@@ -1,0 +1,60 @@
+DDD assumes two prerequisites:
+- Development is iterative
+- Developers and domain experts have a close relationship 
+
+"A model is a simplification. It is an interpretation of reality that abstracts the aspects relevant to solving
+the problem at hand and ignores extraneous detail."
+
+"That subject area to which the user applies the program is the domain of the software"
+
+Ingredients to effective modelling: page 32
+
+good developers would want to abstract and develop a model that can do more work; this is
+done through understanding the domain
+
+Chapter 2 - Communication and use of language
+ - ubiquitious language: taken care of by Spec by Example
+	A few members of the team
+	manage to become bilingual, but they become bottlenecks of information flow, and their
+	translations are inexact
+
+"If sophisticated domain experts don't understand the model, there is something wrong with the model"
+
+"The developers and domain experts can informally test the model by walking through scenarios, using the model 
+objects step-by-step"
+
+"If you use UML as your implementation language, you will still need other means of
+communicating the uncluttered model." - UML is not enough on its own; we need to supplement with plain English in places
+
+Code should be concise enough to not require extensive documentation - it should speak for itself
+But code can be overwhelming, therefore we can use diagrams as a abstraction tool to explain model
+
+"The greatest value of a design document is to explain the concepts of the model, help in
+navigating the detail of the code, and perhaps give some insight into the model's intended style of
+use"
+
+"To communicate effectively, the code must be based on the same language used to write the requirements—the same
+language that the developers speak with each other and with domain experts"
+
+"The thrust of this book is that one model should underlie implementation, design, and team
+communication. Having separate models for these separate purposes poses a hazard"
+
+"Domain-driven design calls for a model that doesn't just aid early analysis but is the very foundation of the design"
+
+"Many design methodologies advocate an analysis model; the product of analyzing the business domain to 
+organize its concepts without any consideration of the part it will play in a software system; not created with design
+issues in mind"
+
+What we want to do is bridge the divide between analysis (of domain) and design (of software solution)
+
+"An analysis must capture fundamental concepts from the domain in a comprehensible, expressive
+way. The design has to specify a set of components that can be constructed with the programming
+tools in use on the project that will perform efficiently in the target deployment environment and
+will correctly solve the problems posed for the application."
+
+Essentially, we'd like to end up with "Development becomes an iterative process of refining the model, the design, and 
+the code as a single activity"
+
+"...work within a modeling paradigm supported by software tools that allow you to create
+direct analogs to the concepts in the model" - that is, we want to keep model as close to code as possible such that 
+translation is less prone to interpretation errors
