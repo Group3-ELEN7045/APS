@@ -7,8 +7,6 @@ the problem at hand and ignores extraneous detail."
 
 "That subject area to which the user applies the program is the domain of the software"
 
-Ingredients to effective modelling: page 32
-
 good developers would want to abstract and develop a model that can do more work; this is
 done through understanding the domain
 
