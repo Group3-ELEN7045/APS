@@ -1,3 +1,5 @@
+package test.za.ac.group3.accounts.test;
+
 import org.junit.Before;
 import org.junit.Test;
 
