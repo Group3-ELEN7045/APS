@@ -1,0 +1,62 @@
+Expanding on the Context Diagram
+
+Lists of Requirements
+1	USER ACTIVITIES
+•	User to create account with APS system.
+•	User provide his/her details to APS
+•	User provide login details to APS
+•	User update his/her details on APS
+•	User to login into APS
+•	User to provide details of his account with billing companies
+•	User activate e-billing on billing account 
+•	User request for billing statement
+•	User verify the billing details
+
+1.1	SPECIFICATION BY EXAMPLE SCENARIOS
+
+1.1.1	SCENARIO ONE – USER CREATES AN ACCOUNT WITH APS
+Given that, the user wants to register with APS
+And has provided his/her details (name, address e.t.c)
+And has specified the login details
+When the user complete the registration 
+And submitted the form
+Then an APS account is created.
+
+1.1.2	SCENARIO TWO– USER LOGIN INTO APS
+Given that, the user wants to log into APS
+And has provided the login details
+When the user complete login form 
+And submitted the form
+Then access is granted
+
+1.1.3	SCENARIO THREE– USER PROVIDES BILLING DETAILS
+Given that, the user has an account with APS
+When the user provides his billing account details
+Then scraping of his account begins on the billing date
+
+1.1.4	SCENARIO FOUR – USER UPDATE BILLING DETAILS
+Given that, the user is requested by billing site to update details
+When the user provides the details and submits 
+Then his APS account status is changed to “trying” (Change of status from active to inactive done by scraper/APS?)
+
+
+1.1.5	SCENARIO FIVE-  USER REQUEST BILLING STATEMENT
+Given that, the user has successful login to APS
+And has provided the accounts details for billing company
+And his billing dates scheduled 
+And it’s after the billing date
+When user request for the statement
+Then the billing statement is rendered
+
+1.1.6	SCENARIO SIX - USER ACTIVATE E-BILLING ACCOUNT
+Given that, the user has successful login to APS
+And has provided the accounts details for billing company
+And has completed the billing company sign up form 
+When the user submit the form
+Then e-billing is activated on the account
+
+1.1.7	SCENARIO SEVEN - USER BILLING DETAILS VERIFICATION
+Given that, the user has successful login to APS
+And has provided the accounts details for billing company
+When verify the details with the billing company
+Then the verification results are rendered
