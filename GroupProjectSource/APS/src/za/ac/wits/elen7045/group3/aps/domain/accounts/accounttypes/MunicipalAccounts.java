@@ -14,79 +14,79 @@ public class MunicipalAccounts extends AbstractAccounts {
 	private DataPair SewerageCharges;
 	private DataPair RefuseCharges;
 	
-	protected MunicipalAccounts(DataPair accountNumber) {
+	public MunicipalAccounts(DataPair accountNumber) {
 		setAccountNumber(new DataPair(accountNumber));
 	}
 	
-	protected DataPair getInstalmentNotice() {
+	public DataPair getInstalmentNotice() {
 		return new DataPair(InstalmentNotice);
 	}
 
-	protected void setInstalmentNotice(DataPair instalmentNotice) {
+	public void setInstalmentNotice(DataPair instalmentNotice) {
 		InstalmentNotice = new DataPair(instalmentNotice);
 	}
 
-	protected DataPair getElectricityUsed() {
+	public DataPair getElectricityUsed() {
 		return new DataPair(ElectricityUsed);
 	}
 
-	protected void setElectricityUsed(DataPair electricityUsed) {
+	public void setElectricityUsed(DataPair electricityUsed) {
 		ElectricityUsed = new DataPair(electricityUsed);
 	}
 
-	protected DataPair getElectricityCharges() {
+	public DataPair getElectricityCharges() {
 		return new DataPair(ElectricityCharges);
 	}
 
-	protected void setElectricityCharges(DataPair electricityCharges) {
+	public void setElectricityCharges(DataPair electricityCharges) {
 		ElectricityCharges = new DataPair(electricityCharges);
 	}
 
-	protected DataPair getGasUsed() {
+	public DataPair getGasUsed() {
 		return new DataPair(GasUsed);
 	}
 
-	protected void setGasUsed(DataPair gasUsed) {
+	public void setGasUsed(DataPair gasUsed) {
 		GasUsed = new DataPair(gasUsed);
 	}
 
-	protected DataPair getGasCharges() {
+	public DataPair getGasCharges() {
 		return new DataPair(GasCharges);
 	}
 
-	protected void setGasCharges(DataPair gasCharges) {
+	public void setGasCharges(DataPair gasCharges) {
 		GasCharges = new DataPair(gasCharges);
 	}
 
-	protected DataPair getWaterUsed() {
+	public DataPair getWaterUsed() {
 		return new DataPair(WaterUsed);
 	}
 
-	protected void setWaterUsed(DataPair waterUsed) {
+	public void setWaterUsed(DataPair waterUsed) {
 		WaterUsed = new DataPair(waterUsed);
 	}
 
-	protected DataPair getWaterCharges() {
+	public DataPair getWaterCharges() {
 		return new DataPair(WaterCharges);
 	}
 
-	protected void setWaterCharges(DataPair waterCharges) {
+	public void setWaterCharges(DataPair waterCharges) {
 		WaterCharges = new DataPair(waterCharges);
 	}
 
-	protected DataPair getSewerageCharges() {
+	public DataPair getSewerageCharges() {
 		return new DataPair(SewerageCharges);
 	}
 
-	protected void setSewerageCharges(DataPair sewerageCharges) {
+	public void setSewerageCharges(DataPair sewerageCharges) {
 		SewerageCharges = new DataPair(sewerageCharges);
 	}
 
-	protected DataPair getRefuseCharges() {
+	public DataPair getRefuseCharges() {
 		return new DataPair(RefuseCharges);
 	}
 
-	protected void setRefuseCharges(DataPair refuseCharges) {
+	public void setRefuseCharges(DataPair refuseCharges) {
 		RefuseCharges = new DataPair(refuseCharges);
 	}
 

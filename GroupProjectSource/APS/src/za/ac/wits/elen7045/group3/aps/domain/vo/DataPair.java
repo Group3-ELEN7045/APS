@@ -1,9 +1,17 @@
 package za.ac.wits.elen7045.group3.aps.domain.vo;
 
 public class DataPair {
+	
 	String id;
 	String text;
 	String value;
+	
+	public DataPair(String id, String text, String value)
+	{
+		this.id = id;
+		this.text = text;
+		this.value = value;
+	}
 	public String getText() {
 		return text;
 	}
@@ -35,12 +43,7 @@ public class DataPair {
 		this.value = copy.getValue();
 	}
 	
-	public DataPair(String id, String text, String value)
-	{
-		this.id = id;
-		this.text = text;
-		this.value = value;
-	}
+
 
 
 }

@@ -11,47 +11,47 @@ public class CreditCardAccounts extends AbstractAccounts{
 	private DataPair creditAvailable;
 	private DataPair minimumAmountDue;
 
-	protected CreditCardAccounts(DataPair accountNumber) {
+	public CreditCardAccounts(DataPair accountNumber) {
 		setAccountNumber(new DataPair(accountNumber));
 	}
 	
-	protected DataPair getCardType() {
+	public DataPair getCardType() {
 		return new DataPair(cardType);
 	}
 
-	protected void setCardType(DataPair cardType) {
+	public void setCardType(DataPair cardType) {
 		this.cardType = new DataPair(cardType);
 	}
 
-	protected DataPair getInterestRate() {
+	public DataPair getInterestRate() {
 		return new DataPair(interestRate);
 	}
 
-	protected void setInterestRate(DataPair interestRate) {
+	public void setInterestRate(DataPair interestRate) {
 		this.interestRate = new DataPair(interestRate);
 	}
 
-	protected DataPair getCreditLimit() {
+	public DataPair getCreditLimit() {
 		return new DataPair(creditLimit);
 	}
 
-	protected void setCreditLimit(DataPair creditLimit) {
+	public void setCreditLimit(DataPair creditLimit) {
 		this.creditLimit = new DataPair(creditLimit);
 	}
 
-	protected DataPair getCreditAvailable() {
+	public DataPair getCreditAvailable() {
 		return new DataPair(creditAvailable);
 	}
 
-	protected void setCreditAvailable(DataPair creditAvailable) {
+	public void setCreditAvailable(DataPair creditAvailable) {
 		this.creditAvailable = new DataPair(creditAvailable);
 	}
 
-	protected DataPair getMinimumAmountDue() {
+	public DataPair getMinimumAmountDue() {
 		return new DataPair(minimumAmountDue);
 	}
 
-	protected void setMinimumAmountDue(DataPair minimumAmountDue) {
+	public void setMinimumAmountDue(DataPair minimumAmountDue) {
 		this.minimumAmountDue = new DataPair(minimumAmountDue);
 	}
 	
