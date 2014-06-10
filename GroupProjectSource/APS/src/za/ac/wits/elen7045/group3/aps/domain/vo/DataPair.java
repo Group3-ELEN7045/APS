@@ -16,8 +16,7 @@ public class DataPair {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
-	
+
 	public String getId() {
 		return id;
 	}
@@ -29,6 +28,19 @@ public class DataPair {
 		return "DataPair [text=" + text + ", value=" + value + "]";
 	}
 	
+	public DataPair(DataPair copy)
+	{
+		this.id = copy.getId();
+		this.text = copy.getText();
+		this.value = copy.getValue();
+	}
 	
+	public DataPair(String id, String text, String value)
+	{
+		this.id = id;
+		this.text = text;
+		this.value = value;
+	}
+
 
 }

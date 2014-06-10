@@ -24,21 +24,19 @@ public class XSTreamTest {
 	
 	static String filePath = "E:\\ELEN 7045\\Group Project\\New Folder\\return.xml";
 	public static class DummyClass{
-		String name;
 		DataPair dataPair;
 		
 		public DummyClass(){
-			name = "MyName";
-			dataPair = new DataPair();
-			dataPair.setId("001");
-			dataPair.setText("Account no");
-			dataPair.setValue("1122334");
+
+			dataPair = new DataPair("001","account no","1234567");
 		}
 
 		@Override
 		public String toString() {
-			return "DummyClass [name=" + name + ", dataPair=" + dataPair + "]";
+			return "DummyClass [dataPair=" + dataPair + "]";
 		}
+
+	
 		
 	}
 	/**
@@ -48,14 +46,11 @@ public class XSTreamTest {
 		DummyClass dumz = new DummyClass();
 		DummyClass dum1 = new DummyClass();
 		PrintWriter writer = new PrintWriter(filePath);
-		
-		/*Customer cust = new Customer();
-		cust.setFirstName("Silas");
-		cust.setLastname("dork");
-		cust.setId((long)13);*/
-		//CreditCardAccountXML crXML = new CreditCardAccountXML();
+	
 		XStream xml = new XStream();
 		xml.alias("scrape-session",DummyClass.class);
+		xml.aliasField("datapair", DummyClass.class, "dataPair");
+		
 		xml.useAttributeFor(DataPair.class, "id");
 		writer.println(xml.toXML(dumz));
 		writer.close();
