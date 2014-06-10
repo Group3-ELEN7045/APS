@@ -1,4 +1,8 @@
 package test.za.ac.group3.accounts.test;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d06a685c42dd92350d06842e6709b616c713041
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
