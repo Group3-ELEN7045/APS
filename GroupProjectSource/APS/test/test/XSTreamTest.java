@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sun.swing.FilePane;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
@@ -43,8 +45,7 @@ public class XSTreamTest {
 	 * @param args
 	 */
 	public static void main(String[] args) throws FileNotFoundException{
-		DummyClass dumz = new DummyClass();
-		DummyClass dum1 = new DummyClass();
+		/*DummyClass dumz = new DummyClass();
 		PrintWriter writer = new PrintWriter(filePath);
 	
 		XStream xml = new XStream();
@@ -55,6 +56,19 @@ public class XSTreamTest {
 		writer.println(xml.toXML(dumz));
 		writer.close();
 		dumz = (DummyClass)xml.fromXML(new File(filePath));
+		System.out.println(xml.toXML(dumz));*/
+		TelcoAccounts dumz = new TelcoAccounts(new DataPair("001","Account no","2434434") );
+		PrintWriter writer = new PrintWriter(filePath);
+		
+		XStream xml = new XStream();
+		//xml.processAnnotations(GetConfigurationParametersResponse.class);
+		xml.alias("scrape-session",TelcoAccounts.class);
+		xml.aliasField("datapair", TelcoAccounts.class, "accountNumber");
+		
+		xml.useAttributeFor(DataPair.class, "id");
+		writer.println(xml.toXML(dumz));
+		writer.close();
+		dumz = (TelcoAccounts)xml.fromXML(new File(filePath));
 		System.out.println(xml.toXML(dumz));
 	}
 

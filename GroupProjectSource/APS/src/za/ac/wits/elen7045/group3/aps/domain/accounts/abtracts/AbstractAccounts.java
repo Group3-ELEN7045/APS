@@ -1,6 +1,8 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts;
-import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
+@XStreamAlias("scrape-session")
 public abstract class  AbstractAccounts {
 
 	DataPair accountNumber;
@@ -17,88 +19,88 @@ public abstract class  AbstractAccounts {
 	DataPair accountDeductions;
 	DataPair accountDiscount;
 	DataPair accountVATAmount;
-	protected DataPair getAccountNumber() {
+	public DataPair getAccountNumber() {
 		return new DataPair(accountNumber);
 	}
-	protected void setAccountNumber(DataPair accountNumber) {
+	public void setAccountNumber(DataPair accountNumber) {
 		this.accountNumber = new DataPair(accountNumber) ;
 	}
-	protected DataPair getAccountHolderName() {
+	public DataPair getAccountHolderName() {
 		return new DataPair(accountHolderName);
 	}
-	protected void setAccountHolderName(DataPair accountHolderName) {
+	public void setAccountHolderName(DataPair accountHolderName) {
 		this.accountHolderName = new DataPair(accountHolderName);
 	}
-	protected DataPair getAccountStatementDate() {
+	public DataPair getAccountStatementDate() {
 		return new DataPair(accountStatementDate);
 	}
-	protected void setAccountStatementDate(DataPair accountStatementDate) {
+	public void setAccountStatementDate(DataPair accountStatementDate) {
 		this.accountStatementDate = new DataPair(accountStatementDate);
 	}
-	protected DataPair getAccountStatementNumber() {
+	public DataPair getAccountStatementNumber() {
 		return new DataPair(accountStatementNumber);
 	}
-	protected void setAccountStatementNumber(DataPair accountStatementNumber) {
+	public void setAccountStatementNumber(DataPair accountStatementNumber) {
 		this.accountStatementNumber = new DataPair(accountStatementNumber);
 	}
-	protected DataPair getAccountStatementMonth() {
+	public DataPair getAccountStatementMonth() {
 		return new DataPair(accountStatementMonth);
 	}
-	protected void setAccountStatementMonth(DataPair accountStatementMonth) {
+	public void setAccountStatementMonth(DataPair accountStatementMonth) {
 		this.accountStatementMonth = new DataPair(accountStatementMonth);
 	}
-	protected DataPair getAccountTotalDue() {
+	public DataPair getAccountTotalDue() {
 		return new DataPair(accountTotalDue);
 	}
-	protected void setAccountTotalDue(DataPair accountTotalDue) {
+	public void setAccountTotalDue(DataPair accountTotalDue) {
 		this.accountTotalDue = new DataPair(accountTotalDue);
 	}
-	protected DataPair getAccountDueDate() {
+	public DataPair getAccountDueDate() {
 		return new DataPair(accountDueDate);
 	}
-	protected void setAccountDueDate(DataPair accountDueDate) {
+	public void setAccountDueDate(DataPair accountDueDate) {
 		this.accountDueDate = new DataPair(accountDueDate);
 	}
-	protected DataPair getAccountOpeningBalance() {
+	public DataPair getAccountOpeningBalance() {
 		return new DataPair(accountOpeningBalance);
 	}
-	protected void setAccountOpeningBalance(DataPair accountOpeningBalance) {
+	public void setAccountOpeningBalance(DataPair accountOpeningBalance) {
 		this.accountOpeningBalance = new DataPair(accountOpeningBalance);
 	}
-	protected DataPair getAccountClosingBalance() {
+	public DataPair getAccountClosingBalance() {
 		return new DataPair(accountClosingBalance);
 	}
-	protected void setAccountClosingBalance(DataPair accountClosingBalance) {
+	public void setAccountClosingBalance(DataPair accountClosingBalance) {
 		this.accountClosingBalance = new DataPair(accountClosingBalance);
 	}
-	protected DataPair getAccountPaymentReceived() {
+	public DataPair getAccountPaymentReceived() {
 		return new DataPair(accountPaymentReceived);
 	}
-	protected void setAccountPaymentReceived(DataPair accountPaymentReceived) {
+	public void setAccountPaymentReceived(DataPair accountPaymentReceived) {
 		this.accountPaymentReceived = new DataPair(accountPaymentReceived);
 	}
-	protected DataPair getAccountNewCharges() {
+	public DataPair getAccountNewCharges() {
 		return new DataPair(accountNewCharges);
 	}
-	protected void setAccountNewCharges(DataPair accountNewCharges) {
+	public void setAccountNewCharges(DataPair accountNewCharges) {
 		this.accountNewCharges = new DataPair(accountNewCharges);
 	}
-	protected DataPair getAccountDeductions() {
+	public DataPair getAccountDeductions() {
 		return new DataPair(accountDeductions);
 	}
-	protected void setAccountDeductions(DataPair accountDeductions) {
+	public void setAccountDeductions(DataPair accountDeductions) {
 		this.accountDeductions = new DataPair(accountDeductions);
 	}
-	protected DataPair getAccountDiscount() {
+	public DataPair getAccountDiscount() {
 		return new DataPair(accountDiscount);
 	}
-	protected void setAccountDiscount(DataPair accountDiscount) {
+	public void setAccountDiscount(DataPair accountDiscount) {
 		this.accountDiscount = new DataPair(accountDiscount);;
 	}
-	protected DataPair getAccountVATAmount() {
+	public DataPair getAccountVATAmount() {
 		return new DataPair(accountVATAmount);
 	}
-	protected void setAccountVATAmount(DataPair accountVATAmount) {
+	public void setAccountVATAmount(DataPair accountVATAmount) {
 		this.accountVATAmount = new DataPair(accountVATAmount);
 	}
 }
