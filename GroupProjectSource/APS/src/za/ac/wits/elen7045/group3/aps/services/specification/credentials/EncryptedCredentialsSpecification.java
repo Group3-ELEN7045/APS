@@ -20,7 +20,7 @@ public class EncryptedCredentialsSpecification extends ApplicationSpecification<
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean isFulfiledBy(Object capturedlogonCredentials) {
+	public boolean isSatisfiedBy(CredentialsVO credentialsVO) {
 		return ((Base64.isArrayByteBase64(credentialsVO.getPassword().getBytes()))
 				 &&
 				(Base64.isArrayByteBase64(credentialsVO.getUserName().getBytes()))

@@ -10,12 +10,12 @@
     </bean>
     
     <bean id="applicationUser" class="za.ac.wits.elen7045.group3.aps.domain.entities.Customer"/>
-    <bean id="userCredentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials"/>
-    <bean id="paymentDetails"  class="za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetails"/>   
-     
+    <!-- bean id="userCredentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials" -->
+    <bean id="paymentDetails"  class="za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetails"/> 
+    <bean id="customerRepository"  class="za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl"/>
     <bean id="encryptionModule" class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
        
-    <bean id="credentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO">
+    <bean id="credentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials">
         <property name="encryptionModule" ref="encryptionModule"></property>
     </bean>
      

@@ -17,9 +17,12 @@ public class CapturedCredentialsSpecification extends ApplicationSpecification<L
 	public CapturedCredentialsSpecification(LogonCredentials logonCredentials){
 		this.logonCredentials = logonCredentials;	
 	}
-
-	public boolean isFulfiledBy(Object capturedlogonCredentials) {
-		return logonCredentials.getConfirmPasword().equals(logonCredentials.getPassword());
-	}
+   //public boolean isFulfiledBy(LogonCredentials logonCredentialsParam) {
+	//	return logonCredentials.getConfirmPasword().equals(logonCredentialsParam.getPassword());
+	//}
+@Override
+public boolean isSatisfiedBy(LogonCredentials logonCredentialsParam) {
+	return logonCredentials.getConfirmPasword().equals(logonCredentialsParam.getPassword());
+}
 
 }

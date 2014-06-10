@@ -80,7 +80,7 @@ public class InsertUserTest {
 	
 	@Test //if password and Confirm password are the same
 	public void testValidateCapturedCredentials(){
-		Specification capturedCredentials = new CapturedCredentialsSpecification(customer.getCredentials());
+		Specification capturedCredentials = new CapturedCredentialsSpecification(logonCredentials);
 		assertTrue("Captured Password and Confirm Password are not the same",capturedCredentials.isFulfiledBy(customer.getCredentials()));
 	}
 	
@@ -89,7 +89,7 @@ public class InsertUserTest {
 		customer.setEncryptionModule(encryptionModule);
 		customer.encryptUserInformation();
 		Specification userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
-		assertTrue("User details not encrypted properly", userDetailsSpecification.isFulfiledBy(userDetailsSpecification));
+		assertTrue("User details not encrypted properly", userDetailsSpecification.isSatisfiedBy(userDetailsSpecification));
 	} 
 	
 	@Test //if username and password are encrypted
@@ -97,7 +97,7 @@ public class InsertUserTest {
 		customer.getCredentials().setEncryptionModule(encryptionModule);
 		credentialVO = customer.getCredentials().encryptCredentials();
 		Specification encryptSpecification = new EncryptedCredentialsSpecification(credentialVO);
-		assertTrue("UserName and password are not Encrypted", encryptSpecification.isFulfiledBy(credentialVO));	
+		assertTrue("UserName and password are not Encrypted", encryptSpecification.isSatisfiedBy(credentialVO));	
 	}
 	
 	@Test //test if insertion happened successfult
@@ -111,10 +111,10 @@ public class InsertUserTest {
 	public void testSendNotification() throws DatabaseException{
 		Customer insertedCustomer = customerRepository.selectCustomer(customer); 	
 		ApplicationSpecification<Customer> customerSpecificationById = new UserSpecificationByID(insertedCustomer);
-		if(customerSpecificationById.isFulfiledBy(customer)){
+		if(customerSpecificationById.isSatisfiedBy(customer)){
 			ConfirmationNotification fileNotification = new FileNotification(ApplicationContants.ACCOUNT_STATUS+"="+customer.getCredentials().getAccountStatus());
 			ApplicationSpecification<ConfirmSendNotification> filSendConfirmSpecification = new ConfirmSendNotification(fileNotification.sendNotification());
-			assertTrue("Failed to Send Account Activation Message", filSendConfirmSpecification.isFulfiledBy(fileNotification));
+			assertTrue("Failed to Send Account Activation Message", filSendConfirmSpecification.isSatisfiedBy(fileNotification));
 		}
 		
 	}
