@@ -37,7 +37,7 @@ public class testUserLogin {
 	private CustomerRepository     customerRepository;
 	private PaymentDetails         paymentDetails;
 	private EncryptionModule       encryptionModule; 
-//	private CredentialsVO          credentialVO;
+    private CredentialsVO          credentialVO;
 	private LogonCredentials          credentials;
 	private LogonUserValidation 	logonUserValidation;
 
@@ -61,6 +61,7 @@ public class testUserLogin {
 		credentials.setPassword("password");
 		credentials.setConfirmPasword("password");
 		credentials.setAccountStatus(StatusType.INACTIVE.getStatusType());
+		credentials.encryptCredentials();
 	    customer.setCredentials(credentials);
 	    
 //	    credentials.setUserName("John");
@@ -74,28 +75,35 @@ public class testUserLogin {
 	    mockUserDataAccess = new CustomerRepositoryImpl(userDataRepository);
 	    customerRepository = new APSMockObjectGenerator<CustomerRepositoryImpl>().mock(mockUserDataAccess);
 //	    try {
-//			customerRepository.updateUser(customer);
+			//customerRepository.updateUser(customer);
 //		} catch (DatabaseException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 	}
-//	
-//	@Test //test if insertion happened successfull
-//	public void testRegisterUser() throws DatabaseException{
-//		customerRepository.updateUser(customer);
-//	    User insertedUser = customerRepository.selectCustomer(customer);
-//	    assertNotNull("Failed to Insert User" , insertedUser);
-//	}
+	
+	@Test //test if insertion happened successfull
+	public void testRegisterUser(){
+		User insertedUser = null;
+		try {
+			customerRepository.updateUser(customer);
+			insertedUser = customerRepository.selectCustomer(customer);
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    assertNotNull("Failed to Insert User" , insertedUser);
+	}
 
 	@Test
 	public void testUserValidationAndAuthenitation(){
 		try {
 			
 			customerRepository.updateUser(customer);
-//			credentials.setUserName("1234");
-//			customer.setCredentials(credentials);
-		//	logonUserValidation.validation(credentials);
+			credentials.setUserName("1234");
+			customer.setCredentials(credentials);
+			logonUserValidation.validation(credentials);
 			assertTrue(new LogonUserValidation(customerRepository).validation(credentials));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -104,19 +112,19 @@ public class testUserLogin {
 	}
 	
 
-	@Test
-	public void testBillingCompanySelected(){
-		try {
-			
-			customerRepository.updateUser(customer);
-//			credentials.setUserName("1234");
-//			customer.setCredentials(credentials);
-		//	logonUserValidation.validation(credentials);
-			assertTrue(new LogonUserValidation(customerRepository).validation(credentials));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	}
+//	@Test
+//	public void testBillingCompanySelected(){
+//		try {
+//			
+//			//customerRepository.updateUser(customer);
+////			credentials.setUserName("1234");
+////			customer.setCredentials(credentials);
+//		//	logonUserValidation.validation(credentials);
+//			//assertTrue(new LogonUserValidation(customerRepository).validation(credentials));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}		
+//	}
 
 }
