@@ -3,6 +3,8 @@ package test.za.ac.group3.accounts.test;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Mockito.*;   
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalAccount;
