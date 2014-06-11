@@ -22,6 +22,7 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
+import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 import za.ac.wits.elen7045.group3.aps.services.validation.LogonUserValidation;
@@ -50,7 +51,7 @@ public class testUserLogin {
 		encryptionModule    = context.getBean(EncryptionModule.class);
 		paymentDetails      = context.getBean(PaymentDetails.class);
 		credentials			= context.getBean(LogonCredentials.class);		
-		customerRepository	= context.getBean(CustomerRepository.class);
+	//	customerRepository	= context.getBean(CustomerRepository.class);
 		
 		customer.setId((long) 1);
 		customer.setFirstName("Silas");
@@ -61,11 +62,10 @@ public class testUserLogin {
 		credentials.setPassword("password");
 		credentials.setConfirmPasword("password");
 		credentials.setAccountStatus(StatusType.INACTIVE.getStatusType());
-	    customer.setCredentials(credentials);
-	    
-//	    credentials.setUserName("John");
-//	    credentials.setPassword("password");
-//	    customer.setCredentials(credentials);
+		credentials.setEncryptionModule(encryptionModule);
+		credentials.encryptCredentials();
+	    customer.setCredentials(credentials); 
+
 	    
 	    paymentDetails.setPaymentType(PaymentType.CREDIT_CARD.getPaymentType());
 	    paymentDetails.setValue("1234 1234 5678 5678");
@@ -73,12 +73,6 @@ public class testUserLogin {
 	    
 	    mockUserDataAccess = new CustomerRepositoryImpl(userDataRepository);
 	    customerRepository = new APSMockObjectGenerator<CustomerRepositoryImpl>().mock(mockUserDataAccess);
-//	    try {
-//			customerRepository.updateUser(customer);
-//		} catch (DatabaseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 //	
 //	@Test //test if insertion happened successfull
@@ -91,12 +85,18 @@ public class testUserLogin {
 	@Test
 	public void testUserValidationAndAuthenitation(){
 		try {
-			
 			customerRepository.updateUser(customer);
-//			credentials.setUserName("1234");
-//			customer.setCredentials(credentials);
-		//	logonUserValidation.validation(credentials);
-			assertTrue(new LogonUserValidation(customerRepository).validation(credentials));
+			
+			CredentialsVO cred = new CredentialsVO();
+			cred.setUserName("username");
+			cred.setPassword("password");
+			EncryptionModule encryptionModule = new EncryptionModuleImpl();			
+			cred.setEncryptionModule(encryptionModule);
+			cred.encryptCredentials();
+			
+			User insertedUser = customerRepository.selectCustomer(customer);
+		    assertNotNull("Failed to Insert User" , insertedUser);
+			assertTrue(new LogonUserValidation(customerRepository).validation(cred));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,19 +104,19 @@ public class testUserLogin {
 	}
 	
 
-	@Test
-	public void testBillingCompanySelected(){
-		try {
-			
-			customerRepository.updateUser(customer);
-//			credentials.setUserName("1234");
-//			customer.setCredentials(credentials);
-		//	logonUserValidation.validation(credentials);
-			assertTrue(new LogonUserValidation(customerRepository).validation(credentials));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	}
+//	@Test
+//	public void testBillingCompanySelected(){
+//		try {
+//			
+//			customerRepository.updateUser(customer);
+////			credentials.setUserName("1234");
+////			customer.setCredentials(credentials);
+//		//	logonUserValidation.validation(credentials);
+//			assertTrue(new LogonUserValidation(customerRepository).validation(credentials));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}		
+//	}
 
 }

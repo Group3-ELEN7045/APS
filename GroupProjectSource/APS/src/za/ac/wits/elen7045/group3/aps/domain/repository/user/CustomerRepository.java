@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /**
  * 
  */
@@ -17,23 +17,3 @@ public interface CustomerRepository {
    Customer selectCustomer(Customer customer) throws DatabaseException;
    Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
 }
-=======
-
-/**
- * 
- */
-package za.ac.wits.elen7045.group3.aps.domain.repository.user;
-
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-
-/**
- * @author SilasMahlangu
- *
- */
-public interface CustomerRepository {
-   boolean updateUser(Customer customer) throws DatabaseException;
-   Customer selectCustomer(Customer customer) throws DatabaseException;
-  
-}
->>>>>>> 9d06a685c42dd92350d06842e6709b616c713041

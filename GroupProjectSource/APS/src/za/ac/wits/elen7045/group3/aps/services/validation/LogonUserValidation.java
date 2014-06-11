@@ -35,13 +35,13 @@ public class LogonUserValidation {
 	
 	private Boolean authenitacte(User user, CredentialsVO credentials) throws LogonException, Exception {
 		
-		CredentialsVO decryptedCredentials = user.getCredentials().decryptCredentals();	
+		CredentialsVO encryptedCredentials = user.getCredentials();	
 		
 		ApplicationSpecification<CredentialsVO> userAuthenticationSpec = new UserAuthenticationSpecification(credentials);
-		if(userAuthenticationSpec.isSatisfiedBy(decryptedCredentials)){
+		if(userAuthenticationSpec.isSatisfiedBy(encryptedCredentials)){
 			return true;
 		}
-		throw new LogonException(ApplicationContants.USER_PASS_NO_MATCH);
+		throw new LogonException(ApplicationContants.USER_CREDENTIALS_INCORRECT);
 	}
 		
 }

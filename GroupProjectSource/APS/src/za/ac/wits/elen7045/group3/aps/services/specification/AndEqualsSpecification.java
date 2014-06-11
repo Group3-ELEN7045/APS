@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /**
  * 
  */
@@ -22,29 +22,3 @@ public class AndEqualsSpecification<T> extends ApplicationSpecification<T>{
 	   return compare1.isSatisfiedBy(t) && compare2.isSatisfiedBy(t);
    }
 }
-=======
-
-/**
- * 
- */
-package za.ac.wits.elen7045.group3.aps.services.specification;
-
-/**
- * @author SilasMahlangu
- *
- */
-public class AndEqualsSpecification extends ApplicationSpecification<Object>{
-   private Specification compare1;
-   private Specification compare2;
-   
-   public AndEqualsSpecification(final Specification compare1, final Specification compare2){
-	   this.compare1 = compare1;
-	   this.compare2 = compare2;
-   }
-
-   @Override
-   public boolean isFulfiledBy(Object object) {
-	   return compare1.isFulfiledBy(object) && compare2.isFulfiledBy(object);
-   }
-}
->>>>>>> 9d06a685c42dd92350d06842e6709b616c713041

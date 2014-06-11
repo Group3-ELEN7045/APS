@@ -1,10 +1,9 @@
 package test.za.ac.group3.accounts.test;
-<<<<<<< HEAD
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-=======
->>>>>>> 9d06a685c42dd92350d06842e6709b616c713041
+
 
 import org.junit.Before;
 import org.junit.Test;
