@@ -13,7 +13,7 @@ public class BillingAccountManagerBean implements BillingAccountManager {
 	private Customer customer;
 	private BillingAccountRepository billingRepository;
 
-	BillingAccountManagerBean(Customer customer,
+	public BillingAccountManagerBean(Customer customer,
 			BillingAccountRepository billingRepository) {
 		this.customer = customer;
 		this.billingRepository = billingRepository;
@@ -31,8 +31,7 @@ public class BillingAccountManagerBean implements BillingAccountManager {
 
 				ApplicationSpecification<BillingAccount> userBillingAccountDetails = new BillingAccountDetailsSpecification(
 						item);
-				if (billingRepository.getCustomerBillingAccount(customer,
-						item.getAccountNumber()) == null) {
+				if (billingRepository.getBillingAccount(item.getAccountNumber()) == null) {
 
 					if (userBillingAccountDetails.isSatisfiedBy(item)) {
 						account.add(item);
@@ -73,5 +72,28 @@ public class BillingAccountManagerBean implements BillingAccountManager {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public BillingAccount getBillingAccount(String accountNumber){
+		
+		BillingAccount billingAccount = null;		
+		if(accountNumber == null){
+			 try {
+				throw new Exception(ApplicationContants.ACCOUNT_NUMBER_REQ);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			billingAccount = billingRepository.getBillingAccount(accountNumber);
+//			if(billingAccount != null){
+//				return billingAccount;
+//			}
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return billingAccount;
 	}
 }

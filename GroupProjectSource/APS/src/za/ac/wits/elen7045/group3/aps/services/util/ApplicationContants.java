@@ -16,6 +16,10 @@ public class ApplicationContants {
    public final static String DATE_OF_BIRTH_FORMAT = "dd/mm/yyyy";
    public static final String USER_CREDENTIALS_INCORRECT = "Credentials provided incorrect";
  
+   public static final String ACCOUNT_DUPLICATE = "Duplicate billing account";
+   public static final String ACCOUNT_NOT_FOUND = "Account not found";
+   public static final String ACCOUNT_NUMBER_REQ = "Account number required";
+   
    public static final String FILE_NAME_NOTIFICATION = "notifications.txt";
    public static final String ACCOUNT_STATUS = "status";
 }

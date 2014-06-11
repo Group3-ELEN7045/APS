@@ -6,4 +6,5 @@ public interface BillingAccountManager {
 
 	public void addCustomerBillingAccounts(List<BillingAccount> billingAccount);
 	public void updateCustomerBillingAccounts(BillingAccount billingAccount);
+	public BillingAccount getBillingAccount(String accountNumber);
 }

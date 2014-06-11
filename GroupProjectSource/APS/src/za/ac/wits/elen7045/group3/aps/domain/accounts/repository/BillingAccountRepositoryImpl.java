@@ -15,8 +15,8 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	private BillingAccountDataAccess dataAccess;
-	
-	BillingAccountRepositoryImpl(BillingAccountDataAccess dataAccess){
+		
+	public BillingAccountRepositoryImpl(BillingAccountDataAccess dataAccess){
 		this.dataAccess = dataAccess;
 	}
 	
@@ -24,11 +24,11 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 		dataAccess.saveCustomerBillingAccount(customer);
 	}
 	
-	public BillingAccount getCustomerBillingAccount(Customer customer, String accountNumber)throws DatabaseException{
-		return dataAccess.getBillingAccount(customer, accountNumber);
+	public BillingAccount getBillingAccount(String accountNumber)throws DatabaseException{
+		return dataAccess.getBillingAccount(accountNumber);
 	}
 	
 	public void upDateCustomerBillingAccount(Customer customer, BillingAccount billingAccount)throws DatabaseException{
-		dataAccess.upCustomerBillingAccount(customer, billingAccount);
+		dataAccess.upDateCustomerBillingAccount(customer, billingAccount);
 	}
 }

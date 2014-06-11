@@ -6,6 +6,6 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 public interface BillingAccountRepository {
 	public void saveCustomerBillingAccount(Customer customer) throws DatabaseException;
-	public BillingAccount getCustomerBillingAccount(Customer customer, String accountNumer) throws DatabaseException;
+	public BillingAccount getBillingAccount(String accountNumer) throws DatabaseException;
 	public void upDateCustomerBillingAccount(Customer customer, BillingAccount billingAccount) throws DatabaseException;
 }
