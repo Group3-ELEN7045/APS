@@ -7,8 +7,8 @@ public class TelcoAccount extends AbstractAccount{
 	private String 	telephonenumber;
 	private String 	serviceCharges;
 	private String 	callCharges;
-	private int 	totalCustomerCalls;
-	private float	totalCallDuration;
+	private String 	totalCustomerCalls;
+	private String	totalCallDuration;
 	
 	public TelcoAccount(String accountNumber) {
 		setAccountNumber(accountNumber);
@@ -31,16 +31,16 @@ public class TelcoAccount extends AbstractAccount{
 	protected void setCallCharges(String callCharges) {
 		this.callCharges = callCharges;
 	}
-	protected int getTotalCustomerCalls() {
+	protected String getTotalCustomerCalls() {
 		return totalCustomerCalls;
 	}
-	protected void setTotalCustomerCalls(int totalCustomerCalls) {
+	protected void setTotalCustomerCalls(String totalCustomerCalls) {
 		this.totalCustomerCalls = totalCustomerCalls;
 	}
-	protected float getTotalCallDuration() {
+	protected String getTotalCallDuration() {
 		return totalCallDuration;
 	}
-	protected void setTotalCallDuration(float totalCallDuration) {
+	protected void setTotalCallDuration(String totalCallDuration) {
 		this.totalCallDuration = totalCallDuration;
 	}
 }
