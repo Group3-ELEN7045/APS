@@ -1,20 +1,12 @@
 package test.za.ac.wits.group3.scrape;
 
-import java.io.File;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
-
-import static org.junit.Assert.*;  
-import static org.mockito.Mockito.*;  
-
-import org.junit.After;  
-import org.junit.Before;  
-import org.junit.Test;  
-import org.junit.runner.RunWith;  
-import org.mockito.Mock;  
-import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;  
   
 @RunWith(MockitoJUnitRunner.class)
 
