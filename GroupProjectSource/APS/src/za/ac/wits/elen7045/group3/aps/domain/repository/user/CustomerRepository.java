@@ -5,6 +5,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.repository.user;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
+import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 /**
@@ -14,5 +15,5 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 public interface CustomerRepository {
    boolean updateUser(Customer customer) throws DatabaseException;
    Customer selectCustomer(Customer customer) throws DatabaseException;
-  
+   Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
 }

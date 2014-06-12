@@ -21,7 +21,7 @@ private Customer customer;
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean isFulfiledBy(Object capturedlogonCredentials) {
+	public boolean isSatisfiedBy(Customer customerParam) {
 		return ((Base64.isArrayByteBase64(customer.getStringDateOfBirth().getBytes())
 				 &&
 				(Base64.isArrayByteBase64(customer.getPaymentDetails().getValue().getBytes()))

@@ -3,8 +3,9 @@ package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials;
+import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 
 public class User implements Serializable{
 	
@@ -27,7 +28,9 @@ public class User implements Serializable{
 	private Date                     dateOfBirth;
 	
 	/** The credentials. */
-	private LogonCredentials              credentials;
+	private CredentialsVO              credentials;
+	
+	private List<BillingAccount> 	billingAccounts;
 	
 		
 	private String                    stringDateOfBirth;
@@ -111,18 +114,12 @@ public class User implements Serializable{
 	 * @return the credentials
 	 */
 	
-	public LogonCredentials getCredentials() {
-		return credentials;
-	}
 
 	/**
 	 * Sets the credentials.
 	 *
 	 * @param credentials the new credentials
 	 */
-	public void setCredentials(LogonCredentials credentials) {
-		this.credentials = credentials;
-	}
 
 	public String getStringDateOfBirth() {
 		return stringDateOfBirth;
@@ -135,4 +132,21 @@ public class User implements Serializable{
 	public boolean isIDValid(Long id) {
 	   return this.id.equals(id);
     }
+	
+	public CredentialsVO getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(CredentialsVO credentials) {
+		this.credentials = credentials;
+	}
+
+	public List<BillingAccount> getBillingAccounts() {
+		return billingAccounts;
+	}
+
+	public void setBillingAccounts(List<BillingAccount> billingAccounts) {
+		this.billingAccounts = billingAccounts;
+	}
+	
 }
