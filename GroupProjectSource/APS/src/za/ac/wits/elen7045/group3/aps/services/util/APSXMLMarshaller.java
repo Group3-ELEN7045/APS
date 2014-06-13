@@ -23,6 +23,7 @@ public class APSXMLMarshaller {
 		xstream.alias("datapair",DataPair.class);
 		xstream.useAttributeFor(DataPair.class, "id");
 		xstream.addImplicitCollection(objectToConvert, "dataPairs");
+		
 		return xstream.fromXML(new File(filePath));
 	}
 	
