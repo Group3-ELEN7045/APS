@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import sun.swing.FilePane;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
@@ -29,7 +30,7 @@ import com.thoughtworks.xstream.XStream;
  */
 public class XStreamTests {
 	
-	static String filePath = ".\\telco.xml";
+	static String filePath = ".\\creditcard.xml";
 
 	/**
 	 * @param args
@@ -40,7 +41,7 @@ public class XStreamTests {
 		
 		Accounts dumz1 = new Accounts();
 		dumz1.setBaseURL("www.elen7045.co.za");
-		dumz1.setDate("www.xbox.com");
+		dumz1.setDate("12/12/2014");
 		dumz1.setTime("13:50:00");
 		List <DataPair>dataPairs = dumz1.getDataPairList();
 		dataPairs.add(new DataPair("001","Account Number","123456789"));
@@ -57,11 +58,11 @@ public class XStreamTests {
 		dataPairs.add(new DataPair("012","Deductions","R123"));
 		dataPairs.add(new DataPair("013","Discount","R456"));
 		dataPairs.add(new DataPair("014","VAT Amount","R123"));
-		dataPairs.add(new DataPair("015","Telephone number","0721231232"));
-		dataPairs.add(new DataPair("016","Service charges","R90"));
-		dataPairs.add(new DataPair("017","Call charges","R100"));
-		dataPairs.add(new DataPair("018","Total number of calls","23"));
-		dataPairs.add(new DataPair("019","Total call duration","120mins"));
+		dataPairs.add(new DataPair("015","Card type","0721231232"));
+		dataPairs.add(new DataPair("016","Interest rate","R90"));
+		dataPairs.add(new DataPair("017","Credit limit","R100"));
+		dataPairs.add(new DataPair("018","Credit available","R23"));
+		dataPairs.add(new DataPair("019","Minimum amount due","R90"));
 		
 		XStream xstream = new XStream();
 		xstream.alias("scrape-session",Accounts.class);
@@ -73,7 +74,20 @@ public class XStreamTests {
 		
 		dumz1 = (Accounts)new APSXMLMarshaller(".\\test.xml").convertXMLFileToObject(Accounts.class);
 		System.out.println(dumz1.getDataPairList().get(0).getId().equals("001"));
+		
+		System.out.println(readFile(".\\test.xml"));
 		//System.out.println(xstream.toXML(dumz1));
+	}
+	
+	public static String readFile(String filepath) throws FileNotFoundException{
+		String tempString="";
+		File file = new File(filepath);
+		Scanner scanner = new Scanner(file);
+		while (scanner.hasNextLine()){
+			tempString += scanner.nextLine();
+		}
+		scanner.close();
+		return tempString;
 	}
 
 }
