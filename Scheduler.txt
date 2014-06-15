@@ -1,0 +1,110 @@
+
+enum JobType
+{
+	MUNICIPALITY,CREDITCARD,TELCOSERVICE
+}
+package scheduler;
+
+public class JobScheduler {
+	
+	private Scrape sc;
+	
+	JobScheduler()
+	{
+		sc=new Scrape();
+	}
+
+	public String Schedule(int jobno)
+	{
+		String s=sc.exScrape();
+		return "job" + jobno+ " has been Scheduled";
+    }
+	
+	public static void main (String[] args)
+	{
+		JobScheduler sc=new JobScheduler();
+		String x=sc.Schedule(123);
+		System.out.print(x);
+	}
+}
+
+
+
+package scheduler;
+
+public interface Scrapper {
+
+	//public void exScrape();
+
+	public String exScrape();
+}
+
+package scheduler;
+
+public class Scrape implements Scrapper{
+
+ 
+	
+	public String exScrape()
+	{
+		 return "Scrapping Starting";
+		
+	}
+	
+
+
+}
+
+
+package scheduler;
+
+import static org.junit.Assert.*;
+import org.junit.Assert;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class SchedulerTest {
+private Boolean peak , maintanance ;
+Scrape sc;
+
+ 
+//	@Before
+ 	public void setUp() throws Exception {
+        //  sc=new Scrape();
+		  //peak=false;
+		  //maintanance=true;
+ }
+
+	@Test
+	public void test() {
+		String s="True";
+		//fail("Not yet implemented");
+		//assertEquals("True","True");		//fail("Not yet implemented");
+		assertTrue(s.equals("True"));
+
+	}
+	@Test
+	public void testtimes() { 
+			  peak=false;
+			  maintanance=true;
+		assertFalse(peak);		 
+		assertTrue(maintanance);   
+	}
+
+	@Test
+	public void testScheduler() {
+	    sc=new Scrape(); 
+		String s=sc.exScrape();    
+		assertTrue(s.equals("Scrapping"));
+	}
+	
+	@Test
+	public void testJobScheduler() {
+	    JobScheduler js=new JobScheduler(); 
+		String s =js.Schedule(456);   
+
+		assertTrue(s.equals("Scrapping456"));
+	}
+
+}
