@@ -60,6 +60,7 @@
   </datapair>
   <datapair id="015">
     <text>Card type</text>
+<<<<<<< HEAD
     <value>0721231232</value>
   </datapair>
   <datapair id="016">
@@ -73,6 +74,21 @@
   <datapair id="018">
     <text>Credit available</text>
     <value>R23</value>
+=======
+    <value>Visa</value>
+  </datapair>
+  <datapair id="016">
+    <text>Interest rate</text>
+    <value>12%</value>
+  </datapair>
+  <datapair id="017">
+    <text>Credit limit</text>
+    <value>R20000</value>
+  </datapair>
+  <datapair id="018">
+    <text>Credit available</text>
+    <value>R4500</value>
+>>>>>>> experiment
   </datapair>
   <datapair id="019">
     <text>Minimum amount due</text>
