@@ -75,18 +75,22 @@
     <value>400Btu</value>
   </datapair>
   <datapair id="019">
+    <text>Gas Charges</text>
+    <value>R100</value>
+  </datapair>
+  <datapair id="020">
     <text>Water used</text>
     <value>300Kl</value>
   </datapair>
-  <datapair id="020">
+  <datapair id="021">
     <text>Water charges</text>
     <value>R456</value>
   </datapair>
-  <datapair id="021">
+  <datapair id="022">
     <text>Sewerage charges</text>
     <value>R345</value>
   </datapair>
-  <datapair id="022">
+  <datapair id="023">
     <text>Refuse charges</text>
     <value>R123</value>
   </datapair>

@@ -21,7 +21,8 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccounts
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
-import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.ErrorScrapedData;
 
 import com.thoughtworks.xstream.XStream;
 /**
@@ -30,7 +31,7 @@ import com.thoughtworks.xstream.XStream;
  */
 public class XStreamTests {
 	
-	static String filePath = ".\\creditcard.xml";
+	static String filePath = ".\\errors.xml";
 
 	/**
 	 * @param args
@@ -39,11 +40,13 @@ public class XStreamTests {
 		
 		PrintWriter write = new PrintWriter(new File(filePath));
 		
-		ScrapedData dumz1 = new ScrapedData();
+		ErrorScrapedData dumz1 = new ErrorScrapedData();
 		dumz1.setBaseURL("www.elen7045.co.za");
 		dumz1.setDate("12/12/2014");
 		dumz1.setTime("13:50:00");
-		List <DataPair>dataPairs = dumz1.getDataPairList();
+		dumz1.setError("InvalidCredentials");
+		/*List <DataPair>dataPairs = dumz1.getDataPairList();
+		dataPairs.add(new DataPair("001","error",""));
 		dataPairs.add(new DataPair("001","Account Number","123456789"));
 		dataPairs.add(new DataPair("002","Account holder name","Jack Parcell"));
 		dataPairs.add(new DataPair("003","Statement date","12/12/2014"));
@@ -58,24 +61,28 @@ public class XStreamTests {
 		dataPairs.add(new DataPair("012","Deductions","R123"));
 		dataPairs.add(new DataPair("013","Discount","R456"));
 		dataPairs.add(new DataPair("014","VAT Amount","R123"));
-		dataPairs.add(new DataPair("015","Card type","Visa"));
-		dataPairs.add(new DataPair("016","Interest rate","12%"));
-		dataPairs.add(new DataPair("017","Credit limit","R20000"));
-		dataPairs.add(new DataPair("018","Credit available","R4500"));
-		dataPairs.add(new DataPair("019","Minimum amount due","R90"));
+		dataPairs.add(new DataPair("015","Instalment notice","10"));
+		dataPairs.add(new DataPair("016","Electricity used","200kW"));
+		dataPairs.add(new DataPair("017","Electricity charges","R100"));
+		dataPairs.add(new DataPair("018","Gas used","400Btu"));
+		dataPairs.add(new DataPair("019", "Gas Charges", "R100"));
+		dataPairs.add(new DataPair("020","Water used","300Kl"));
+		dataPairs.add(new DataPair("021","Water charges","R456"));
+		dataPairs.add(new DataPair("022","Sewerage charges","R345"));
+		dataPairs.add(new DataPair("023","Refuse charges","R123"));*/
 		
 		XStream xstream = new XStream();
-		xstream.alias("scrape-session",ScrapedData.class);
-		xstream.alias("datapair",DataPair.class);
-		xstream.useAttributeFor(DataPair.class, "id");
-		xstream.addImplicitCollection(ScrapedData.class, "dataPairs"); // no List class tag, only entries
+		xstream.alias("scrape-session",ErrorScrapedData.class);
+		//xstream.alias("datapair",DataPair.class);
+		//xstream.useAttributeFor(DataPair.class, "id");
+		//xstream.addImplicitCollection(AccountScrapedData.class, "dataPairs"); // no List class tag, only entries
 		write.println(xstream.toXML(dumz1));
 		write.close();
 		
-		dumz1 = (ScrapedData)new APSXMLMarshaller(".\\creditcard.xml").convertXMLFileToObject(ScrapedData.class);
-		System.out.println(dumz1.getDataPairList().get(0).getId().equals("001"));
+		dumz1 = (ErrorScrapedData)new APSXMLMarshaller(".\\errors.xml").convertErrorXMLToObject(ErrorScrapedData.class);
+		System.out.println(xstream.toXML(dumz1));
 		
-		System.out.println(readFile(".\\creditcard.xml"));
+	//	System.out.println(readFile(".\\creditcard.xml"));
 		//System.out.println(xstream.toXML(dumz1));
 	}
 	

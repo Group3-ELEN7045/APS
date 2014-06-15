@@ -20,7 +20,7 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccounts
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
-import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
 
 import com.thoughtworks.xstream.XStream;
 /**
@@ -125,7 +125,7 @@ public class XSTreamTest {
 		dumz = null;
 		//dumz = (AbstractAccounts)xml.fromXML(new File(filePath));
 		
-		dumz = (DummyClass)new APSXMLMarshaller(filePath).convertXMLFileToObject(DummyClass.class);
+		dumz = (DummyClass)new APSXMLMarshaller(filePath).convertAccountXMLToObject(DummyClass.class);
 		System.out.println(xstream.toXML(dumz));
 		//System.out.println(xstream.toXML(myxml).equals(xstream.toXML(dumz)));
 		//System.out.println(xstream.toXML(myxml));

@@ -14,17 +14,19 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccount;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedAccountAdapter;
-import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ScrapeAccountAdapterTests {
 	
 	TelcoAccount telcoObject;
 	CreditCardAccount creditCardObject;
-	@Mock ScrapedData scrapedAccount;
+	MunicipalAccount municipalObject;
+	@Mock AccountScrapedData scrapedAccount;
 	List<DataPair> dataPairs;
 	
 	@Before
@@ -51,6 +53,7 @@ public class ScrapeAccountAdapterTests {
 		telcoObject = null;
 		dataPairs = null;
 		creditCardObject = null;
+		municipalObject = null;
 	}
 	@Test
 	public void telcoAccountScrape(){
@@ -85,12 +88,49 @@ public class ScrapeAccountAdapterTests {
 		assertTrue("Total number of calls error",telcoObject.getTotalCustomerCalls().equals(scrapedAccount.getDataPairList().get(17).getValue()));
 		assertTrue("Total call duration error",telcoObject.getTotalCallDuration().equals(scrapedAccount.getDataPairList().get(18).getValue()));
 	}
-	/*
+	
 	@Test 
 	public void municipalAccountScrape(){
+		when(dataPairs.get(14)).thenReturn(new DataPair("015","qaz","10"));
+		when(dataPairs.get(15)).thenReturn(new DataPair("016","qaz","200kW"));
+		when(dataPairs.get(16)).thenReturn(new DataPair("017","qaz","R100"));
+		when(dataPairs.get(17)).thenReturn(new DataPair("018","qaz","400Btu"));
+		when(dataPairs.get(18)).thenReturn(new DataPair("019","qaz","R100"));
+		when(dataPairs.get(19)).thenReturn(new DataPair("020","qaz","300Kl"));
+		when(dataPairs.get(20)).thenReturn(new DataPair("021","qaz","R456"));
+		when(dataPairs.get(21)).thenReturn(new DataPair("022","qaz","R345"));
+		when(dataPairs.get(22)).thenReturn(new DataPair("023","qaz","R123"));
+		
+		municipalObject = ScrapedAccountAdapter.getMunicipalAccount(scrapedAccount);
+		
+		assertTrue(municipalObject.getClass().equals(MunicipalAccount.class));
+		assertTrue("Account number error",municipalObject.getAccountNumber().equals(scrapedAccount.getDataPairList().get(0).getValue()));	
+		assertTrue("Account holder name",municipalObject.getAccountHolderName().equals(scrapedAccount.getDataPairList().get(1).getValue()));
+		assertTrue("Statement date error",municipalObject.getAccountStatementDate().equals(scrapedAccount.getDataPairList().get(2).getValue()));
+		assertTrue("Statement number error",municipalObject.getAccountStatementNumber().equals(scrapedAccount.getDataPairList().get(3).getValue()));
+		assertTrue("Statement month error",municipalObject.getAccountStatementMonth().equals(scrapedAccount.getDataPairList().get(4).getValue()));
+		assertTrue("Total due error",municipalObject.getAccountTotalDue().equals(scrapedAccount.getDataPairList().get(5).getValue()));
+		assertTrue("Due date error",municipalObject.getAccountDueDate().equals(scrapedAccount.getDataPairList().get(6).getValue()));
+		assertTrue("Opening balance error",municipalObject.getAccountOpeningBalance().equals(scrapedAccount.getDataPairList().get(7).getValue()));
+		assertTrue("Closing balance error",municipalObject.getAccountClosingBalance().equals(scrapedAccount.getDataPairList().get(8).getValue()));
+		assertTrue("Payment received error",municipalObject.getAccountPaymentReceived().equals(scrapedAccount.getDataPairList().get(9).getValue()));
+		assertTrue("New charges error",municipalObject.getAccountNewCharges().equals(scrapedAccount.getDataPairList().get(10).getValue()));
+		assertTrue("Deductions error",municipalObject.getAccountDeductions().equals(scrapedAccount.getDataPairList().get(11).getValue()));
+		assertTrue("Discount error",municipalObject.getAccountDiscount().equals(scrapedAccount.getDataPairList().get(12).getValue()));
+		assertTrue("VAT amount error",municipalObject.getAccountVATAmount().equals(scrapedAccount.getDataPairList().get(13).getValue()));
+		
+		assertTrue("Instalment notice error",municipalObject.getInstalmentNotice().equals(scrapedAccount.getDataPairList().get(14).getValue()));
+		assertTrue("Electricity used error",municipalObject.getElectricityUsed().equals(scrapedAccount.getDataPairList().get(15).getValue()));
+		assertTrue("Electricity charges error",municipalObject.getElectricityCharges().equals(scrapedAccount.getDataPairList().get(16).getValue()));
+		assertTrue("Gas used error",municipalObject.getGasUsed().equals(scrapedAccount.getDataPairList().get(17).getValue()));
+		assertTrue("Gas charges due",municipalObject.getGasCharges().equals(scrapedAccount.getDataPairList().get(18).getValue()));
+		assertTrue("Water used error",municipalObject.getWaterUsed().equals(scrapedAccount.getDataPairList().get(19).getValue()));
+		assertTrue("Water charges error",municipalObject.getWaterCharges().equals(scrapedAccount.getDataPairList().get(20).getValue()));
+		assertTrue("Sewerage charges error",municipalObject.getSewerageCharges().equals(scrapedAccount.getDataPairList().get(21).getValue()));
+		assertTrue("Refuse charges error",municipalObject.getRefuseCharges().equals(scrapedAccount.getDataPairList().get(22).getValue()));
 		
 	}
-	*/
+	
 	@Test
 	public void creditCardAccountScrape(){
 		

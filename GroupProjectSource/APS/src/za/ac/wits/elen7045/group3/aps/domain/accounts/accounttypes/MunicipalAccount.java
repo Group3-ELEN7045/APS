@@ -17,58 +17,58 @@ public class MunicipalAccount extends AbstractBillingAccountStatement {
 	public MunicipalAccount(String accountNumber) {
 		setAccountNumber(accountNumber);
 	}
-	protected String getInstalmentNotice() {
+	public String getInstalmentNotice() {
 		return InstalmentNotice;
 	}
-	protected void setInstalmentNotice(String instalmentNotice) {
+	public void setInstalmentNotice(String instalmentNotice) {
 		InstalmentNotice = instalmentNotice;
 	}
-	protected String getElectricityUsed() {
+	public String getElectricityUsed() {
 		return ElectricityUsed;
 	}
-	protected void setElectricityUsed(String electricityUsed) {
+	public void setElectricityUsed(String electricityUsed) {
 		ElectricityUsed = electricityUsed;
 	}
-	protected String getElectricityCharges() {
+	public String getElectricityCharges() {
 		return ElectricityCharges;
 	}
-	protected void setElectricityCharges(String electricityCharges) {
+	public void setElectricityCharges(String electricityCharges) {
 		ElectricityCharges = electricityCharges;
 	}
-	protected String getGasUsed() {
+	public String getGasUsed() {
 		return GasUsed;
 	}
-	protected void setGasUsed(String gasUsed) {
+	public void setGasUsed(String gasUsed) {
 		GasUsed = gasUsed;
 	}
-	protected String getGasCharges() {
+	public String getGasCharges() {
 		return GasCharges;
 	}
-	protected void setGasCharges(String gasCharges) {
+	public void setGasCharges(String gasCharges) {
 		GasCharges = gasCharges;
 	}
-	protected String getWaterUsed() {
+	public String getWaterUsed() {
 		return WaterUsed;
 	}
-	protected void setWaterUsed(String waterUsed) {
+	public void setWaterUsed(String waterUsed) {
 		WaterUsed = waterUsed;
 	}
-	protected String getWaterCharges() {
+	public String getWaterCharges() {
 		return WaterCharges;
 	}
-	protected void setWaterCharges(String waterCharges) {
+	public void setWaterCharges(String waterCharges) {
 		WaterCharges = waterCharges;
 	}
-	protected String getSewerageCharges() {
+	public String getSewerageCharges() {
 		return SewerageCharges;
 	}
-	protected void setSewerageCharges(String sewerageCharges) {
+	public void setSewerageCharges(String sewerageCharges) {
 		SewerageCharges = sewerageCharges;
 	}
-	protected String getRefuseCharges() {
+	public String getRefuseCharges() {
 		return RefuseCharges;
 	}
-	protected void setRefuseCharges(String refuseCharges) {
+	public void setRefuseCharges(String refuseCharges) {
 		RefuseCharges = refuseCharges;
 	}
 }

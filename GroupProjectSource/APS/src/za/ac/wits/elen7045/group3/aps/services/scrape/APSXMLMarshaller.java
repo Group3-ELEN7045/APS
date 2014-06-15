@@ -12,12 +12,17 @@ public class APSXMLMarshaller {
 		xstream = new XStream();
 		this.filePath = filePath;
 	}
-	public Object convertXMLFileToObject(Class objectToConvert){
+	public Object convertAccountXMLToObject(Class objectToConvert){
 		xstream.alias("scrape-session",objectToConvert);
 		xstream.alias("datapair",DataPair.class);
 		xstream.useAttributeFor(DataPair.class, "id");
 		xstream.addImplicitCollection(objectToConvert, "dataPairs");
 		
+		return xstream.fromXML(new File(filePath));
+	}
+	
+	public Object convertErrorXMLToObject(Class objectToConvert){
+		xstream.alias("scrape-session",objectToConvert);		
 		return xstream.fromXML(new File(filePath));
 	}
 	
