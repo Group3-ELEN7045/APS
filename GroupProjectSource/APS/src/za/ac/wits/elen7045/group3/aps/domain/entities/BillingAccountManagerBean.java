@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
+import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
@@ -34,6 +36,7 @@ public class BillingAccountManagerBean implements BillingAccountManager {
 				if (billingRepository.getBillingAccount(item.getAccountNumber()) == null) {
 
 					if (userBillingAccountDetails.isSatisfiedBy(item)) {
+						item.setAccountStatus(StatusType.TRYING);
 						account.add(item);
 					} else {
 						throw new Exception(
@@ -48,23 +51,31 @@ public class BillingAccountManagerBean implements BillingAccountManager {
 		}
 		customer.setBillingAccounts(account);
 		try {
-			billingRepository.saveCustomerBillingAccount(customer);
+			billingRepository.saveCustomerBillingAccount(customer);  //Update the Customer with billing account details
 		} catch (DatabaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	
+	//Method to update customer's billing account
 	public void updateCustomerBillingAccounts(BillingAccount billingAccount) {
 
 		if (billingAccount == null) {
-			// throw new LogonException(ApplicationContants.USER_NOT_FOUND);
+			 try {
+				throw new ApplicationException(ApplicationContants.BILLING_ACCOUNT_DETAILS);
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
+		//Check if all the required fields are set
 		ApplicationSpecification<BillingAccount> userBillingAccountDetails = new BillingAccountDetailsSpecification(
 				billingAccount);
 		if (userBillingAccountDetails.isSatisfiedBy(billingAccount)) {
 			try {
+				billingAccount.setAccountStatus(StatusType.TRYING);  // billing account status set to TRYING
 				billingRepository.upDateCustomerBillingAccount(customer,
 						billingAccount);
 			} catch (DatabaseException e) {
@@ -87,13 +98,13 @@ public class BillingAccountManagerBean implements BillingAccountManager {
 		}
 		try {
 			billingAccount = billingRepository.getBillingAccount(accountNumber);
-//			if(billingAccount != null){
-//				return billingAccount;
-//			}
+			if(billingAccount != null){
+				return billingAccount;
+			}
 		} catch (DatabaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return billingAccount;
+		return null;
 	}
 }

@@ -37,4 +37,8 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 	public Customer getCustomer(CredentialsVO credentials) throws DatabaseException {
 		return userDatabase.getCustomer(credentials);
 	}
+	
+	 public void clearData(Customer customer) throws DatabaseException{
+		 userDatabase.clearData(customer);
+	 }
 }

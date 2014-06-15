@@ -12,11 +12,11 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.UserAuthenticationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
-public class LogonUserValidation {
+public class LogonService {
 	private CustomerRepository customerRepository;
 	private User user;
 	
-	public LogonUserValidation(CustomerRepository customerRepository ){
+	public LogonService(CustomerRepository customerRepository ){
 		this.customerRepository = customerRepository;
 	}
 	

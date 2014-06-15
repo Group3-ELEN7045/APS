@@ -1,8 +1,8 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccount;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 
-public class CreditCardAccount extends AbstractAccount{
+public class CreditCardAccount extends AbstractBillingAccountStatement{
 
 	private String cardType;
 	private String interestRate;

@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
+import java.util.List;
+
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
 
@@ -9,11 +11,20 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
  *
  */
 public class BillingAccount {
+	private long id;
 	private StatusType accountStatus;
 	private String accountNumber;
 	private String billingCompanyName;
 	private CredentialsVO credentials;
-	
+	private StatementType billingType;
+	private List<BillingAccountStatement> billingStatement;
+		
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -38,5 +49,17 @@ public class BillingAccount {
 	}
 	public void setAccountStatus(StatusType accountStatus) {
 		this.accountStatus = accountStatus;
+	}
+	public List<BillingAccountStatement> getBillingStatement() {
+		return billingStatement;
+	}
+	public void setBillingStatement(List<BillingAccountStatement> billingStatement) {
+		this.billingStatement = billingStatement;
+	}
+	public StatementType getBillingType() {
+		return billingType;
+	}
+	public void setBillingType(StatementType billingType) {
+		this.billingType = billingType;
 	}	
 }

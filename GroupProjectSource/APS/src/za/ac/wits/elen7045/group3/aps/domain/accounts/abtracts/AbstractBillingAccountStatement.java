@@ -1,6 +1,6 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts;
 
-public abstract class  AbstractAccount {
+public abstract class  AbstractBillingAccountStatement {
 
 	String AccountNumber="";
 	String AccountHolderName="";

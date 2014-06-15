@@ -7,7 +7,7 @@ package za.ac.wits.elen7045.group3.aps.services.exception;
  * @author SilasMahlangu
  *
  */
-public class LogonException extends ApplicationException{
+public class LogonException extends Exception{
 	/**
 	 * 
 	 */

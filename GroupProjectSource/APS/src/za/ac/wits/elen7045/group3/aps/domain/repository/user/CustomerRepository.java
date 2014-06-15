@@ -16,4 +16,5 @@ public interface CustomerRepository {
    boolean updateUser(Customer customer) throws DatabaseException;
    Customer selectCustomer(Customer customer) throws DatabaseException;
    Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
+   public void clearData(Customer customer) throws DatabaseException;
 }
