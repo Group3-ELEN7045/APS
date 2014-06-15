@@ -32,8 +32,7 @@ public class XMLReadTests {
 	}
 	
 	@Test
-	public void testReadScrapeXMLForTelcoAccount()
-	{
+	public void testReadScrapeXMLForTelcoAccount(){
 		
 		filePath = ".\\telco.xml";
 		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
@@ -44,8 +43,7 @@ public class XMLReadTests {
 	}
 	
 	@Test
-	public void testReadScrapeXMLForMunicipalAccount()
-	{
+	public void testReadScrapeXMLForMunicipalAccount(){
 		
 		filePath = ".\\municipal.xml";
 		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
@@ -56,8 +54,7 @@ public class XMLReadTests {
 	}
 	
 	@Test
-	public void testReadScrapeXMLForCreditCardAccount()
-	{
+	public void testReadScrapeXMLForCreditCardAccount(){
 		
 		filePath = ".\\creditcard.xml";
 		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
