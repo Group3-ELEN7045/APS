@@ -1,14 +1,14 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccount;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
+import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
 
 public class ScrapedAccountAdapter {
 	//AbstractAccount creditAcc;
-	public static CreditCardAccount getCreditCardAccount(Accounts scrapedAccount){
+	public static CreditCardAccount getCreditCardAccount(ScrapedData scrapedAccount){
 		CreditCardAccount creditAcc = new CreditCardAccount(scrapedAccount.getDataPairList().get(0).getValue());
 		creditAcc.setAccountHolderName(scrapedAccount.getDataPairList().get(1).getValue());
 		creditAcc.setAccountStatementDate(scrapedAccount.getDataPairList().get(2).getValue());
@@ -49,7 +49,7 @@ public class ScrapedAccountAdapter {
 		return creditAcc;
 	}
 */
-	public static TelcoAccount getTelcoAccount(Accounts scrapedAccount){
+	public static TelcoAccount getTelcoAccount(ScrapedData scrapedAccount){
 		TelcoAccount telcoAcc = new TelcoAccount(scrapedAccount.getDataPairList().get(0).getValue());
 		telcoAcc.setAccountHolderName(scrapedAccount.getDataPairList().get(1).getValue());
 		telcoAcc.setAccountStatementDate(scrapedAccount.getDataPairList().get(2).getValue());

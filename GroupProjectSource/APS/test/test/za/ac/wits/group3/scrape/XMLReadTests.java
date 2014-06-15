@@ -10,25 +10,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;  
 import org.mockito.runners.MockitoJUnitRunner;  
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
+import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
   
 @RunWith(MockitoJUnitRunner.class)
 public class XMLReadTests {
 	
 	String filePath;
 	XStream xstream;	
-	Accounts scrapedAccount;
+	ScrapedData scrapedData;
 	
 	@Before
 	public void init(){
 		xstream = new XStream();
-		scrapedAccount = new Accounts();	
+		scrapedData = new ScrapedData();	
 	}
 	@After
 	public void tearDown(){
 		xstream = null;
-		scrapedAccount = null;
+		scrapedData = null;
 	}
 	
 	@Test
@@ -36,11 +36,11 @@ public class XMLReadTests {
 	{
 		
 		filePath = ".\\telco.xml";
-		scrapedAccount = (Accounts)new APSXMLMarshaller(filePath).convertXMLFileToObject(Accounts.class);
-		assertTrue("There are incorrect number of datapairs for this Account type",scrapedAccount.getDataPairList().size() == 19);
-		assertTrue(scrapedAccount.getBaseURL().equals("www.elen7045.co.za"));
-		assertTrue(scrapedAccount.getDate().equals("12/12/2014"));
-		assertTrue(scrapedAccount.getTime().equals("13:50:00"));
+		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
+		assertTrue(scrapedData.getBaseURL().equals("www.elen7045.co.za"));
+		assertTrue(scrapedData.getDate().equals("12/12/2014"));
+		assertTrue(scrapedData.getTime().equals("13:50:00"));
+		assertTrue("Incorrect number of datapairs for Telco account",scrapedData.getDataPairList().size() == 19);
 	}
 	
 	@Test
@@ -48,11 +48,11 @@ public class XMLReadTests {
 	{
 		
 		filePath = ".\\municipal.xml";
-		scrapedAccount = (Accounts)new APSXMLMarshaller(filePath).convertXMLFileToObject(Accounts.class);
-		assertTrue("There are incorrect number of datapairs for this Account type",scrapedAccount.getDataPairList().size() == 22);
-		assertTrue(scrapedAccount.getBaseURL().equals("www.elen7045.co.za"));
-		assertTrue(scrapedAccount.getDate().equals("12/12/2014"));
-		assertTrue(scrapedAccount.getTime().equals("13:50:00"));	
+		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
+		assertTrue(scrapedData.getBaseURL().equals("www.elen7045.co.za"));
+		assertTrue(scrapedData.getDate().equals("12/12/2014"));
+		assertTrue(scrapedData.getTime().equals("13:50:00"));	
+		assertTrue("Incorrect number of datapairs for Municipal account",scrapedData.getDataPairList().size() == 23);
 	}
 	
 	@Test
@@ -60,14 +60,22 @@ public class XMLReadTests {
 	{
 		
 		filePath = ".\\creditcard.xml";
-		scrapedAccount = (Accounts)new APSXMLMarshaller(filePath).convertXMLFileToObject(Accounts.class);
-		assertTrue("There are incorrect number of datapairs for this Account type",scrapedAccount.getDataPairList().size() == 19);
-		assertTrue(scrapedAccount.getBaseURL().equals("www.elen7045.co.za"));
-		assertTrue(scrapedAccount.getBaseURL().equals("www.elen7045.co.za"));
-		assertTrue(scrapedAccount.getDate().equals("12/12/2014"));
-		assertTrue(scrapedAccount.getTime().equals("13:50:00"));
+		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
+		assertTrue(scrapedData.getBaseURL().equals("www.elen7045.co.za"));
+		assertTrue(scrapedData.getDate().equals("12/12/2014"));
+		assertTrue(scrapedData.getTime().equals("13:50:00"));
+		assertTrue("Incorrect number of datapairs for Credit Card account",scrapedData.getDataPairList().size() == 19);
 	}
 	
+	@Test
+	public void testReadScrapeXMLForError(){
+		filePath = ".\\error.xml";
+		scrapedData = (ScrapedData)new APSXMLMarshaller(filePath).convertXMLFileToObject(ScrapedData.class);
+		assertTrue(scrapedData.getBaseURL().equals("www.elen7045.co.za"));
+		assertTrue(scrapedData.getDate().equals("12/12/2014"));
+		assertTrue(scrapedData.getTime().equals("13:50:00"));
+		assertTrue("Incorrect number of datapairs for error",scrapedData.getDataPairList().size() == 1);
+	}
 
 
 }

@@ -1,16 +1,16 @@
-package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
+package za.ac.wits.elen7045.group3.aps.services.util;
 
 import java.util.ArrayList;
 import java.util.List;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
-public class Accounts {
+public class ScrapedData {
 	private String baseURL;
 	private String date;
 	private String time;
 	private List <DataPair> dataPairs;
 
-	public Accounts (){
+	public ScrapedData (){
 		dataPairs = new ArrayList<DataPair>();
 	}
 	public String getBaseURL() {

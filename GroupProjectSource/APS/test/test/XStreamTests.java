@@ -15,13 +15,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 import sun.swing.FilePane;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
+import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
 
 import com.thoughtworks.xstream.XStream;
 /**
@@ -39,7 +39,7 @@ public class XStreamTests {
 		
 		PrintWriter write = new PrintWriter(new File(filePath));
 		
-		Accounts dumz1 = new Accounts();
+		ScrapedData dumz1 = new ScrapedData();
 		dumz1.setBaseURL("www.elen7045.co.za");
 		dumz1.setDate("12/12/2014");
 		dumz1.setTime("13:50:00");
@@ -65,14 +65,14 @@ public class XStreamTests {
 		dataPairs.add(new DataPair("019","Minimum amount due","R90"));
 		
 		XStream xstream = new XStream();
-		xstream.alias("scrape-session",Accounts.class);
+		xstream.alias("scrape-session",ScrapedData.class);
 		xstream.alias("datapair",DataPair.class);
 		xstream.useAttributeFor(DataPair.class, "id");
-		xstream.addImplicitCollection(Accounts.class, "dataPairs"); // no List class tag, only entries
+		xstream.addImplicitCollection(ScrapedData.class, "dataPairs"); // no List class tag, only entries
 		write.println(xstream.toXML(dumz1));
 		write.close();
 		
-		dumz1 = (Accounts)new APSXMLMarshaller(".\\creditcard.xml").convertXMLFileToObject(Accounts.class);
+		dumz1 = (ScrapedData)new APSXMLMarshaller(".\\creditcard.xml").convertXMLFileToObject(ScrapedData.class);
 		System.out.println(dumz1.getDataPairList().get(0).getId().equals("001"));
 		
 		System.out.println(readFile(".\\creditcard.xml"));

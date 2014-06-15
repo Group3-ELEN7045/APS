@@ -13,18 +13,18 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;  
 
 import static org.mockito.Mockito.*;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedAccountAdapter;
+import za.ac.wits.elen7045.group3.aps.services.util.ScrapedData;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ScrapeAccountAdapterTests {
 	
 	TelcoAccount telcoObject;
 	CreditCardAccount creditCardObject;
-	@Mock Accounts scrapedAccount;
+	@Mock ScrapedData scrapedAccount;
 	List<DataPair> dataPairs;
 	
 	@Before
