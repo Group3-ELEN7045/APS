@@ -7,40 +7,40 @@ public class TelcoAccount extends AbstractBillingAccountStatement{
 	private String 	telephonenumber;
 	private String 	serviceCharges;
 	private String 	callCharges;
-	private int 	totalCustomerCalls;
-	private float	totalCallDuration;
+	private String 	totalCustomerCalls;
+	private String	totalCallDuration;
 	
 	public TelcoAccount(String accountNumber) {
 		setAccountNumber(accountNumber);
 	}
-	protected String getTelephonenumber() {
+	public String getTelephonenumber() {
 		return telephonenumber;
 	}
-	protected void setTelephonenumber(String telephonenumber) {
+	public void setTelephonenumber(String telephonenumber) {
 		this.telephonenumber = telephonenumber;
 	}
-	protected String getServiceCharges() {
+	public String getServiceCharges() {
 		return serviceCharges;
 	}
-	protected void setServiceCharges(String serviceCharges) {
+	public void setServiceCharges(String serviceCharges) {
 		this.serviceCharges = serviceCharges;
 	}
-	protected String getCallCharges() {
+	public String getCallCharges() {
 		return callCharges;
 	}
-	protected void setCallCharges(String callCharges) {
+	public void setCallCharges(String callCharges) {
 		this.callCharges = callCharges;
 	}
-	protected int getTotalCustomerCalls() {
+	public String getTotalCustomerCalls() {
 		return totalCustomerCalls;
 	}
-	protected void setTotalCustomerCalls(int totalCustomerCalls) {
+	public void setTotalCustomerCalls(String totalCustomerCalls) {
 		this.totalCustomerCalls = totalCustomerCalls;
 	}
-	protected float getTotalCallDuration() {
+	public String getTotalCallDuration() {
 		return totalCallDuration;
 	}
-	protected void setTotalCallDuration(float totalCallDuration) {
+	public void setTotalCallDuration(String totalCallDuration) {
 		this.totalCallDuration = totalCallDuration;
 	}
 }

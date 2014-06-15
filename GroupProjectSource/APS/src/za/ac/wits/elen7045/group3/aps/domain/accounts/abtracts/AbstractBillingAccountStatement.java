@@ -16,88 +16,88 @@ public abstract class  AbstractBillingAccountStatement {
 	String AccountDeductions="";
 	String AccountDiscount="";
 	String AccountVATAmount="";
-	protected String getAccountNumber() {
+	public String getAccountNumber() {
 		return AccountNumber;
 	}
-	protected void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		AccountNumber = accountNumber;
 	}
-	protected String getAccountHolderName() {
+	public String getAccountHolderName() {
 		return AccountHolderName;
 	}
-	protected void setAccountHolderName(String accountHolderName) {
+	public void setAccountHolderName(String accountHolderName) {
 		AccountHolderName = accountHolderName;
 	}
-	protected String getAccountStatementDate() {
+	public String getAccountStatementDate() {
 		return AccountStatementDate;
 	}
-	protected void setAccountStatementDate(String accountStatementDate) {
+	public void setAccountStatementDate(String accountStatementDate) {
 		AccountStatementDate = accountStatementDate;
 	}
-	protected String getAccountStatementNumber() {
+	public String getAccountStatementNumber() {
 		return AccountStatementNumber;
 	}
-	protected void setAccountStatementNumber(String accountStatementNumber) {
+	public void setAccountStatementNumber(String accountStatementNumber) {
 		AccountStatementNumber = accountStatementNumber;
 	}
-	protected String getAccountStatementMonth() {
+	public String getAccountStatementMonth() {
 		return AccountStatementMonth;
 	}
-	protected void setAccountStatementMonth(String accountStatementMonth) {
+	public void setAccountStatementMonth(String accountStatementMonth) {
 		AccountStatementMonth = accountStatementMonth;
 	}
-	protected String getAccountTotalDue() {
+	public String getAccountTotalDue() {
 		return AccountTotalDue;
 	}
-	protected void setAccountTotalDue(String accountTotalDue) {
+	public void setAccountTotalDue(String accountTotalDue) {
 		AccountTotalDue = accountTotalDue;
 	}
-	protected String getAccountDueDate() {
+	public String getAccountDueDate() {
 		return AccountDueDate;
 	}
-	protected void setAccountDueDate(String accountDueDate) {
+	public void setAccountDueDate(String accountDueDate) {
 		AccountDueDate = accountDueDate;
 	}
-	protected String getAccountOpeningBalance() {
+	public String getAccountOpeningBalance() {
 		return AccountOpeningBalance;
 	}
-	protected void setAccountOpeningBalance(String accountOpeningBalance) {
+	public void setAccountOpeningBalance(String accountOpeningBalance) {
 		AccountOpeningBalance = accountOpeningBalance;
 	}
-	protected String getAccountClosingBalance() {
+	public String getAccountClosingBalance() {
 		return AccountClosingBalance;
 	}
-	protected void setAccountClosingBalance(String accountClosingBalance) {
+	public void setAccountClosingBalance(String accountClosingBalance) {
 		AccountClosingBalance = accountClosingBalance;
 	}
-	protected String getAccountPaymentReceived() {
+	public String getAccountPaymentReceived() {
 		return AccountPaymentReceived;
 	}
-	protected void setAccountPaymentReceived(String accountPaymentReceived) {
+	public void setAccountPaymentReceived(String accountPaymentReceived) {
 		AccountPaymentReceived = accountPaymentReceived;
 	}
-	protected String getAccountNewCharges() {
+	public String getAccountNewCharges() {
 		return AccountNewCharges;
 	}
-	protected void setAccountNewCharges(String accountNewCharges) {
+	public void setAccountNewCharges(String accountNewCharges) {
 		AccountNewCharges = accountNewCharges;
 	}
-	protected String getAccountDeductions() {
+	public String getAccountDeductions() {
 		return AccountDeductions;
 	}
-	protected void setAccountDeductions(String accountDeductions) {
+	public void setAccountDeductions(String accountDeductions) {
 		AccountDeductions = accountDeductions;
 	}
-	protected String getAccountDiscount() {
+	public String getAccountDiscount() {
 		return AccountDiscount;
 	}
-	protected void setAccountDiscount(String accountDiscount) {
+	public void setAccountDiscount(String accountDiscount) {
 		AccountDiscount = accountDiscount;
 	}
-	protected String getAccountVATAmount() {
+	public String getAccountVATAmount() {
 		return AccountVATAmount;
 	}
-	protected void setAccountVATAmount(String accountVATAmount) {
+	public void setAccountVATAmount(String accountVATAmount) {
 		AccountVATAmount = accountVATAmount;
 	}
 }
