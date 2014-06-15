@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.util;
+package za.ac.wits.elen7045.group3.aps.services.scrape;
 
 import java.util.HashMap;
 import java.util.Map;

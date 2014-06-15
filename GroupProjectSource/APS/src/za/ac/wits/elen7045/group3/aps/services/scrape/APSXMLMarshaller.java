@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.util;
+package za.ac.wits.elen7045.group3.aps.services.scrape;
 
 import java.io.File;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;

@@ -1,17 +1,17 @@
 package test.za.ac.wits.group3.scrape;
 
 import com.thoughtworks.xstream.XStream;
+
 import static org.junit.Assert.*;    
+
 import org.junit.After;  
 import org.junit.Before;  
 import org.junit.Test;  
 import org.junit.runner.RunWith;  
 import org.mockito.runners.MockitoJUnitRunner;  
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
-import za.ac.wits.elen7045.group3.aps.services.util.APSXMLMarshaller;
-//import static org.mockito.Mockito.*;
-//import org.mockito.Mock;  
-//import org.mockito.MockitoAnnotations;
+import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
   
 @RunWith(MockitoJUnitRunner.class)
 public class XMLReadTests {

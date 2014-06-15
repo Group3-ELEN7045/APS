@@ -21,7 +21,7 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
-import za.ac.wits.elen7045.group3.aps.services.util.APSXMLMarshaller;
+import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
 
 import com.thoughtworks.xstream.XStream;
 /**

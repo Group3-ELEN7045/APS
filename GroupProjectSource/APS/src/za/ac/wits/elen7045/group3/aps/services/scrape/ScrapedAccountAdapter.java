@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.util;
+package za.ac.wits.elen7045.group3.aps.services.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.Accounts;
