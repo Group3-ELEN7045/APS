@@ -20,7 +20,7 @@ public class UserSpecificationByID extends ApplicationSpecification<Customer>{
 	}
 	
 	@Override
-	public boolean isFulfiledBy(Object object) {
+	public boolean isSatisfiedBy(Customer customer) {
 		return (customer.getId() != null);
 	}
 }

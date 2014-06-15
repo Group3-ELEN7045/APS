@@ -9,7 +9,7 @@ package za.ac.wits.elen7045.group3.aps.services.enumtypes;
  *
  */
 public enum AccountType {
-	CLOTHING("C"), ELECTRIC("E"), CELLPHONE("CL"), LOAN("L");
+	MUNICIPALITY("M"), ELECTRIC("E"), CELLPHONE("CL"), LOAN("L");
 	 
 	private String accountType;
  

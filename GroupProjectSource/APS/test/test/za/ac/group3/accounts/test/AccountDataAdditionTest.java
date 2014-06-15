@@ -1,9 +1,16 @@
 package test.za.ac.group3.accounts.test;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+
 import org.junit.Before;
 import org.junit.Test;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccount;
+import static org.mockito.Mockito.*;   
+
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalAccount;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
@@ -26,7 +33,7 @@ public class AccountDataAdditionTest {
 	public void testDuplicateAccounts(){
 
 		//setup account
-		AbstractAccount muniaccount 	= new MunicipalAccount("123456");
+		AbstractBillingAccountStatement muniaccount 	= new MunicipalAccount("123456");
 
 		//configure mock
 		when(repo.doesAccountEntryExist(muniaccount)).thenReturn(false).thenReturn(true);
@@ -44,9 +51,9 @@ public class AccountDataAdditionTest {
 	@Test
 	public void testAddAccounts() {
 		//setup account
-		AbstractAccount muniaccount 	= new MunicipalAccount("123456");
-		AbstractAccount creditaccount 	= new CreditCardAccount("798101112");
-		AbstractAccount telcoaccount 	= new TelcoAccount("1213141516");
+		AbstractBillingAccountStatement muniaccount 	= new MunicipalAccount("123456");
+		AbstractBillingAccountStatement creditaccount 	= new CreditCardAccount("798101112");
+		AbstractBillingAccountStatement telcoaccount 	= new TelcoAccount("1213141516");
 		
 		//configure mock
 		when(repo.doesAccountEntryExist(muniaccount)).thenReturn(false).thenReturn(true);

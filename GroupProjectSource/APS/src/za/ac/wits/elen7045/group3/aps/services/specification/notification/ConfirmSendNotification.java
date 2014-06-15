@@ -10,7 +10,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
  * @author SilasMahlangu
  *
  */
-public class ConfirmSendNotification extends ApplicationSpecification<ConfirmSendNotification>{
+public class ConfirmSendNotification extends ApplicationSpecification<Boolean>{
 	private boolean confirmSendNotification;
 	
 	public ConfirmSendNotification (boolean confirmSendNotification){
@@ -18,8 +18,8 @@ public class ConfirmSendNotification extends ApplicationSpecification<ConfirmSen
 	}
 
 	@Override
-	public boolean isFulfiledBy(Object object) {
-		return confirmSendNotification;
+	public boolean isSatisfiedBy(Boolean object) {
+		return confirmSendNotification == object.booleanValue();
 	}
 	
 	

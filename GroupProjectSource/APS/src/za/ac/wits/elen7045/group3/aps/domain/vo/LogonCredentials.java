@@ -9,7 +9,7 @@ package za.ac.wits.elen7045.group3.aps.domain.vo;
  *
  */
 public class LogonCredentials extends CredentialsVO{
-    private String confirmPasword;
+    private String confirmPasword;   
 
 	public String getConfirmPasword() {
 		return confirmPasword;
@@ -17,7 +17,6 @@ public class LogonCredentials extends CredentialsVO{
 
 	public void setConfirmPasword(String confirmPasword) {
 		this.confirmPasword = confirmPasword;
-	}
-    
+	}	
 	
 }
