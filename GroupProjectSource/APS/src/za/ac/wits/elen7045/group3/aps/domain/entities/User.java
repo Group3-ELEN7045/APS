@@ -30,7 +30,7 @@ public class User implements Serializable{
 	/** The credentials. */
 	private CredentialsVO              credentials;
 	
-	private List<BillingAccount> 	billingAccounts;
+	
 	
 		
 	private String                    stringDateOfBirth;
@@ -141,12 +141,4 @@ public class User implements Serializable{
 		this.credentials = credentials;
 	}
 
-	public List<BillingAccount> getBillingAccounts() {
-		return billingAccounts;
-	}
-
-	public void setBillingAccounts(List<BillingAccount> billingAccounts) {
-		this.billingAccounts = billingAccounts;
-	}
-	
 }
