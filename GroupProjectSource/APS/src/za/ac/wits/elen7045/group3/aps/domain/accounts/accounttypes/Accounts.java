@@ -1,10 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
 public class Accounts {
@@ -40,10 +37,4 @@ public class Accounts {
 	public void setDataPairList(List<DataPair> dp) {
 		this.dataPairs = dp;
 	}
-	
-	
-
-	
-	
-	
 }

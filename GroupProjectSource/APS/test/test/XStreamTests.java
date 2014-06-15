@@ -58,10 +58,10 @@ public class XStreamTests {
 		dataPairs.add(new DataPair("012","Deductions","R123"));
 		dataPairs.add(new DataPair("013","Discount","R456"));
 		dataPairs.add(new DataPair("014","VAT Amount","R123"));
-		dataPairs.add(new DataPair("015","Card type","0721231232"));
-		dataPairs.add(new DataPair("016","Interest rate","R90"));
-		dataPairs.add(new DataPair("017","Credit limit","R100"));
-		dataPairs.add(new DataPair("018","Credit available","R23"));
+		dataPairs.add(new DataPair("015","Card type","Visa"));
+		dataPairs.add(new DataPair("016","Interest rate","12%"));
+		dataPairs.add(new DataPair("017","Credit limit","R20000"));
+		dataPairs.add(new DataPair("018","Credit available","R4500"));
 		dataPairs.add(new DataPair("019","Minimum amount due","R90"));
 		
 		XStream xstream = new XStream();
@@ -72,10 +72,10 @@ public class XStreamTests {
 		write.println(xstream.toXML(dumz1));
 		write.close();
 		
-		dumz1 = (Accounts)new APSXMLMarshaller(".\\test.xml").convertXMLFileToObject(Accounts.class);
+		dumz1 = (Accounts)new APSXMLMarshaller(".\\creditcard.xml").convertXMLFileToObject(Accounts.class);
 		System.out.println(dumz1.getDataPairList().get(0).getId().equals("001"));
 		
-		System.out.println(readFile(".\\test.xml"));
+		System.out.println(readFile(".\\creditcard.xml"));
 		//System.out.println(xstream.toXML(dumz1));
 	}
 	
