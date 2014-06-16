@@ -37,6 +37,11 @@ public class Customer extends User implements Serializable{
 	
 	private PaymentDetails           paymentDetails = new PaymentDetails();
 	
+<<<<<<< HEAD
+=======
+	private List<BillingAccount> 	billingAccounts;
+	
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
 	/**
 	 * Gets the account details.
 	 *
@@ -90,9 +95,22 @@ public class Customer extends User implements Serializable{
 
 	public void setEncryptionModule(EncryptionModule encryptionModule) {
 		this.encryptionModule = encryptionModule;
+<<<<<<< HEAD
 	}
 
 	
+=======
+	}	
+		
+	public List<BillingAccount> getBillingAccounts() {
+		return billingAccounts;
+	}
+
+	public void setBillingAccounts(List<BillingAccount> billingAccounts) {
+		this.billingAccounts = billingAccounts;
+	}
+
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
 	public Customer encryptUserInformation() {
 		String stringDatOfBirth = DateUtil.getDate(getDateOfBirth(), ApplicationContants.DATE_OF_BIRTH_FORMAT);
 		

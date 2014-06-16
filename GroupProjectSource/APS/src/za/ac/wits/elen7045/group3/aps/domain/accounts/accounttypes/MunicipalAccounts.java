@@ -1,4 +1,5 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
+<<<<<<< HEAD
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
@@ -89,6 +90,14 @@ public class MunicipalAccounts extends AbstractAccounts {
 	protected void setRefuseCharges(DataPair refuseCharges) {
 		RefuseCharges = new DataPair(refuseCharges);
 	}
+=======
+import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
+
+public class MunicipalAccounts extends AccountScrapedData {
+
+
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
 
 	
 }

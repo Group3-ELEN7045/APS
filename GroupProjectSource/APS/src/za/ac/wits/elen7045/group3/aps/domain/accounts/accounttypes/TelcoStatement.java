@@ -1,46 +1,52 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
+<<<<<<< HEAD:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/TelcoStatement.java
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractStatement;
 
 public class TelcoStatement extends AbstractStatement{
+=======
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+
+public class TelcoAccount extends AbstractBillingAccountStatement{
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/TelcoAccount.java
 
 	private String 	telephonenumber;
 	private String 	serviceCharges;
 	private String 	callCharges;
-	private int 	totalCustomerCalls;
-	private float	totalCallDuration;
+	private String 	totalCustomerCalls;
+	private String	totalCallDuration;
 	
 	public TelcoStatement(String accountNumber) {
 		setAccountNumber(accountNumber);
 	}
-	protected String getTelephonenumber() {
+	public String getTelephonenumber() {
 		return telephonenumber;
 	}
-	protected void setTelephonenumber(String telephonenumber) {
+	public void setTelephonenumber(String telephonenumber) {
 		this.telephonenumber = telephonenumber;
 	}
-	protected String getServiceCharges() {
+	public String getServiceCharges() {
 		return serviceCharges;
 	}
-	protected void setServiceCharges(String serviceCharges) {
+	public void setServiceCharges(String serviceCharges) {
 		this.serviceCharges = serviceCharges;
 	}
-	protected String getCallCharges() {
+	public String getCallCharges() {
 		return callCharges;
 	}
-	protected void setCallCharges(String callCharges) {
+	public void setCallCharges(String callCharges) {
 		this.callCharges = callCharges;
 	}
-	protected int getTotalCustomerCalls() {
+	public String getTotalCustomerCalls() {
 		return totalCustomerCalls;
 	}
-	protected void setTotalCustomerCalls(int totalCustomerCalls) {
+	public void setTotalCustomerCalls(String totalCustomerCalls) {
 		this.totalCustomerCalls = totalCustomerCalls;
 	}
-	protected float getTotalCallDuration() {
+	public String getTotalCallDuration() {
 		return totalCallDuration;
 	}
-	protected void setTotalCallDuration(float totalCallDuration) {
+	public void setTotalCallDuration(String totalCallDuration) {
 		this.totalCallDuration = totalCallDuration;
 	}
 }

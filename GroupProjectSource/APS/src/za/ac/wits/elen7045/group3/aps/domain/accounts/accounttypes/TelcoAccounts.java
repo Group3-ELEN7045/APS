@@ -1,5 +1,6 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
+<<<<<<< HEAD
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
@@ -54,5 +55,13 @@ public class TelcoAccounts extends AbstractAccounts{
 	protected void setTotalCallDuration(DataPair totalCallDuration) {
 		this.totalCallDuration = new DataPair(totalCallDuration);
 	}
+=======
+import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
+
+public class TelcoAccounts extends AccountScrapedData{
+
+	
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
 	
 }

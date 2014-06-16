@@ -8,7 +8,7 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.AccountDataRepo
 
 public class AccountRepository implements AccountDataRepository{
 	
-	LinkedList<AbstractAccount> data = new LinkedList<>();
+	LinkedList<AbstractAccount> data = new LinkedList<AbstractAccount>();
 	
 	@Override
 	public boolean doesAccountEntryExist(AbstractAccount account){

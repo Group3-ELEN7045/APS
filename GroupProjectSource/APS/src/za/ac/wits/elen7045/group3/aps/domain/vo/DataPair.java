@@ -1,9 +1,23 @@
 package za.ac.wits.elen7045.group3.aps.domain.vo;
 
 public class DataPair {
+<<<<<<< HEAD
 	String id;
 	String text;
 	String value;
+=======
+	
+	String id;
+	String text;
+	String value;
+	
+	public DataPair(String id, String text, String value)
+	{
+		this.id = id;
+		this.text = text;
+		this.value = value;
+	}
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
 	public String getText() {
 		return text;
 	}
@@ -35,12 +49,16 @@ public class DataPair {
 		this.value = copy.getValue();
 	}
 	
+<<<<<<< HEAD
 	public DataPair(String id, String text, String value)
 	{
 		this.id = id;
 		this.text = text;
 		this.value = value;
 	}
+=======
+
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
 
 
 }

@@ -1,8 +1,14 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
+<<<<<<< HEAD:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/CreditCardStatement.java
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractStatement;
 
 public class CreditCardStatement extends AbstractStatement{
+=======
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+
+public class CreditCardAccount extends AbstractBillingAccountStatement{
+>>>>>>> 334e171862bacecf51ba61bafe29223ce078425e:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/CreditCardAccount.java
 
 	private String cardType;
 	private String interestRate;
@@ -14,34 +20,34 @@ public class CreditCardStatement extends AbstractStatement{
 		setAccountNumber(accountNumber);
 	}
 	
-	protected String getCardType() {
+	public String getCardType() {
 		return cardType;
 	}
-	protected void setCardType(String cardType) {
+	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
-	protected String getInterestRate() {
+	public String getInterestRate() {
 		return interestRate;
 	}
-	protected void setInterestRate(String interestRate) {
+	public void setInterestRate(String interestRate) {
 		this.interestRate = interestRate;
 	}
-	protected String getCreditLimit() {
+	public String getCreditLimit() {
 		return creditLimit;
 	}
-	protected void setCreditLimit(String creditLimit) {
+	public void setCreditLimit(String creditLimit) {
 		this.creditLimit = creditLimit;
 	}
-	protected String getCreditAvailable() {
+	public String getCreditAvailable() {
 		return creditAvailable;
 	}
-	protected void setCreditAvailable(String creditAvailable) {
+	public void setCreditAvailable(String creditAvailable) {
 		this.creditAvailable = creditAvailable;
 	}
-	protected String getMinimumAmountDue() {
+	public String getMinimumAmountDue() {
 		return minimumAmountDue;
 	}
-	protected void setMinimumAmountDue(String minimumAmountDue) {
+	public void setMinimumAmountDue(String minimumAmountDue) {
 		this.minimumAmountDue = minimumAmountDue;
 	}
 	
