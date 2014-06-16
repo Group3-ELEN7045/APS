@@ -1,9 +1,0 @@
-<scrape-session>
-  <baseURL>www.facebook.com</baseURL>
-  <date>12/12/2014</date>
-  <time>00:28:56</time>
-  <datapair id="001">
-    <text>Account Number</text>
-    <value>123456789</value>
-  </datapair>
-</scrape-session>

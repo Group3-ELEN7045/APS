@@ -1,0 +1,25 @@
+/**
+ * 
+ */
+package za.ac.wits.elen7045.group3.aps.services.specification;
+
+/**
+ * @author SilasMahlangu
+ *
+ */
+public abstract class ApplicationSpecification<T> implements Specification<T>{
+     public abstract boolean isFulfiledBy(Object object);
+     
+     public Specification<T> and(final Specification<T> specification) {
+    	    return new AndEqualsSpecification(this, specification);
+    	  }
+
+    	  public Specification<T> or(final Specification<T> specification) {
+    	    return new OrEqualsSpecification(this, specification);
+    	  }
+
+    	  public Specification<T> not(final Specification<T> specification) {
+    	    return new NotEqualsSpecification(specification);
+    	  }
+
+}
