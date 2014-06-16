@@ -32,9 +32,6 @@ public class User implements Serializable{
 	
 	/** The credentials. */
 	private CredentialsVO              credentials;
-	
-	
-	
 		
 	private String                    stringDateOfBirth;
 	

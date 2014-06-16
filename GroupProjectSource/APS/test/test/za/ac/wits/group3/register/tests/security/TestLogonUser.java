@@ -78,10 +78,10 @@ public class TestLogonUser {
 		customer.setLastname("Mahlangu");
 		customer.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
 	   
-	    logonCredentials.setUserName(Base64.encode("username".getBytes()));
-	    logonCredentials.setPassword(Base64.encode("password".getBytes()));
+	    logonCredentials.setUserName("username");
+	    logonCredentials.setPassword("password");
 	    	    
-	    logonCredentials.setConfirmPasword("P@ssword");
+	    logonCredentials.setConfirmPasword("password");
 	    customer.setCredentials(logonCredentials);
 	    
 	    paymentDetails.setPaymentType(PaymentType.CREDIT_CARD.getPaymentType());
@@ -95,7 +95,7 @@ public class TestLogonUser {
 	@Test //if password and Confirm password are the same
 	public void testValidateCapturedCredentials(){
 		ApplicationSpecification<LogonCredentialsVO> capturedCredentials = new CapturedCredentialsSpecification(logonCredentials);
-		assertTrue("Captured Password and Confirm Password are not the same",capturedCredentials.isSatisfiedBy(logonCredentials));
+		assertTrue("Captured Password and Confirm Password are not the same",capturedCredentials.isSatisfiedBy(logonCredentials) );
 	}
 	
 	@Test //if parts user Details are Encrypted 

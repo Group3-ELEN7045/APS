@@ -3,7 +3,7 @@
  */
 package za.ac.wits.elen7045.group3.aps.services.specification.notification;
 
-import za.ac.wits.elen7045.group3.aps.domain.entities.Notification;
+import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 
@@ -11,16 +11,16 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
  * @author SilasMahlangu
  *
  */
-public class CheckNotificationSpecification extends ApplicationSpecification<Notification>{
+public class CheckNotificationSpecification extends ApplicationSpecification<ScrapeLogResult>{
  
-    private Notification notification;	
+    private ScrapeLogResult notification;	
 	
-	public CheckNotificationSpecification(Notification notification){
+	public CheckNotificationSpecification(ScrapeLogResult notification){
 		this.notification = notification;
 	}
 	
 	@Override
-	public boolean isSatisfiedBy(Notification param) {
+	public boolean isSatisfiedBy(ScrapeLogResult param) {
 		return param.getStatsus().equals(NotificationStatus.WAITING.getNotificationStatus());
 	}
 }

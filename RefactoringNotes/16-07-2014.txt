@@ -1,0 +1,4 @@
+16/06/2014
+1. Create account Repository
+2. Remove Statement repository persist via BillingAccountRepository
+3. Change Notify ntity to ScrapeLogResult Entity

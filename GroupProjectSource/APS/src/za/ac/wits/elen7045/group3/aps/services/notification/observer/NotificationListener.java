@@ -6,10 +6,8 @@ package za.ac.wits.elen7045.group3.aps.services.notification.observer;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Notification;
-import za.ac.wits.elen7045.group3.aps.domain.repository.notification.NotificationRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.notification.NotificationRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
+import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
 import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
@@ -20,11 +18,11 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 public class NotificationListener implements Observer{
 	private NotificationCheck notificationCheck;
 	private Subject listener;
-	NotificationRepository  notificationRepository;
-	List<Notification>  notifications = new ArrayList<Notification>();
-	public NotificationListener(NotificationCheck notificationCheck, NotificationRepository  notificationRepository){
+	ScrapeLogResultRepository  scrapeResiltsRepository;
+	List<ScrapeLogResult>  notifications = new ArrayList<ScrapeLogResult>();
+	public NotificationListener(NotificationCheck notificationCheck, ScrapeLogResultRepository  scrapeResiltsRepository){
 		this.notificationCheck      = notificationCheck;
-		this.notificationRepository = notificationRepository;
+		this.scrapeResiltsRepository = scrapeResiltsRepository;
 	}
 
 	@Override
@@ -32,7 +30,7 @@ public class NotificationListener implements Observer{
 		try {
 		    if(object instanceof NotificationCheck){
 		        NotificationCheck notificationCheckInternal = (NotificationCheck) object;
-			    notifications = notificationRepository.getNotifications(notificationCheckInternal.getId(), null);
+			    notifications = scrapeResiltsRepository.getScrapeLogResult(notificationCheckInternal.getId(), null);
 			    listener.setResponse(notifications);
 			 }
 		} catch (DatabaseException e) {

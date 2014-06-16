@@ -1,7 +1,9 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
 
@@ -10,23 +12,22 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
  * @author Livious
  *
  */
-public class BillingAccount {
-	private long id;
+public class BillingAccount implements Serializable{
+	private Long id;
+	private Long customerId;
 	private String accountNumber;
 	private String billingCompanyName;
 	private CredentialsVO credentials;
-	private StatementType billingType;
-	private List<BillingAccountStatement> billingStatement;
+	private List<AbstractBillingAccountStatement> billingStatement;
 	private String accountStatus;
-	
-			
+				
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
 	}
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getAccountNumber() {
@@ -49,16 +50,10 @@ public class BillingAccount {
 		this.billingCompanyName = billingCompanyName;
 	}
 	
-	public List<BillingAccountStatement> getBillingStatement() {
+	public List<AbstractBillingAccountStatement> getBillingStatement() {
 		return billingStatement;
 	}
-	public void setBillingStatement(List<BillingAccountStatement> billingStatement) {
+	public void setBillingStatement(List<AbstractBillingAccountStatement> billingStatement) {
 		this.billingStatement = billingStatement;
 	}
-	public StatementType getBillingType() {
-		return billingType;
-	}
-	public void setBillingType(StatementType billingType) {
-		this.billingType = billingType;
-	}	
 }

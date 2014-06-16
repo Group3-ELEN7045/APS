@@ -10,13 +10,13 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;   
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.StatementRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AccountStatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.StatementManager;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.services.managers.StatementManager;
 
 public class AccountStatementAdditionTest {
 	

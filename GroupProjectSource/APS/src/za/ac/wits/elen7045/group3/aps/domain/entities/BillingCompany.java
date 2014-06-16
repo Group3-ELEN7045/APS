@@ -1,14 +1,17 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
+import java.io.Serializable;
+
 
 /**
  * @author Livious
  *
  */
 
-public class BillingCompany {
+public class BillingCompany implements Serializable{
 	private String companyName;
 	private String url;
+		
 	public String getCompanyName() {
 		return companyName;
 	}

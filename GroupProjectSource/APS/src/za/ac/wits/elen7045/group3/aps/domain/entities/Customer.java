@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.AccountDetailsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactInformationVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
@@ -21,7 +20,6 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
  *
  */
 public class Customer extends User implements Serializable{
-	
 	/**
 	 * 
 	 */
@@ -67,10 +65,6 @@ public class Customer extends User implements Serializable{
 		this.encryptionModule = encryptionModule;
 
 	}
-
-	
-
-	
 		
 	public List<BillingAccount> getBillingAccounts() {
 		return billingAccounts;
@@ -91,7 +85,6 @@ public class Customer extends User implements Serializable{
 		setDateOfBirth(null);
 		getPaymentDetails().setValue(newPaymentDetails);
 		
-		
 		return this;
 	}
 	
@@ -108,7 +101,6 @@ public class Customer extends User implements Serializable{
 		
 		paymentValue = encryptionModule.decrypt(paymentValue);
 		getPaymentDetails().setValue(paymentValue);
-		
 		return this;  
 	}
 }

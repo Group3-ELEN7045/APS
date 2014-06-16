@@ -1,10 +1,12 @@
 package za.ac.wits.elen7045.group3.aps.domain.vo;
 
-public class DataPair {
+import java.io.Serializable;
 
-	String id;
-	String text;
-	String value;
+public class DataPair implements Serializable{
+
+	private String id;
+	private String text;
+	private String value;
 
 	public String getText() {
 		return text;

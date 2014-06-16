@@ -14,10 +14,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.NotificationDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Notification;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.NotificationRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.notification.NotificationRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 /**
@@ -29,19 +29,19 @@ public class TestsAddNotificationd {
     
 	private Notification               notification;
 	private List<Notification>         notifications;
-	private NotificationDataAccess     notificationDataAccess;
+	private ScrapeLogResultDataAccess     notificationDataAccess;
 	private NotificationRepository     notificationRepository;
-	private NotificationRepositoryImpl notificationRepositoryImpl;
+	private ScrapeLogResultImpl notificationRepositoryImpl;
 	private ApplicationContext         context;
 	
 	@Before
 	public void initilize(){
 		context                     = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-		notification                = context.getBean(Notification.class);
-		notificationDataAccess      = context.getBean(NotificationDataAccess.class);
+		notification                = (Notification)context.getBean("notification");
+		notificationDataAccess      = context.getBean(ScrapeLogResultDataAccess.class);
 		notifications               = new ArrayList<Notification>();  
-		notificationRepositoryImpl  = new NotificationRepositoryImpl(notificationDataAccess);
-		notificationRepository      = new APSMockObjectGenerator<NotificationRepositoryImpl>().mock(notificationRepositoryImpl);
+		notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
+		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 	}
 	
 	@Test

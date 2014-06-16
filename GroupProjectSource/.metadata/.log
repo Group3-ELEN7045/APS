@@ -364,3 +364,6 @@ Java Model Exception: Java Model Status [Timed out while retrieving the attached
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1012 2014-06-16 14:23:43.189
 !MESSAGE Timed out while retrieving the attached javadoc for LinkedList [in LinkedList.class [in java.util [in C:\Program Files (x86)\Java\jre6\lib\rt.jar]]] 
+
+!ENTRY org.eclipse.ui 2 2 2014-06-16 16:22:39.735
+!MESSAGE Invalid preference category path: org.jboss.tools.common.model.ui.MainPreferencePage (bundle: org.jboss.tools.usage, page: org.jboss.tools.usage.analytics.preferences.UsageAnalyticsPreferencePage)

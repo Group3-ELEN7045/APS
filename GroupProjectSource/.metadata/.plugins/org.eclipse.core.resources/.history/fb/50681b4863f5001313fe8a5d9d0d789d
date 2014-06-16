@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    
+
+    <bean id="userRepository" class="test.za.ac.wits.group3.domain.mock.MockUserDAOImpl"></bean>
+    <bean id="billingDataAccess" class="test.za.ac.wits.group3.domain.mock.MockBillingDAOImpl"/>
+    
+    <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.domain.entities.Customer"/>
+    <bean id="userCredentials"   class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentialsVO"/>
+    <bean id="paymentDetails"    class="za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO"/>   
+    <bean id="encryptionModule"  class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
+    
+    <bean id="notification" class="za.ac.wits.elen7045.group3.aps.domain.entities.Notification"/>
+     
+    <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
+   		<constructor-arg ref="billingDataAccess"/>
+   	</bean>	
+
+    <bean id="credentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO">
+        <property name="encryptionModule" ref="encryptionModule"></property>
+    </bean>
+</beans>
+

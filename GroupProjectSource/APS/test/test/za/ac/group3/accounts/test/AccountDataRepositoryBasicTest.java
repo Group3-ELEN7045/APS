@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.StatementManager;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
+import za.ac.wits.elen7045.group3.aps.services.managers.StatementManager;
 
 
 public class AccountDataRepositoryBasicTest {

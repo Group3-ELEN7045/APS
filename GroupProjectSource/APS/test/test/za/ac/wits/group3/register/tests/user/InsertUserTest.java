@@ -42,13 +42,14 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 public class InsertUserTest {
     private Customer customer;
 	private LogonCredentialsVO       logonCredentials;
-	private ApplicationContext     context;
-	private UserDataAccess         userDataRepository;
-	private CustomerRepositoryImpl mockUserDataAccess;	
-	private CustomerRepository     customerRepository;
+	private ApplicationContext       context;
+	private UserDataAccess           userDataRepository;
+	private CustomerRepositoryImpl   mockUserDataAccess;	
+	private CustomerRepository       customerRepository;
 	private PaymentDetailsVO         paymentDetails;
-	private EncryptionModule       encryptionModule; 
-	private CredentialsVO          credentialVO;
+	private EncryptionModule         encryptionModule; 
+	private CredentialsVO            credentialVO;
+	
 	//Scenario Registration Customer 
 	@Before
 	public void init(){

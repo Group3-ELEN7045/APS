@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="TestLogonUser" project="APS" tests="4" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="test.za.ac.wits.group3.register.tests.security.TestLogonUser" incomplete="true">
+    <testcase name="testValidateCapturedCredentials" classname="test.za.ac.wits.group3.register.tests.security.TestLogonUser" incomplete="true"/>
+    <testcase name="testValidatedUserEncryption" classname="test.za.ac.wits.group3.register.tests.security.TestLogonUser" incomplete="true"/>
+    <testcase name="testRegisterUser" classname="test.za.ac.wits.group3.register.tests.security.TestLogonUser" incomplete="true"/>
+    <testcase name="testCustomerAuthentication" classname="test.za.ac.wits.group3.register.tests.security.TestLogonUser" incomplete="true"/>
+  </testsuite>
+</testrun>

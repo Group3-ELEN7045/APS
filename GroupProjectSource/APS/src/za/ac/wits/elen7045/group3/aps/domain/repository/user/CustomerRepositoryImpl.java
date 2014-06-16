@@ -38,11 +38,6 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public void clearData(Customer customer) throws DatabaseException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 	 

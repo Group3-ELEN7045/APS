@@ -13,9 +13,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;  
 
 import static org.mockito.Mockito.*;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedAccountAdapter;
 import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;

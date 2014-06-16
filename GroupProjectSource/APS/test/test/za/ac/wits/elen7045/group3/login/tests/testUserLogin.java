@@ -14,11 +14,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountManager;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountManagerBean;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.entities.User;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
@@ -29,6 +27,8 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
+import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
@@ -163,7 +163,7 @@ public class testUserLogin {
 	 billingAccount2.setCredentials(cred2);
 	 accountList.add(billingAccount2);
 	
-	 BillingAccountManager billingManager = new BillingAccountManagerBean(
+	 BillingAccountManager billingManager = new BillingAccountManagerImpl(
 	 customer, billingAccountRepository);
 	 billingManager.addCustomerBillingAccounts(accountList);
 	

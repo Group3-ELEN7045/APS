@@ -1,9 +1,9 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.repository;
 
+import java.util.List;
+
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 
@@ -19,16 +19,34 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	public BillingAccountRepositoryImpl(BillingAccountDataAccess dataAccess){
 		this.dataAccess = dataAccess;
 	}
-	
-	public void saveCustomerBillingAccount(Customer customer) throws DatabaseException{
-		dataAccess.saveCustomerBillingAccount(customer);
+
+	@Override
+	public void saveBillingAccount(BillingAccount billingAccount)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateBillingAccount(BillingAccount billingAccount)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BillingAccount getBillingAccount(String accountNumber)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BillingAccount> getBillingAccounts(String billingCompanyName)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	public BillingAccount getBillingAccount(String accountNumber)throws DatabaseException{
-		return dataAccess.getBillingAccount(accountNumber);
-	}
-	
-	public void upDateCustomerBillingAccount(Customer customer, BillingAccount billingAccount)throws DatabaseException{
-		dataAccess.upDateCustomerBillingAccount(customer, billingAccount);
-	}
+		
 }
