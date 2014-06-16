@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+C:\Stuff\Silas\Wits CPD\2014\FinalProject\APS\GroupProjectSource\APS\.metadata\.plugins\org.eclipse.jdt.core
