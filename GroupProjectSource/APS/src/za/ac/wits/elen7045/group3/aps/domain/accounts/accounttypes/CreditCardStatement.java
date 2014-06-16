@@ -1,14 +1,9 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
-<<<<<<< HEAD:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/CreditCardStatement.java
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractStatement;
 
-public class CreditCardStatement extends AbstractStatement{
-=======
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 
-public class CreditCardAccount extends AbstractBillingAccountStatement{
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/CreditCardAccount.java
+public class CreditCardStatement extends AbstractBillingAccountStatement{
 
 	private String cardType;
 	private String interestRate;

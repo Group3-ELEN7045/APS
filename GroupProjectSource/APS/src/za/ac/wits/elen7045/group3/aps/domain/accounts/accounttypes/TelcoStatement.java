@@ -1,14 +1,10 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
-<<<<<<< HEAD:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/TelcoStatement.java
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractStatement;
 
-public class TelcoStatement extends AbstractStatement{
-=======
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 
-public class TelcoAccount extends AbstractBillingAccountStatement{
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/TelcoAccount.java
+public class TelcoStatement extends AbstractBillingAccountStatement{
+
 
 	private String 	telephonenumber;
 	private String 	serviceCharges;

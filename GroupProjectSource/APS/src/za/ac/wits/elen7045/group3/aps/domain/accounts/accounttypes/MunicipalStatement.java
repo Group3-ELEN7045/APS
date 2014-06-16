@@ -1,14 +1,11 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes;
 
-<<<<<<< HEAD:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/MunicipalStatement.java
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractStatement;
 
-public class MunicipalStatement extends AbstractStatement {
-=======
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 
-public class MunicipalAccount extends AbstractBillingAccountStatement {
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e:GroupProjectSource/APS/src/za/ac/wits/elen7045/group3/aps/domain/accounts/accounttypes/MunicipalAccount.java
+public class MunicipalStatement extends AbstractBillingAccountStatement {
 
 	private String InstalmentNotice = "";
 	private String ElectricityUsed = "";
