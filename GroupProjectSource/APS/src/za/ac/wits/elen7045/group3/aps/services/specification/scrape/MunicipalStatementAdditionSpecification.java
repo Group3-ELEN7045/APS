@@ -11,7 +11,7 @@ public class MunicipalStatementAdditionSpecification extends
 		return commonAdditionSatisfied(statement) && municipalSpecificAdditonSatisfied((MunicipalStatement)statement);
 	}
 	
-	public boolean municipalSpecificAdditonSatisfied(MunicipalStatement statement){
+	private boolean municipalSpecificAdditonSatisfied(MunicipalStatement statement){
 		
 		double calc = 0.0;
 		calc = Double.parseDouble(statement.getElectricityCharges().substring(1))

@@ -12,7 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
 import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.util.ErrorScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.ScrapedErrorData;
   
 @RunWith(MockitoJUnitRunner.class)
 public class XMLReadTests {
@@ -20,12 +20,12 @@ public class XMLReadTests {
 	String filePath;
 	XStream xstream;	
 	AccountScrapedData accountScrapedData;
-	ErrorScrapedData errorScrapedData;
+	ScrapedErrorData errorScrapedData;
 	@Before
 	public void init(){
 		xstream = new XStream();
 		accountScrapedData = new AccountScrapedData();	
-		errorScrapedData = new ErrorScrapedData();
+		errorScrapedData = new ScrapedErrorData();
 	}
 	@After
 	public void tearDown(){
@@ -69,7 +69,7 @@ public class XMLReadTests {
 	@Test
 	public void testReadScrapeXMLForError(){
 		filePath = ".\\errors.xml";
-		errorScrapedData = (ErrorScrapedData)new APSXMLMarshaller(filePath).convertErrorXMLToObject(ErrorScrapedData.class);
+		errorScrapedData = (ScrapedErrorData)new APSXMLMarshaller(filePath).convertErrorXMLToObject(ScrapedErrorData.class);
 		assertTrue(errorScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(errorScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(errorScrapedData.getTime().equals("13:50:00"));

@@ -19,7 +19,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
 import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.util.ErrorScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.ScrapedErrorData;
 
 import com.thoughtworks.xstream.XStream;
 /**
@@ -37,7 +37,7 @@ public class XStreamTests {
 		
 		PrintWriter write = new PrintWriter(new File(filePath));
 		
-		ErrorScrapedData dumz1 = new ErrorScrapedData();
+		ScrapedErrorData dumz1 = new ScrapedErrorData();
 		dumz1.setBaseURL("www.elen7045.co.za");
 		dumz1.setDate("12/12/2014");
 		dumz1.setTime("13:50:00");
@@ -69,14 +69,14 @@ public class XStreamTests {
 		dataPairs.add(new DataPair("023","Refuse charges","R123"));*/
 		
 		XStream xstream = new XStream();
-		xstream.alias("scrape-session",ErrorScrapedData.class);
+		xstream.alias("scrape-session",ScrapedErrorData.class);
 		//xstream.alias("datapair",DataPair.class);
 		//xstream.useAttributeFor(DataPair.class, "id");
 		//xstream.addImplicitCollection(AccountScrapedData.class, "dataPairs"); // no List class tag, only entries
 		write.println(xstream.toXML(dumz1));
 		write.close();
 		
-		dumz1 = (ErrorScrapedData)new APSXMLMarshaller(".\\errors.xml").convertErrorXMLToObject(ErrorScrapedData.class);
+		dumz1 = (ScrapedErrorData)new APSXMLMarshaller(".\\errors.xml").convertErrorXMLToObject(ScrapedErrorData.class);
 		System.out.println(xstream.toXML(dumz1));
 		
 	//	System.out.println(readFile(".\\creditcard.xml"));
