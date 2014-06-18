@@ -19,6 +19,14 @@ public class BillingCompany implements Serializable{
 	private List<BillingAccount> billingAccounts; 
 	private ComanyStatementType companyType;
 	
+	
+	public BillingCompany(BillingCompany copy){
+		this.companyName = copy.getCompanyName();
+		this.companyType = copy.getCompanyType();
+		this.url = copy.getUrl();
+		this.billingAccounts = copy.getBillingAccounts();
+	}
+	
 	public BillingCompany(String companyName){
 		this.companyName = companyName;
 	}
@@ -52,4 +60,5 @@ public class BillingCompany implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}	
+
 }
