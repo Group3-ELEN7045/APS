@@ -4,6 +4,6 @@
   <time>13:50:00</time>
   <datapair id="001">
     <text>Scraper Error</text>
-    <value>InvalidCredentials</value>
+    <value>BillingSiteDown</value>
   </datapair>
 </scrape-session>

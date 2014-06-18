@@ -2,7 +2,7 @@
 /**
  * 
  */
-package test;
+package test.za.ac.wits.group3.scrape;
 
 
 import java.io.File;
@@ -17,7 +17,7 @@ import sun.swing.FilePane;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
-import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
 
 import com.thoughtworks.xstream.XStream;
 /**
@@ -122,7 +122,7 @@ public class XSTreamTest {
 		dumz = null;
 		//dumz = (AbstractAccounts)xml.fromXML(new File(filePath));
 		
-		dumz = (DummyClass)new APSXMLMarshaller(filePath).convertAccountXMLToObject(DummyClass.class);
+		dumz = (DummyClass)new APSXMLMarshaller(filePath).convertScrapedXMLToObject(DummyClass.class);
 		System.out.println(xstream.toXML(dumz));
 		//System.out.println(xstream.toXML(myxml).equals(xstream.toXML(dumz)));
 		//System.out.println(xstream.toXML(myxml));

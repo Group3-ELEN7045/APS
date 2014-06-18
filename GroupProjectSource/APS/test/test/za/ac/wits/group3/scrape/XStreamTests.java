@@ -2,24 +2,19 @@
 /**
  * 
  */
-package test;
+package test.za.ac.wits.group3.scrape;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import java.util.Scanner;
 
-import sun.swing.FilePane;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
-import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.util.ErrorScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
 
 import com.thoughtworks.xstream.XStream;
 /**
@@ -37,14 +32,14 @@ public class XStreamTests {
 		
 		PrintWriter write = new PrintWriter(new File(filePath));
 		
-		ErrorScrapedData dumz1 = new ErrorScrapedData();
+		StatementScrapedData dumz1 = new StatementScrapedData();
 		dumz1.setBaseURL("www.elen7045.co.za");
 		dumz1.setDate("12/12/2014");
 		dumz1.setTime("13:50:00");
-		dumz1.setError("InvalidCredentials");
-		/*List <DataPair>dataPairs = dumz1.getDataPairList();
-		dataPairs.add(new DataPair("001","error",""));
-		dataPairs.add(new DataPair("001","Account Number","123456789"));
+		//dumz1.setError("InvalidCredentials");
+		List <DataPair>dataPairs = dumz1.getDataPairList();
+		dataPairs.add(new DataPair("001","Scraper Error","InvalidCredentials"));
+		/*dataPairs.add(new DataPair("001","Account Number","123456789"));
 		dataPairs.add(new DataPair("002","Account holder name","Jack Parcell"));
 		dataPairs.add(new DataPair("003","Statement date","12/12/2014"));
 		dataPairs.add(new DataPair("004","Statement number","1122"));
@@ -69,14 +64,14 @@ public class XStreamTests {
 		dataPairs.add(new DataPair("023","Refuse charges","R123"));*/
 		
 		XStream xstream = new XStream();
-		xstream.alias("scrape-session",ErrorScrapedData.class);
-		//xstream.alias("datapair",DataPair.class);
-		//xstream.useAttributeFor(DataPair.class, "id");
-		//xstream.addImplicitCollection(AccountScrapedData.class, "dataPairs"); // no List class tag, only entries
+		xstream.alias("scrape-session",StatementScrapedData.class);
+		xstream.alias("datapair",DataPair.class);
+		xstream.useAttributeFor(DataPair.class, "id");
+		xstream.addImplicitCollection(StatementScrapedData.class, "dataPairs"); // no List class tag, only entries
 		write.println(xstream.toXML(dumz1));
 		write.close();
 		
-		dumz1 = (ErrorScrapedData)new APSXMLMarshaller(".\\errors.xml").convertErrorXMLToObject(ErrorScrapedData.class);
+		dumz1 = (StatementScrapedData)new APSXMLMarshaller(filePath).convertScrapedXMLToObject(StatementScrapedData.class);
 		System.out.println(xstream.toXML(dumz1));
 		
 	//	System.out.println(readFile(".\\creditcard.xml"));
