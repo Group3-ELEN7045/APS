@@ -10,13 +10,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalStatement;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.MunicipalStatementAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
+import za.ac.wits.elen7045.group3.aps.services.specification.scrape.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MunicipalAdditionSpecTest {
 	
 	MunicipalStatementAdditionSpecification municipalSpec;
+	VATCalculationSpecification vatSpec;
+	DuplicateStatementDataSpecification dupSpec;
 	@Mock MunicipalStatement trueStatement;
 	@Mock MunicipalStatement falseStatement;
 	

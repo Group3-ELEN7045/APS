@@ -1,10 +1,10 @@
 package za.ac.wits.elen7045.group3.aps.services.specification.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 
 public class TelcoStatementAdditionSpecification extends
-		StatementAdditionSpecification{
+		AbstractStatementAdditionSpecification{
 
 	
 	@Override

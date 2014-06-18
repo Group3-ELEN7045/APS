@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.VATCalculationSpecification;
 
 @RunWith(MockitoJUnitRunner.class)

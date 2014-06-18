@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.TelcoStatementAdditionSpecification;
 
 @RunWith(MockitoJUnitRunner.class)
