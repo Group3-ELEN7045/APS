@@ -1,4 +1,4 @@
-package test.za.ac.wits.group3.scrape.specification;
+package test.za.ac.wits.group3.scrape;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;    

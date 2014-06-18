@@ -1,4 +1,4 @@
-package test.za.ac.wits.group3.scrape.specification;
+package test.za.ac.wits.group3.scrape;
 
 import java.util.ArrayList;
 import java.util.List;
