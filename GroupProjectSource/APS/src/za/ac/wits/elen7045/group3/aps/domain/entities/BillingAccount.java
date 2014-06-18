@@ -6,7 +6,7 @@ import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
 
 /**
@@ -20,7 +20,7 @@ public class BillingAccount implements Serializable{
 	private String billingCompanyName;
 	private CredentialsVO credentials;
 	private List<AbstractBillingAccountStatement> billingStatement;
-	private StatusType accountStatus;
+	private AccountStatusType accountStatus;
 				
 	public long getId() {
 		return id;
@@ -60,10 +60,10 @@ public class BillingAccount implements Serializable{
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	public StatusType getAccountStatus() {
+	public AccountStatusType getAccountStatus() {
 		return accountStatus;
 	}
-	public void setAccountStatus(StatusType accountStatus) {
+	public void setAccountStatus(AccountStatusType accountStatus) {
 		this.accountStatus = accountStatus;
 	}
 	

@@ -26,7 +26,7 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CapturedCredentialsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.notification.ConfirmationNotification;
 import za.ac.wits.elen7045.group3.aps.services.notification.FileNotification;

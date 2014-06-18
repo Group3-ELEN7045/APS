@@ -1,8 +1,10 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.DuplicateStatementDataSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.VATCalculationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.util.DuplicateDataException;
@@ -16,14 +18,18 @@ import za.ac.wits.elen7045.group3.aps.services.util.VatCalculationException;
 public class ScrapedStatementAdaptor {
 	
 	private StatementScrapedData scrapedAccount;
-	DuplicateStatementDataSpecification duplicateSpec;
-	VATCalculationSpecification vatSpec;
+	private DuplicateStatementDataSpecification duplicateSpec;
+	private VATCalculationSpecification vatSpec;
+	private CompanyStatementType companyStatementType;
 	
-	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount) 
+	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType) 
 			throws DuplicateDataException, ScrapeErrorException{
 		
 		this.scrapedAccount = scrapedAccount;
+		this.companyStatementType = companyStatementType;
+		
 		duplicateSpec = new DuplicateStatementDataSpecification();
+		
 		vatSpec = new VATCalculationSpecification(14);
 		
 		if(!duplicateSpec.isSatisfiedBy(scrapedAccount))
@@ -33,7 +39,17 @@ public class ScrapedStatementAdaptor {
 			throw new ScrapeErrorException(scrapedAccount.getDataPairList().get(0).getValue());
 	}
 	
-	public CreditCardStatement getCreditCardAccount() throws VatCalculationException{
+	public AbstractBillingAccountStatement getStatement()
+				throws VatCalculationException{
+		if (companyStatementType.equals(CompanyStatementType.CREDITCARD))
+			return getCreditCardStatement();
+		else if (companyStatementType.equals(CompanyStatementType.MUNICIPALITY))
+			return getMunicipalStatement();
+		else
+			return getTelcoStatement();
+	}
+	
+	private CreditCardStatement getCreditCardStatement() throws VatCalculationException{
 		
 		CreditCardStatement creditAcc = ScrapedStatementAdaptorMap.getCreditCardStatement(scrapedAccount);
 		
@@ -43,7 +59,7 @@ public class ScrapedStatementAdaptor {
 		return creditAcc;
 	}
 	
-	public MunicipalStatement getMunicipalAccount() throws VatCalculationException{
+	private MunicipalStatement getMunicipalStatement() throws VatCalculationException{
 		
 		MunicipalStatement municipalAcc = ScrapedStatementAdaptorMap.getMunicipalStatement(scrapedAccount);
 		
@@ -53,7 +69,7 @@ public class ScrapedStatementAdaptor {
 		return municipalAcc;
 	}
 
-	public TelcoStatement getTelcoAccount() throws VatCalculationException{
+	private TelcoStatement getTelcoStatement() throws VatCalculationException{
 		
 		TelcoStatement telcoAcc = ScrapedStatementAdaptorMap.getTelcoStatement(scrapedAccount);
 		
