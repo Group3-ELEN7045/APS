@@ -35,19 +35,16 @@ public class MockUserDAOImpl implements UserDataAccess{
 		if(!userDatabase.containsKey(customer.getId())){
 			userDatabase.put(customer.getId(), customer);
 			customerDatabase.put(customer.getCredentials().getUserName(), customer);
-			return true;
+			
 		}else{		  
-			throw new DatabaseException(ApplicationContants.USER_DUPLICATE); 
+			userDatabase.remove(customer.getId());
+			customerDatabase.remove(customer.getId());
+			userDatabase.put(customer.getId(), customer);
+			customerDatabase.put(customer.getCredentials().getUserName(), customer);			
 		}
+		return true;
 	}
 	
-	public void clearData(Customer customer){
-		if(userDatabase.containsKey(customer.getId())){
-			userDatabase.remove(customer.getId());
-			customerDatabase.remove(customer.getCredentials().getUserName());
-		}
-	}
-
 	public Customer selectCustomer(Customer customer) throws DatabaseException{
 		Customer customerSearch = null;
 		Specification speUserSpecification = new UserSpecificationByID(customer);

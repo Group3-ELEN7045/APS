@@ -10,4 +10,5 @@ public interface BillingAccountRepository {
 	public void updateBillingAccount(BillingAccount billingAccount) throws DatabaseException;
 	public BillingAccount getBillingAccount(String accountNumber) throws DatabaseException;
 	public List<BillingAccount> getBillingAccounts(String billingCompanyName) throws DatabaseException;
+	public BillingAccount getBillingStatement(String accountnumber, String period) throws DatabaseException;
 }

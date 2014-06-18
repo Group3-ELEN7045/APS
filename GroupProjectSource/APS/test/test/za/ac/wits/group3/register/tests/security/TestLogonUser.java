@@ -23,7 +23,7 @@ import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactDetailsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentialsVO;
+import za.ac.wits.elen7045.group3.aps.domain.vo.CapturedCredentialsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
@@ -48,7 +48,7 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
  */
 public class TestLogonUser {
     private Customer customer;
-	private LogonCredentialsVO     logonCredentials;
+	private CapturedCredentialsVO     logonCredentials;
 	private ApplicationContext     context;
 	private UserDataAccess         userDataRepository;
 	private CustomerRepositoryImpl mockUserDataAccess;	
@@ -65,7 +65,7 @@ public class TestLogonUser {
 	public void init(){
 		context                     = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
 		customer                    = context.getBean(Customer.class); 
-		logonCredentials            = context.getBean(LogonCredentialsVO.class);
+		logonCredentials            = context.getBean(CapturedCredentialsVO.class);
 		userDataRepository          = context.getBean(UserDataAccess.class);
 		encryptionModule            = context.getBean(EncryptionModule.class);
 		paymentDetails              = context.getBean(PaymentDetailsVO.class);
@@ -94,7 +94,7 @@ public class TestLogonUser {
 	
 	@Test //if password and Confirm password are the same
 	public void testValidateCapturedCredentials(){
-		ApplicationSpecification<LogonCredentialsVO> capturedCredentials = new CapturedCredentialsSpecification(logonCredentials);
+		ApplicationSpecification<CapturedCredentialsVO> capturedCredentials = new CapturedCredentialsSpecification(logonCredentials);
 		assertTrue("Captured Password and Confirm Password are not the same",capturedCredentials.isSatisfiedBy(logonCredentials) );
 	}
 	

@@ -23,29 +23,33 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	@Override
 	public void saveBillingAccount(BillingAccount billingAccount)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
-		
+		dataAccess.saveBillingAccount(billingAccount);
 	}
 
 	@Override
 	public void updateBillingAccount(BillingAccount billingAccount)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
+		dataAccess.updateBillingAccount(billingAccount);
 		
 	}
 
 	@Override
 	public BillingAccount getBillingAccount(String accountNumber)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+		return dataAccess.getBillingAccount(accountNumber);
 	}
 
 	@Override
 	public List<BillingAccount> getBillingAccounts(String billingCompanyName)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
+		dataAccess.getBillingAccounts(billingCompanyName);
 		return null;
+	}
+
+	@Override
+	public BillingAccount getBillingStatement(String accountNumber,
+			String period) throws DatabaseException {		
+		return dataAccess.getBillingAccountStatement(accountNumber, period);
 	}
 	
 		

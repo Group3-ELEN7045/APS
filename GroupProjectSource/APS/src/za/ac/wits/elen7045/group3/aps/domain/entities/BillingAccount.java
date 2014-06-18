@@ -1,6 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
@@ -19,11 +20,8 @@ public class BillingAccount implements Serializable{
 	private String billingCompanyName;
 	private CredentialsVO credentials;
 	private List<AbstractBillingAccountStatement> billingStatement;
-	private String accountStatus;
+	private StatusType accountStatus;
 				
-	public void setAccountStatus(String accountStatus) {
-		this.accountStatus = accountStatus;
-	}
 	public long getId() {
 		return id;
 	}
@@ -55,5 +53,24 @@ public class BillingAccount implements Serializable{
 	}
 	public void setBillingStatement(List<AbstractBillingAccountStatement> billingStatement) {
 		this.billingStatement = billingStatement;
+	}
+	public Long getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+	public StatusType getAccountStatus() {
+		return accountStatus;
+	}
+	public void setAccountStatus(StatusType accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+	
+	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+		if(billingStatement == null){
+			billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+		}
+		billingStatement.add(statement);
 	}
 }

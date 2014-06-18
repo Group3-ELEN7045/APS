@@ -1,15 +1,12 @@
 package za.ac.wits.elen7045.group3.aps.services.validation;
 
 
-import java.io.IOException;
-
-
 import za.ac.wits.elen7045.group3.aps.domain.entities.User;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.LogonException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.UserAuthenticationSpecification;
+import za.ac.wits.elen7045.group3.aps.services.specification.user.UserAuthenticationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class LogonService {

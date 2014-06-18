@@ -10,11 +10,11 @@
     <bean id="billingDataAccess" class="test.za.ac.wits.group3.domain.mock.MockBillingDAOImpl"/>
     
     <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.domain.entities.Customer"/>
-    <bean id="userCredentials"   class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentialsVO"/>
+    <bean id="userCredentials"   class="za.ac.wits.elen7045.group3.aps.domain.vo.CapturedCredentialsVO"/>
     <bean id="paymentDetails"    class="za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO"/>   
     <bean id="encryptionModule"  class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
     
-    <bean id="notification" class="za.ac.wits.elen7045.group3.aps.domain.entities.Notification"/>
+    <!-- bean id="notification" class="za.ac.wits.elen7045.group3.aps.domain.entities.Notification"/ -->
                                    
     <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
    		<constructor-arg ref="billingDataAccess"/>

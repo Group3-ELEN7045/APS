@@ -1,11 +1,13 @@
 package test.za.ac.wits.group3.domain.mock;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
@@ -15,39 +17,69 @@ import za.ac.wits.elen7045.group3.aps.services.specification.user.UserSpecificat
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class MockBillingDAOImpl implements BillingAccountDataAccess {
-	private static Map<Long, String> customerBillingAccountsDatabase = new HashMap<Long, String>();
+	private static Map<String, Long> customerBillingAccountsDatabase = new HashMap<String, Long>();
 	private static Map<String, BillingAccount> billingAccountsDatabase = new HashMap<String, BillingAccount>();
+	private static Map<String, BillingAccount> billingStatementsDatabase = new HashMap<String, BillingAccount>();
 
-	public void saveCustomerBillingAccount(Customer customer) throws DatabaseException{
+	public void saveBillingAccount(BillingAccount billingAccount) throws DatabaseException{
+			List<AbstractBillingAccountStatement> statementList = new ArrayList<AbstractBillingAccountStatement>();	
+						
+			if(!billingAccountsDatabase.containsKey(billingAccount.getAccountNumber())){
+				billingAccountsDatabase.put(billingAccount.getAccountNumber(), billingAccount);
+				customerBillingAccountsDatabase.put(billingAccount.getAccountNumber(), billingAccount.getCustomerId());
 				
-		for(BillingAccount account : customer.getBillingAccounts()){			
-			if(!billingAccountsDatabase.containsKey(account.getAccountNumber())){
-				billingAccountsDatabase.put(account.getAccountNumber(), account);
-				customerBillingAccountsDatabase.put(customer.getId(), account.getAccountNumber());
-			}else
-			{		
-				throw new DatabaseException(ApplicationContants.ACCOUNT_DUPLICATE);
-			}
+				for (AbstractBillingAccountStatement statement : billingAccount.getBillingStatement()){
+					billingStatementsDatabase.put(statement.getAccountStatementMonth(), billingAccount);
+				}
+			}else{
+//				billingAccountsDatabase.remove(billingAccount.getAccountNumber());
+//				billingAccountsDatabase.put(billingAccount.getAccountNumber(), billingAccount);
+//								
+//				for (AbstractBillingAccountStatement statement : billingAccount.getBillingStatement()){
+//					billingStatementsDatabase.put(statement.getAccountStatementDate(), billingAccount);
+//				}
+				
+			}		
 		}
-	}	public BillingAccount getBillingAccount(String accountNumber)
+	
+public List<BillingAccount> getBillingAccounts(String accountNumber)
 			throws DatabaseException {
-		BillingAccount billingAccount = null;
-		billingAccount = billingAccountsDatabase.get(accountNumber);
+		List<BillingAccount> billingAccountList = new ArrayList<BillingAccount>();
+	//	billingAccountList = billingAccountsDatabase.get(accountNumber);
 
-		if (billingAccount != null) {
-			return billingAccount;
+		if (billingAccountList != null) {
+			return billingAccountList;
 		}
 		return null;
 	}
 
-	public void upDateCustomerBillingAccount(Customer customer,
-			BillingAccount billingAccount) throws DatabaseException {
+public BillingAccount getBillingAccount(String accountNumber)
+		throws DatabaseException {
+	BillingAccount billingAccount = billingAccountsDatabase.get(accountNumber);
+//	billingAccountList = billingAccountsDatabase.get(accountNumber);
 
-		if (billingAccountsDatabase.containsKey(billingAccount)) {
+	if (billingAccount != null) {
+		return billingAccount;
+	}
+	return null;
+}
+	@Override
+	public void updateBillingAccount(BillingAccount billingAccount)
+			throws DatabaseException {
+		if (billingAccountsDatabase.containsKey(billingAccount.getAccountNumber())) {
 			billingAccountsDatabase.remove(billingAccount);
-			billingAccountsDatabase.put(billingAccount.getAccountNumber(),
-					billingAccount);
+			billingAccountsDatabase.put(billingAccount.getAccountNumber(), billingAccount);
+							
+			for (AbstractBillingAccountStatement statement : billingAccount.getBillingStatement()){
+				billingStatementsDatabase.put(statement.getAccountStatementDate(), billingAccount);
+			}
 		}
 	}
 
+	@Override
+	public BillingAccount getBillingAccountStatement(String accountNumber,
+			String period) throws DatabaseException {
+		BillingAccount billingAccount = billingStatementsDatabase.get(period);
+		return billingAccount;
+	}
 }

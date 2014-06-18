@@ -35,8 +35,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 	@Override
 	public Customer getCustomer(CredentialsVO credentials)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+		return userDatabase.getCustomer(credentials);
 	}
 	
 	
