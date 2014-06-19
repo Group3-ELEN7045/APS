@@ -88,8 +88,8 @@ public class InsertUserTest {
 	public void testValidatedUserEncryption(){
 		customer.setEncryptionModule(encryptionModule);
 		customer.encryptUserInformation();
-		Specification userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
-		assertTrue("User details not encrypted properly", userDetailsSpecification.isSatisfiedBy(userDetailsSpecification));
+		ApplicationSpecification<Customer> userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
+		assertTrue("User details not encrypted properly", userDetailsSpecification.isSatisfiedBy(customer));
 	} 
 	
 	@Test //if username and password are encrypted
