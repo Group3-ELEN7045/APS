@@ -3,7 +3,6 @@
  */
 package za.ac.wits.elen7045.group3.aps.services.notification.observer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,14 +15,14 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
  *
  */
 public class NotificationObserver {
-	private  NotificationPublisher pub = new NotificationPublisher();
+	private  NotificationPublisher notificationPublisher = new NotificationPublisher();
 	
 	public List<ScrapeLogResult> checkNotifications(NotificationCheck checkNotification, ScrapeLogResultRepository notificationRepository){ 
-	   Observer   = new NotificationListener(checkNotification,notificationRepository);
-	   pub.register(one);
-	   one.setSubject(pub);
-	   one.update(checkNotification);
-	   pub.checkNotifications(checkNotification);
-	   return (List<ScrapeLogResult>) pub.getResponse(one);
+	   Observer notificationListenr   = new NotificationListener(checkNotification,notificationRepository);
+	   notificationPublisher.register(notificationListenr);
+	   notificationListenr.setSubject(notificationPublisher);
+	   notificationListenr.update(checkNotification);
+	   notificationPublisher.checkNotifications(checkNotification);
+	   return (List<ScrapeLogResult>) notificationPublisher.getResponse(notificationListenr);
 	}
 }
