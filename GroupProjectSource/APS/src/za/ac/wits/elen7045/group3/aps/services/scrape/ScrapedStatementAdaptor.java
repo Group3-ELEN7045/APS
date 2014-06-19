@@ -21,13 +21,17 @@ public class ScrapedStatementAdaptor {
 	private DuplicateStatementDataSpecification duplicateSpec;
 	private VATCalculationSpecification vatSpec;
 	private CompanyStatementType companyStatementType;
+	private INumericDataConverterStrategy numericConvertStrategy;
+	private NumericDataConverter numericDataConverter;
 	
-	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType) 
+	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType,
+			INumericDataConverterStrategy numericConvertStrategy) 
 			throws DuplicateDataException, ScrapeErrorException{
 		
 		this.scrapedAccount = scrapedAccount;
+		this.numericConvertStrategy = numericConvertStrategy;
 		this.companyStatementType = companyStatementType;
-		
+		this.numericDataConverter = new NumericDataConverter(numericConvertStrategy);
 		duplicateSpec = new DuplicateStatementDataSpecification();
 		
 		vatSpec = new VATCalculationSpecification(14);
@@ -51,7 +55,7 @@ public class ScrapedStatementAdaptor {
 	
 	private CreditCardStatement getCreditCardStatement() throws VatCalculationException{
 		
-		CreditCardStatement creditAcc = ScrapedStatementAdaptorMap.getCreditCardStatement(scrapedAccount);
+		CreditCardStatement creditAcc = ScrapedStatementAdaptorMap.getCreditCardStatement(scrapedAccount,numericDataConverter);
 		
 		if (!vatSpec.isSatisfiedBy(creditAcc))
 			throw new VatCalculationException();
@@ -61,7 +65,7 @@ public class ScrapedStatementAdaptor {
 	
 	private MunicipalStatement getMunicipalStatement() throws VatCalculationException{
 		
-		MunicipalStatement municipalAcc = ScrapedStatementAdaptorMap.getMunicipalStatement(scrapedAccount);
+		MunicipalStatement municipalAcc = ScrapedStatementAdaptorMap.getMunicipalStatement(scrapedAccount,numericDataConverter);
 		
 		if (!vatSpec.isSatisfiedBy(municipalAcc))
 			throw new VatCalculationException();
@@ -71,7 +75,7 @@ public class ScrapedStatementAdaptor {
 
 	private TelcoStatement getTelcoStatement() throws VatCalculationException{
 		
-		TelcoStatement telcoAcc = ScrapedStatementAdaptorMap.getTelcoStatement(scrapedAccount);
+		TelcoStatement telcoAcc = ScrapedStatementAdaptorMap.getTelcoStatement(scrapedAccount,numericDataConverter);
 		
 		if (!vatSpec.isSatisfiedBy(telcoAcc))
 			throw new VatCalculationException();

@@ -67,7 +67,7 @@ public class ScrapeManager {
 		CompanyStatementType companyType = billingCompany.getCompanyType();
 		scrapedXML = (StatementScrapedData)marshaller.convertScrapedXMLToObject(StatementScrapedData.class);
 		
-		ScrapedStatementAdaptor statementAdaptor = new ScrapedStatementAdaptor(scrapedXML, companyType);
+		ScrapedStatementAdaptor statementAdaptor = new ScrapedStatementAdaptor(scrapedXML, companyType, new DefaultNumericDataConverterStrategy());
 		
 		return statementAdaptor.getStatement();
 	}

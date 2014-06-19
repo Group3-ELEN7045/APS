@@ -9,7 +9,7 @@ import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
 public class ScrapedStatementAdaptorMap {
 	private static StatementScrapedData statement;
 	
-	public static TelcoStatement getTelcoStatement(StatementScrapedData statement){
+	public static TelcoStatement getTelcoStatement(StatementScrapedData statement, NumericDataConverter numericData){
 		ScrapedStatementAdaptorMap.statement = statement;
 		TelcoStatement telcoAcc = new TelcoStatement(getIndexDataPair("001").getValue());
 		telcoAcc.setAccountHolderName(getIndexDataPair("002").getValue());
@@ -35,7 +35,7 @@ public class ScrapedStatementAdaptorMap {
 		return telcoAcc;
 	}
 	
-	public static MunicipalStatement getMunicipalStatement(StatementScrapedData statement){
+	public static MunicipalStatement getMunicipalStatement(StatementScrapedData statement, NumericDataConverter numericData){
 		ScrapedStatementAdaptorMap.statement = statement;
 		MunicipalStatement municipalAcc = new MunicipalStatement(getIndexDataPair("001").getValue());
 		municipalAcc.setAccountHolderName(getIndexDataPair("002").getValue());
@@ -65,7 +65,7 @@ public class ScrapedStatementAdaptorMap {
 		return municipalAcc;
 	}
 	
-	public static CreditCardStatement getCreditCardStatement(StatementScrapedData statement){
+	public static CreditCardStatement getCreditCardStatement(StatementScrapedData statement, NumericDataConverter numericDataStrategy){
 		ScrapedStatementAdaptorMap.statement = statement;
 		CreditCardStatement creditAcc = new CreditCardStatement(getIndexDataPair("001").getValue());
 		creditAcc.setAccountHolderName(getIndexDataPair("002").getValue());

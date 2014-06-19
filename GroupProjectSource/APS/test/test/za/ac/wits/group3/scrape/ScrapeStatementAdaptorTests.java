@@ -12,6 +12,8 @@ import org.junit.Test;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
+import za.ac.wits.elen7045.group3.aps.services.scrape.DefaultNumericDataConverterStrategy;
+import za.ac.wits.elen7045.group3.aps.services.scrape.NumericDataConverter;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedStatementAdaptor;
 import za.ac.wits.elen7045.group3.aps.services.util.DuplicateDataException;
 import za.ac.wits.elen7045.group3.aps.services.util.ScrapeErrorException;
@@ -66,7 +68,7 @@ public class ScrapeStatementAdaptorTests {
 		
 		scrapedStatement.setDataPairList(dataPairs);
 		
-		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.TELCO);
+		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.TELCO, new DefaultNumericDataConverterStrategy());
 		telcoObject = (TelcoStatement)statementAdaptor.getStatement();
 
 		assertTrue(telcoObject.getClass().equals(TelcoStatement.class));
@@ -106,7 +108,7 @@ public class ScrapeStatementAdaptorTests {
 		
 		scrapedStatement.setDataPairList(dataPairs);
 		
-		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.MUNICIPALITY);
+		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.MUNICIPALITY, new DefaultNumericDataConverterStrategy());
 		municipalObject = (MunicipalStatement)statementAdaptor.getStatement();
 		
 		assertTrue(municipalObject.getClass().equals(MunicipalStatement.class));
@@ -148,7 +150,7 @@ public class ScrapeStatementAdaptorTests {
 		
 		scrapedStatement.setDataPairList(dataPairs);
 		
-		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.CREDITCARD);
+		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.CREDITCARD, new DefaultNumericDataConverterStrategy());
 		creditCardObject = (CreditCardStatement)statementAdaptor.getStatement();
 		
 		assertTrue(creditCardObject.getClass().equals(CreditCardStatement.class));
@@ -186,7 +188,7 @@ public class ScrapeStatementAdaptorTests {
 		dataPairsFalse.add(new DataPair("005","qaz","2"));
 		cc.setDataPairList(dataPairsFalse);
 		
-		statementAdaptor = new ScrapedStatementAdaptor(cc, CompanyStatementType.CREDITCARD);
+		statementAdaptor = new ScrapedStatementAdaptor(cc, CompanyStatementType.CREDITCARD, new DefaultNumericDataConverterStrategy());
 		
 	}
 	
@@ -217,7 +219,7 @@ public class ScrapeStatementAdaptorTests {
 		
 		scrapedStatement.setDataPairList(dataPairs);
 		
-		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.CREDITCARD);
+		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.CREDITCARD, new DefaultNumericDataConverterStrategy());
 		creditCardObject = (CreditCardStatement)statementAdaptor.getStatement();
 	}
 	
@@ -228,6 +230,6 @@ public class ScrapeStatementAdaptorTests {
 		
 		scrapedStatement.setDataPairList(dataPairs);
 		
-		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.CREDITCARD);
+		statementAdaptor = new ScrapedStatementAdaptor(scrapedStatement, CompanyStatementType.CREDITCARD, new DefaultNumericDataConverterStrategy());
 	}
 }
