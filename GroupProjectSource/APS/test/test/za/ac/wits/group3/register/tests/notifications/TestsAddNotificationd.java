@@ -15,9 +15,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Notification;
-import za.ac.wits.elen7045.group3.aps.domain.repository.notification.NotificationRepository;
+import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 /**
@@ -27,19 +27,19 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 public class TestsAddNotificationd {
     
-	private Notification               notification;
-	private List<Notification>         notifications;
+	private ScrapeLogResult               notification;
+	private List<ScrapeLogResult>         notifications;
 	private ScrapeLogResultDataAccess     notificationDataAccess;
-	private NotificationRepository     notificationRepository;
+	private ScrapeLogResultRepository     notificationRepository;
 	private ScrapeLogResultImpl notificationRepositoryImpl;
 	private ApplicationContext         context;
 	
 	@Before
 	public void initilize(){
 		context                     = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-		notification                = (Notification)context.getBean("notification");
+		notification                = (ScrapeLogResult)context.getBean("notification");
 		notificationDataAccess      = context.getBean(ScrapeLogResultDataAccess.class);
-		notifications               = new ArrayList<Notification>();  
+		notifications               = new ArrayList<ScrapeLogResult>();  
 		notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
 		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 	}
@@ -49,12 +49,12 @@ public class TestsAddNotificationd {
 		notification.setNotificationType("message");
 		notification.setStatsus("waiting");
 		notification.setMessage("Please Update email address");
-		assertTrue("Unble to add Notifiction in Datbse", notificationRepository.updateNotification(notification));  
+		assertTrue("Unble to add Notifiction in Datbse", notificationRepository.updateScrapeLogResult(notification));  
 	}
 	
 	@Test
 	public void testValidteInsert() throws DatabaseException{
-		List<Notification> notifications = notificationRepository.getNotifications(Long.valueOf(1), null);
+		List<ScrapeLogResult> notifications = notificationRepository.getScrapeLogResult(Long.valueOf(1), null);
 		assertEquals("The databse shoud have 2 entries", notifications.size() , 1);
 	}
 	
