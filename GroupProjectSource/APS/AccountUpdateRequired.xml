@@ -1,9 +1,0 @@
-<scrape-session>
-  <baseURL>www.elen7045.co.za</baseURL>
-  <date>12/12/2014</date>
-  <time>13:50:00</time>
-  <datapair id="001">
-    <text>Scraper Error</text>
-    <value>AccountUpdateRequired</value>
-  </datapair>
-</scrape-session>
