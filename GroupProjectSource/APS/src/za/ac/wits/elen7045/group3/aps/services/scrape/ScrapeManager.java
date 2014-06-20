@@ -10,7 +10,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.entities.ScrapeRequest;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.SuitableForScrapeSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.SuitableForScrapeSpecification;
 
 public class ScrapeManager {
 	private ScrapeRequest scrapeRequest;
@@ -32,13 +32,13 @@ public class ScrapeManager {
 	public void scrapeWebsite(){
 		List <BillingAccount> accounts = scrapeRequest.getBillingCompany().getBillingAccounts();
 		String url = scrapeRequest.getBillingCompany().getUrl();
-		for(int i = 0; i < accounts.size(); i++){
-			if(scrapeCriteria.isSatisfiedBy(accounts.get(i))){
+		for(BillingAccount billingAccount: accounts){
+			if(scrapeCriteria.isSatisfiedBy(billingAccount)){
 				WebsiteScraper.scrapeWebsite(url, 
-					billingCompany.getBillingAccounts().get(i).getCredentials().getUserName(), 
-					billingCompany.getBillingAccounts().get(i).getCredentials().getPassword(), 
-					billingCompany.getBillingAccounts().get(i).getAccountNumber()
-				);
+						billingAccount.getCredentials().getUserName(), 
+						billingAccount.getCredentials().getPassword(), 
+						billingAccount.getAccountNumber()
+					);
 			}
 		}
 		try{
@@ -67,7 +67,7 @@ public class ScrapeManager {
 		CompanyStatementType companyType = billingCompany.getCompanyType();
 		scrapedXML = (StatementScrapedData)marshaller.convertScrapedXMLToObject(StatementScrapedData.class);
 		
-		ScrapedStatementAdaptor statementAdaptor = new ScrapedStatementAdaptor(scrapedXML, companyType, new DefaultNumericDataConverterStrategy());
+		ScrapedStatementAdaptor statementAdaptor = new ScrapedStatementAdaptor(scrapedXML, companyType, new DefaultNumericDataFormatStrategy());
 		
 		return statementAdaptor.getStatement();
 	}

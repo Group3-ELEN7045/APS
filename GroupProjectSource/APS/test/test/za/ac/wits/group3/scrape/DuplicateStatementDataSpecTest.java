@@ -4,13 +4,16 @@ package test.za.ac.wits.group3.scrape;
  */
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.Assert.*; 
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.DuplicateStatementDataSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 
 public class DuplicateStatementDataSpecTest {
 	

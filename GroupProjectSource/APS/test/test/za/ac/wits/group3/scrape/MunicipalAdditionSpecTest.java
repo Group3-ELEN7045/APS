@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.*;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MunicipalAdditionSpecTest {

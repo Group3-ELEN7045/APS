@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.specification.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 /**
  * @author bakwanyana
  */
@@ -14,7 +14,7 @@ public class TelcoStatementAdditionSpecification extends
 		return commonAdditionSatisfied(statement) && telcoSpecificAdditonSatisfied((TelcoStatement)statement);
 	}
 	
-	public boolean telcoSpecificAdditonSatisfied(TelcoStatement statement){
+	private boolean telcoSpecificAdditonSatisfied(TelcoStatement statement){
 		
 		double calc = 0.0;
 		calc = Double.parseDouble(statement.getServiceCharges().substring(1))

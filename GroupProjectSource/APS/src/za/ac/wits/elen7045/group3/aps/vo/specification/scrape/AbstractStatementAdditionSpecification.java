@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.specification.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 /**
  * @author bakwanyana
  */
@@ -8,8 +8,8 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 public abstract class AbstractStatementAdditionSpecification extends 
 	ApplicationSpecification<AbstractBillingAccountStatement>{
 	
-	boolean commonAdditionSatisfied(final AbstractBillingAccountStatement statement){
-		
+	protected boolean commonAdditionSatisfied(final AbstractBillingAccountStatement statement){
+		// package access given to this method - no use elsewhere
 		double calc = 0.0;
 		calc = Double.parseDouble(statement.getAccountOpeningBalance().substring(1))
 						- Double.parseDouble(statement.getAccountPaymentReceived().substring(1))

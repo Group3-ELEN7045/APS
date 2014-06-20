@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.specification.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;

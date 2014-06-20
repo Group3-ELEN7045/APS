@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.specification.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 /**
  * @author bakwanyana
  */
@@ -10,7 +10,7 @@ public class VATCalculationSpecification extends
 	
 	private double vatPercentage;
 	
-	public VATCalculationSpecification(final double vatPercentage){
+	public VATCalculationSpecification(double vatPercentage){ // injected % to allow for variable vat change
 		this.vatPercentage = vatPercentage;
 	}
 	@Override

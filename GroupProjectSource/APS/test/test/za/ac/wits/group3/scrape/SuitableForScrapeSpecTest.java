@@ -3,15 +3,17 @@ package test.za.ac.wits.group3.scrape;
  * @author bakwanyana
  */
 import static org.junit.Assert.*; 
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.SuitableForScrapeSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.SuitableForScrapeSpecification;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.TelcoStatementAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementAdditionSpecification;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TelcoAdditionSpecTest {

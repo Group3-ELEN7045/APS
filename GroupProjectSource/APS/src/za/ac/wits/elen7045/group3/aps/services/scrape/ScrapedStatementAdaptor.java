@@ -7,8 +7,8 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatem
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.DuplicateStatementDataSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.scrape.VATCalculationSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.VATCalculationSpecification;
 
 public class ScrapedStatementAdaptor {
 	
@@ -16,15 +16,15 @@ public class ScrapedStatementAdaptor {
 	private DuplicateStatementDataSpecification duplicateSpec;
 	private VATCalculationSpecification vatSpec;
 	private CompanyStatementType companyStatementType;
-	private NumericDataConverter numericDataConverter;
+	private NumericDataFormatter numericDataConverter;
 	
 	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType,
-			INumericDataConverterStrategy numericConvertStrategy) 
+			INumericDataFormatStrategy numericConvertStrategy) 
 			throws DuplicateDataException, ScrapeErrorException{
 		
 		this.scrapedAccount = scrapedAccount;
 		this.companyStatementType = companyStatementType;
-		this.numericDataConverter = new NumericDataConverter(numericConvertStrategy);
+		this.numericDataConverter = new NumericDataFormatter(numericConvertStrategy);
 		duplicateSpec = new DuplicateStatementDataSpecification();
 		
 		vatSpec = new VATCalculationSpecification(14);
@@ -36,8 +36,7 @@ public class ScrapedStatementAdaptor {
 			throw new ScrapeErrorException(scrapedAccount.getDataPairList().get(0).getValue());
 	}
 	
-	public AbstractBillingAccountStatement getStatement()
-				throws VatCalculationException{
+	public AbstractBillingAccountStatement getStatement() throws VatCalculationException{
 		if (companyStatementType.equals(CompanyStatementType.CREDITCARD))
 			return getCreditCardStatement();
 		else if (companyStatementType.equals(CompanyStatementType.MUNICIPALITY))

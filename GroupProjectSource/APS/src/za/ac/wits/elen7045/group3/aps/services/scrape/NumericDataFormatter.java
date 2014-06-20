@@ -2,15 +2,15 @@ package za.ac.wits.elen7045.group3.aps.services.scrape;
 /**
  * @author bakwanyana
  */
-public class NumericDataConverter {
-	INumericDataConverterStrategy dataConverter;
+public class NumericDataFormatter {
+	INumericDataFormatStrategy dataConverter;
 	
-	public NumericDataConverter(INumericDataConverterStrategy dataConverter){
+	public NumericDataFormatter(INumericDataFormatStrategy dataConverter){
 		this.dataConverter = dataConverter;
 	}
 	
-	public String convert(String value){
+	public String format(String value){
 		
-		return dataConverter.convert(value);
+		return dataConverter.getFormattedString(value);
 	}
 }
