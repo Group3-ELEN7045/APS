@@ -1,5 +1,7 @@
 package test.za.ac.wits.group3.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;

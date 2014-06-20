@@ -1,5 +1,7 @@
-package za.ac.wits.elen7045.group3.aps.services.util;
-
+package za.ac.wits.elen7045.group3.aps.services.scrape;
+/**
+ * @author bakwanyana
+ */
 import java.util.ArrayList;
 import java.util.List;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;

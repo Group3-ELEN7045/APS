@@ -1,16 +1,17 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
 
 public class ScrapedStatementAdaptorMap {
-	private static StatementScrapedData statement;
+	private StatementScrapedData statement;
 	
-	public static TelcoStatement getTelcoStatement(StatementScrapedData statement, NumericDataConverter numericData){
-		ScrapedStatementAdaptorMap.statement = statement;
+	public TelcoStatement getTelcoStatement(StatementScrapedData statement, NumericDataConverter numericData){
+		this.statement = statement;
 		TelcoStatement telcoAcc = new TelcoStatement(getIndexDataPair("001").getValue());
 		telcoAcc.setAccountHolderName(getIndexDataPair("002").getValue());
 		telcoAcc.setAccountStatementDate(getIndexDataPair("003").getValue());
@@ -35,8 +36,8 @@ public class ScrapedStatementAdaptorMap {
 		return telcoAcc;
 	}
 	
-	public static MunicipalStatement getMunicipalStatement(StatementScrapedData statement, NumericDataConverter numericData){
-		ScrapedStatementAdaptorMap.statement = statement;
+	public MunicipalStatement getMunicipalStatement(StatementScrapedData statement, NumericDataConverter numericData){
+		this.statement = statement;
 		MunicipalStatement municipalAcc = new MunicipalStatement(getIndexDataPair("001").getValue());
 		municipalAcc.setAccountHolderName(getIndexDataPair("002").getValue());
 		municipalAcc.setAccountStatementDate(getIndexDataPair("003").getValue());
@@ -65,8 +66,8 @@ public class ScrapedStatementAdaptorMap {
 		return municipalAcc;
 	}
 	
-	public static CreditCardStatement getCreditCardStatement(StatementScrapedData statement, NumericDataConverter numericDataStrategy){
-		ScrapedStatementAdaptorMap.statement = statement;
+	public CreditCardStatement getCreditCardStatement(StatementScrapedData statement, NumericDataConverter numericDataStrategy){
+		this.statement = statement;
 		CreditCardStatement creditAcc = new CreditCardStatement(getIndexDataPair("001").getValue());
 		creditAcc.setAccountHolderName(getIndexDataPair("002").getValue());
 		creditAcc.setAccountStatementDate(getIndexDataPair("003").getValue());
@@ -90,7 +91,7 @@ public class ScrapedStatementAdaptorMap {
 		return creditAcc;
 	}
 	
-	private static DataPair getIndexDataPair(String id){
+	private DataPair getIndexDataPair(String id){
 		for (int i = 0; i < statement.getDataPairList().size(); i++){
 			if(statement.getDataPairList().get(i).getId().equals(id))
 				return statement.getDataPairList().get(i);

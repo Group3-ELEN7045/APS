@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.phantomscraper;
-
+/**
+ * @author bakwanyana
+ */
 public class WebsiteScraper {
 	
 	public WebsiteScraper(){

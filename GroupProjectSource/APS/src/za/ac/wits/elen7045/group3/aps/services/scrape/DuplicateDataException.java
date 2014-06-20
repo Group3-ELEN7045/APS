@@ -1,5 +1,7 @@
-package za.ac.wits.elen7045.group3.aps.services.util;
-
+package za.ac.wits.elen7045.group3.aps.services.scrape;
+/**
+ * @author bakwanyana
+ */
 public class DuplicateDataException extends Exception {
 	
 	/**

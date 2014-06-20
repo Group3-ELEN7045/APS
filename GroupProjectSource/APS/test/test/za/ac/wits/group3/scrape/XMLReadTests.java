@@ -1,5 +1,7 @@
 package test.za.ac.wits.group3.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import com.thoughtworks.xstream.XStream;
 
 import static org.junit.Assert.*;    
@@ -7,15 +9,10 @@ import static org.junit.Assert.*;
 import org.junit.After;  
 import org.junit.Before;  
 import org.junit.Test;  
-import org.junit.runner.RunWith;  
-import org.mockito.runners.MockitoJUnitRunner;  
 
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
-//import za.ac.wits.elen7045.group3.aps.services.util.ScrapedErrorData;
+import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
 
-  
-@RunWith(MockitoJUnitRunner.class)
 public class XMLReadTests {
 	
 	String filePath;
@@ -35,7 +32,7 @@ public class XMLReadTests {
 	@Test
 	public void testReadScrapeXMLForTelcoAccount(){
 		
-		filePath = ".\\telco.xml";
+		filePath = "..\\..\\XML Files\\telco.xml";
 		statementScrapedData = (StatementScrapedData)new APSXMLMarshaller(filePath).convertScrapedXMLToObject(StatementScrapedData.class);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
@@ -46,7 +43,7 @@ public class XMLReadTests {
 	@Test
 	public void testReadScrapeXMLForMunicipalAccount(){
 		
-		filePath = ".\\municipal.xml";
+		filePath = "..\\..\\XML Files\\municipal.xml";
 		statementScrapedData = (StatementScrapedData)new APSXMLMarshaller(filePath).convertScrapedXMLToObject(StatementScrapedData.class);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
@@ -57,7 +54,7 @@ public class XMLReadTests {
 	@Test
 	public void testReadScrapeXMLForCreditCardAccount(){
 		
-		filePath = ".\\creditcard.xml";
+		filePath = "..\\..\\XML Files\\creditcard.xml";
 		statementScrapedData = (StatementScrapedData)new APSXMLMarshaller(filePath).convertScrapedXMLToObject(StatementScrapedData.class);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
@@ -68,7 +65,7 @@ public class XMLReadTests {
 	@Test
 	public void testReadScrapeXMLForError(){
 		
-		filePath = ".\\errors.xml";
+		filePath = "..\\..\\XML Files\\errors.xml";
 		statementScrapedData = (StatementScrapedData)new APSXMLMarshaller(filePath).convertScrapedXMLToObject(StatementScrapedData.class);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));

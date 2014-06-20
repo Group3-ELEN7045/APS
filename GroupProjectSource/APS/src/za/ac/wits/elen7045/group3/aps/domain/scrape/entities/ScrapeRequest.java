@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.scrape.entities;
-
+/**
+ * @author bakwanyana
+ */
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 
 public class ScrapeRequest {

@@ -1,7 +1,9 @@
 package za.ac.wits.elen7045.group3.aps.services.specification.scrape;
-
+/**
+ * @author bakwanyana
+ */
+import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
 
 
 public class DuplicateStatementDataSpecification

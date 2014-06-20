@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
@@ -7,13 +9,6 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.DuplicateStatementDataSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.VATCalculationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.DuplicateDataException;
-import za.ac.wits.elen7045.group3.aps.services.util.ScrapeErrorException;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.util.VatCalculationException;
-
-//review
-
 
 public class ScrapedStatementAdaptor {
 	
@@ -21,7 +16,6 @@ public class ScrapedStatementAdaptor {
 	private DuplicateStatementDataSpecification duplicateSpec;
 	private VATCalculationSpecification vatSpec;
 	private CompanyStatementType companyStatementType;
-	private INumericDataConverterStrategy numericConvertStrategy;
 	private NumericDataConverter numericDataConverter;
 	
 	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType,
@@ -29,7 +23,6 @@ public class ScrapedStatementAdaptor {
 			throws DuplicateDataException, ScrapeErrorException{
 		
 		this.scrapedAccount = scrapedAccount;
-		this.numericConvertStrategy = numericConvertStrategy;
 		this.companyStatementType = companyStatementType;
 		this.numericDataConverter = new NumericDataConverter(numericConvertStrategy);
 		duplicateSpec = new DuplicateStatementDataSpecification();
@@ -55,7 +48,7 @@ public class ScrapedStatementAdaptor {
 	
 	private CreditCardStatement getCreditCardStatement() throws VatCalculationException{
 		
-		CreditCardStatement creditAcc = ScrapedStatementAdaptorMap.getCreditCardStatement(scrapedAccount,numericDataConverter);
+		CreditCardStatement creditAcc = new ScrapedStatementAdaptorMap().getCreditCardStatement(scrapedAccount,numericDataConverter);
 		
 		if (!vatSpec.isSatisfiedBy(creditAcc))
 			throw new VatCalculationException();
@@ -65,7 +58,7 @@ public class ScrapedStatementAdaptor {
 	
 	private MunicipalStatement getMunicipalStatement() throws VatCalculationException{
 		
-		MunicipalStatement municipalAcc = ScrapedStatementAdaptorMap.getMunicipalStatement(scrapedAccount,numericDataConverter);
+		MunicipalStatement municipalAcc = new ScrapedStatementAdaptorMap().getMunicipalStatement(scrapedAccount,numericDataConverter);
 		
 		if (!vatSpec.isSatisfiedBy(municipalAcc))
 			throw new VatCalculationException();
@@ -75,7 +68,7 @@ public class ScrapedStatementAdaptor {
 
 	private TelcoStatement getTelcoStatement() throws VatCalculationException{
 		
-		TelcoStatement telcoAcc = ScrapedStatementAdaptorMap.getTelcoStatement(scrapedAccount,numericDataConverter);
+		TelcoStatement telcoAcc = new ScrapedStatementAdaptorMap().getTelcoStatement(scrapedAccount,numericDataConverter);
 		
 		if (!vatSpec.isSatisfiedBy(telcoAcc))
 			throw new VatCalculationException();

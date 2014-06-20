@@ -1,26 +1,24 @@
 package test.za.ac.wits.group3.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*; 
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
-
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.DuplicateStatementDataSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
 
-@RunWith(MockitoJUnitRunner.class)
 public class DuplicateStatementDataSpecTest {
+	
 	StatementScrapedData scrapedStatement;
 	List<DataPair> dataPairsTrue;
 	List<DataPair> dataPairsFalse;
 	DuplicateStatementDataSpecification duplicateSpec;
+	
 	@Before
 	public void init(){
 		scrapedStatement = new StatementScrapedData();

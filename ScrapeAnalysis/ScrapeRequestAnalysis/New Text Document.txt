@@ -1,0 +1,2 @@
+say in spec that new folder is created (filepath)
+scrape filenames are account numbers

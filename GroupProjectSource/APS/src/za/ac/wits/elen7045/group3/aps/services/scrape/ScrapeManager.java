@@ -1,6 +1,9 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import java.util.List;
+
 import za.ac.wits.elen7045.group3.aps.phantomscraper.*;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
@@ -8,10 +11,6 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.entities.ScrapeRequest;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.specification.scrape.SuitableForScrapeSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.DuplicateDataException;
-import za.ac.wits.elen7045.group3.aps.services.util.ScrapeErrorException;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.util.VatCalculationException;
 
 public class ScrapeManager {
 	private ScrapeRequest scrapeRequest;
@@ -19,6 +18,7 @@ public class ScrapeManager {
 	private String filePath; 
 	private AbstractBillingAccountStatement scrapedStatement;
 	private StatementScrapedData scrapedXML;
+	// TODO depend on implementations here??
 	private SuitableForScrapeSpecification scrapeCriteria;
 	
 	

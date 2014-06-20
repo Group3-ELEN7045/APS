@@ -1,5 +1,7 @@
 package test.za.ac.wits.group3.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import static org.junit.Assert.*;    
 
 import java.util.ArrayList;
@@ -13,12 +15,11 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.scrape.DefaultNumericDataConverterStrategy;
-import za.ac.wits.elen7045.group3.aps.services.scrape.NumericDataConverter;
+import za.ac.wits.elen7045.group3.aps.services.scrape.DuplicateDataException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapeErrorException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedStatementAdaptor;
-import za.ac.wits.elen7045.group3.aps.services.util.DuplicateDataException;
-import za.ac.wits.elen7045.group3.aps.services.util.ScrapeErrorException;
-import za.ac.wits.elen7045.group3.aps.services.util.StatementScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.util.VatCalculationException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
+import za.ac.wits.elen7045.group3.aps.services.scrape.VatCalculationException;
 
 public class ScrapeStatementAdaptorTests {
 	
