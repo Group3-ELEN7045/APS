@@ -1,0 +1,52 @@
+package test.za.ac.wits.group3.scrape;
+/**
+ * @author bakwanyana
+ */
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;   
+
+import org.junit.After;  
+import org.junit.Before;  
+import org.junit.Test;  
+import org.junit.runner.RunWith;  
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner; 
+
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
+import za.ac.wits.elen7045.group3.aps.services.scrape.DefaultNumericDataFormatStrategy;
+import za.ac.wits.elen7045.group3.aps.services.scrape.NumericDataFormatter;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
+
+@RunWith(MockitoJUnitRunner.class)
+public class StatementVATCalculationSpecTest {
+	
+	StatementVATCalculationSpecification vatSpec;
+	
+	@Mock MunicipalStatement trueStatement;
+	@Mock MunicipalStatement falseStatement;
+
+	@Before
+	public void init(){
+		vatSpec = new StatementVATCalculationSpecification(14, new NumericDataFormatter(new DefaultNumericDataFormatStrategy()));
+		when(trueStatement.getAccountNewCharges()).thenReturn("R100");
+		when(trueStatement.getAccountVATAmount()).thenReturn("R14.00");
+		when(falseStatement.getAccountNewCharges()).thenReturn("R100");
+		when(falseStatement.getAccountVATAmount()).thenReturn("R10.14");
+		
+	}
+	
+	@After
+	public void tearDown(){
+		trueStatement = null;
+		falseStatement = null;
+		vatSpec = null;
+	}
+	
+	@Test
+	public void testCorrectCalculation(){
+		
+		assertTrue("Error validating correct calculation",vatSpec.isSatisfiedBy(trueStatement));
+		assertFalse("Error validating incorrect calculation",vatSpec.isSatisfiedBy(falseStatement));
+	}
+
+}

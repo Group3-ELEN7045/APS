@@ -1,2 +1,0 @@
-INDEX VERSION 1.122+C:\Stuff\Silas\Wits CPD\2014\FinalProject\APS\GroupProjectSource\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2568934891.index

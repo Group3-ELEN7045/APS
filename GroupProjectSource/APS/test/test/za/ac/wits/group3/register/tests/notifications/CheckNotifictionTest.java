@@ -16,10 +16,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Notification;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
-import za.ac.wits.elen7045.group3.aps.domain.repository.notification.NotificationRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
 import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
@@ -43,9 +42,9 @@ public class CheckNotifictionTest {
 		@Before
 		public void initilize(){
 			context                     = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-			notification                = context.getBean(Notification.class);
+			notification                = context.getBean(ScrapeLogResult.class);
 			notificationDataAccess      = context.getBean(ScrapeLogResultDataAccess.class);
-			notifications               = new ArrayList<Notification>();  
+			notifications               = new ArrayList<ScrapeLogResult>();  
 			notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
 			notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 		}
@@ -55,12 +54,12 @@ public class CheckNotifictionTest {
 			notification.setNotificationType("message");
 			notification.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 			notification.setMessage("Please Update email address");
-			assertTrue("Unble to add Notifiction in Datbse", notificationRepository.updateNotification(notification));  
+			assertTrue("Unble to add Notifiction in Datbse", notificationRepository.updateScrapeLogResult(notification));  
 		}
 		
 		@Test
 		public void testValidteInsert() throws DatabaseException{
-			List<Notification> notifications = notificationRepository.getNotifications(Long.valueOf(1), null);
+			List<ScrapeLogResult> notifications = notificationRepository.getScrapeLogResult(Long.valueOf(1), null);
 			assertEquals("The databse shoud have 2 entries", notifications.size() , 1);
 		}
 		
@@ -69,17 +68,17 @@ public class CheckNotifictionTest {
 		public void checkNotifictionTest(){
 			NotificationCheck checkNotification = new NotificationCheck();
 			NotificationObserver notificationObserver = new NotificationObserver();  
-			Notification responseNotification = new Notification();
+			ScrapeLogResult responseNotification = new ScrapeLogResult();
 			
 			checkNotification.setId(Long.valueOf(1));
 			checkNotification.setNotificationStatus(NotificationStatus.WAITING.getNotificationStatus());
 			
-			List<Notification> dbNotifications = new ArrayList<Notification>();
+			List<ScrapeLogResult> dbNotifications = new ArrayList<ScrapeLogResult>();
 			dbNotifications = notificationObserver.checkNotifications(checkNotification, notificationRepository);
 			
 			responseNotification = dbNotifications.get(0);
 			
-			ApplicationSpecification<Notification> notificationSpecification = new CheckNotificationSpecification(notification);
+			ApplicationSpecification<ScrapeLogResult> notificationSpecification = new CheckNotificationSpecification(notification);
 		    assertTrue("No Notifications in a wait state", notificationSpecification.isSatisfiedBy(responseNotification));	
 		}
 }

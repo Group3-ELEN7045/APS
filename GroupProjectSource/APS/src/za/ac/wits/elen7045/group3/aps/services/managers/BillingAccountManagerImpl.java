@@ -2,7 +2,7 @@ package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
@@ -26,7 +26,7 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 			ApplicationSpecification<BillingAccount> userBillingAccountDetails = new BillingAccountDetailsSpecification(
 					billingAccount);
 			if (userBillingAccountDetails.isSatisfiedBy(billingAccount)) {  //checks is all fields on the billing account have been set
-				billingAccount.setAccountStatus(StatusType.TRYING);		//set the billing account status to trying
+				billingAccount.setAccountStatus(AccountStatusType.TRYING);		//set the billing account status to trying
 			} else {
 				// new Exception() billing account details incorrect.
 			}			
