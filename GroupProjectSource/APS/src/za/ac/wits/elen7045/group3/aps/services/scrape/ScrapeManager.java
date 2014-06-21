@@ -10,6 +10,10 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.entities.ScrapeRequest;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DataIntegrityException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DuplicateDataException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.ScrapeErrorException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.VatCalculationException;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.BillingAccountSuitableForScrapeSpecification;
 
 public class ScrapeManager {

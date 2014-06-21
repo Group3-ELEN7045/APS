@@ -10,7 +10,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 public class StatementVATCalculationSpecification extends 
 		ApplicationSpecification<AbstractBillingAccountStatement> {
 	
-	private double vatPercentage;
+	private final double vatPercentage;
 	private NumericDataFormatter numericDataFormatter;
 	
 	public StatementVATCalculationSpecification(){ // use default values

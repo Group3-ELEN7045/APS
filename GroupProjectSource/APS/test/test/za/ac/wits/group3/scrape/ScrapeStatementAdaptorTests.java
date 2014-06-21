@@ -15,11 +15,11 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.scrape.DefaultNumericDataFormatStrategy;
-import za.ac.wits.elen7045.group3.aps.services.scrape.DuplicateDataException;
-import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapeErrorException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedStatementAdaptor;
 import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
-import za.ac.wits.elen7045.group3.aps.services.scrape.VatCalculationException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DuplicateDataException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.ScrapeErrorException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.VatCalculationException;
 
 public class ScrapeStatementAdaptorTests {
 	

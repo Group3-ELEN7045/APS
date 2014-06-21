@@ -8,6 +8,10 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStateme
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DataIntegrityException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DuplicateDataException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.ScrapeErrorException;
+import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.VatCalculationException;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.GenericStatementDataAdditionSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalStatementDataAdditionSpecification;
