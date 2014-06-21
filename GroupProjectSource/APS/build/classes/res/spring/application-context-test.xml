@@ -6,8 +6,8 @@
     
     
 
-    <bean id="userRepository" class="test.za.ac.wits.group3.domain.mock.MockUserDAOImpl"></bean>
-    <bean id="billingDataAccess" class="test.za.ac.wits.group3.domain.mock.MockBillingDAOImpl"/>
+    <bean id="userRepository" class="test.za.ac.wits.group3.domain.mock.MockUserDAOImpl">
+    </bean>
     
     <bean id="applicationUser" class="za.ac.wits.elen7045.group3.aps.domain.entities.Customer"/>
     <bean id="userCredentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials"/>

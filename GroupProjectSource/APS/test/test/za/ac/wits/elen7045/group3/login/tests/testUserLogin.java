@@ -37,6 +37,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.user.UserAuthentica
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 import za.ac.wits.elen7045.group3.aps.services.validation.LogonService;
+import za.ac.wits.elen7045.group3.aps.services.validation.LogonServiceImpl;
 
 public class testUserLogin {
 	private Customer customer;	
@@ -128,10 +129,12 @@ public class testUserLogin {
 			EncryptionModule encryptionModule = new EncryptionModuleImpl();
 			cred.setEncryptionModule(encryptionModule);
 			cred.encryptCredentials();
+			
+			LogonService logonService = new LogonServiceImpl(customerRepository);
 
 			User insertedUser = customerRepository.selectCustomer(customer);			
 			assertNotNull("Failed to Insert User", insertedUser);
-			assertTrue(new LogonService(customerRepository).validation(cred));
+			assertTrue(logonService.validation(cred));
 		} catch (Exception e) {			
 		e.printStackTrace();
 		}
