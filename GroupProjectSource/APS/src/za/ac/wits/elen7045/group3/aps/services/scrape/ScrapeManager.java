@@ -10,7 +10,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.entities.ScrapeRequest;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.SuitableForScrapeSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.BillingAccountSuitableForScrapeSpecification;
 
 public class ScrapeManager {
 	private ScrapeRequest scrapeRequest;
@@ -19,13 +19,13 @@ public class ScrapeManager {
 	private AbstractBillingAccountStatement scrapedStatement;
 	private StatementScrapedData scrapedXML;
 	// TODO depend on implementations here??
-	private SuitableForScrapeSpecification scrapeCriteria;
+	private BillingAccountSuitableForScrapeSpecification scrapeCriteria;
 	
 	
 	public ScrapeManager(ScrapeRequest scrapeRequest, String filePath){
 		this.scrapeRequest = scrapeRequest;
 		this.filePath = filePath;
-		scrapeCriteria = new SuitableForScrapeSpecification();
+		scrapeCriteria = new BillingAccountSuitableForScrapeSpecification();
 		this.billingCompany = new BillingCompany(scrapeRequest.getBillingCompany());
 	}
 	
@@ -41,13 +41,16 @@ public class ScrapeManager {
 					);
 			}
 		}
-		try{
+		try{ // what happens when in a loop and exception is thrown??
 		scrapedStatement = readScrapedResults(filePath);
 		
 		// successful scrape logic
 		}
 		catch(ScrapeErrorException e){
 			// error logic
+		}
+		catch(DataIntegrityException e){
+			// statement data error logic
 		}
 		catch(DuplicateDataException e){
 			// statement data error logic
@@ -61,7 +64,7 @@ public class ScrapeManager {
 	}
 	
 	private AbstractBillingAccountStatement readScrapedResults(String filePath) 
-			throws DuplicateDataException, ScrapeErrorException, VatCalculationException{
+			throws DataIntegrityException, DuplicateDataException, ScrapeErrorException, VatCalculationException{
 		
 		APSXMLMarshaller marshaller = new APSXMLMarshaller(filePath);
 		CompanyStatementType companyType = billingCompany.getCompanyType();

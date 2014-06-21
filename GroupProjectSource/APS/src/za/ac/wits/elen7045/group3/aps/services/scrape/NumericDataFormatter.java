@@ -9,8 +9,12 @@ public class NumericDataFormatter {
 		this.dataConverter = dataConverter;
 	}
 	
-	public String format(String value){
+	public double getNumericValue(String value) {
 		
+		return dataConverter.getNumericValue(value);
+	}
+	
+	public String getFormattedString(String value){
 		return dataConverter.getFormattedString(value);
 	}
 }
