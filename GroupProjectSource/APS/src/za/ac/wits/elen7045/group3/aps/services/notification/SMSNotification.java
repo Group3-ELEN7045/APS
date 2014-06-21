@@ -20,6 +20,12 @@ public class SMSNotification extends ConfirmationNotification{
 		System.out.println("Beep Beep  Beeep " + this.notificationData);
 		return false;
 	}
+
+	@Override
+	public String getNotification() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

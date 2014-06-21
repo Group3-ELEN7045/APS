@@ -19,5 +19,11 @@ public class EmailNotification extends ConfirmationNotification{
 		System.out.println("Sending email Natification " + notificationData);
 		return true;
 	}
+
+	@Override
+	public String getNotification() {
+		// TODO Auto-generated method stub
+		return null;
+	}
    
 }

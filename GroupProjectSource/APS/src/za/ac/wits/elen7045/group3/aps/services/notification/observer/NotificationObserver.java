@@ -5,7 +5,6 @@ package za.ac.wits.elen7045.group3.aps.services.notification.observer;
 
 import java.util.List;
 
-
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
 import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
@@ -23,6 +22,7 @@ public class NotificationObserver {
 	   notificationListenr.setSubject(notificationPublisher);
 	   notificationListenr.update(checkNotification);
 	   notificationPublisher.checkNotifications(checkNotification);
-	   return (List<ScrapeLogResult>) notificationPublisher.getResponse(notificationListenr);
+	   List gg = (List)notificationPublisher.getResponse(notificationListenr);
+	   return gg;
 	}
 }

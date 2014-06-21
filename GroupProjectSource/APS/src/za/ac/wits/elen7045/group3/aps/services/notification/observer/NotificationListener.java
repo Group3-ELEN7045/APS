@@ -30,7 +30,10 @@ public class NotificationListener implements Observer{
 		try {
 		    if(object instanceof NotificationCheck){
 		        NotificationCheck notificationCheckInternal = (NotificationCheck) object;
-			    notifications = scrapeResiltsRepository.getScrapeLogResult(notificationCheckInternal.getId(), null);
+		        ScrapeLogResult notification = new ScrapeLogResult();
+		        notification.setAccountNumber(notificationCheckInternal.getAccountNumber());
+		        notification.setNotificationType(notificationCheckInternal.getNotificationStatus());
+			    notifications = scrapeResiltsRepository.getScrapeLogResult(notification);
 			    listener.setResponse(notifications);
 			 }
 		} catch (DatabaseException e) {

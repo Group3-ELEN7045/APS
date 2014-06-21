@@ -3,6 +3,8 @@
  */
 package za.ac.wits.elen7045.group3.aps.services.notification;
 
+import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
+
 /**
  * @author SilasMahlangu
  *
@@ -18,14 +20,14 @@ public abstract class  ConfirmationNotification  implements Notification{
 	}
 
 	@Override
-	public boolean database(String notification) {
+	public boolean database(ScrapeLogResult notification) {
 		DatabaseNotification databaseNotification = new DatabaseNotification(notification);
 		return databaseNotification.sendNotification();
 	}
 
 	@Override
-	public boolean filesystem(String notification) {
-		FileNotification fileNotification = new FileNotification(notification);
+	public boolean filesystem(String notification,String filePath) {
+		FileNotification fileNotification = new FileNotification(notification,filePath);
 		return fileNotification.sendNotification();
 	}
 
@@ -35,9 +37,5 @@ public abstract class  ConfirmationNotification  implements Notification{
 		return smsNotification.sendNotification();
 	}
 
-	@Override
-	public Notification getNotification(Notification notification) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }  

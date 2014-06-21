@@ -3,22 +3,22 @@
  */
 package za.ac.wits.elen7045.group3.aps.services.specification.credentials;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.CapturedCredentialsVO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 
 /**
  * @author SilasMahlangu
  *
  */
-public class CapturedCredentialsSpecification extends ApplicationSpecification<CapturedCredentialsVO>{
+public class CapturedCredentialsSpecification extends ApplicationSpecification<CapturedCredentialsDTO>{
 	
-	private CapturedCredentialsVO logonCredentials;
+	private CapturedCredentialsDTO logonCredentials;
 		
-	public CapturedCredentialsSpecification(CapturedCredentialsVO logonCredentials){
+	public CapturedCredentialsSpecification(CapturedCredentialsDTO logonCredentials){
 		this.logonCredentials = logonCredentials;	
 	}
 
-	public boolean isSatisfiedBy(CapturedCredentialsVO capturedlogonCredentials) {
+	public boolean isSatisfiedBy(CapturedCredentialsDTO capturedlogonCredentials) {
 		return capturedlogonCredentials.getConfirmPasword().equals(capturedlogonCredentials.getPassword());
 	}
 
