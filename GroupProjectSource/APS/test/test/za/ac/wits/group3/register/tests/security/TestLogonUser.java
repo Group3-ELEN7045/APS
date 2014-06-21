@@ -23,11 +23,18 @@ import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactDetailsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.CapturedCredentialsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
+import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
+import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.notification.ConfirmationNotification;
 import za.ac.wits.elen7045.group3.aps.services.notification.FileNotification;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
@@ -47,90 +54,49 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
  *
  */
 public class TestLogonUser {
-    private Customer customer;
-	private CapturedCredentialsVO     logonCredentials;
-	private ApplicationContext     context;
-	private UserDataAccess         userDataRepository;
-	private CustomerRepositoryImpl mockUserDataAccess;	
-	private CustomerRepository     customerRepository;
-	private PaymentDetailsVO       paymentDetails;
-	private ContactDetailsVO   contactDetails;
-	private EncryptionModule       encryptionModule; 
-	private CredentialsVO          credentialVO;
-	private CredentialsVO          authenticationCredentialsVO;
-	private List<BillingAccount>          customerAccounts;
-	
+    private CustomerDTO customer;
+	private CapturedCredentialsDTO      capturedCredentialsDTO;
+	private PaymentDetailsDTO           paymentDetailsDTO;
+	private ContactInformationDTO       contactInforMationDTO;
+	private BillingAccountDTO           billingAccountDTO;
+	private List<BillingAccountDTO>     billingAccountDTOs;
+	private CredentialsDTO              userCredenials;
+	private ApplicationContext          context;
+	private UserDataAccess              userDataRepository;
+	private CustomerRepository          customerRepository;
+		
+	private EncryptionModule            encryptionModule; 
+	private UserManager	                userManager;
+	private UserManagerImpl             userManagerImpl;
+		
 	//Scenario Registration Customer 
 	@Before
 	public void init(){
-		context                     = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-		customer                    = context.getBean(Customer.class); 
-		logonCredentials            = context.getBean(CapturedCredentialsVO.class);
-		userDataRepository          = context.getBean(UserDataAccess.class);
-		encryptionModule            = context.getBean(EncryptionModule.class);
-		paymentDetails              = context.getBean(PaymentDetailsVO.class);
-		authenticationCredentialsVO = (CredentialsVO)context.getBean("credentials");
-		customerAccounts            = new ArrayList<BillingAccount>();
-		
-		
-		customer.setId((long) 1);
-		customer.setFirstName("Silas");
-		customer.setLastname("Mahlangu");
-		customer.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
-	   
-	    logonCredentials.setUserName("username");
-	    logonCredentials.setPassword("password");
-	    	    
-	    logonCredentials.setConfirmPasword("password");
-	    customer.setCredentials(logonCredentials);
-	    
-	    paymentDetails.setPaymentType(PaymentType.CREDIT_CARD.getPaymentType());
-	    paymentDetails.setValue("1234 1234 5678 5678");
-	    customer.setPaymentDetails(paymentDetails);
-	    
-	    mockUserDataAccess = new CustomerRepositoryImpl(userDataRepository);
-	    customerRepository = new APSMockObjectGenerator<CustomerRepositoryImpl>().mock(mockUserDataAccess);
+	    context                = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
+		customer               = context.getBean(CustomerDTO.class); 
+		userCredenials         = new CredentialsDTO(); 
+		userDataRepository     = context.getBean(UserDataAccess.class);
+		encryptionModule       = context.getBean(EncryptionModule.class);
+		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
+		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
+		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
+		customerRepository     = context.getBean(CustomerRepository.class);
+		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
+			
+	    customer.setEncryptionModule(encryptionModule);
+   	    userManagerImpl  = new UserManagerImpl(customerRepository);
+		userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
+		    
 	}
 	
-	@Test //if password and Confirm password are the same
-	public void testValidateCapturedCredentials(){
-		ApplicationSpecification<CapturedCredentialsVO> capturedCredentials = new CapturedCredentialsSpecification(logonCredentials);
-		assertTrue("Captured Password and Confirm Password are not the same",capturedCredentials.isSatisfiedBy(logonCredentials) );
-	}
-	
-	@Test //if parts user Details are Encrypted 
-	public void testValidatedUserEncryption(){
-		customer.setEncryptionModule(encryptionModule);
-		customer.encryptUserInformation();
-		Specification<Customer> userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
-		assertTrue("User details not encrypted properly", userDetailsSpecification.isSatisfiedBy(customer));
-	} 
-	
-	@Test //test if insertion happened successfult
-	public void testRegisterUser() throws DatabaseException{
-		customerRepository.updateUser(customer);
-		customer = customerRepository.selectCustomer(customer);
-	    assertNotNull("Failed to Insert User" , customer);
-	}
-	
-	//@Test
-	//public void testSendNotification() throws DatabaseException{
-	//	Customer insertedCustomer = customerRepository.selectCustomer(customer); 	
-	///	ApplicationSpecification<Customer> customerSpecificationById = new UserSpecificationByID(insertedCustomer);
-	//	if(customerSpecificationById.isSatisfiedBy(customer)){
-	//		ConfirmationNotification fileNotification = new FileNotification(ApplicationContants.ACCOUNT_STATUS+"="+customer.getCredentials().getAccountStatus());
-	//		ConfirmSendNotification filSendConfirmSpecification = new ConfirmSendNotification(fileNotification.sendNotification());
-    //			assertTrue("Failed to Send Account Activation Message", filSendConfirmSpecification.isSatisfiedBy(filSendConfirmSpecification));
-	//}
-    //}
-	
-	//This is the Test
     @Test
-    public void testCustomerAuthentication(){
-    	authenticationCredentialsVO.setUserName("username");
-	    authenticationCredentialsVO.setPassword("password");
-	    customer.getCredentials().setEncryptionModule(encryptionModule);
-	     ApplicationSpecification<CredentialsVO> autentication = new AuthenticationSpecification(customer.getCredentials());
-	    assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(authenticationCredentialsVO));
+    public void testCustomerAuthentication() throws DatabaseException {
+    	userCredenials.setUserName("username1");
+    	userCredenials.setPassword("password");
+    	CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
+    	authenticationCustomer.getCredentials().setEncryptionModule(encryptionModule);
+	    ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
+	    CredentialsDTO dbCredentials = authenticationCustomer.getCredentials();
+	    assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(dbCredentials));
     }
 }

@@ -4,63 +4,47 @@
  */
 package test.za.ac.wits.group3.domain.mock;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
-import za.ac.wits.elen7045.group3.aps.services.specification.user.UserSpecificationByID;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 /**
  * @author SilasMahlangu
  *
  */		
 public class MockUserDAOImpl implements UserDataAccess{
-    private static Map<Long, Customer> userDatabase = new HashMap<Long, Customer>();
-    private static Map<String, Customer> customerDatabase = new HashMap<String, Customer>();
- 
+    	 
 	public boolean updateUser(Customer customer) throws DatabaseException{
-		if(customer.getId() == null){
-			int newGeneratedId = userDatabase.size();
-			if(newGeneratedId == 0){
-			 ++newGeneratedId; //crate newID
-			}
-			customer.setId((long)newGeneratedId);
-		}
-		
-		if(!userDatabase.containsKey(customer.getId())){
-			userDatabase.put(customer.getId(), customer);
-			customerDatabase.put(customer.getCredentials().getUserName(), customer);
-			
-		}else{		  
-			userDatabase.remove(customer.getId());
-			customerDatabase.remove(customer.getId());
-			userDatabase.put(customer.getId(), customer);
-			customerDatabase.put(customer.getCredentials().getUserName(), customer);			
-		}
-		return true;
+	   //DI Inject This
+	   EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+	   entityManager.getTransaction().begin();
+	   Customer cist = entityManager.merge(customer);
+	   entityManager.getTransaction().commit();
+	   entityManager.close();
+       return true;
 	}
 	
 	public Customer selectCustomer(Customer customer) throws DatabaseException{
-		Customer customerSearch = null;
-		Specification speUserSpecification = new UserSpecificationByID(customer);
-		customerSearch =  userDatabase.get(customer.getId());
-		if(customerSearch != null && speUserSpecification.isSatisfiedBy(customerSearch)){
-			return customerSearch;		
-		}
-		throw new DatabaseException(ApplicationContants.USER_NOT_FOUND); 
+		//DI Inject This
+		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		 Customer customerResponse = entityManager.find(Customer.class,customer.getId());
+		 entityManager.close();
+		 return customerResponse;
 	}
+	
 	public Customer getCustomer(CredentialsVO credentilas) throws DatabaseException{
-		Customer customerSearch = null;
-		customerSearch =  customerDatabase.get(credentilas.getUserName());
-		if(customerSearch != null){
-			return customerSearch;		
-		}
-		throw new DatabaseException(ApplicationContants.USER_NOT_FOUND); 
+		//DI Inject This
+		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		 Query query = entityManager.createQuery ("SELECT customer FROM Customer customer WHERE customer.credentials.userName = ?1");
+		 query.setParameter (1, credentilas.getUserName());
+		 Customer custResult =(Customer) query.getSingleResult();
+		 entityManager.close();
+		 return custResult;
 	}
 	
 }
