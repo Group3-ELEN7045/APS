@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.interfaces.BillingAccountStatementRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountManager;
@@ -24,8 +24,8 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.User;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials;
-import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetails;
+import za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentialsVO;
+import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.StatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
@@ -43,12 +43,12 @@ public class testUserLogin {
 	// private UserDataAccess userDataRepository;
 	private CustomerRepositoryImpl mockUserDataAccess;
 	private CustomerRepository customerRepository;
-	private PaymentDetails paymentDetails;
+	private PaymentDetailsVO paymentDetails;
 	private EncryptionModule encryptionModule;
 	// private CredentialsVO credentialVO;
-	private LogonCredentials credentials;
+	private LogonCredentialsVO credentials;
 	private LogonService logonUserValidation;
-	private BillingAccountRepository billingAccountRepository;
+	private BillingAccountStatementRepository billingAccountRepository;
 	private BillingAccountRepositoryImpl billingAccountD;
 	private BillingAccountDataAccess billingDataAccess;
 
@@ -60,8 +60,8 @@ public class testUserLogin {
 		// logonCredentials = context.getBean(LogonCredentials.class);
 		userDataRepository = context.getBean(UserDataAccess.class);
 		encryptionModule = context.getBean(EncryptionModule.class);
-		paymentDetails = context.getBean(PaymentDetails.class);
-		credentials = context.getBean(LogonCredentials.class);
+		paymentDetails = context.getBean(PaymentDetailsVO.class);
+		credentials = context.getBean(LogonCredentialsVO.class);
 		billingAccountRepository = context
 				.getBean(BillingAccountRepositoryImpl.class);
 		billingDataAccess = context.getBean(BillingAccountDataAccess.class);
@@ -75,8 +75,7 @@ public class testUserLogin {
 		credentials.setUserName("username");
 		credentials.setPassword("password");
 		credentials.setConfirmPasword("password1");
-		credentials.setAccountStatus(StatusType.INACTIVE.getStatusType());
-		credentials.setEncryptionModule(encryptionModule);
+				credentials.setEncryptionModule(encryptionModule);
 		credentials.encryptCredentials();
 		customer.setCredentials(credentials);
 
@@ -152,14 +151,14 @@ public class testUserLogin {
 	 
 	 BillingAccount billingAccount = new BillingAccount();
 	 billingAccount.setAccountNumber("12345");
-	 billingAccount.setAccountStatus(StatusType.TRYING);
+	 billingAccount.setAccountStatus(StatusType.TRYING.getStatusType());
 	 billingAccount.setBillingCompanyName("Telcom");
 	 billingAccount.setCredentials(cred);
 	 accountList.add(billingAccount);
 	
 	 BillingAccount billingAccount2 = new BillingAccount();
 	 billingAccount2.setAccountNumber("123456");
-	 billingAccount2.setAccountStatus(StatusType.TRYING);
+	 billingAccount2.setAccountStatus(StatusType.TRYING.getStatusType());
 	 billingAccount2.setBillingCompanyName("Municipality");
 	 billingAccount2.setCredentials(cred2);
 	 accountList.add(billingAccount2);

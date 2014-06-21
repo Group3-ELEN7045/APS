@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -20,7 +19,7 @@ public class UserSpecificationByID extends ApplicationSpecification<Customer>{
 	}
 	
 	@Override
-	public boolean isSatisfiedBy(Customer customer) {
-		return (customer.getId() != null);
+	public boolean isSatisfiedBy(Customer customerParam) {
+		return (customerParam.getId() != null);
 	}
 }

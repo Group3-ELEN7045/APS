@@ -3,6 +3,9 @@ package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
@@ -29,9 +32,6 @@ public class User implements Serializable{
 	
 	/** The credentials. */
 	private CredentialsVO              credentials;
-	
-	
-	
 		
 	private String                    stringDateOfBirth;
 	
@@ -142,3 +142,4 @@ public class User implements Serializable{
 	}
 
 }
+

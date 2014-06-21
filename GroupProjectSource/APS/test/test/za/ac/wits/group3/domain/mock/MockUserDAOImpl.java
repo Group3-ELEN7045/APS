@@ -37,7 +37,7 @@ public class MockUserDAOImpl implements UserDataAccess{
 			customerDatabase.put(customer.getCredentials().getUserName(), customer);
 			return true;
 		}else{		  
-			throw new DatabaseException(ApplicationContants.USER_Dupicate); 
+			throw new DatabaseException(ApplicationContants.USER_DUPLICATE); 
 		}
 	}
 	

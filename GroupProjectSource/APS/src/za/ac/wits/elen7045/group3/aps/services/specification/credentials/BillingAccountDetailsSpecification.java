@@ -12,11 +12,15 @@ public class BillingAccountDetailsSpecification extends ApplicationSpecification
 		this.billingAccount = billingAccount;	
 	}
 
-	public boolean isSatisfiedBy(BillingAccount billingAccountParam) {
-     return((billingAccount.getAccountNumber().equals(billingAccountParam.getAccountNumber())) &&
-    		 (billingAccount.getBillingCompanyName().equals(billingAccountParam.getBillingCompanyName())) &&
-    		 (billingAccount.getCredentials().getUserName().equals(billingAccountParam.getCredentials().getUserName())) &&
-    		 (billingAccount.getCredentials().getPassword().equals(billingAccountParam.getCredentials().getPassword())));
+	public boolean isSatisfiedBy(BillingAccount billingAccount) {
+		if(billingAccount.getCredentials() != null){
+     return((billingAccount.getAccountNumber() != null) &&
+    		 (billingAccount.getCustomerId() != null) &&
+    		 (billingAccount.getBillingCompanyName() != null) &&
+    		 (billingAccount.getCredentials().getUserName() != null) &&
+    		 (billingAccount.getCredentials().getPassword() != null));
+		}
+		return false;
 	}
 
 }

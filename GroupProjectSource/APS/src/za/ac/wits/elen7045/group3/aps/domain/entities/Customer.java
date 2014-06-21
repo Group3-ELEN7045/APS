@@ -9,9 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.AccountDetailsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactInformationVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetails;
+import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
@@ -21,7 +20,6 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
  *
  */
 public class Customer extends User implements Serializable{
-	
 	/**
 	 * 
 	 */
@@ -29,43 +27,16 @@ public class Customer extends User implements Serializable{
 
 	private EncryptionModule encryptionModule;
 	
-	/** The account details. */
-	private List<AccountDetailsVO>     accountDetails = new ArrayList<AccountDetailsVO>();
-	
+	private BillingAccount     account = new BillingAccount();
 	/** The contact details. */
 	private List<ContactInformationVO> contactDetails = new ArrayList<ContactInformationVO>();
 	
-	private PaymentDetails           paymentDetails = new PaymentDetails();
+	private PaymentDetailsVO           paymentDetails = new PaymentDetailsVO();
 	
 	private List<BillingAccount> 	billingAccounts;
 	
 	/**
 	 * Gets the account details.
-	 *
-	 * @return the account details
-	 */
-	
-	public List<AccountDetailsVO> getAccountDetails() {
-		return accountDetails;
-	}
-
-	/**
-	 * Sets the account details.
-	 *
-	 * @param accountDetails the new account details
-	 */
-	public void setAccountDetails(List<AccountDetailsVO> accountDetails) {
-		this.accountDetails = accountDetails;
-	}
-	
-	/**
-	 * Gets the contact details.
-	 *
-	 * @return the contact details
-	 */
-	public List<ContactInformationVO> getContactDetails() {
-		return contactDetails;
-	}
 
 	/**
 	 * Sets the contact details.
@@ -76,11 +47,11 @@ public class Customer extends User implements Serializable{
 		this.contactDetails = contactDetails;
 	}
 
-	public PaymentDetails getPaymentDetails() {
+	public PaymentDetailsVO getPaymentDetails() {
 		return paymentDetails;
 	}
 
-	public void setPaymentDetails(PaymentDetails paymentDetails) {
+	public void setPaymentDetails(PaymentDetailsVO paymentDetails) {
 		this.paymentDetails = paymentDetails;
 	}
 	
@@ -92,7 +63,8 @@ public class Customer extends User implements Serializable{
 
 	public void setEncryptionModule(EncryptionModule encryptionModule) {
 		this.encryptionModule = encryptionModule;
-	}	
+
+	}
 		
 	public List<BillingAccount> getBillingAccounts() {
 		return billingAccounts;
@@ -101,7 +73,7 @@ public class Customer extends User implements Serializable{
 	public void setBillingAccounts(List<BillingAccount> billingAccounts) {
 		this.billingAccounts = billingAccounts;
 	}
-
+	
 	public Customer encryptUserInformation() {
 		String stringDatOfBirth = DateUtil.getDate(getDateOfBirth(), ApplicationContants.DATE_OF_BIRTH_FORMAT);
 		
@@ -112,7 +84,6 @@ public class Customer extends User implements Serializable{
 		setStringDateOfBirth(stringDatOfBirth);
 		setDateOfBirth(null);
 		getPaymentDetails().setValue(newPaymentDetails);
-		
 		
 		return this;
 	}
@@ -130,7 +101,6 @@ public class Customer extends User implements Serializable{
 		
 		paymentValue = encryptionModule.decrypt(paymentValue);
 		getPaymentDetails().setValue(paymentValue);
-		
 		return this;  
 	}
 }

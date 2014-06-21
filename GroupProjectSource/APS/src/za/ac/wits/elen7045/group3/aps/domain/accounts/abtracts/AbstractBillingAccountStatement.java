@@ -16,6 +16,7 @@ public abstract class  AbstractBillingAccountStatement {
 	String AccountDeductions="";
 	String AccountDiscount="";
 	String AccountVATAmount="";
+	
 	public String getAccountNumber() {
 		return AccountNumber;
 	}

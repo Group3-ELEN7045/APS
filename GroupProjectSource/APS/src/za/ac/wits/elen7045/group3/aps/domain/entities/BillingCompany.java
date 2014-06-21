@@ -1,14 +1,53 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
+import java.io.Serializable;
+import java.util.List;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.ComanyStatementType;
 
 /**
  * @author Livious
  *
  */
 
-public class BillingCompany {
+public class BillingCompany implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String companyName;
 	private String url;
+	private List<BillingAccount> billingAccounts; 
+	private ComanyStatementType companyType;
+	
+	
+	public BillingCompany(BillingCompany copy){
+		this.companyName = copy.getCompanyName();
+		this.companyType = copy.getCompanyType();
+		this.url = copy.getUrl();
+		this.billingAccounts = copy.getBillingAccounts();
+	}
+	
+	public BillingCompany(String companyName){
+		this.companyName = companyName;
+	}
+	
+	public List<BillingAccount> getBillingAccounts() {
+		return billingAccounts;
+	}
+	public void setBillingAccounts(List<BillingAccount> billingAccounts) {
+		this.billingAccounts = billingAccounts;
+	}
+	
+	public void addBillingAccounts(BillingAccount billingAccount){
+		billingAccounts.add(billingAccount);
+	}
+	public ComanyStatementType getCompanyType() {
+		return companyType;
+	}
+	public void setCompanyType(ComanyStatementType companyType) {
+		this.companyType = companyType;
+	}
+
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -21,4 +60,5 @@ public class BillingCompany {
 	public void setUrl(String url) {
 		this.url = url;
 	}	
+
 }

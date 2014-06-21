@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -21,10 +20,10 @@ private Customer customer;
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean isSatisfiedBy(Customer customerParam) {
-		return ((Base64.isArrayByteBase64(customer.getStringDateOfBirth().getBytes())
+	public boolean isSatisfiedBy(Customer customerParams) {
+		return ((Base64.isArrayByteBase64(customerParams.getStringDateOfBirth().getBytes())
 				 &&
-				(Base64.isArrayByteBase64(customer.getPaymentDetails().getValue().getBytes()))
+				(Base64.isArrayByteBase64(customerParams.getPaymentDetails().getValue().getBytes()))
 			   ));
 	}
 }

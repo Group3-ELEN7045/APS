@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -21,10 +20,11 @@ public class EncryptedCredentialsSpecification extends ApplicationSpecification<
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean isSatisfiedBy(CredentialsVO credentialsVO) {
-		return ((Base64.isArrayByteBase64(credentialsVO.getPassword().getBytes()))
+	public boolean isSatisfiedBy(CredentialsVO capturedlogonCredentials) {
+		
+		return ((Base64.isArrayByteBase64(capturedlogonCredentials.getPassword().getBytes()))
 				 &&
-				(Base64.isArrayByteBase64(credentialsVO.getUserName().getBytes()))
+				(Base64.isArrayByteBase64(capturedlogonCredentials.getUserName().getBytes()))
 			   );
 	}
 }
