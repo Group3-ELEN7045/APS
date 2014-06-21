@@ -14,37 +14,48 @@ public class StatementScrapedData {
 
 	public StatementScrapedData (){
 		dataPairs = new ArrayList<DataPair>();
+		this.baseURL = "";
+		this.date = "";
+		this.time = "";
+	}
+	
+	public StatementScrapedData(String baseURL, String date, 
+			String time, List<DataPair> datapairs){
+		this.baseURL = baseURL;
+		this.dataPairs = datapairs;
+		this.date = date;
+		this.time = time;
 	}
 	
 	public String getBaseURL() {
 		return baseURL;
 	}
 	
-	public void setBaseURL(String baseURL) {
+	/*public void setBaseURL(String baseURL) {
 		this.baseURL = baseURL;
-	}
+	}*/
 	
 	public String getDate() {
 		return date;
 	}
 	
-	public void setDate(String date) {
+	/*public void setDate(String date) {
 		this.date = date;
-	}
+	}*/
 	
 	public String getTime() {
 		return time;
 	}
 	
-	public void setTime(String time) {
+	/*public void setTime(String time) {
 		this.time = time;
-	}
+	}*/
 	
 	public List<DataPair> getDataPairList() {
 		return dataPairs;
 	}
 	
-	public void setDataPairList(List<DataPair> dp) {
+	/*public void setDataPairList(List<DataPair> dp) {
 		this.dataPairs = dp;
-	}
+	}*/
 }

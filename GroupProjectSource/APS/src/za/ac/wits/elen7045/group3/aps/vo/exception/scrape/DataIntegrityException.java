@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.exception.scrape;
 
 
 public class DataIntegrityException extends Exception {

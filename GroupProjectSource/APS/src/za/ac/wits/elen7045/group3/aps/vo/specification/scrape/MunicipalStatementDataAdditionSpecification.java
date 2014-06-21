@@ -11,7 +11,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 public class MunicipalStatementDataAdditionSpecification extends
 		ApplicationSpecification<AbstractBillingAccountStatement> {
 
-	private NumericDataFormatter numericDataFormatter;
+	private final NumericDataFormatter numericDataFormatter;
 	
 	public MunicipalStatementDataAdditionSpecification(){
 		// default the dataFormat conversion if none is specified

@@ -8,6 +8,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 
 public class DuplicateStatementDataSpecification
 	extends ApplicationSpecification<StatementScrapedData>{
+	
 	@Override
 	public boolean isSatisfiedBy(StatementScrapedData scrapedData) {
 		
