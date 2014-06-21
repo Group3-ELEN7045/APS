@@ -31,15 +31,8 @@ public class MockBillingDAOImpl implements BillingAccountDataAccess {
 				for (AbstractBillingAccountStatement statement : billingAccount.getBillingStatement()){
 					billingStatementsDatabase.put(statement.getAccountStatementMonth(), billingAccount);
 				}
-			}else{
-//				billingAccountsDatabase.remove(billingAccount.getAccountNumber());
-//				billingAccountsDatabase.put(billingAccount.getAccountNumber(), billingAccount);
-//								
-//				for (AbstractBillingAccountStatement statement : billingAccount.getBillingStatement()){
-//					billingStatementsDatabase.put(statement.getAccountStatementDate(), billingAccount);
-//				}
-				
-			}		
+			}
+					
 		}
 	
 public List<BillingAccount> getBillingAccounts(String accountNumber)

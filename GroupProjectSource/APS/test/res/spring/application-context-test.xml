@@ -13,8 +13,7 @@
     <bean id="userCredentials" class="za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials"/>
     <bean id="paymentDetails"  class="za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetails"/>   
     <bean id="encryptionModule" class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
-    <bean id="billingDataAccess"  class="test.za.ac.wits.group3.domain.mock.MockBillingDAOImpl" />
-     
+    
     <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
    		<constructor-arg ref="billingDataAccess"/>
    	</bean>	

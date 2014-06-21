@@ -21,7 +21,14 @@ public class BillingAccount implements Serializable{
 	private CredentialsVO credentials;
 	private List<AbstractBillingAccountStatement> billingStatement;
 	private AccountStatusType accountStatus;
-				
+	
+	public BillingAccount(String accountNumber){
+		if(accountNumber == null || accountNumber ==""){
+			throw new RuntimeException("Billing Account number cannot be null or empty String");
+		}
+		this.accountNumber = accountNumber;
+	}
+				 
 	public long getId() {
 		return id;
 	}
@@ -32,6 +39,9 @@ public class BillingAccount implements Serializable{
 		return accountNumber;
 	}
 	public void setAccountNumber(String accountNumber) {
+		if(accountNumber == null || accountNumber ==""){
+			throw new RuntimeException("Billing Account number cannot be null or empty String");
+		}
 		this.accountNumber = accountNumber;
 	}
 	
@@ -39,6 +49,15 @@ public class BillingAccount implements Serializable{
 		return credentials;
 	}
 	public void setCredentials(CredentialsVO credentials) {
+		if(credentials == null){
+			throw new RuntimeException("Credentials cannot be null");
+		}
+		if(credentials.getUserName()== null){
+			throw new RuntimeException("Username cannot be null");
+		}
+		if(credentials.getPassword() == null){
+			throw new RuntimeException("Password cannot be null");
+		}
 		this.credentials = credentials;
 	}	
 	public String getBillingCompanyName() {
@@ -51,9 +70,7 @@ public class BillingAccount implements Serializable{
 	public List<AbstractBillingAccountStatement> getBillingStatement() {
 		return billingStatement;
 	}
-	public void setBillingStatement(List<AbstractBillingAccountStatement> billingStatement) {
-		this.billingStatement = billingStatement;
-	}
+
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -65,12 +82,13 @@ public class BillingAccount implements Serializable{
 	}
 	public void setAccountStatus(AccountStatusType accountStatus) {
 		this.accountStatus = accountStatus;
-	}
-	
+	}	
 	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(billingStatement == null){
-			billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+		if(!(statement == null)){
+			if(billingStatement == null){
+				billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+			}
+			billingStatement.add(statement);
 		}
-		billingStatement.add(statement);
 	}
 }
