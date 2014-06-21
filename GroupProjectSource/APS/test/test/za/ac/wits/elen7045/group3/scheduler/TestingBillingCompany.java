@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.domain.scheduler;
+package test.za.ac.wits.elen7045.group3.scheduler;
  
 
 import java.util.List;
