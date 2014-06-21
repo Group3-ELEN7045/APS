@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
-import za.ac.wits.elen7045.group3.aps.services.scrape.DefaultNumericDataFormatStrategy;
-import za.ac.wits.elen7045.group3.aps.services.scrape.NumericDataFormatter;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.DefaultNumericDataFormatStrategy;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.NumericDataFormatter;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
 
 @RunWith(MockitoJUnitRunner.class)

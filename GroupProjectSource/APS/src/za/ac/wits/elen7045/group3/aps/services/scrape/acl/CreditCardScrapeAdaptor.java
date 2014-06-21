@@ -1,10 +1,12 @@
-package za.ac.wits.elen7045.group3.aps.services.scrape;
-
+package za.ac.wits.elen7045.group3.aps.services.scrape.acl;
+/**
+ * @author bakwanyana
+ */
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.phantomscraper.WebsiteScraper;
-public class MunicipalScrapeAdaptor implements ScrapeAdaptor{
-
-	private StatementScrapedData scrapedXML;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.StatementScrapedData;
+public class CreditCardScrapeAdaptor implements ScrapeAdaptor{
+	
 	@Override
 	public StatementScrapedData scrapeWebsite(String url, BillingAccount account) {
 		String filePath = "..\\..\\XML Files\\municipal.xml";
@@ -13,9 +15,7 @@ public class MunicipalScrapeAdaptor implements ScrapeAdaptor{
 				account.getAccountNumber(), 
 				account.getCredentials().getUserName(), 
 				account.getCredentials().getPassword());
-		APSXMLMarshaller marshaller = new APSXMLMarshaller(filePath);
-		scrapedXML = (StatementScrapedData)marshaller.convertScrapedXMLToObject(StatementScrapedData.class);
-		return scrapedXML;
+		return (StatementScrapedData)new XMLFileMarshall().convertScrapedDataToObject(StatementScrapedData.class, filePath);
 	}
 
 }

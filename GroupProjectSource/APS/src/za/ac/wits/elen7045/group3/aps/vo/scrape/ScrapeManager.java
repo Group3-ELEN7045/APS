@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.scrape;
 /**
  * @author bakwanyana
  */
@@ -10,6 +10,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.entities.ScrapeRequest;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
+import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLFileMarshall;
 import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DataIntegrityException;
 import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.DuplicateDataException;
 import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.ScrapeErrorException;
@@ -30,7 +31,7 @@ public class ScrapeManager {
 		this.scrapeRequest = scrapeRequest;
 		this.filePath = filePath;
 		scrapeCriteria = new BillingAccountSuitableForScrapeSpecification();
-		this.billingCompany = new BillingCompany(scrapeRequest.getBillingCompany());
+		this.billingCompany = new BillingCompany(scrapeRequest.getBillingCompany().getCompanyName());
 	}
 	
 	public void scrapeWebsite(){
@@ -70,11 +71,10 @@ public class ScrapeManager {
 	private AbstractBillingAccountStatement readScrapedResults(String filePath) 
 			throws DataIntegrityException, DuplicateDataException, ScrapeErrorException, VatCalculationException{
 		
-		APSXMLMarshaller marshaller = new APSXMLMarshaller(filePath);
 		CompanyStatementType companyType = billingCompany.getCompanyType();
-		scrapedXML = (StatementScrapedData)marshaller.convertScrapedXMLToObject(StatementScrapedData.class);
+		scrapedXML = (StatementScrapedData)new XMLFileMarshall().convertScrapedDataToObject(StatementScrapedData.class, filePath);
 		
-		ScrapedStatementAdaptor statementAdaptor = new ScrapedStatementAdaptor(scrapedXML, companyType, new DefaultNumericDataFormatStrategy());
+		ScrapedStatementConverter statementAdaptor = new ScrapedStatementConverter(scrapedXML, companyType, new DefaultNumericDataFormatStrategy());
 		
 		return statementAdaptor.getStatement();
 	}

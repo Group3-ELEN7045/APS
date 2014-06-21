@@ -1,20 +1,17 @@
-package za.ac.wits.elen7045.group3.aps.services.scrape;
+package za.ac.wits.elen7045.group3.aps.services.scrape.acl;
 /**
  * @author bakwanyana
  */
 import java.io.File;
+
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
 import com.thoughtworks.xstream.XStream;
 
-public class APSXMLMarshaller {
-	private  XStream xstream;
-	private String filePath;
-	public APSXMLMarshaller(String filePath){
-		xstream = new XStream();
-		this.filePath = filePath;
-	}
-	public Object convertScrapedXMLToObject(Class objectToConvert){
+public class XMLFileMarshall {
+	
+	public Object convertScrapedDataToObject(Class objectToConvert, String filePath){
+		XStream xstream = new XStream();
 		xstream.alias("scrape-session",objectToConvert);
 		xstream.alias("datapair",DataPair.class);
 		xstream.useAttributeFor(DataPair.class, "id");

@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
-import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.StatementScrapedData;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 
 public class DuplicateStatementDataSpecTest {
@@ -24,7 +24,6 @@ public class DuplicateStatementDataSpecTest {
 	
 	@Before
 	public void init(){
-		scrapedStatement = new StatementScrapedData();
 		
 		duplicateSpec = new DuplicateStatementDataSpecification();
 		
@@ -55,14 +54,15 @@ public class DuplicateStatementDataSpecTest {
 	
 	@Test
 	public void positiveDuplicateCorrelationTest(){
-		scrapedStatement.setDataPairList(dataPairsTrue);
+		
+		scrapedStatement = new StatementScrapedData(null,null,null,dataPairsTrue);
 	
 		assertTrue(duplicateSpec.isSatisfiedBy(scrapedStatement));
 	}
 	
 	@Test
 	public void negativeDuplicateCorrelationTest(){
-		scrapedStatement.setDataPairList(dataPairsFalse);
+		scrapedStatement = new StatementScrapedData(null,null,null,dataPairsFalse);
 		
 		assertFalse(duplicateSpec.isSatisfiedBy(scrapedStatement));
 	}

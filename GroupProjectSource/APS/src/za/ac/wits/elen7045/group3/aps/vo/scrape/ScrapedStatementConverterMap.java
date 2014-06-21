@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.scrape;
 /**
  * @author bakwanyana
  */
@@ -7,7 +7,7 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStateme
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
-public class ScrapedStatementAdaptorMap {
+public class ScrapedStatementConverterMap {
 	private StatementScrapedData statement;
 	
 	public TelcoStatement getTelcoStatement(StatementScrapedData statement, NumericDataFormatter numericData){

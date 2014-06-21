@@ -1,4 +1,4 @@
-package za.ac.wits.elen7045.group3.aps.services.scrape;
+package za.ac.wits.elen7045.group3.aps.vo.scrape;
 /**
  * @author bakwanyana
  */
@@ -18,7 +18,7 @@ import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalStatement
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementDataAdditionSpecification;
 
-public class ScrapedStatementAdaptor {
+public class ScrapedStatementConverter {
 	
 	private StatementScrapedData scrapedAccount;
 	private DuplicateStatementDataSpecification duplicateSpec;
@@ -30,7 +30,7 @@ public class ScrapedStatementAdaptor {
 	private GenericStatementDataAdditionSpecification genericAddSpec;
 	private Specification<AbstractBillingAccountStatement> stateMentAddSpec;
 	
-	public ScrapedStatementAdaptor(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType,
+	public ScrapedStatementConverter(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType,
 			INumericDataFormatStrategy numericConvertStrategy) 
 			throws DuplicateDataException, ScrapeErrorException{
 		
@@ -61,9 +61,15 @@ public class ScrapedStatementAdaptor {
 			return getTelcoStatement();
 	}
 	
-	private CreditCardStatement getCreditCardStatement() throws VatCalculationException{
+	private CreditCardStatement getCreditCardStatement() 
+			throws DataIntegrityException,VatCalculationException{
 		
-		CreditCardStatement creditAcc = new ScrapedStatementAdaptorMap().getCreditCardStatement(scrapedAccount,numericDataConverter);
+		CreditCardStatement creditAcc = new ScrapedStatementConverterMap().getCreditCardStatement(scrapedAccount,numericDataConverter);
+		
+		stateMentAddSpec = new GenericStatementDataAdditionSpecification();
+		
+		if(!stateMentAddSpec.isSatisfiedBy(creditAcc))
+			throw new DataIntegrityException(creditAcc.getAccountNumber());
 		
 		if (!vatSpec.isSatisfiedBy(creditAcc))
 			throw new VatCalculationException();
@@ -74,9 +80,9 @@ public class ScrapedStatementAdaptor {
 	private MunicipalStatement getMunicipalStatement() 
 			throws VatCalculationException, DataIntegrityException{
 		
-		MunicipalStatement municipalAcc = new ScrapedStatementAdaptorMap().getMunicipalStatement(scrapedAccount,numericDataConverter);
-		
+		MunicipalStatement municipalAcc = new ScrapedStatementConverterMap().getMunicipalStatement(scrapedAccount,numericDataConverter);
 		stateMentAddSpec = genericAddSpec.and(municipalAddSpec);
+		stateMentAddSpec = new GenericStatementDataAdditionSpecification();//stateMentAddSpec = genericAddSpec.and(municipalAddSpec);
 		
 		if (!stateMentAddSpec.isSatisfiedBy(municipalAcc))
 			throw new DataIntegrityException(municipalAcc.getAccountNumber());
@@ -90,7 +96,7 @@ public class ScrapedStatementAdaptor {
 	private TelcoStatement getTelcoStatement()
 			throws VatCalculationException, DataIntegrityException{
 		
-		TelcoStatement telcoAcc = new ScrapedStatementAdaptorMap().getTelcoStatement(scrapedAccount,numericDataConverter);
+		TelcoStatement telcoAcc = new ScrapedStatementConverterMap().getTelcoStatement(scrapedAccount,numericDataConverter);
 		stateMentAddSpec = genericAddSpec.and(telcoAddSpec);
 		
 		if (!stateMentAddSpec.isSatisfiedBy(telcoAcc))
