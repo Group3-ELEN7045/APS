@@ -38,7 +38,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.credentials.Capture
 import za.ac.wits.elen7045.group3.aps.services.specification.user.EncryptedUserInformationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
-import za.ac.wits.elen7045.group3.aps.services.validation.LogonService;
+import za.ac.wits.elen7045.group3.aps.services.validation.LogonServiceImpl;
 
 public class testAddBillingAccounts {
 	private Customer customer;	

@@ -69,7 +69,7 @@ public class testViewStatement {
 		billingAccount.setBillingCompanyName("Telcom");
 		billingAccount.setCredentials(credentials);
 		
-		BillingAccount billingAccount2 = new BillingAccount();
+	    billingAccount2 = new BillingAccount();
 		billingAccount2 = new BillingAccount();
 		billingAccount2.setAccountNumber("45454");
 		billingAccount2.setCustomerId(customer.getId());
@@ -140,18 +140,17 @@ public class testViewStatement {
 	 try {	 	 
 	 BillingAccountManager billingManager = new BillingAccountManagerImpl(billingAccountRepository);	 
 	 billingManager.addCustomerBillingAccounts(billingAccount2);
-	 BillingAccount billAccount = billingManager.getBillingStatement("45454", "August");
-	 //AbstractBillingAccountStatement = statement = billAccount.getBillingStatement();
-	 for(AbstractBillingAccountStatement statement : billAccount.getBillingStatement()){
-		 System.out.println("Account Number : " + billAccount.getAccountNumber());
-		 System.out.println("Account Type : " + billAccount.getBillingCompanyName());
+	 BillingAccount billAccount2 = billingManager.getBillingStatement("45454", "August");
+	 for(AbstractBillingAccountStatement statement : billAccount2.getBillingStatement()){
+		 System.out.println("Account Number : " + billAccount2.getAccountNumber());
+		 System.out.println("Account Type : " + billAccount2.getBillingCompanyName());
 		 System.out.println("Statement Number : " + statement.getAccountNumber());
 		 System.out.println("Closing Balance : " + statement.getAccountClosingBalance());
 		 System.out.println("Amount Deducted : " + statement.getAccountDeductions());
 		 System.out.println("Account Holder : " + statement.getAccountHolderName());
 		 System.out.println("Statement Period: " + statement.getAccountStatementMonth());
 	 }
-	 assertEquals(1,  billAccount.getBillingStatement().size()); 
+	 assertEquals(1,  billAccount2.getBillingStatement().size()); 
 	
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block

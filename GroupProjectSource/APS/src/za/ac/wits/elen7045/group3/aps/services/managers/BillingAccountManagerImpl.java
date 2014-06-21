@@ -61,8 +61,7 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 				e.printStackTrace();
 			}
 		}
-	}
-	
+	}	
 	public BillingAccount getBillingAccount(String accountNumber){
 		
 		BillingAccount billingAccount = null;		
