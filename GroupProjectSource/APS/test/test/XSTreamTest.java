@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import sun.swing.FilePane;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccounts;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccounts;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;

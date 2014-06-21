@@ -1,23 +1,13 @@
 package za.ac.wits.elen7045.group3.aps.domain.vo;
 
-public class DataPair {
-<<<<<<< HEAD
-	String id;
-	String text;
-	String value;
-=======
-	
-	String id;
-	String text;
-	String value;
-	
-	public DataPair(String id, String text, String value)
-	{
-		this.id = id;
-		this.text = text;
-		this.value = value;
-	}
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
+import java.io.Serializable;
+
+public class DataPair implements Serializable{
+
+	private String id;
+	private String text;
+	private String value;
+
 	public String getText() {
 		return text;
 	}
@@ -41,24 +31,18 @@ public class DataPair {
 	public String toString() {
 		return "DataPair [text=" + text + ", value=" + value + "]";
 	}
-	
+
 	public DataPair(DataPair copy)
 	{
 		this.id = copy.getId();
 		this.text = copy.getText();
 		this.value = copy.getValue();
 	}
-	
-<<<<<<< HEAD
+
 	public DataPair(String id, String text, String value)
 	{
 		this.id = id;
 		this.text = text;
 		this.value = value;
 	}
-=======
-
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
-
-
 }

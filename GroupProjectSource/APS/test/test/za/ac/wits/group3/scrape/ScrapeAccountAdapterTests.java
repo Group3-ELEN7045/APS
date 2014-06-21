@@ -13,9 +13,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;  
 
 import static org.mockito.Mockito.*;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardAccount;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalAccount;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoAccount;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.CreditCardStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.MunicipalStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.accounttypes.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedAccountAdapter;
 import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
@@ -23,9 +23,9 @@ import za.ac.wits.elen7045.group3.aps.services.util.AccountScrapedData;
 @RunWith(MockitoJUnitRunner.class)
 public class ScrapeAccountAdapterTests {
 	
-	TelcoAccount telcoObject;
-	CreditCardAccount creditCardObject;
-	MunicipalAccount municipalObject;
+	TelcoStatement telcoObject;
+	CreditCardStatement creditCardObject;
+	MunicipalStatement municipalObject;
 	@Mock AccountScrapedData scrapedAccount;
 	List<DataPair> dataPairs;
 	
@@ -66,7 +66,7 @@ public class ScrapeAccountAdapterTests {
 		
 		telcoObject = ScrapedAccountAdapter.getTelcoAccount(scrapedAccount);
 		
-		assertTrue(telcoObject.getClass().equals(TelcoAccount.class));
+		assertTrue(telcoObject.getClass().equals(TelcoStatement.class));
 		assertTrue("Account number error",telcoObject.getAccountNumber().equals(scrapedAccount.getDataPairList().get(0).getValue()));	
 		assertTrue("Account holder name",telcoObject.getAccountHolderName().equals(scrapedAccount.getDataPairList().get(1).getValue()));
 		assertTrue("Statement date error",telcoObject.getAccountStatementDate().equals(scrapedAccount.getDataPairList().get(2).getValue()));
@@ -103,7 +103,7 @@ public class ScrapeAccountAdapterTests {
 		
 		municipalObject = ScrapedAccountAdapter.getMunicipalAccount(scrapedAccount);
 		
-		assertTrue(municipalObject.getClass().equals(MunicipalAccount.class));
+		assertTrue(municipalObject.getClass().equals(MunicipalStatement.class));
 		assertTrue("Account number error",municipalObject.getAccountNumber().equals(scrapedAccount.getDataPairList().get(0).getValue()));	
 		assertTrue("Account holder name",municipalObject.getAccountHolderName().equals(scrapedAccount.getDataPairList().get(1).getValue()));
 		assertTrue("Statement date error",municipalObject.getAccountStatementDate().equals(scrapedAccount.getDataPairList().get(2).getValue()));
@@ -142,7 +142,7 @@ public class ScrapeAccountAdapterTests {
 		
 		creditCardObject = ScrapedAccountAdapter.getCreditCardAccount(scrapedAccount);
 		
-		assertTrue(creditCardObject.getClass().equals(CreditCardAccount.class));
+		assertTrue(creditCardObject.getClass().equals(CreditCardStatement.class));
 		assertTrue("Account number error",creditCardObject.getAccountNumber().equals(scrapedAccount.getDataPairList().get(0).getValue()));	
 		assertTrue("Account holder name",creditCardObject.getAccountHolderName().equals(scrapedAccount.getDataPairList().get(1).getValue()));
 		assertTrue("Statement date error",creditCardObject.getAccountStatementDate().equals(scrapedAccount.getDataPairList().get(2).getValue()));

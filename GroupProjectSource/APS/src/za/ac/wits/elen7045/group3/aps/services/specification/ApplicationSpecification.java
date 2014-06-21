@@ -1,31 +1,3 @@
-
-<<<<<<< HEAD
-/**
- * 
- */
-package za.ac.wits.elen7045.group3.aps.services.specification;
-
-/**
- * @author SilasMahlangu
- *
- */
-public abstract class ApplicationSpecification<T> implements Specification{
-     public abstract boolean isFulfiledBy(Object object);
-     
-     public Specification and(final Specification specification) {
-    	    return new AndEqualsSpecification(this, specification);
-    	  }
-
-    	  public Specification or(final Specification specification) {
-    	    return new OrEqualsSpecification(this, specification);
-    	  }
-
-    	  public Specification not(final Specification specification) {
-    	    return new NotEqualsSpecification(specification);
-    	  }
-
-}
-=======
 /**
  * 
  */
@@ -36,19 +8,18 @@ package za.ac.wits.elen7045.group3.aps.services.specification;
  *
  */
 public abstract class ApplicationSpecification<T> implements Specification<T>{
-     public abstract boolean isSatisfiedBy(T paramT);
+     public abstract boolean isSatisfiedBy(T tParam);
      
      public Specification<T> and(Specification<T> specification) {
-    	    return new AndEqualsSpecification(this, specification);
+    	    return new AndEqualsSpecification<T>(this, specification);
     	  }
 
     	  public Specification<T> or(Specification<T> specification) {
-    	    return new OrEqualsSpecification(this, specification);
+    	    return new OrEqualsSpecification<T>(this, specification);
     	  }
 
     	  public Specification<T> not(Specification<T> specification) {
-    	    return new NotEqualsSpecification(specification);
+    	    return new NotEqualsSpecification<T>(specification);
     	  }
 
 }
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e

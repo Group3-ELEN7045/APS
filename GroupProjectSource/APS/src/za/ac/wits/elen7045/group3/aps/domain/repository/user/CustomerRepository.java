@@ -1,27 +1,9 @@
 
-<<<<<<< HEAD
 /**
  * 
  */
 package za.ac.wits.elen7045.group3.aps.domain.repository.user;
 
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-
-/**
- * @author SilasMahlangu
- *
- */
-public interface CustomerRepository {
-   boolean updateUser(Customer customer) throws DatabaseException;
-   Customer selectCustomer(Customer customer) throws DatabaseException;
-  
-}
-=======
-/**
- * 
- */
-package za.ac.wits.elen7045.group3.aps.domain.repository.user;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
@@ -32,9 +14,9 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  *
  */
 public interface CustomerRepository {
-   boolean updateUser(Customer customer) throws DatabaseException;
-   Customer selectCustomer(Customer customer) throws DatabaseException;
-   Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
-   public void clearData(Customer customer) throws DatabaseException;
+   public boolean updateUser(Customer customer) throws DatabaseException;
+   public Customer selectCustomer(Customer customer) throws DatabaseException;
+   public Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
+   
 }
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
+

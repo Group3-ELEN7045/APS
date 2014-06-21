@@ -1,57 +1,25 @@
-
-<<<<<<< HEAD
 /**
  * 
  */
 package za.ac.wits.elen7045.group3.aps.services.specification.credentials;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials;
+import za.ac.wits.elen7045.group3.aps.domain.vo.CapturedCredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 
 /**
  * @author SilasMahlangu
  *
  */
-public class CapturedCredentialsSpecification extends ApplicationSpecification<LogonCredentials>{
+public class CapturedCredentialsSpecification extends ApplicationSpecification<CapturedCredentialsVO>{
 	
-	private LogonCredentials logonCredentials;
+	private CapturedCredentialsVO logonCredentials;
 		
-	public CapturedCredentialsSpecification(LogonCredentials logonCredentials){
+	public CapturedCredentialsSpecification(CapturedCredentialsVO logonCredentials){
 		this.logonCredentials = logonCredentials;	
 	}
 
-	public boolean isFulfiledBy(Object capturedlogonCredentials) {
-		return logonCredentials.getConfirmPasword().equals(logonCredentials.getPassword());
+	public boolean isSatisfiedBy(CapturedCredentialsVO capturedlogonCredentials) {
+		return capturedlogonCredentials.getConfirmPasword().equals(capturedlogonCredentials.getPassword());
 	}
 
 }
-=======
-/**
- * 
- */
-package za.ac.wits.elen7045.group3.aps.services.specification.credentials;
-
-import za.ac.wits.elen7045.group3.aps.domain.vo.LogonCredentials;
-import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-
-/**
- * @author SilasMahlangu
- *
- */
-public class CapturedCredentialsSpecification extends ApplicationSpecification<LogonCredentials>{
-	
-	private LogonCredentials logonCredentials;
-		
-	public CapturedCredentialsSpecification(LogonCredentials logonCredentials){
-		this.logonCredentials = logonCredentials;	
-	}
-   //public boolean isFulfiledBy(LogonCredentials logonCredentialsParam) {
-	//	return logonCredentials.getConfirmPasword().equals(logonCredentialsParam.getPassword());
-	//}
-@Override
-public boolean isSatisfiedBy(LogonCredentials logonCredentialsParam) {
-	return logonCredentials.getConfirmPasword().equals(logonCredentialsParam.getPassword());
-}
-
-}
->>>>>>> 334e171862bacecf51ba61bafe29223ce078425e
