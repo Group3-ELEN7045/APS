@@ -1,17 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="12.0">
   <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>369</x>
+      <y>396</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+PeakPeriod</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>495</x>
+      <y>99</y>
+      <w>171</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service&gt;&gt;
+BillingCompaniesManager</panel_attributes>
+    <additional_attributes/>
+  </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>234</x>
-      <y>81</y>
-      <w>118</w>
-      <h>116</h>
+      <x>747</x>
+      <y>315</y>
+      <w>116</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;45;99;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>369</x>
+      <y>306</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Aggregate Root&gt;&gt;
+BillingCompany</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1170</x>
+      <y>180</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Factory&gt;&gt;
+CustomerBuilder</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>126</x>
+      <y>189</y>
+      <w>44</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;117;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>468</x>
+      <y>396</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+MaintenaceWindow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>333</x>
+      <y>45</y>
+      <w>440</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>63;99;63;27</additional_attributes>
+    <additional_attributes>423;45;27;45</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -29,6 +112,157 @@ AccountStatus
 
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>990</x>
+      <y>81</y>
+      <w>106</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>54;99;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>531</x>
+      <y>108</y>
+      <w>106</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>54;72;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>180</x>
+      <y>297</y>
+      <w>206</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;189;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>45</x>
+      <y>72</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service&gt;&gt;
+SchedulingManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>18</x>
+      <y>81</y>
+      <w>107</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>27;99;90;27</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>675</x>
+      <y>279</y>
+      <w>333</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>270</y>
+      <w>261</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>405</x>
+      <y>315</y>
+      <w>143</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;126;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>792</x>
+      <y>180</y>
+      <w>171</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+eBillingAccountRepository</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>828</x>
+      <y>81</y>
+      <w>233</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>216;99;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>360</x>
+      <y>180</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+BillingCompanies
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1044</x>
+      <y>189</y>
+      <w>188</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>171;117;27;27</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -62,215 +296,37 @@ RegistrationManager
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>333</x>
-      <y>45</y>
-      <w>440</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>423;45;27;45</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1161</x>
-      <y>378</y>
-      <w>108</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
-APSCredentials
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>72</x>
+      <x>81</x>
       <y>81</y>
-      <w>118</w>
+      <w>106</w>
       <h>116</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>90;99;36;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>369</x>
-      <y>378</y>
-      <w>90</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
-PeakPeriod</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>81;99;27;27</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1188</x>
+      <x>396</x>
       <y>315</y>
       <w>44</w>
-      <h>80</h>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;63;27;27</additional_attributes>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>252</x>
-      <y>297</y>
-      <w>360</w>
-      <h>171</h>
-    </coordinates>
-    <panel_attributes>
-
-
-lt=.</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>27;27;27;81</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>9</x>
+      <x>801</x>
       <y>81</y>
-      <w>117</w>
+      <w>106</w>
       <h>116</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>36;99;99;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>981</x>
-      <y>72</y>
-      <w>144</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Service&gt;&gt;
-APSLoginManager
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>45</x>
-      <y>72</y>
-      <w>126</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Service&gt;&gt;
-SchedulingManager</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>108</x>
-      <y>180</y>
-      <w>108</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Repository&gt;&gt;
-Tasks
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>135</x>
-      <y>45</y>
-      <w>117</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>99;45;36;45</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>288</x>
-      <y>315</y>
-      <w>143</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>126;27;27;63</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>792</x>
-      <y>297</y>
-      <w>126</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
-eBillingAccount
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>99</x>
-      <y>387</y>
-      <w>108</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
-Retries
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>234</x>
-      <y>72</y>
-      <w>126</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Service&gt;&gt;
-ScrapingService</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>1161</x>
-      <y>81</y>
-      <w>118</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>63;99;63;27</additional_attributes>
+    <additional_attributes>54;99;54;27</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
@@ -287,6 +343,17 @@ lt=.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1188</x>
+      <y>315</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;63;27;27</additional_attributes>
+  </element>
+  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>495</x>
@@ -301,331 +368,13 @@ BillingCompanyBuilder</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>468</x>
-      <y>378</y>
-      <w>126</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
-MaintenaceWindow
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>396</x>
-      <y>189</y>
-      <w>44</w>
-      <h>134</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>27;117;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>756</x>
-      <y>72</y>
-      <w>216</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Service&gt;&gt;
-BillingAccountManager</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1008</x>
-      <y>180</y>
-      <w>144</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Repository&gt;&gt;
-Customers
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>360</x>
-      <y>180</y>
-      <w>126</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Repository&gt;&gt;
-BillingCompanies
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>495</x>
-      <y>99</y>
-      <w>171</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Service&gt;&gt;
-BillingCompaniesManager</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>522</x>
-      <y>108</y>
-      <w>118</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>63;72;63;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>747</x>
-      <y>315</y>
-      <w>116</w>
-      <h>62</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>27;45;99;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>819</x>
-      <y>423</y>
-      <w>126</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
-eBillingCredentials
-
-
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>828</x>
-      <y>81</y>
-      <w>233</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>216;99;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>1017</x>
-      <y>81</y>
-      <w>224</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>27;99;207;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>981</x>
-      <y>81</y>
-      <w>118</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>63;99;63;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1170</x>
-      <y>180</y>
-      <w>144</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Factory&gt;&gt;
-CustomerBuilder</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>1080</x>
-      <y>270</y>
-      <w>261</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>
-
-
-lt=.</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>0</x>
-      <y>180</y>
-      <w>99</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Factory&gt;&gt;
-TaskBuilder</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>126</x>
-      <y>324</y>
-      <w>44</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;27;63</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>648</x>
-      <y>180</y>
-      <w>117</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Factory&gt;&gt;
-StatementBuilder</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>99</x>
-      <y>306</y>
-      <w>108</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Aggregate Root&gt;&gt;
-ScheduledTask
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
       <x>270</x>
-      <y>378</y>
+      <y>396</y>
       <w>90</w>
       <h>36</h>
     </coordinates>
     <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
 BillingCycle</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>405</x>
-      <y>315</y>
-      <w>143</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;126;63</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>657</x>
-      <y>81</y>
-      <w>215</w>
-      <h>116</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>27;99;198;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>225</x>
-      <y>180</y>
-      <w>117</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Repository&gt;&gt;
-ScrapeLogResults</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>396</x>
-      <y>315</y>
-      <w>44</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;27;63</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>369</x>
-      <y>306</y>
-      <w>108</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Aggregate Root&gt;&gt;
-BillingCompany</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>126</x>
-      <y>189</y>
-      <w>44</w>
-      <h>134</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>27;117;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>684</x>
-      <y>360</y>
-      <w>171</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
-eBillingAccountStatement
-
-
-
-
-</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -648,51 +397,109 @@ Customer
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>180</x>
-      <y>297</y>
-      <w>206</w>
-      <h>44</h>
+      <x>126</x>
+      <y>324</y>
+      <w>44</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>27;27;189;27</additional_attributes>
+    <additional_attributes>27;27;27;63</additional_attributes>
   </element>
   <element>
-    <id>UMLUseCase</id>
+    <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>675</x>
-      <y>279</y>
-      <w>333</w>
-      <h>216</h>
+      <x>108</x>
+      <y>180</y>
+      <w>108</w>
+      <h>36</h>
     </coordinates>
-    <panel_attributes>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+Tasks
 
 
-lt=.</panel_attributes>
+
+
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>792</x>
+      <x>1008</x>
       <y>180</y>
-      <w>171</w>
+      <w>144</w>
       <h>36</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Repository&gt;&gt;
-eBillingAccountRepository</panel_attributes>
+Customers
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>99</x>
+      <y>387</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+Retries
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>792</x>
+      <x>657</x>
       <y>81</y>
-      <w>118</w>
+      <w>215</w>
       <h>116</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>63;99;63;27</additional_attributes>
+    <additional_attributes>27;99;198;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>513</x>
+      <y>342</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+LeadTime
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>144</x>
+      <y>45</y>
+      <w>107</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>90;45;27;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>234</x>
+      <y>72</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service&gt;&gt;
+ScrapingService</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -708,41 +515,6 @@ eBillingAccountRepository</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>891</x>
-      <y>297</y>
-      <w>269</w>
-      <h>44</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>252;27;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>792</x>
-      <y>189</y>
-      <w>118</w>
-      <h>125</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>63;108;63;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>1044</x>
-      <y>189</y>
-      <w>188</w>
-      <h>134</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>171;117;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
       <x>837</x>
       <y>315</y>
       <w>44</w>
@@ -754,6 +526,210 @@ eBillingAccountRepository</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
+      <x>891</x>
+      <y>297</y>
+      <w>269</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>252;27;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>189</y>
+      <w>44</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;117;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>99</x>
+      <y>306</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Aggregate Root&gt;&gt;
+ScheduledTask
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>792</x>
+      <y>297</y>
+      <w>126</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
+eBillingAccount
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1161</x>
+      <y>378</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+APSCredentials
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>225</x>
+      <y>180</y>
+      <w>117</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Repository&gt;&gt;
+ScrapeLogResults</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>180</y>
+      <w>99</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Factory&gt;&gt;
+TaskBuilder</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>684</x>
+      <y>360</y>
+      <w>171</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+eBillingAccountStatement
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>288</x>
+      <y>315</y>
+      <w>143</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>126;27;27;81</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>252</x>
+      <y>288</y>
+      <w>414</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>648</x>
+      <y>180</y>
+      <w>117</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Factory&gt;&gt;
+StatementBuilder</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>756</x>
+      <y>72</y>
+      <w>216</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service&gt;&gt;
+BillingAccountManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>981</x>
+      <y>72</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service&gt;&gt;
+APSLoginManager
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>450</x>
+      <y>297</y>
+      <w>80</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;63;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>423</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ValueObject&gt;&gt;
+eBillingCredentials
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
       <x>837</x>
       <y>315</y>
       <w>107</w>
@@ -761,5 +737,53 @@ eBillingAccountRepository</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>27;27;90;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>243</x>
+      <y>81</y>
+      <w>106</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>54;99;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1017</x>
+      <y>81</y>
+      <w>224</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>27;99;207;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>801</x>
+      <y>189</y>
+      <w>106</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>54;108;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1161</x>
+      <y>81</y>
+      <w>118</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>63;99;63;27</additional_attributes>
   </element>
 </diagram>
