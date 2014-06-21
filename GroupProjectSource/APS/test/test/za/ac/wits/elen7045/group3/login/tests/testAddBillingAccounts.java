@@ -38,7 +38,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.credentials.Capture
 import za.ac.wits.elen7045.group3.aps.services.specification.user.EncryptedUserInformationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
-import za.ac.wits.elen7045.group3.aps.services.validation.LogonServiceImpl;
+import za.ac.wits.elen7045.group3.aps.services.validation.LogonManagerImpl;
 
 public class testAddBillingAccounts {
 	private Customer customer;	
@@ -73,8 +73,7 @@ public class testAddBillingAccounts {
 		credentials.encryptCredentials();
 		customer.setCredentials(credentials);
 		
-		billingAccount = new BillingAccount();
-		billingAccount.setAccountNumber("12345");
+		billingAccount = new BillingAccount("12345");
 		billingAccount.setCustomerId(customer.getId());
 		billingAccount.setBillingCompanyName("Telcom");
 		billingAccount.setCredentials(credentials);

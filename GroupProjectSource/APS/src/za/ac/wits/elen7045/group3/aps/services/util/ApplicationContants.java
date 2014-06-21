@@ -9,6 +9,8 @@ public class ApplicationContants {
    public static final String USER_PASS_NO_MATCH = "Password and Confirm Password are not the same";
    public static final String USER_NOT_FOUND = "User cannot be found";
    public static final String USER_DUPLICATE = "Customer already exist";
+   public static final String USER_NAME = "Username cannot be null";
+   public static final String USER_PASSWORD = "Password cannot be null";
    public static final String BILLING_ACCOUNT_DETAILS = "Billing Account details Incorrect";
    public final static String DATE_OF_BIRTH_FORMAT = "dd/mm/yyyy";
    public static final String USER_CREDENTIALS_INCORRECT = "Credentials provided incorrect";

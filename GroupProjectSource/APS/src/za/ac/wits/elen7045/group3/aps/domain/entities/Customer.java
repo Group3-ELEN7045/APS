@@ -27,7 +27,7 @@ public class Customer extends User implements Serializable{
 
 	private EncryptionModule encryptionModule;
 	
-	private BillingAccount     account = new BillingAccount();
+	private BillingAccount     account = new BillingAccount("1234");
 	/** The contact details. */
 	private List<ContactInformationVO> contactDetails = new ArrayList<ContactInformationVO>();
 	

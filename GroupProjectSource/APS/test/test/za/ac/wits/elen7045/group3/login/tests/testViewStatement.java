@@ -63,15 +63,12 @@ public class testViewStatement {
 		credentials.encryptCredentials();
 		customer.setCredentials(credentials);
 		
-		billingAccount = new BillingAccount();
-		billingAccount.setAccountNumber("12345");
+		billingAccount = new BillingAccount("12345");		
 		billingAccount.setCustomerId(customer.getId());
 		billingAccount.setBillingCompanyName("Telcom");
 		billingAccount.setCredentials(credentials);
 		
-	    billingAccount2 = new BillingAccount();
-		billingAccount2 = new BillingAccount();
-		billingAccount2.setAccountNumber("45454");
+	    billingAccount2 = new BillingAccount("45454");
 		billingAccount2.setCustomerId(customer.getId());
 		billingAccount2.setBillingCompanyName("Municipal");
 		billingAccount2.setCredentials(credentials);
