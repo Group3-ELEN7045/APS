@@ -8,12 +8,13 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
    DuplicateStatementDataSpecTest.class,
-   MunicipalAdditionSpecTest.class,
-   VATCalculationSpecTest.class,
-   TelcoAdditionSpecTest.class,
+   MunicipalStatementDataAdditionSpecTest.class,
+   StatementVATCalculationSpecTest.class,
+   TelcoStatementDataAdditionSpecTest.class,
    ScrapeStatementAdaptorTests.class,
-   XMLReadTests.class,
-   SuitableForScrapeSpecTest.class
+   ScrapedXMLFileReadTests.class,
+   BillingAccountSuitableForScrapeSpecTest.class,
+   DuplicateStatementDataSpecTest.class
 })
 public class ScrapeTestSuite {   
 }  

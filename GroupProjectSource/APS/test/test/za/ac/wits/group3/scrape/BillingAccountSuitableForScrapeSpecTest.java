@@ -13,20 +13,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.SuitableForScrapeSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.BillingAccountSuitableForScrapeSpecification;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SuitableForScrapeSpecTest {
+public class BillingAccountSuitableForScrapeSpecTest {
 	
 	@Mock BillingAccount activeBillingAccount;
 	@Mock BillingAccount tryingBillingAccount;
 	@Mock BillingAccount inactiveBillingAccount;
-	private SuitableForScrapeSpecification scrapeSpec;
+	private BillingAccountSuitableForScrapeSpecification scrapeSpec;
 	
 	@Before
 	public void init(){
-		scrapeSpec = new SuitableForScrapeSpecification();
+		scrapeSpec = new BillingAccountSuitableForScrapeSpecification();
 		when(activeBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.ACTIVE);
 		when(tryingBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.TRYING);
 		when(inactiveBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.INACTIVE);

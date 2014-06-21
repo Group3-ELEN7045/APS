@@ -13,19 +13,21 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.VATCalculationSpecification;
+import za.ac.wits.elen7045.group3.aps.services.scrape.DefaultNumericDataFormatStrategy;
+import za.ac.wits.elen7045.group3.aps.services.scrape.NumericDataFormatter;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
 
 @RunWith(MockitoJUnitRunner.class)
-public class VATCalculationSpecTest {
+public class StatementVATCalculationSpecTest {
 	
-	VATCalculationSpecification vatSpec;
+	StatementVATCalculationSpecification vatSpec;
 	
 	@Mock MunicipalStatement trueStatement;
 	@Mock MunicipalStatement falseStatement;
 
 	@Before
 	public void init(){
-		vatSpec = new VATCalculationSpecification(14);
+		vatSpec = new StatementVATCalculationSpecification(14, new NumericDataFormatter(new DefaultNumericDataFormatStrategy()));
 		when(trueStatement.getAccountNewCharges()).thenReturn("R100");
 		when(trueStatement.getAccountVATAmount()).thenReturn("R14.00");
 		when(falseStatement.getAccountNewCharges()).thenReturn("R100");

@@ -13,7 +13,7 @@ import org.junit.Test;
 import za.ac.wits.elen7045.group3.aps.services.scrape.APSXMLMarshaller;
 import za.ac.wits.elen7045.group3.aps.services.scrape.StatementScrapedData;
 
-public class XMLReadTests {
+public class ScrapedXMLFileReadTests {
 	
 	String filePath;
 	XStream xstream;	

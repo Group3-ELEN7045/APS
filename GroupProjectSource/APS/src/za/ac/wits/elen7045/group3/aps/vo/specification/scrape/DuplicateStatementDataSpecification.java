@@ -14,6 +14,7 @@ public class DuplicateStatementDataSpecification
 		return !correlationErrorsExist(scrapedData);
 	}
 	
+	// method locates data pairs with identical ID, correlates only their value
 	private boolean correlationErrorsExist(StatementScrapedData scrapedData){
 		boolean flag = false;
 		for (int i = 0; i < scrapedData.getDataPairList().size(); i++){

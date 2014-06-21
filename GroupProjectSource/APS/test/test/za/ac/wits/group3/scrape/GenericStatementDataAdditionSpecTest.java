@@ -3,7 +3,7 @@ package test.za.ac.wits.group3.scrape;
  * @author bakwanyana
  */
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;    
+import static org.junit.Assert.*;   
 
 import org.junit.After;  
 import org.junit.Before;  
@@ -13,21 +13,20 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.*;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.GenericStatementDataAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementDataAdditionSpecification;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MunicipalAdditionSpecTest {
+public class GenericStatementDataAdditionSpecTest {
 	
-	MunicipalStatementAdditionSpecification municipalSpec;
-	VATCalculationSpecification vatSpec;
-	DuplicateStatementDataSpecification dupSpec;
-	@Mock MunicipalStatement trueStatement;
-	@Mock MunicipalStatement falseStatement;
+	GenericStatementDataAdditionSpecification dataSpec;
+	@Mock TelcoStatement trueStatement;
+	@Mock TelcoStatement falseStatement;
 	
 	@Before
 	public void init(){
 		
-		municipalSpec = new MunicipalStatementAdditionSpecification();
+		dataSpec = new GenericStatementDataAdditionSpecification();
 		
 		when(trueStatement.getAccountOpeningBalance()).thenReturn("R2000");
 		when(trueStatement.getAccountPaymentReceived()).thenReturn("R300");
@@ -36,25 +35,12 @@ public class MunicipalAdditionSpecTest {
 		when(trueStatement.getAccountDeductions()).thenReturn("R100");
 		when(trueStatement.getAccountTotalDue()).thenReturn("R1750");
 		
-		when(trueStatement.getElectricityCharges()).thenReturn("R50.50");
-		when(trueStatement.getGasCharges()).thenReturn("R49.50");
-		when(trueStatement.getSewerageCharges()).thenReturn("R70");
-		when(trueStatement.getRefuseCharges()).thenReturn("R10");
-		when(trueStatement.getWaterCharges()).thenReturn("R20");
-		
-		
 		when(falseStatement.getAccountOpeningBalance()).thenReturn("R2000");
 		when(falseStatement.getAccountPaymentReceived()).thenReturn("R300");
 		when(falseStatement.getAccountNewCharges()).thenReturn("R200");
 		when(falseStatement.getAccountDiscount()).thenReturn("R50");
 		when(falseStatement.getAccountDeductions()).thenReturn("R100");
 		when(falseStatement.getAccountTotalDue()).thenReturn("R1750.50");
-		
-		when(falseStatement.getElectricityCharges()).thenReturn("R50.50");
-		when(falseStatement.getGasCharges()).thenReturn("R49.50");
-		when(falseStatement.getSewerageCharges()).thenReturn("R70");
-		when(falseStatement.getRefuseCharges()).thenReturn("R10");
-		when(falseStatement.getWaterCharges()).thenReturn("R20.01");
 		
 	}
 	
@@ -67,8 +53,8 @@ public class MunicipalAdditionSpecTest {
 	@Test
 	public void testCorrectAddition(){
 		
-		assertTrue(municipalSpec.isSatisfiedBy(trueStatement));
-		assertFalse(municipalSpec.isSatisfiedBy(falseStatement));
+		assertTrue(dataSpec.isSatisfiedBy(trueStatement));
+		assertFalse(dataSpec.isSatisfiedBy(falseStatement));
 	}
 
 }
