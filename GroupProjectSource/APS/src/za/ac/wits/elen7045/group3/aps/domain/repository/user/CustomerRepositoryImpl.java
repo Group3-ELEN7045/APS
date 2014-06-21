@@ -16,9 +16,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 public class CustomerRepositoryImpl implements CustomerRepository{
 	private UserDataAccess userDatabase;
 	
-	public CustomerRepositoryImpl(){
-		
-	}
+	
 	public CustomerRepositoryImpl(UserDataAccess userDatabase){
 		this.userDatabase = userDatabase;
 	}

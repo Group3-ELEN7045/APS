@@ -3,13 +3,21 @@ package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 
+/**
+ * @author SilasMahlangu
+ *
+ */
+@MappedSuperclass
 public class User implements Serializable{
 	
 	/**
@@ -18,7 +26,6 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1244663388016048205L;
 
 	/** The id. */
-	
 	private Long                     id;
 	
 	/** The first name. */
@@ -35,12 +42,14 @@ public class User implements Serializable{
 		
 	private String                    stringDateOfBirth;
 	
-	
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID", unique = true, nullable = false)	
 	public Long getId() {
 		return id;
 	}
@@ -59,6 +68,7 @@ public class User implements Serializable{
 	 *
 	 * @return the first name
 	 */
+	@Column(name = "FIRST_NAME", nullable = false) 
 	public String getFirstName() {
 		return firstName;
 	}
@@ -77,6 +87,7 @@ public class User implements Serializable{
 	 *
 	 * @return the lastname
 	 */
+	@Column(name = "LAST_NAME", nullable = false)
 	public String getLastname() {
 		return lastname;
 	}
@@ -95,8 +106,9 @@ public class User implements Serializable{
 	 *
 	 * @return the date of birth
 	 */
+	@Column(name = "DATE_OF_BIRTH",nullable = true)
 	public Date getDateOfBirth() {
-		return dateOfBirth;
+		return new Date();
 	}
 	
 	/**
@@ -105,7 +117,7 @@ public class User implements Serializable{
 	 * @param dateOfBirth the new date of birth
 	 */
 	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+		this.dateOfBirth = new Date();
 	}
 	
 	/**
@@ -120,7 +132,7 @@ public class User implements Serializable{
 	 *
 	 * @param credentials the new credentials
 	 */
-
+    @Transient
 	public String getStringDateOfBirth() {
 		return stringDateOfBirth;
 	}
@@ -133,6 +145,7 @@ public class User implements Serializable{
 	   return this.id.equals(id);
     }
 	
+	@Embedded
 	public CredentialsVO getCredentials() {
 		return credentials;
 	}

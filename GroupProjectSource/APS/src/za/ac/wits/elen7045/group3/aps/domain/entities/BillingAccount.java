@@ -1,65 +1,77 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-
 
 /**
  * @author Livious
  *
  */
+@Entity
+@Table(name="BILLING_ACCOUNT")
 public class BillingAccount implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID", unique = true, nullable = false)	
 	private Long id;
 	private Long customerId;
 	private String accountNumber;
 	private String billingCompanyName;
+	private String billingCompanyType;
 	private CredentialsVO credentials;
-	private List<AbstractBillingAccountStatement> billingStatement;
-	private AccountStatusType accountStatus;
 	
-	public BillingAccount(String accountNumber){
-		if(accountNumber == null || accountNumber ==""){
-			throw new RuntimeException("Billing Account number cannot be null or empty String");
-		}
-		this.accountNumber = accountNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
+	private Customer customer;
+	//private List<AbstractBillingAccountStatement> billingStatement;
+	private String accountStatus;
+	
+	
+	public Customer getCustomer() {
+		return customer;
 	}
-				 
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Column(name = "ACCOUNT_NUMBER") 
 	public String getAccountNumber() {
 		return accountNumber;
 	}
 	public void setAccountNumber(String accountNumber) {
-		if(accountNumber == null || accountNumber ==""){
-			throw new RuntimeException("Billing Account number cannot be null or empty String");
-		}
 		this.accountNumber = accountNumber;
 	}
 	
+	@Embedded 
 	public CredentialsVO getCredentials() {
 		return credentials;
 	}
 	public void setCredentials(CredentialsVO credentials) {
-		if(credentials == null){
-			throw new RuntimeException("Credentials cannot be null");
-		}
-		if(credentials.getUserName()== null){
-			throw new RuntimeException("Username cannot be null");
-		}
-		if(credentials.getPassword() == null){
-			throw new RuntimeException("Password cannot be null");
-		}
 		this.credentials = credentials;
 	}	
+	
+	@Column(name = "BILLING_COMPANY_NAME")
 	public String getBillingCompanyName() {
 		return billingCompanyName;
 	}
@@ -67,28 +79,43 @@ public class BillingAccount implements Serializable{
 		this.billingCompanyName = billingCompanyName;
 	}
 	
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
-		return billingStatement;
-	}
-
+	//@LazyCollection(LazyCollectionOption.FALSE)
+	//@OneToMany(cascade=CascadeType.ALL)
+	//public List<AbstractBillingAccountStatement> getBillingStatement() {
+		//return billingStatement;
+	//}
+	//public void setBillingStatement(List<AbstractBillingAccountStatement> billingStatement) {
+	//	this.billingStatement = billingStatement;
+	//}
+	
+	@Column(name = "CUSTOMER_ID")
 	public Long getCustomerId() {
 		return customerId;
 	}
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	public AccountStatusType getAccountStatus() {
+	
+	@Column(name = "ACCOUNT_STATUS")
+	public String getAccountStatus() {
 		return accountStatus;
 	}
-	public void setAccountStatus(AccountStatusType accountStatus) {
+	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
-	}	
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(!(statement == null)){
-			if(billingStatement == null){
-				billingStatement = new ArrayList<AbstractBillingAccountStatement>();
-			}
-			billingStatement.add(statement);
-		}
+	}
+	
+	//public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+		//if(billingStatement == null){
+			//billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+	//	}
+		//billingStatement.add(statement);
+	//}
+	
+	@Column(name = "BILLING_COMPANY_TYPE")
+	public String getBillingCompanyType() {
+		return billingCompanyType;
+	}
+	public void setBillingCompanyType(String billingCompanyType) {
+		this.billingCompanyType = billingCompanyType;
 	}
 }

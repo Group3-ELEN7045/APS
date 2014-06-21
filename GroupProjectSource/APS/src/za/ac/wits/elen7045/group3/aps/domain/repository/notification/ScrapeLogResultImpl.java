@@ -24,13 +24,13 @@ public class ScrapeLogResultImpl implements ScrapeLogResultRepository{
 	@Override
 	public boolean updateScrapeLogResult(ScrapeLogResult notification)
 			throws DatabaseException {
-		return notificationDataAccess.updateNotification(notification);
+		return notificationDataAccess.updateScrapeLogResult(notification);
 	
 	}
 
 	@Override
-	public List<ScrapeLogResult> getScrapeLogResult(Long id, String status) throws DatabaseException {
-		return notificationDataAccess.getNotifications(id, status);
+	public List<ScrapeLogResult> getScrapeLogResult(ScrapeLogResult notification) throws DatabaseException {
+		return notificationDataAccess.getScrapeLogResults(notification);
 	}
 
 }

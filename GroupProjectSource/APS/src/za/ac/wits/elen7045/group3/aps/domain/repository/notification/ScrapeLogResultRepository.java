@@ -14,5 +14,5 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  */
 public interface ScrapeLogResultRepository {
     public boolean updateScrapeLogResult(ScrapeLogResult notification)throws DatabaseException;
-    public List<ScrapeLogResult> getScrapeLogResult(Long id,String status) throws DatabaseException;
+    public List<ScrapeLogResult> getScrapeLogResult(ScrapeLogResult notification) throws DatabaseException;
 }
