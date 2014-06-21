@@ -14,16 +14,15 @@ import java.io.Serializable;
 
 public class NotificationCheck implements Serializable{
 	
-	private Long id;
+	private String accountNumber;
 	private String notificationStatus;
-	
-	public Long getId() {
-		return id;
+		
+	public String getAccountNumber() {
+		return accountNumber;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
-	
 	public String getNotificationStatus() {
 		return notificationStatus;
 	}

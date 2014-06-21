@@ -1,29 +1,29 @@
 
 package za.ac.wits.elen7045.group3.aps.domain.vo;
 
-import java.io.IOException;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
-import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
-
+/**
+ * @author SilasMahlangu
+ *
+ */
+@Embeddable
 public class CredentialsVO{
 	
 	private String userName;
 	private String password;
-	private EncryptionModule encryptionModule;
-		
-
-	public void setEncryptionModule(EncryptionModule encryptionModule) {
-		this.encryptionModule = encryptionModule;
-	}
-
+	
+	@Column(name = "USER_NAME", nullable = false) 
 	public String getUserName() {
 		return userName;
 	}
-
+	
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
     
+	@Column(name = "PASSWORD", nullable = false) 
 	public String getPassword() {
 		return password;
 	}
@@ -32,19 +32,4 @@ public class CredentialsVO{
 		this.password = password;
 	}
 
-	public CredentialsVO encryptCredentials() {
-		String encUserName        = encryptionModule.encrypt(this.userName);
-		String encPassWordString  = encryptionModule.encrypt(this.password);
-		setPassword(encPassWordString);
-		setUserName(encUserName);
-		return this;
-	}
-	
-	public CredentialsVO decryptCredentals() throws IOException {
-		String encUserName        = encryptionModule.decrypt(this.userName);
-		String encPassWordString  = encryptionModule.decrypt(this.password);
-		setPassword(encPassWordString);
-		setUserName(encUserName);
-		return this;
-	}
 }

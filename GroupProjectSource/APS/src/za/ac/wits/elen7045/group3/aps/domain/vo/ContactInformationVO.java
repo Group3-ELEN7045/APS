@@ -2,6 +2,9 @@ package za.ac.wits.elen7045.group3.aps.domain.vo;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+@Embeddable
 public class ContactInformationVO implements Serializable{
 	
 	/**
@@ -11,6 +14,7 @@ public class ContactInformationVO implements Serializable{
 	private String contactType;
 	private String contactValue;
     
+	@Column(name = "CONTACT_VALUE")
 	public String getContactValue() {
 		return contactValue;
 	}
@@ -18,7 +22,8 @@ public class ContactInformationVO implements Serializable{
 	public void setContactValue(String contactValue) {
 		this.contactValue = contactValue;
 	}
-
+    
+	@Column(name = "CONTACT_TYPE") 
 	public String getContactType() {
 		return contactType;
 	}
