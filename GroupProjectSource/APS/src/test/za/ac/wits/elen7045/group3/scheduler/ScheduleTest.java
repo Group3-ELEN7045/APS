@@ -105,31 +105,29 @@ public class ScheduleTest extends TestCase {
 	}
 	@Test
 	public void testchecktimeslong() throws ParseException {
-       // long lstart;  
-        CheckTimes schedulertimes=new CheckTimes();
+       // long lstart;   
 		
         long lstart=1406524199000l;
         long lend=1406611299000l; 
         long lsche=1406584199000l; // between
         int returnvalue;
         
-        returnvalue=schedulertimes.comparetimes(lsche, lstart, lend);
-        assertEquals(returnvalue,0); 
+       // returnvalue=schedulertimes.comparetimes(lsche, lstart, lend);
+        //assertEquals(returnvalue,0); 
          
         lsche=1406404199000l; //before 
-        returnvalue=schedulertimes.comparetimes(lsche, lstart, lend);
-        assertEquals(returnvalue,2); 
+       // returnvalue=schedulertimes.comparetimes(lsche, lstart, lend);
+        //assertEquals(returnvalue,2); 
            
         lsche=1406781299000l;   //after 
-        returnvalue=schedulertimes.comparetimes(lsche, lstart, lend);
-        assertEquals(returnvalue,2);   
+       // returnvalue=schedulertimes.comparetimes(lsche, lstart, lend);
+        //assertEquals(returnvalue,2);   
 	}
 	
 	@Test
 	public void testchecktimesdates() throws ParseException {
 		String companyName="COJ";
-		BillingCompany billingCompany = new BillingCompany(companyName);
-        CheckTimes schedulertimes=new CheckTimes();
+		BillingCompany billingCompany = new BillingCompany(companyName); 
         int returnvalue;
          
         long lsche=1406404199000l;//1406530200000l
@@ -158,24 +156,24 @@ public class ScheduleTest extends TestCase {
 		      
 		       lsche=1406781299000l;   //after
 		        datesched=new Date(lsche); 
-		        returnvalue=schedulertimes.comparetimes(lsche, mybillingCycle.getStartDate(), mybillingCycle.getEndDate());
-		        assertEquals(returnvalue,2);     
+	//	        returnvalue=schedulertimes.comparetimes(lsche, mybillingCycle.getStartDate(), mybillingCycle.getEndDate());
+	//	        assertEquals(returnvalue,2);     
 			    
 			    lsche=1406281299000l;   //before
 			    datesched=new Date(lsche); 
-		        returnvalue=schedulertimes.comparetimes(lsche,mybillingCycle.getStartDate(), mybillingCycle.getEndDate());
-		        assertEquals(returnvalue,2);   
+	//	        returnvalue=schedulertimes.comparetimes(lsche,mybillingCycle.getStartDate(), mybillingCycle.getEndDate());
+	//	        assertEquals(returnvalue,2);   
 			     
 			    lsche=1406591299000l;   //between
 			    datesched=new Date(lsche); 
-		        returnvalue=schedulertimes.comparetimes(lsche,mybillingCycle.getStartDate(), mybillingCycle.getEndDate());
-		        assertEquals(returnvalue,0); 
-			    
+	//	        returnvalue=schedulertimes.comparetimes(lsche,mybillingCycle.getStartDate(), mybillingCycle.getEndDate());
+	//	        assertEquals(returnvalue,0); 
+	 		    
 
 			    lsche=1406671200000l;   //scheduletime
 			    datesched=new Date(lsche); 
-		        returnvalue=schedulertimes.comparetimes(lsche,mybillingCycle.getEndDate(), mybillingCycle.getEndDate());
-		        assertEquals(returnvalue,0);     
+		 //       returnvalue=schedulertimes.comparetimes(lsche,mybillingCycle.getEndDate(), mybillingCycle.getEndDate());
+		       // assertEquals(returnvalue,0);     
 			    
 	   
 	}
@@ -220,9 +218,13 @@ public class ScheduleTest extends TestCase {
 	 
 		  LegalTimes legality=new LegalTimes(billingCompany, lschedule);
 		  boolean isLegal=legality.IsLegal();
-		  System.out.println(isLegal);
-		  boolean isScheduleTime=legality.IsLegal(new Date(lschedule));
-		  System.out.println(isScheduleTime); 
+		  assertTrue(isLegal);
+		  boolean isScheduleTime=legality.IsLegal(new Date(lschedule)); 
+		  assertTrue(isLegal);
+		    lschedule=1401351200000l; //During Peak
+		    legality=new LegalTimes(billingCompany, lschedule);
+		     isLegal=legality.IsLegal();
+			  assertFalse(isLegal);
 	}
  
  
