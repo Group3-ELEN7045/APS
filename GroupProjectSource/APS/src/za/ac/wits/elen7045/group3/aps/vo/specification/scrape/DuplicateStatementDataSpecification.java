@@ -3,20 +3,20 @@ package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
  * @author bakwanyana
  */
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.StatementScrapedData;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 
 public class DuplicateStatementDataSpecification
-	extends ApplicationSpecification<StatementScrapedData>{
+	extends ApplicationSpecification<ScrapedResult>{
 	
 	@Override
-	public boolean isSatisfiedBy(StatementScrapedData scrapedData) {
+	public boolean isSatisfiedBy(ScrapedResult scrapedData) {
 		
 		return !correlationErrorsExist(scrapedData);
 	}
 	
 	// method locates data pairs with identical ID, correlates only their value
-	private boolean correlationErrorsExist(StatementScrapedData scrapedData){
+	private boolean correlationErrorsExist(ScrapedResult scrapedData){
 		boolean flag = false;
 		for (int i = 0; i < scrapedData.getDataPairList().size(); i++){
 			for (int j = 0; j < scrapedData.getDataPairList().size(); j++){

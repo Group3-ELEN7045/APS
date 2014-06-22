@@ -1,7 +1,7 @@
 /**
  * 
  */
-package za.ac.wits.elen7045.group3.aps.services.notification.observer;
+package za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -43,11 +43,11 @@ public class BillingAccount implements Serializable{
 	private String billingCompanyName;
 	private String billingCompanyType;
 	private CredentialsVO credentials;
+	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 	
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
-	private Customer customer;
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+	private Customer customer;	 
 	private String accountStatus;
 		
 	public Customer getCustomer() {
@@ -93,7 +93,6 @@ public class BillingAccount implements Serializable{
 		return billingStatement;
 	}
 		
-	@Column(name = "CUSTOMER_ID")
 	public Long getCustomerId() {
 		return customerId;
 	}

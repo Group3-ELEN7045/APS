@@ -32,7 +32,7 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	}
 
 	@Override
-	public BillingAccount getBillingAccount(BillingAccount accountNumberSearch)	throws DatabaseException {
+	public BillingAccount getBillingAccount(String accountNumberSearch)	throws DatabaseException {
 		return dataAccess.getBillingAccount(accountNumberSearch);
 	}
 

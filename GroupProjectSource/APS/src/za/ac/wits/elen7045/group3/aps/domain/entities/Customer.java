@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import za.ac.wits.elen7045.group3.aps.domain.vo.ContactInformationVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
 
@@ -30,7 +31,7 @@ public class Customer extends User implements Serializable{
 	
 	private List<BillingAccount> 	billingAccounts;
 	
-	private ContactInformationDTO contactDetails = new ContactInformationDTO();
+	private ContactInformationVO contactDetails = new ContactInformationVO();
 	
 	@Embedded
 	public PaymentDetailsVO getPaymentDetails() {
@@ -51,11 +52,11 @@ public class Customer extends User implements Serializable{
 	}
     
 	@Embedded
-	public ContactInformationDTO getContactDetails() {
+	public ContactInformationVO getContactDetails() {
 		return contactDetails;
 	}
 
-	public void setContactDetails(ContactInformationDTO contactDetails) {
+	public void setContactDetails(ContactInformationVO contactDetails) {
 		this.contactDetails = contactDetails;
 	}
 }

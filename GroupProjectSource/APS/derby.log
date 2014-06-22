@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 ----------------------------------------------------------------
 2014-06-22 10:23:47.157 GMT:
  Booting Derby version The Apache Software Foundation - Apache Derby - 10.5.1.1 - (764942): instance a816c00e-0146-c31a-6b98-000002e704f8
 on database directory C:\Users\livious\MyDBC  
 
 Database Class Loader started - derby.database.classpath=''
+=======
+----------------------------------------------------------------
+2014-06-22 08:39:39.508 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.5.1.1 - (764942): instance a816c00e-0146-c2bb-160a-000000af9908
+on database directory C:\Users\SilasMahlangu\MyAPSDB  
+
+Database Class Loader started - derby.database.classpath=''
+>>>>>>> 0813fe42daa5c8280d1315e7ee8c7f01558e6b4b
