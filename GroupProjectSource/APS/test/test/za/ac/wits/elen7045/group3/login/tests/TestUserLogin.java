@@ -54,8 +54,7 @@ public class TestUserLogin {
 		userCredenials         = new CredentialsDTO(); 
 		userDataRepository     = context.getBean(UserDataAccess.class);
 		encryptionModule       = context.getBean(EncryptionModule.class);
-		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
-		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
+		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);		
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();

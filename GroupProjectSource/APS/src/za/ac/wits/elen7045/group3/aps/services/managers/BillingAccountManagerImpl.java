@@ -60,19 +60,19 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 	}
 
 	@Override
-	public BillingAccount getBillingAccount(String accountNumber)throws DatabaseException {
+	public BillingAccountDTO getBillingAccount(String accountNumber)throws DatabaseException {
 		if(accountNumber == null){
 			throw new DatabaseException("Account Number cannot be null account should have an ID please fix");
 		}
 		
 		DozerBeanMapper dozer = new DozerBeanMapper();
 		entityBillingAccount = billingRepository.getBillingAccount(accountNumber);
-		if(entityBillingAccount == null){
+		if(!(entityBillingAccount == null)){
 			billingAccountdto = new BillingAccountDTO(entityBillingAccount.getAccountNumber());
 			dozer.map(billingAccountdto, entityBillingAccount);
-		}
-							
-		return billingRepository.getBillingAccount(accountNumber);
+			return billingAccountdto;
+		}							
+		return null;
 	}
 
 	@Override

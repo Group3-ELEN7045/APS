@@ -17,10 +17,9 @@ public class BillingAccountDTO implements Serializable{
 	private Long id;
 	private Long customerId;
 	private String accountNumber;
-	private String billingCompanyName;
-	private String billingCompanyType;
+	private String companyUrl;	
 	private CredentialsDTO credentials;
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+//	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 	private String accountStatus;
 	
 	public BillingAccountDTO(String accountNumber){
@@ -47,18 +46,30 @@ public class BillingAccountDTO implements Serializable{
 		return credentials;
 	}
 	public void setCredentials(CredentialsDTO credentials) {
+		if(credentials == null){
+			new RuntimeException("Billing account should have credentials");
+		}
+		if(credentials.getUserName() == null){
+			new RuntimeException("Username cannot be null");
+		}
+		if(credentials.getPassword() ==null){
+			new RuntimeException("Password cannot be null");
+		}
 		this.credentials = credentials;
 	}	
-	public String getBillingCompanyName() {
-		return billingCompanyName;
-	}
-	public void setBillingCompanyName(String billingCompanyName) {
-		this.billingCompanyName = billingCompanyName;
-	}
 	
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
-		return billingStatement;
-	}	
+	
+public String getCompanyUrl() {
+		return companyUrl;
+	}
+
+	public void setCompanyUrl(String companyUrl) {
+		this.companyUrl = companyUrl;
+	}
+
+	//	public List<AbstractBillingAccountStatement> getBillingStatement() {
+//		return billingStatement;
+//	}	
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -72,17 +83,12 @@ public class BillingAccountDTO implements Serializable{
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-	public String getBillingCompanyType() {
-		return billingCompanyType;
-	}
-	public void setBillingCompanyType(String billingCompanyNameType) {
-		this.billingCompanyType = billingCompanyType;
-	}
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(!(statement == null)){
-			if(!billingStatement.contains(statement)){
-				billingStatement.add(statement);
-			}					
-		}		
-	}
+	
+//	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+//		if(!(statement == null)){
+//			if(!billingStatement.contains(statement)){
+//				billingStatement.add(statement);
+//			}					
+//		}		
+//	}
 }

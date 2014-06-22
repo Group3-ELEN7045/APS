@@ -1,10 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -14,13 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 
 /**
@@ -40,11 +32,11 @@ public class BillingAccount implements Serializable{
 	private Long id;
 	private Long customerId;
 	private String accountNumber;
-	private String billingCompanyName;
-	private String billingCompanyType;
+	private String companyUrl;	
 	private CredentialsVO credentials;
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
-	
+
+//	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
 	private Customer customer;	 
@@ -78,21 +70,14 @@ public class BillingAccount implements Serializable{
 	public void setCredentials(CredentialsVO credentials) {
 		this.credentials = credentials;
 	}	
-	
-	@Column(name = "BILLING_COMPANY_NAME")
-	public String getBillingCompanyName() {
-		return billingCompanyName;
-	}
-	public void setBillingCompanyName(String billingCompanyName) {
-		this.billingCompanyName = billingCompanyName;
-	}
-	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade=CascadeType.ALL)
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
-		return billingStatement;
-	}
+
 		
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(cascade=CascadeType.ALL)
+//	public List<AbstractBillingAccountStatement> getBillingStatement() {
+//		return billingStatement;
+//	}
+
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -108,19 +93,18 @@ public class BillingAccount implements Serializable{
 		this.accountStatus = accountStatus;
 	}
 	
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(!(statement ==null)){
-			if(!billingStatement.contains(statement)){
-				billingStatement.add(statement);	
-			}		
-		}
+
+//	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+//		if(!(statement ==null)){
+//			if(!billingStatement.contains(statement)){
+//				billingStatement.add(statement);	
+//			}		
+//		}
+//	}
+	public String getCompanyUrl() {
+		return companyUrl;
 	}
-	
-	@Column(name = "BILLING_COMPANY_TYPE")
-	public String getBillingCompanyType() {
-		return billingCompanyType;
-	}
-	public void setBillingCompanyType(String billingCompanyType) {
-		this.billingCompanyType = billingCompanyType;
+	public void setCompanyUrl(String companyUrl) {
+		this.companyUrl = companyUrl;
 	}
 }
