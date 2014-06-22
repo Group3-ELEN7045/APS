@@ -10,24 +10,39 @@ import org.junit.After;
 import org.junit.Before;  
 import org.junit.Test;  
 
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
+import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.*;
+import za.ac.wits.elen7045.group3.aps.services.scraper.ScrapeResult;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 public class ScrapeAdaptorTests {
 	
 	String filePath;
 	XStream xstream;	
-	ScrapedResult statementScrapedData;
+	ScrapeResult statementScrapedData;
 	TelcoScrapeAdaptor telcoScrapeAdaptor;
 	MunicipalScrapeAdaptor munipalScrapeAdaptor;
 	CreditCardScrapeAdaptor crediCardScrapeAdapter;
+	
+	BillingAccount billingAccount;
+	BillingCompany billingCo;
+	
 	@Before
 	public void init(){
 		xstream = new XStream();
-		statementScrapedData = new ScrapedResult(null,null,null,null);	
+		statementScrapedData = new ScrapeResult();	
 		telcoScrapeAdaptor = new TelcoScrapeAdaptor();
 		munipalScrapeAdaptor = new MunicipalScrapeAdaptor();
 		crediCardScrapeAdapter = new CreditCardScrapeAdaptor();
+		
+		billingCo = new BillingCompany("JoburgMunicipality");
+		billingCo.setURL("http:////localhost/APS/municipal.xml");
+		billingAccount = new BillingAccount(1L,98986L,"9098777546");
+		billingAccount.setCredentials(new CredentialsVO());
+		billingAccount.setCompanyUrl("municipal.xml");
+		billingCo.addBillingAccounts(billingAccount);
 		
 	}
 	@After
@@ -38,7 +53,9 @@ public class ScrapeAdaptorTests {
 	
 	@Test
 	public void testReadScrapeAdaptorForTelcoAccount(){
-		statementScrapedData = telcoScrapeAdaptor.scrapeWebsite(null, null);
+
+		statementScrapedData = telcoScrapeAdaptor.scrapeWebsite(billingAccount.getCompanyUrl(), billingAccount.getCredentials());
+		
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));
@@ -48,7 +65,9 @@ public class ScrapeAdaptorTests {
 
 	@Test
 	public void testReadScrapeAdaptorForMunicipalAccount(){
-		statementScrapedData = munipalScrapeAdaptor.scrapeWebsite(null, null);
+
+		statementScrapedData = munipalScrapeAdaptor.scrapeWebsite(billingAccount.getCompanyUrl(), billingAccount.getCredentials());
+		
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));	
@@ -57,7 +76,9 @@ public class ScrapeAdaptorTests {
 	
 	@Test
 	public void testReadScrapeAdaptorForCreditCardAccount(){
-		statementScrapedData = crediCardScrapeAdapter.scrapeWebsite(null, null);
+
+		statementScrapedData = crediCardScrapeAdapter.scrapeWebsite(billingAccount.getCompanyUrl(), billingAccount.getCredentials());
+		
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));

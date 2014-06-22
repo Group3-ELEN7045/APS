@@ -1,15 +1,16 @@
 package za.ac.wits.elen7045.group3.aps.vo.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.services.scraper.ScrapeResult;
 
 public class TelcoStatementConverter {
-	private ScrapedResult scrapedStatement;
+	private ScrapeResult scrapedStatement;
 	//private NumericDataFormatter numericDataFormat;
 	//private String [] eligibleID = {"006","008","009","010","011","012","013","014","016","017"};
 	// TODO numeric formatting
 	
-	public TelcoStatementConverter(ScrapedResult scrapedStatement){
-		this.scrapedStatement = scrapedStatement;
+	public TelcoStatementConverter(ScrapeResult scrapedStatement2){
+		this.scrapedStatement = scrapedStatement2;
 	}
 	
 	public TelcoStatement getTelcoStatement(){

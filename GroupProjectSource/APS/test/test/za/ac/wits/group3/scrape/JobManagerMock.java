@@ -1,5 +1,10 @@
 package test.za.ac.wits.group3.scrape;
 
+/**
+ * @author boitumelo
+ * 
+ */
+
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
@@ -14,22 +19,19 @@ public class JobManagerMock {
 	public JobManagerMock() {
 		BillingAccount billingAccount;
 		BillingCompany billingCo = new BillingCompany("JoburgMunicipality");
-		//home/boitumelo/git/APS/GroupProjectSource/APS
 		billingCo.setURL("file:///municipal.xml");
 		
 		billingAccount = new BillingAccount(1L,98986L,"9098777546");
 		billingAccount.setCredentials(new CredentialsVO());
-		billingAccount.setCompanyUrl(billingCo.getUrl());
+		billingAccount.setCompanyUrl("municipal.xml");
 		billingCo.addBillingAccounts(billingAccount);
 		
 		billingAccount = new BillingAccount(2L,98654L,"9098666546");
 		billingAccount.setCredentials(new CredentialsVO());
-		billingAccount.setCompanyUrl(billingCo.getUrl());
+		billingAccount.setCompanyUrl("municipal.xml");
 		billingCo.addBillingAccounts(billingAccount);
 		
-		ScraperStrategy scraper = new MunicipalScrapeStrategy(billingAccount);
-		//scrapeRequest = new ScrapeRequest("1", billingCo, scraper);
-		
+		ScraperStrategy scraper = new MunicipalScrapeStrategy(billingAccount);	
 		sm = new ScrapeManager(scraper);
 	}
 
