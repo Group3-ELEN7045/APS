@@ -11,20 +11,20 @@ import org.junit.Before;
 import org.junit.Test;  
 
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.*;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.StatementScrapedData;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 public class ScrapeAdaptorTests {
 	
 	String filePath;
 	XStream xstream;	
-	StatementScrapedData statementScrapedData;
+	ScrapedResult statementScrapedData;
 	TelcoScrapeAdaptor telcoScrapeAdaptor;
 	MunicipalScrapeAdaptor munipalScrapeAdaptor;
 	CreditCardScrapeAdaptor crediCardScrapeAdapter;
 	@Before
 	public void init(){
 		xstream = new XStream();
-		statementScrapedData = new StatementScrapedData(null,null,null,null);	
+		statementScrapedData = new ScrapedResult(null,null,null,null);	
 		telcoScrapeAdaptor = new TelcoScrapeAdaptor();
 		munipalScrapeAdaptor = new MunicipalScrapeAdaptor();
 		crediCardScrapeAdapter = new CreditCardScrapeAdaptor();

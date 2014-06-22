@@ -4,7 +4,7 @@ package za.ac.wits.elen7045.group3.aps.services.scrape.acl;
  */
 import java.io.File;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
 
 import com.thoughtworks.xstream.XStream;
 
