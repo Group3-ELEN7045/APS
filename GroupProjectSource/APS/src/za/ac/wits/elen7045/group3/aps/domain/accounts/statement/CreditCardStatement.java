@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
-
+/**
+ * @author boitumelo
+ */
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 
