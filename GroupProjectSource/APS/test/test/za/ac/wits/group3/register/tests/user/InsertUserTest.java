@@ -67,10 +67,10 @@ public class InsertUserTest {
 		userDataRepository     = context.getBean(UserDataAccess.class);
 		encryptionModule       = context.getBean(EncryptionModule.class);
 		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
-		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
-			
+		
+		billingAccountDTO      = new BillingAccountDTO("123456");
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
 	
 		// Customer Basic information;
