@@ -1,10 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -14,13 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 
 /**
@@ -42,8 +34,9 @@ public class BillingAccount implements Serializable{
 	private String accountNumber;
 	private String companyUrl;	
 	private CredentialsVO credentials;
+
 //	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
 	private Customer customer;	 
@@ -77,13 +70,14 @@ public class BillingAccount implements Serializable{
 	public void setCredentials(CredentialsVO credentials) {
 		this.credentials = credentials;
 	}	
+
 		
 //	@LazyCollection(LazyCollectionOption.FALSE)
 //	@OneToMany(cascade=CascadeType.ALL)
 //	public List<AbstractBillingAccountStatement> getBillingStatement() {
 //		return billingStatement;
 //	}
-		
+
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -99,6 +93,7 @@ public class BillingAccount implements Serializable{
 		this.accountStatus = accountStatus;
 	}
 	
+
 //	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
 //		if(!(statement ==null)){
 //			if(!billingStatement.contains(statement)){
@@ -111,5 +106,5 @@ public class BillingAccount implements Serializable{
 	}
 	public void setCompanyUrl(String companyUrl) {
 		this.companyUrl = companyUrl;
-	}	
+	}
 }

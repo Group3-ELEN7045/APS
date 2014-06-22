@@ -30,7 +30,9 @@
     </bean>
     <bean id="paymentDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO"/>   
     <bean id="userCredenials"    class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/> 
+
     
+
     <bean id="billingCompanyDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO"/> 
     <bean id="contactDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
      
