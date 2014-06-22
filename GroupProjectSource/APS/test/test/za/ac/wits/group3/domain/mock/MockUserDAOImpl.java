@@ -23,8 +23,7 @@ public class MockUserDAOImpl implements UserDataAccess{
 	   //DI Inject This
 	   EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
 	   entityManager.getTransaction().begin();
-	   Customer cist = entityManager.merge(customer);
-	   System.out.println(cist.getId());
+	   entityManager.merge(customer);	   
 	   entityManager.getTransaction().commit();
 	   entityManager.close();
        return true;

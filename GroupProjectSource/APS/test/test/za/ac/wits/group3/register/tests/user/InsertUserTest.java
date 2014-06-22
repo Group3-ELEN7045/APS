@@ -93,7 +93,7 @@ public class InsertUserTest {
 	    billingAccountDTO.setAccountNumber("123456789");
 	    billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
 	    billingAccountDTO.setCompanyUrl("MTN");
-	    billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
+	   // billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
 	    billingAccountDTOs.add(billingAccountDTO);
 	    customer.setBillingAccounts(billingAccountDTOs);
 	    
