@@ -1,7 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.vo.scrape;
 /**
  * @author bakwanyana
- */
+ *//*
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.phantomscraper.*;
@@ -79,4 +79,4 @@ public class ScrapeManager {
 		return statementAdaptor.getStatement();
 	}
 	
-}
+}*/
