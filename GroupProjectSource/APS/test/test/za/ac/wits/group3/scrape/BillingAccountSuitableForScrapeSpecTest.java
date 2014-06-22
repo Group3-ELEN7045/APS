@@ -27,9 +27,9 @@ public class BillingAccountSuitableForScrapeSpecTest {
 	@Before
 	public void init(){
 		scrapeSpec = new BillingAccountSuitableForScrapeSpecification();
-		when(activeBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.ACTIVE);
-		when(tryingBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.TRYING);
-		when(inactiveBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.INACTIVE);
+		when(activeBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.ACTIVE.getStatusType());
+		when(tryingBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.TRYING.getStatusType());
+		when(inactiveBillingAccount.getAccountStatus()).thenReturn(AccountStatusType.INACTIVE.getStatusType());
 	}
 	
 	@After

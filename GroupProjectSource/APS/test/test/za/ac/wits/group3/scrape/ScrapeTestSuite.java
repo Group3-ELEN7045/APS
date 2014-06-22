@@ -11,10 +11,11 @@ import org.junit.runners.Suite;
    MunicipalStatementDataAdditionSpecTest.class,
    StatementVATCalculationSpecTest.class,
    TelcoStatementDataAdditionSpecTest.class,
-   ScrapeStatementAdaptorTests.class,
+   ScrapeStatementConverterTests.class,
    ScrapedXMLFileReadTests.class,
    BillingAccountSuitableForScrapeSpecTest.class,
-   DuplicateStatementDataSpecTest.class
+   DuplicateStatementDataSpecTest.class,
+   ScrapeAdaptorTests.class
 })
 public class ScrapeTestSuite {   
 }  
