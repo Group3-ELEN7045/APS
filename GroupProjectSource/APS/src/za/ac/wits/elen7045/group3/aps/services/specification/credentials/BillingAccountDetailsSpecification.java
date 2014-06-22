@@ -15,7 +15,7 @@ public class BillingAccountDetailsSpecification extends ApplicationSpecification
 		if(billingAccount.getCredentials() != null){
      return((billingAccount.getAccountNumber() != null) &&
     		 (billingAccount.getCustomerId() != null) &&
-    		 (billingAccount.getBillingCompanyName() != null) &&
+    		 (billingAccount.getCompanyUrl() != null) &&
     		 (billingAccount.getCredentials().getUserName() != null) &&
     		 (billingAccount.getCredentials().getPassword() != null));
 		}

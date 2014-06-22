@@ -23,11 +23,18 @@ import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryI
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactDetailsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
+import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
@@ -41,85 +48,88 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 import za.ac.wits.elen7045.group3.aps.services.validation.LogonService;
 
 public class TestAddBillingAccounts {
-	private Customer customer;	
-	private ApplicationContext context;
-	private UserDataAccess userDataRepository;	
-	private CustomerRepositoryImpl mockUserDataAccess;
-	private CustomerRepository customerRepository;	
-	private EncryptionModule encryptionModule;	
-	private CapturedCredentialsDTO credentials;	
-	BillingAccountRepositoryImpl billingAccountRepository;
-	BillingAccount billingAccount ;
+	private CustomerDTO customer;
+	private BillingAccountDTO           billingAccountDTO;
+	private ApplicationContext          context;	
+	private BillingAccountRepository    billingAccountRepository;
+	private BillingAccountManager	    billingAccountManager;
+	private BillingAccountManagerImpl   billingAccountManagerImpl;
+	private UserManager	                userManager;
+	private UserManagerImpl             userManagerImpl;
+	private EncryptionModule            encryptionModule;
+	private CustomerRepository          customerRepository;
+	private CredentialsDTO              userCredenials;
 
 	@Before
-	public void init() {/*
-		context = new ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-		customer = context.getBean(Customer.class);
+	public void init(){
+	    context                = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
+		customer               = context.getBean(CustomerDTO.class);
+		userCredenials         = new CredentialsDTO();
+		encryptionModule       = context.getBean(EncryptionModule.class);
+		billingAccountRepository     = context.getBean(BillingAccountRepository.class);		    
+		billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
+		billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+		customerRepository     = context.getBean(CustomerRepository.class);
 		
-		userDataRepository = context.getBean(UserDataAccess.class);
-		encryptionModule = context.getBean(EncryptionModule.class);		
-		credentials = context.getBean(CapturedCredentialsDTO.class);
-		billingAccountRepository = context.getBean(BillingAccountRepositoryImpl.class);		
-
-		customer.setId((long) 1);
-		customer.setFirstName("John");
-		customer.setLastname("Smith");
-		customer.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
-
-		credentials.setUserName("username");
-		credentials.setPassword("password");
-		credentials.setConfirmPasword("password");
-		credentials.setEncryptionModule(encryptionModule);
-		credentials.encryptCredentials();
-		customer.setCredentials(credentials);
+		customer.setEncryptionModule(encryptionModule);
 		
-		billingAccount = new BillingAccount();
-		billingAccount.setAccountNumber("12345");
-		billingAccount.setCustomerId(customer.getId());
-		billingAccount.setBillingCompanyName("Telcom");
-		billingAccount.setCredentials(credentials);
-				
-		mockUserDataAccess = new CustomerRepositoryImpl(userDataRepository);
-		customerRepository = new APSMockObjectGenerator<CustomerRepositoryImpl>().mock(mockUserDataAccess);		
-	*/}
-
-
-	@Test
-	// test if insertion happened successfull
-	public void testRegisterUser() {/*
-		try {
-			customerRepository.updateUser(customer);
-			User insertedUser = customerRepository.selectCustomer(customer);
-			assertNotNull("Failed to Insert User", insertedUser);
-		} catch (DatabaseException ex) {
-		}
-	*/}
+		userManagerImpl  = new UserManagerImpl(customerRepository);
+	    userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
+	    
+	    billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
+	    billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+    }
+	
 	
 	@Test
-	 public void tetBillingAccountFields() {/*
-	 try {	 	 
-		 ApplicationSpecification<BillingAccount> userBillingAccountDetails = new BillingAccountDetailsSpecification(
-					billingAccount);
-		 assertTrue(userBillingAccountDetails.isSatisfiedBy(billingAccount));
-	
+	 public void tetBillingAccountFields() {
+	 try {	 
+		 billingAccountDTO = new BillingAccountDTO("12345");
+		 ApplicationSpecification<BillingAccountDTO> billingAccountDetails = new BillingAccountDetailsSpecification(
+				 billingAccountDTO);
+		 assertFalse(billingAccountDetails.isSatisfiedBy(billingAccountDTO));
+		 
+		 userCredenials.setUserName("username1");
+	     userCredenials.setPassword("password");
+	     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
+		assertTrue(authenticationCustomer != null);
+		
+		billingAccountDTO.setCustomerId(authenticationCustomer.getId());
+		billingAccountDTO.setCredentials(authenticationCustomer.getCredentials());
+		billingAccountDTO.setCompanyUrl("www.telco.co.za");
+		ApplicationSpecification<BillingAccountDTO> billingAccountDetail = new BillingAccountDetailsSpecification(
+				 billingAccountDTO);
+		 assertTrue(billingAccountDetails.isSatisfiedBy(billingAccountDTO));
+		
 	 } catch (Exception e) {
 		 // TODO Auto-generated catch block
 		 e.printStackTrace();
 		 }
-	 */}
+	} 
 	
 	 @Test
-	 public void testUserAddBillingAccount() {/*
+	 public void testSaveBillingAccount() {
 	 try {	 	 
-	 BillingAccountManager billingManager = new BillingAccountManagerImpl(billingAccountRepository);	 
-	 billingManager.addCustomerBillingAccounts(billingAccount);
-	 BillingAccount billAccount = billingManager.getBillingAccount("123459");
-	 assertNotNull(" Fail to import Billing Account ", billAccount); 
-	
+		 billingAccountDTO = new BillingAccountDTO("12345");		 	 
+		 userCredenials.setUserName("username1");
+	     userCredenials.setPassword("password");
+	     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);		 
+		 billingAccountDTO.setCustomerId(authenticationCustomer.getId());
+		 billingAccountDTO.setCredentials(authenticationCustomer.getCredentials());
+		 billingAccountDTO.setCompanyUrl("www.telco.co.za");
+		 
+		 billingAccountManager.saveBillingAccount(billingAccountDTO);
+		 
+		 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount("12345");
+		 System.out.println(insertedBillingAccount.getCompanyUrl());
+		 assertNotNull("Failed to Insert Billing Account" , insertedBillingAccount);
+		 assertTrue(insertedBillingAccount != null);
+		
+		
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block
 	 e.printStackTrace();
 	 }
-	 */}
+	}
 	 
 }

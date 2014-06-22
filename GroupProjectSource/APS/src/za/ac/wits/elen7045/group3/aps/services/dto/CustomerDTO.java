@@ -18,7 +18,7 @@ public class CustomerDTO extends UserDTO implements Serializable{
 
 	private EncryptionModule encryptionModule;
 	
-	private BillingAccountDTO     account = new BillingAccountDTO();
+	private BillingAccountDTO     account;
 	
 	private ContactInformationDTO contactDetails = new ContactInformationDTO();
 	

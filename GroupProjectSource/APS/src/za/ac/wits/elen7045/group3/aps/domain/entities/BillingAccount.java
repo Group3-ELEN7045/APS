@@ -40,10 +40,9 @@ public class BillingAccount implements Serializable{
 	private Long id;
 	private Long customerId;
 	private String accountNumber;
-	private String billingCompanyName;
-	private String billingCompanyType;
+	private String companyUrl;	
 	private CredentialsVO credentials;
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+//	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 	
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
@@ -78,20 +77,12 @@ public class BillingAccount implements Serializable{
 	public void setCredentials(CredentialsVO credentials) {
 		this.credentials = credentials;
 	}	
-	
-	@Column(name = "BILLING_COMPANY_NAME")
-	public String getBillingCompanyName() {
-		return billingCompanyName;
-	}
-	public void setBillingCompanyName(String billingCompanyName) {
-		this.billingCompanyName = billingCompanyName;
-	}
-	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade=CascadeType.ALL)
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
-		return billingStatement;
-	}
+		
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(cascade=CascadeType.ALL)
+//	public List<AbstractBillingAccountStatement> getBillingStatement() {
+//		return billingStatement;
+//	}
 		
 	public Long getCustomerId() {
 		return customerId;
@@ -108,19 +99,17 @@ public class BillingAccount implements Serializable{
 		this.accountStatus = accountStatus;
 	}
 	
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(!(statement ==null)){
-			if(!billingStatement.contains(statement)){
-				billingStatement.add(statement);	
-			}		
-		}
+//	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+//		if(!(statement ==null)){
+//			if(!billingStatement.contains(statement)){
+//				billingStatement.add(statement);	
+//			}		
+//		}
+//	}
+	public String getCompanyUrl() {
+		return companyUrl;
 	}
-	
-	@Column(name = "BILLING_COMPANY_TYPE")
-	public String getBillingCompanyType() {
-		return billingCompanyType;
-	}
-	public void setBillingCompanyType(String billingCompanyType) {
-		this.billingCompanyType = billingCompanyType;
-	}
+	public void setCompanyUrl(String companyUrl) {
+		this.companyUrl = companyUrl;
+	}	
 }
