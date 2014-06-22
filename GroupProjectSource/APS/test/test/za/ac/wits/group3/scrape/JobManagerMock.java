@@ -5,7 +5,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.scraper.MunicipalScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scraper.ScrapeManager;
-import za.ac.wits.elen7045.group3.aps.services.scraper.interfaces.Scraper;
+import za.ac.wits.elen7045.group3.aps.services.scraper.interfaces.ScraperStrategy;
 
 public class JobManagerMock {
 	ScrapeManager sm;
@@ -27,7 +27,7 @@ public class JobManagerMock {
 		billingAccount.setCompanyUrl(billingCo.getUrl());
 		billingCo.addBillingAccounts(billingAccount);
 		
-		Scraper scraper = new MunicipalScrapeStrategy(billingAccount);
+		ScraperStrategy scraper = new MunicipalScrapeStrategy(billingAccount);
 		//scrapeRequest = new ScrapeRequest("1", billingCo, scraper);
 		
 		sm = new ScrapeManager(scraper);

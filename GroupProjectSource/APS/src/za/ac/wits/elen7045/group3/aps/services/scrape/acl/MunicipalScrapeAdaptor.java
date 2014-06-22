@@ -9,7 +9,7 @@ import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 public class MunicipalScrapeAdaptor implements ScrapeAdaptor{
 	@Override
 	public ScrapedResult scrapeWebsite(String url, CredentialsVO credentialsVO) {
-		String filePath = "..\\..\\XML Files\\municipal.xml";
+		String filePath = "//municipal.xml";
 		/*WebsiteScraper.scrapeWebsite(
 				url, 
 				account.getAccountNumber(), 
