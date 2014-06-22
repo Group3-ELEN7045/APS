@@ -37,7 +37,14 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	}
 
 	@Override
-	public List<BillingAccount> getBillingAccountsByCompanyName(BillingCompany billingCompany) throws DatabaseException {
-		return dataAccess.getBillingAccountsByCompanyName(billingCompany);
+	public List<BillingAccount> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException {
+		return dataAccess.getBillingAccountsByCompanyName(billingCompanyUrl);
+	}
+
+	@Override
+	public List<BillingAccount> getBillingAccountStatementByAccountNumberAndPeriod(
+			Long customerId, String period) throws DatabaseException {
+		return dataAccess.getBillingAccountStatementByAccountNumberAndPeriod(customerId, period);
+		
 	}
 }

@@ -1,7 +1,10 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.repository;
 
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
+import java.util.List;
 
-public interface BillingAccountRepository extends BillingAccountDataAccess{
+import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+
+public interface BillingAccountRepository extends BillingAccountDataAccess{	
 	
 }

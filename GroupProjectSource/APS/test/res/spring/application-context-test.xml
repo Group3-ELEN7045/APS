@@ -22,16 +22,13 @@
     <bean id="billingDataAccess" class="test.za.ac.wits.group3.domain.mock.MockBillingDAOImpl"/>
     <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
    	<constructor-arg ref="billingDataAccess"/>
-    </bean>
-    
+    </bean>    
     <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO"/>
     <bean id="capuredCredentials"   class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO">
       <property name="encryptionModule" ref="encryptionModule"></property>
     </bean>
     <bean id="paymentDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO"/>   
-    <bean id="userCredenials"    class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/> 
-
-    
+    <bean id="userCredenials"    class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/>
 
     <bean id="billingCompanyDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO"/> 
     <bean id="contactDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
