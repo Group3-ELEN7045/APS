@@ -149,7 +149,7 @@ public class InsertUserTest {
 	@Test //test if insertion happened successfult
 	public void testRegisterUser() throws DatabaseException{
 		userManager.updateUser(customer);
-		customer.setId(Long.valueOf(13));
+		customer.setId(Long.valueOf(1));
 	    CustomerDTO insertedUser = userManager.selectCustomer(customer);
 	    assertNotNull("Failed to Insert User" , insertedUser);
 	}

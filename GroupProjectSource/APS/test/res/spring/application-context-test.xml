@@ -24,8 +24,6 @@
    	<constructor-arg ref="billingDataAccess"/>
     </bean>
     
-    
-    
     <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO"/>
     <bean id="capuredCredentials"   class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO">
       <property name="encryptionModule" ref="encryptionModule"></property>

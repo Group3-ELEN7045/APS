@@ -66,6 +66,14 @@ public class TestUserLogin {
 		    
 	}
 	
+	 @Test
+	    public void testCredentials() throws DatabaseException {
+	    	userCredenials.setUserName("username1");
+	    	userCredenials.setPassword("password");    	
+		    ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
+		    assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(userCredenials));
+	    }
+	
     @Test
     public void testCustomerAuthentication() throws DatabaseException {
     	userCredenials.setUserName("username1");
