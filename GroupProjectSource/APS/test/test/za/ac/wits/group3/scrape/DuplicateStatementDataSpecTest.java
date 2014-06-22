@@ -11,13 +11,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.StatementScrapedData;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 
 public class DuplicateStatementDataSpecTest {
 	
-	StatementScrapedData scrapedStatement;
+	ScrapedResult scrapedStatement;
 	List<DataPair> dataPairsTrue;
 	List<DataPair> dataPairsFalse;
 	DuplicateStatementDataSpecification duplicateSpec;
@@ -55,14 +55,14 @@ public class DuplicateStatementDataSpecTest {
 	@Test
 	public void positiveDuplicateCorrelationTest(){
 		
-		scrapedStatement = new StatementScrapedData(null,null,null,dataPairsTrue);
+		scrapedStatement = new ScrapedResult(null,null,null,dataPairsTrue);
 	
 		assertTrue(duplicateSpec.isSatisfiedBy(scrapedStatement));
 	}
 	
 	@Test
 	public void negativeDuplicateCorrelationTest(){
-		scrapedStatement = new StatementScrapedData(null,null,null,dataPairsFalse);
+		scrapedStatement = new ScrapedResult(null,null,null,dataPairsFalse);
 		
 		assertFalse(duplicateSpec.isSatisfiedBy(scrapedStatement));
 	}

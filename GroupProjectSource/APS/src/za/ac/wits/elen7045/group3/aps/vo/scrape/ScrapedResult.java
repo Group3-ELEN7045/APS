@@ -4,15 +4,14 @@ package za.ac.wits.elen7045.group3.aps.vo.scrape;
  */
 
 import java.util.List;
-import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
-public class StatementScrapedData {
+public class ScrapedResult {
 	private String baseURL;
 	private String date;
 	private String time;
 	private List <DataPair> dataPairs;
 
-	public StatementScrapedData(String baseURL, String date, 
+	public ScrapedResult(String baseURL, String date, 
 			String time, List<DataPair> datapairs){
 		this.baseURL = baseURL;
 		this.dataPairs = datapairs;

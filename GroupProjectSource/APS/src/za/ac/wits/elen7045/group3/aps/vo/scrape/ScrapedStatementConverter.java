@@ -15,12 +15,13 @@ import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.VatCalculationExceptio
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.GenericStatementDataAdditionSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalStatementDataAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapeErrorInStatementSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementDataAdditionSpecification;
 
 public class ScrapedStatementConverter {
 	
-	private StatementScrapedData scrapedAccount;
+	private ScrapedResult scrapedData;
 	private DuplicateStatementDataSpecification duplicateSpec;
 	private StatementVATCalculationSpecification vatSpec;
 	private CompanyStatementType companyStatementType;
@@ -29,25 +30,27 @@ public class ScrapedStatementConverter {
 	private TelcoStatementDataAdditionSpecification telcoAddSpec;
 	private GenericStatementDataAdditionSpecification genericAddSpec;
 	private Specification<AbstractBillingAccountStatement> stateMentAddSpec;
+	private ScrapeErrorInStatementSpecification hasScrapeErrors;
 	
-	public ScrapedStatementConverter(StatementScrapedData scrapedAccount, CompanyStatementType companyStatementType,
+	public ScrapedStatementConverter(ScrapedResult scrapedAccount, CompanyStatementType companyStatementType,
 			INumericDataFormatStrategy numericConvertStrategy) 
 			throws DuplicateDataException, ScrapeErrorException{
 		
-		this.scrapedAccount = scrapedAccount;
+		this.scrapedData = scrapedAccount;
 		this.companyStatementType = companyStatementType;
 		this.numericDataConverter = new NumericDataFormatter(numericConvertStrategy);
 		duplicateSpec = new DuplicateStatementDataSpecification();
 		municipalAddSpec = new MunicipalStatementDataAdditionSpecification();
 		telcoAddSpec = new TelcoStatementDataAdditionSpecification();
 		genericAddSpec = new GenericStatementDataAdditionSpecification();
+		hasScrapeErrors = new ScrapeErrorInStatementSpecification();
 		
 		vatSpec = new StatementVATCalculationSpecification(14, numericDataConverter);
 		
 		if(!duplicateSpec.isSatisfiedBy(scrapedAccount))
 			throw new DuplicateDataException();
 		
-		if(scrapedAccount.getDataPairList().size() == 1)
+		if (hasScrapeErrors.isSatisfiedBy(scrapedAccount))
 			throw new ScrapeErrorException(scrapedAccount.getDataPairList().get(0).getValue());
 	}
 	
@@ -64,7 +67,7 @@ public class ScrapedStatementConverter {
 	private CreditCardStatement getCreditCardStatement() 
 			throws DataIntegrityException,VatCalculationException{
 		
-		CreditCardStatement creditAcc = new ScrapedStatementConverterMap().getCreditCardStatement(scrapedAccount,numericDataConverter);
+		CreditCardStatement creditAcc = new ScrapedStatementConverterMap().getCreditCardStatement(scrapedData,numericDataConverter);
 		
 		stateMentAddSpec = new GenericStatementDataAdditionSpecification();
 		
@@ -80,7 +83,7 @@ public class ScrapedStatementConverter {
 	private MunicipalStatement getMunicipalStatement() 
 			throws VatCalculationException, DataIntegrityException{
 		
-		MunicipalStatement municipalAcc = new ScrapedStatementConverterMap().getMunicipalStatement(scrapedAccount,numericDataConverter);
+		MunicipalStatement municipalAcc = new ScrapedStatementConverterMap().getMunicipalStatement(scrapedData,numericDataConverter);
 		stateMentAddSpec = genericAddSpec.and(municipalAddSpec);
 		stateMentAddSpec = new GenericStatementDataAdditionSpecification();//stateMentAddSpec = genericAddSpec.and(municipalAddSpec);
 		
@@ -96,7 +99,7 @@ public class ScrapedStatementConverter {
 	private TelcoStatement getTelcoStatement()
 			throws VatCalculationException, DataIntegrityException{
 		
-		TelcoStatement telcoAcc = new ScrapedStatementConverterMap().getTelcoStatement(scrapedAccount,numericDataConverter);
+		TelcoStatement telcoAcc = new ScrapedStatementConverterMap().getTelcoStatement(scrapedData,numericDataConverter);
 		stateMentAddSpec = genericAddSpec.and(telcoAddSpec);
 		
 		if (!stateMentAddSpec.isSatisfiedBy(telcoAcc))

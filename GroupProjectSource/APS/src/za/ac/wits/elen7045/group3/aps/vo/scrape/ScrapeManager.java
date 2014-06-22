@@ -22,7 +22,7 @@ public class ScrapeManager {
 	private BillingCompany billingCompany;
 	private String filePath; 
 	private AbstractBillingAccountStatement scrapedStatement;
-	private StatementScrapedData scrapedXML;
+	private ScrapedResult scrapedXML;
 	// TODO depend on implementations here??
 	private BillingAccountSuitableForScrapeSpecification scrapeCriteria;
 	
@@ -72,7 +72,7 @@ public class ScrapeManager {
 			throws DataIntegrityException, DuplicateDataException, ScrapeErrorException, VatCalculationException{
 		
 		CompanyStatementType companyType = billingCompany.getCompanyType();
-		scrapedXML = (StatementScrapedData)new XMLFileMarshall().convertScrapedDataToObject(StatementScrapedData.class, filePath);
+		scrapedXML = (ScrapedResult)new XMLFileMarshall().convertScrapedDataToObject(ScrapedResult.class, filePath);
 		
 		ScrapedStatementConverter statementAdaptor = new ScrapedStatementConverter(scrapedXML, companyType, new DefaultNumericDataFormatStrategy());
 		
