@@ -9,9 +9,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +17,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
@@ -74,12 +70,9 @@ public class InsertUserTest {
 		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
-		
-		
-				
+			
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
-		
-		
+	
 		// Customer Basic information;
 		customer.setFirstName("Silas");
 		customer.setLastname("Mahlangu");
@@ -103,6 +96,10 @@ public class InsertUserTest {
 	    billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
 	    billingAccountDTOs.add(billingAccountDTO);
 	    customer.setBillingAccounts(billingAccountDTOs);
+	    
+	    
+	    
+	    
 	    
 	    //E-billing Credentials
 	    CredentialsDTO ebillingLogon = new CredentialsDTO();
