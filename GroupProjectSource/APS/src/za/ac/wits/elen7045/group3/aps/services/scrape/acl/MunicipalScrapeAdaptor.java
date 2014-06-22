@@ -4,17 +4,17 @@ package za.ac.wits.elen7045.group3.aps.services.scrape.acl;
  */
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.phantomscraper.WebsiteScraper;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.StatementScrapedData;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 public class MunicipalScrapeAdaptor implements ScrapeAdaptor{
 	@Override
-	public StatementScrapedData scrapeWebsite(String url, BillingAccount account) {
+	public ScrapedResult scrapeWebsite(String url, BillingAccount account) {
 		String filePath = "..\\..\\XML Files\\municipal.xml";
-		WebsiteScraper.scrapeWebsite(
+		/*WebsiteScraper.scrapeWebsite(
 				url, 
 				account.getAccountNumber(), 
 				account.getCredentials().getUserName(), 
-				account.getCredentials().getPassword());
-		return (StatementScrapedData)new XMLFileMarshall().convertScrapedDataToObject(StatementScrapedData.class, filePath);		
+				account.getCredentials().getPassword());*/
+		return (ScrapedResult)new XMLFileMarshall().convertScrapedDataToObject(ScrapedResult.class, filePath);		
 	}
 
 }

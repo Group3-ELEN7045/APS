@@ -5,12 +5,11 @@ package za.ac.wits.elen7045.group3.aps.vo.scrape;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
-import za.ac.wits.elen7045.group3.aps.domain.vo.DataPair;
 
 public class ScrapedStatementConverterMap {
-	private StatementScrapedData statement;
+	private ScrapedResult statement;
 	
-	public TelcoStatement getTelcoStatement(StatementScrapedData statement, NumericDataFormatter numericData){
+	public TelcoStatement getTelcoStatement(ScrapedResult statement, NumericDataFormatter numericData){
 		this.statement = statement;
 		TelcoStatement telcoAcc = new TelcoStatement(getIndexDataPair("001").getValue());
 		telcoAcc.setAccountHolderName(getIndexDataPair("002").getValue());
@@ -36,7 +35,7 @@ public class ScrapedStatementConverterMap {
 		return telcoAcc;
 	}
 	
-	public MunicipalStatement getMunicipalStatement(StatementScrapedData statement, NumericDataFormatter numericData){
+	public MunicipalStatement getMunicipalStatement(ScrapedResult statement, NumericDataFormatter numericData){
 		this.statement = statement;
 		MunicipalStatement municipalAcc = new MunicipalStatement(getIndexDataPair("001").getValue());
 		municipalAcc.setAccountHolderName(getIndexDataPair("002").getValue());
@@ -66,7 +65,7 @@ public class ScrapedStatementConverterMap {
 		return municipalAcc;
 	}
 	
-	public CreditCardStatement getCreditCardStatement(StatementScrapedData statement, NumericDataFormatter numericDataStrategy){
+	public CreditCardStatement getCreditCardStatement(ScrapedResult statement, NumericDataFormatter numericDataStrategy){
 		this.statement = statement;
 		CreditCardStatement creditAcc = new CreditCardStatement(getIndexDataPair("001").getValue());
 		creditAcc.setAccountHolderName(getIndexDataPair("002").getValue());
