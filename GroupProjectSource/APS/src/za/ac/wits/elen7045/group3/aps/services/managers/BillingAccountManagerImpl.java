@@ -2,9 +2,12 @@ package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import java.util.List;
 
+import org.dozer.DozerBeanMapper;
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
+import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
@@ -15,36 +18,61 @@ import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class BillingAccountManagerImpl implements BillingAccountManager {
 	private BillingAccountRepository billingRepository;
+	private BillingAccount entityBillingAccount = new BillingAccount();
+	private BillingAccountDTO billingAccountdto;
 
 	public BillingAccountManagerImpl(BillingAccountRepository billingRepository) {
 		this.billingRepository = billingRepository;
 	}
 
 	@Override
-	public boolean saveBillingAccount(BillingAccount billingAccount)throws DatabaseException {
-		if(billingAccount.getCustomerId() == null){
-			throw new DatabaseException("User Id cannot be null accoung should have an ID please fix");
+	public boolean saveBillingAccount(BillingAccountDTO billingAccountdto)throws DatabaseException {
+		if (billingAccountdto == null) {
+			// throw new LogonException(ApplicationContants.USER_NOT_FOUND);
+		}	
+		ApplicationSpecification<BillingAccountDTO> userBillingAccountDetails = new BillingAccountDetailsSpecification(
+				billingAccountdto);
+		if (userBillingAccountDetails.isSatisfiedBy(billingAccountdto)) {  //checks is all fields on the billing account have been set
+			billingAccountdto.setAccountStatus(AccountStatusType.ACTIVE.getStatusType());		//set the billing account status to trying
 			
-		}
-		billingRepository.saveBillingAccount(billingAccount);
+			DozerBeanMapper dozer = new DozerBeanMapper();
+			entityBillingAccount = new BillingAccount();
+			dozer.map(billingAccountdto, entityBillingAccount);
+			
+			billingRepository.saveBillingAccount(entityBillingAccount);
+		}			
 		return true;
 	}
 
 	@Override
-	public boolean updateBillingAccountStatus(BillingAccount billingAccount) throws DatabaseException {
-		if(billingAccount.getCustomerId() == null){
-			throw new DatabaseException("User Id cannot be null account should have an ID please fix");
-		}
-		billingRepository.updateBillingAccountStatus(billingAccount);
-		return false;
+	public boolean updateBillingAccountStatus(BillingAccountDTO billingAccountdto) throws DatabaseException {
+		   ApplicationSpecification<BillingAccountDTO> userBillingAccountDetails = new BillingAccountDetailsSpecification(
+					billingAccountdto);
+			if (userBillingAccountDetails.isSatisfiedBy(billingAccountdto)) {  //checks is all fields on the billing account have been set
+				billingAccountdto.setAccountStatus(AccountStatusType.ACTIVE.getStatusType());		//set the billing account status to trying
+				
+				DozerBeanMapper dozer = new DozerBeanMapper();
+				dozer.map(billingAccountdto, entityBillingAccount);
+				billingRepository.updateBillingAccountStatus(entityBillingAccount);
+			}			
+		return true;
+		
 	}
 
 	@Override
-	public BillingAccount getBillingAccount(BillingAccount accountNumberSearch)	throws DatabaseException {
-		if(accountNumberSearch.getCustomerId() == null){
-			throw new DatabaseException("User Id cannot be null account should have an ID please fix");
+	public BillingAccountDTO getBillingAccount(String accountNumber)throws DatabaseException {
+		if(accountNumber == null){
+			throw new DatabaseException("Account Number cannot be null account should have an ID please fix");
 		}
-		return billingRepository.getBillingAccount(accountNumberSearch);
+		
+		DozerBeanMapper dozer = new DozerBeanMapper();
+		entityBillingAccount = billingRepository.getBillingAccount(accountNumber);
+		if(!(entityBillingAccount == null)){
+			billingAccountdto = new BillingAccountDTO(entityBillingAccount.getAccountNumber());
+			dozer.map(billingAccountdto, entityBillingAccount);
+			return billingAccountdto;
+		}							
+		return null;
 	}
 
 	@Override

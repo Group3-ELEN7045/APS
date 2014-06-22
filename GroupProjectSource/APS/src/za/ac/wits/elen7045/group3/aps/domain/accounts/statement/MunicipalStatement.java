@@ -1,7 +1,6 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-
 public class MunicipalStatement extends AbstractBillingAccountStatement {
 
 	private String InstalmentNotice = "";

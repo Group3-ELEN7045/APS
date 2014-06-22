@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
 /**
  * @author SilasMahlangu
@@ -16,11 +17,17 @@ public class BillingAccountDTO implements Serializable{
 	private Long id;
 	private Long customerId;
 	private String accountNumber;
-	private String billingCompanyName;
-	private String billingCompanyType;
+	private String companyUrl;	
 	private CredentialsDTO credentials;
-	private List<AbstractBillingAccountStatement> billingStatement;
+//	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 	private String accountStatus;
+	
+	public BillingAccountDTO(String accountNumber){
+		if(accountNumber == null || accountNumber == ""){
+			throw new RuntimeException("Account numnber cannot be null or empty string");
+		}
+		this.accountNumber = accountNumber;
+	}
 				
 	public long getId() {
 		return id;
@@ -39,27 +46,37 @@ public class BillingAccountDTO implements Serializable{
 		return credentials;
 	}
 	public void setCredentials(CredentialsDTO credentials) {
+		if(credentials == null){
+			new RuntimeException("Billing account should have credentials");
+		}
+		if(credentials.getUserName() == null){
+			new RuntimeException("Username cannot be null");
+		}
+		if(credentials.getPassword() ==null){
+			new RuntimeException("Password cannot be null");
+		}
 		this.credentials = credentials;
 	}	
-	public String getBillingCompanyName() {
-		return billingCompanyName;
-	}
-	public void setBillingCompanyName(String billingCompanyName) {
-		this.billingCompanyName = billingCompanyName;
-	}
 	
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
-		return billingStatement;
+	
+public String getCompanyUrl() {
+		return companyUrl;
 	}
-	public void setBillingStatement(List<AbstractBillingAccountStatement> billingStatement) {
-		this.billingStatement = billingStatement;
+
+	public void setCompanyUrl(String companyUrl) {
+		this.companyUrl = companyUrl;
 	}
+
+	//	public List<AbstractBillingAccountStatement> getBillingStatement() {
+//		return billingStatement;
+//	}	
 	public Long getCustomerId() {
 		return customerId;
 	}
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
+	
 	public String getAccountStatus() {
 		return accountStatus;
 	}
@@ -67,16 +84,11 @@ public class BillingAccountDTO implements Serializable{
 		this.accountStatus = accountStatus;
 	}
 	
-	public String getBillingCompanyType() {
-		return billingCompanyType;
-	}
-	public void setBillingCompanyType(String billingCompanyNameType) {
-		this.billingCompanyType = billingCompanyType;
-	}
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(billingStatement == null){
-			billingStatement = new ArrayList<AbstractBillingAccountStatement>();
-		}
-		billingStatement.add(statement);
-	}
+//	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+//		if(!(statement == null)){
+//			if(!billingStatement.contains(statement)){
+//				billingStatement.add(statement);
+//			}					
+//		}		
+//	}
 }

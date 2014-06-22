@@ -8,6 +8,7 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
+import za.ac.wits.elen7045.group3.aps.services.pattern.user.builder.UserEntityBuilder;
 
 public class UserManagerImpl implements UserManager{
 	
@@ -21,10 +22,15 @@ public class UserManagerImpl implements UserManager{
 	@Override
 	public boolean updateUser(CustomerDTO customer) throws DatabaseException {
 		
-		DozerBeanMapper dozer = new DozerBeanMapper();
-		customer.encryptUserInformation();
-		dozer.map(customer, customerEntity);
-		
+		UserEntityBuilder builder = UserEntityBuilder.newInstance();
+		customerEntity = builder.withId(customer.getId())
+				                .witFirstName(customer.getFirstName())
+				                .withLastName(customer.getLastname())
+				                .withCredentials(customer.getCredentials())
+				                .withDateOfBirth(customer.getDateOfBirth())
+				                .withEncryptedDateOfBirth(customer.getStringDateOfBirth())
+				                .withBillingAccounts(customer.getBillingAccounts())
+				                .buildCustomerEntity();
 		customerRepository.updateUser(customerEntity);
 		return true;
 	}

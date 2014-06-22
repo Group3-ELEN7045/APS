@@ -20,18 +20,8 @@ public class MockBillingDAOImpl implements BillingAccountDataAccess {
 		 entityManager.getTransaction().commit();
 		 entityManager.close();
 	     return true;
-	}
-	
-    public BillingAccount getBillingAccount(BillingAccount accountNumberSearch)throws DatabaseException {
-    	 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.accountNumber = ?1");
-		 query.setParameter (1, accountNumberSearch.getAccountNumber());
-		 
-		 BillingAccount accountResponse = (BillingAccount) query.getSingleResult();
-		 return accountResponse;
-	}
-
-
+	}	
+    
 	@Override
 	public boolean updateBillingAccountStatus(BillingAccount billingAccount)throws DatabaseException {
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
@@ -51,6 +41,16 @@ public class MockBillingDAOImpl implements BillingAccountDataAccess {
 		 
 		 List<BillingAccount> accountList = (List<BillingAccount>) query.getResultList();
 		 return accountList;
+	}
+
+	@Override
+	public BillingAccount getBillingAccount(String accountNumber) throws DatabaseException {
+		EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.accountNumber = ?1");
+		 query.setParameter (1, accountNumber);
+		 
+		 BillingAccount account = (BillingAccount)query.getSingleResult();
+		 return account;
 	}
 
 	//@Override

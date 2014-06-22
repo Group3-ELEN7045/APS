@@ -54,8 +54,7 @@ public class TestUserLogin {
 		userCredenials         = new CredentialsDTO(); 
 		userDataRepository     = context.getBean(UserDataAccess.class);
 		encryptionModule       = context.getBean(EncryptionModule.class);
-		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
-		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
+		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);		
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
@@ -65,6 +64,14 @@ public class TestUserLogin {
 		userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 		    
 	}
+	
+	 @Test
+	    public void testCredentials() throws DatabaseException {
+	    	userCredenials.setUserName("username1");
+	    	userCredenials.setPassword("password");    	
+		    ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
+		    assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(userCredenials));
+	    }
 	
     @Test
     public void testCustomerAuthentication() throws DatabaseException {

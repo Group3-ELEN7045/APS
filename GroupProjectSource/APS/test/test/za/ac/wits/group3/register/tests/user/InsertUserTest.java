@@ -67,10 +67,10 @@ public class InsertUserTest {
 		userDataRepository     = context.getBean(UserDataAccess.class);
 		encryptionModule       = context.getBean(EncryptionModule.class);
 		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
-		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
-			
+		
+		billingAccountDTO      = new BillingAccountDTO("123456");
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
 	
 		// Customer Basic information;
@@ -92,7 +92,7 @@ public class InsertUserTest {
 	    //Customer Ebilling Account 
 	    billingAccountDTO.setAccountNumber("123456789");
 	    billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-	    billingAccountDTO.setBillingCompanyName("MTN");
+	    billingAccountDTO.setCompanyUrl("MTN");
 	    billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
 	    billingAccountDTOs.add(billingAccountDTO);
 	    customer.setBillingAccounts(billingAccountDTOs);
@@ -146,7 +146,7 @@ public class InsertUserTest {
 	@Test //test if insertion happened successfult
 	public void testRegisterUser() throws DatabaseException{
 		userManager.updateUser(customer);
-		customer.setId(Long.valueOf(13));
+		customer.setId(Long.valueOf(1));
 	    CustomerDTO insertedUser = userManager.selectCustomer(customer);
 	    assertNotNull("Failed to Insert User" , insertedUser);
 	}
