@@ -96,11 +96,7 @@ public class InsertUserTest {
 	   // billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
 	    billingAccountDTOs.add(billingAccountDTO);
 	    customer.setBillingAccounts(billingAccountDTOs);
-	    
-	    
-	    
-	    
-	    
+	    	    
 	    //E-billing Credentials
 	    CredentialsDTO ebillingLogon = new CredentialsDTO();
 	    ebillingLogon.setUserName("username");
