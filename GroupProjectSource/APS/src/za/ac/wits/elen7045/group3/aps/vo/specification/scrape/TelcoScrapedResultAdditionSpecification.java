@@ -27,12 +27,12 @@ public class TelcoScrapedResultAdditionSpecification extends
 	}
 	
 	private boolean telcoSpecificAdditonSatisfied(ScrapedResult statement){
-		
 		double calc = 0.0;
 		calc = numericDataFormatter.getNumericValue(statement.getDataPairList().get(15).getValue())
 						+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(16).getValue());
 		double newAccCharge =numericDataFormatter.getNumericValue(statement.getDataPairList().get(10).getValue());
 		return calc == newAccCharge;
+
 	}
 
 }

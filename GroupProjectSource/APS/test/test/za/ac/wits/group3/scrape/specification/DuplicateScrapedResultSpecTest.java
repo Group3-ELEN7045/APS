@@ -1,31 +1,28 @@
-package test.za.ac.wits.group3.scrape;
+package test.za.ac.wits.group3.scrape.specification;
 /**
  * @author bakwanyana
  */
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*; 
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasDuplicateScrapedResultErrorSpecification;
 
-public class DuplicateStatementDataSpecTest {
+public class DuplicateScrapedResultSpecTest {
 	
 	ScrapedResult scrapedStatement;
 	List<DataPair> dataPairsTrue;
 	List<DataPair> dataPairsFalse;
-	DuplicateStatementDataSpecification duplicateSpec;
+	HasDuplicateScrapedResultErrorSpecification duplicateSpec;
 	
 	@Before
 	public void init(){
 		
-		duplicateSpec = new DuplicateStatementDataSpecification();
+		duplicateSpec = new HasDuplicateScrapedResultErrorSpecification();
 		
 		dataPairsTrue = new ArrayList<DataPair>();
 		dataPairsFalse = new ArrayList<DataPair>();

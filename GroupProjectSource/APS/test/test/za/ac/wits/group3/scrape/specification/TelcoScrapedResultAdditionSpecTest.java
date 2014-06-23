@@ -1,52 +1,70 @@
-package test.za.ac.wits.group3.scrape;
+package test.za.ac.wits.group3.scrape.specification;
 /**
  * @author bakwanyana
  */
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;   
 
-import org.junit.After;  
+import static org.junit.Assert.*;
+import java.util.ArrayList;
 import org.junit.Before;  
 import org.junit.Test;  
-import org.junit.runner.RunWith;  
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner; 
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementDataAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoScrapedResultAdditionSpecification;;
 
-@RunWith(MockitoJUnitRunner.class)
-public class TelcoStatementDataAdditionSpecTest {
-	
-	TelcoStatementDataAdditionSpecification telcoSpec;
-	@Mock TelcoStatement trueStatement;
-	@Mock TelcoStatement falseStatement;
+public class TelcoScrapedResultAdditionSpecTest {
+	ArrayList<DataPair> dataPairsTrue;
+	ScrapedResult scrapedStatement;
+	TelcoScrapedResultAdditionSpecification telcoAddSpec;
 	
 	@Before
 	public void init(){
+		telcoAddSpec = new TelcoScrapedResultAdditionSpecification();
 		
-		telcoSpec = new TelcoStatementDataAdditionSpecification();
-		
-		when(trueStatement.getAccountNewCharges()).thenReturn("R200");
-		when(trueStatement.getServiceCharges()).thenReturn("R50.50");
-		when(trueStatement.getCallCharges()).thenReturn("R149.50");
-		
-		when(falseStatement.getAccountNewCharges()).thenReturn("R200");
-		when(falseStatement.getServiceCharges()).thenReturn("R50.50");
-		when(falseStatement.getCallCharges()).thenReturn("R149.51");
-	}
-	
-	@After
-	public void tearDown(){
-		trueStatement = null;
-		falseStatement = null;
+		dataPairsTrue = new ArrayList<DataPair>();
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("011","New Charges","R100"));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
 	}
 	
 	@Test
 	public void testCorrectAddition(){
-		
-		assertTrue(telcoSpec.isSatisfiedBy(trueStatement));
-		assertFalse(telcoSpec.isSatisfiedBy(falseStatement));
-	}
 
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("016","Service Charges","R50"));
+		dataPairsTrue.add(new DataPair("017","Call Charges","R50"));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
+		
+		assertTrue(telcoAddSpec.isSatisfiedBy(scrapedStatement));
+		
+		
+	}
+	
+	@Test
+	public void testIncorrectAddition(){
+
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("016","Service Charges","R501"));
+		dataPairsTrue.add(new DataPair("017","Call Charges","R50"));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
+		
+		assertFalse(telcoAddSpec.isSatisfiedBy(scrapedStatement));
+		
+		
+	}
 }

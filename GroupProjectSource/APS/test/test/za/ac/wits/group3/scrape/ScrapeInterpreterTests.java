@@ -13,7 +13,7 @@ import za.ac.wits.elen7045.group3.aps.vo.scrape.NumericDataFormatter;
 import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.GenericStatementDataAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasGenericErrorInScrapedResultSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalStatementDataAdditionSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ErrorinScrapedResultSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
@@ -28,7 +28,7 @@ public class ScrapeInterpreterTests {
 	ScrapedResult scrapedStatement;
 	List<DataPair> dataPairsTrue;
 	DuplicateStatementDataSpecification spec_duplicate;
-	GenericStatementDataAdditionSpecification spec_generic;
+	HasGenericErrorInScrapedResultSpecification spec_generic;
 	MunicipalStatementDataAdditionSpecification spec_municipal;
 	ErrorinScrapedResultSpecification spec_errorInStatement;
 	StatementVATCalculationSpecification spec_vat;
@@ -49,11 +49,6 @@ public class ScrapeInterpreterTests {
 		dataPairsTrue = null;
 	}
 	
-	/*@Test
-	public void testStatementCorrect(){
-		
-	}
-	*/
 	@Test
 	public void testCommonError(){
 		dataPairsTrue = new ArrayList<DataPair>();
@@ -61,36 +56,26 @@ public class ScrapeInterpreterTests {
 		
 		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
 		
-		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
+		interpreter = new ScrapeInterpreter(scrapedStatement);
 		
 		assertTrue(interpreter.evaluate().equals("InvalidCredentials"));
 	}
 	
-	@Test 
+	/*]@Test 
 	public void testBrokenScript_DuplicateData(){
 		dataPairsTrue = new ArrayList<DataPair>();
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("011","New Account Charges","R111"));
-		dataPairsTrue.add(new DataPair("011","New Account Charges","R100.0"));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("014","Vat Amount","R14.0"));
+		dataPairsTrue.add(new DataPair("000","","1"));
+		dataPairsTrue.add(new DataPair("001","","10202"));
+		dataPairsTrue.add(new DataPair("000","","2"));
+		dataPairsTrue.add(new DataPair("000","","1"));
 		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
 		
 		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
 		
 		assertTrue(interpreter.evaluate().equals("BrokenScript"));
-	}
+	}*/
 	
-	@Test 
+	/*@Test 
 	public void testBrokenScript_NoVatCalculationError(){
 		dataPairsTrue = new ArrayList<DataPair>();
 		dataPairsTrue.add(new DataPair("","",""));
@@ -113,9 +98,9 @@ public class ScrapeInterpreterTests {
 		
 		assertTrue(interpreter.evaluate().equals("000"));
 
-	}
+	}*/
 	
-	@Test 
+	/*@Test 
 	public void testBrokenScript_HasVatCalculationError(){
 		dataPairsTrue = new ArrayList<DataPair>();
 		dataPairsTrue.add(new DataPair("","",""));
@@ -128,7 +113,7 @@ public class ScrapeInterpreterTests {
 		dataPairsTrue.add(new DataPair("","",""));
 		dataPairsTrue.add(new DataPair("","",""));
 		dataPairsTrue.add(new DataPair("","",""));
-		dataPairsTrue.add(new DataPair("011","New Account Charges","R1010.0"));
+		dataPairsTrue.add(new DataPair("011","New Account Charges","R01.0"));
 		dataPairsTrue.add(new DataPair("","",""));
 		dataPairsTrue.add(new DataPair("","",""));
 		dataPairsTrue.add(new DataPair("014","Vat Amount","R14.0"));
@@ -136,7 +121,7 @@ public class ScrapeInterpreterTests {
 		
 		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
 		
-		assertFalse(interpreter.evaluate().equals("BrokenScript"));
+		assertTrue(interpreter.evaluate().equals("BrokenScript"));
 
-	}
+	}*/
 }
