@@ -13,8 +13,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
@@ -129,8 +131,18 @@ public class TestAddBillingAccounts {
 		 insertedBillingAccount.setCompanyUrl("www.credit.co.za");
 		 billingAccountManager.updateBillingAccountStatus(insertedBillingAccount);
 		 BillingAccountDTO updateBillingAccount = billingAccountManager.getBillingAccount("12345");
-		 assertEquals("www.credit.co.za", updateBillingAccount.getCompanyUrl() );
+		 assertEquals("www.crediet.co.za", updateBillingAccount.getCompanyUrl() );
 		 
+		 AbstractBillingAccountStatement statement = new TelcoStatement("33333");
+		 statement.setAccountClosingBalance("R5000");
+		 statement.setAccountDiscount("R23");
+		 statement.setAccountNumber("1234");
+		 insertedBillingAccount.addBillingAccountStatament(statement);
+		 billingAccountManager.updateBillingAccountStatus(insertedBillingAccount);
+		 BillingAccountDTO updateBillingAccount1 = billingAccountManager.getBillingAccount("123456");
+		 System.out.println("Statement size = " + updateBillingAccount1.getBillingStatement().size());
+		 assertEquals(6, updateBillingAccount1.getBillingStatement().size() );
+				 
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block
 	 e.printStackTrace();
@@ -162,7 +174,11 @@ public class TestAddBillingAccounts {
 		
 		String period = "june";
 		List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountStatementByAccountNumberAndPeriod(authenticationCustomer, period);
-		 assertEquals(1, updateBillingAccount.size() );		 
+		 System.out.println("The size of the billing accout list = "  + updateBillingAccount );
+		assertEquals(2, updateBillingAccount.size() );	
+		 for(BillingAccountDTO billingAcc : updateBillingAccount){
+			 
+		 }
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block
 	 e.printStackTrace();

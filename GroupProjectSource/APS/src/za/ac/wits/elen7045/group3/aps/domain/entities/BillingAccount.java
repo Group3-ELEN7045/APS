@@ -111,8 +111,6 @@ public class BillingAccount implements Serializable{
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-	
-
 	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
 		if(!(statement ==null)){
 			if(!billingStatement.contains(statement)){

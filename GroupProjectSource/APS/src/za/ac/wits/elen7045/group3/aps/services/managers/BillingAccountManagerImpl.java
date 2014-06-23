@@ -96,7 +96,6 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
 		List<BillingAccount> accoutList = billingRepository.getBillingAccountsByCompanyName(billingCompanyUrl);
-		System.out.println("list size = " + accoutList.size());
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
 				dozer.map(entity, billingAccountdto);
@@ -117,11 +116,12 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
 		List<BillingAccount> accoutList = billingRepository.getBillingAccountStatementByAccountNumberAndPeriod(customer.getId(), period);
+		System.out.println("What is the list size " + accoutList.size() );
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
-				BillingAccountDTO billingAccountdto1 = new BillingAccountDTO(entity.getAccountNumber());
-				dozer.map(entity, billingAccountdto1);
-				billingAccount.add(billingAccountdto1);
+			//	BillingAccountDTO billingAccountdto1 = new BillingAccountDTO(entity.getAccountNumber());
+				dozer.map(entity, billingAccountdto);
+				billingAccount.add(billingAccountdto);
 			}
 		}
 		return billingAccount;

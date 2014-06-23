@@ -7,10 +7,6 @@ import java.util.List;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
-/**
- * @author SilasMahlangu
- *
- */
 
 public class BillingAccountDTO implements Serializable{
 	
@@ -19,7 +15,7 @@ public class BillingAccountDTO implements Serializable{
 	private String accountNumber;
 	private String companyUrl;	
 	private CredentialsDTO credentials;
-//	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 	private String accountStatus;
 	
 	public BillingAccountDTO(String accountNumber){
@@ -67,9 +63,9 @@ public String getCompanyUrl() {
 		this.companyUrl = companyUrl;
 	}
 
-	//	public List<AbstractBillingAccountStatement> getBillingStatement() {
-//		return billingStatement;
-//	}	
+	public List<AbstractBillingAccountStatement> getBillingStatement() {
+		return billingStatement;
+	}	
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -84,11 +80,11 @@ public String getCompanyUrl() {
 		this.accountStatus = accountStatus;
 	}
 	
-//	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-//		if(!(statement == null)){
-//			if(!billingStatement.contains(statement)){
-//				billingStatement.add(statement);
-//			}					
-//		}		
-//	}
+	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+		if(!(statement == null)){
+			if(!billingStatement.contains(statement)){
+				billingStatement.add(statement);
+			}					
+		}		
+	}
 }
