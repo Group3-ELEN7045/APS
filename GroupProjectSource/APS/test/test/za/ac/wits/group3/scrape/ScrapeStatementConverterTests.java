@@ -66,8 +66,7 @@ public class ScrapeStatementConverterTests {
 		dataPairs.add(new DataPair("018","qaz","23"));
 		dataPairs.add(new DataPair("019","qaz","120mins"));
 		
-		scrapedStatement = new ScrapedResult();
-		scrapedStatement.setDataPairList(dataPairs);
+		scrapedStatement = new ScrapedResult("","","",dataPairs);
 		
 		telcoConverter = new TelcoStatementConverter(scrapedStatement);
 		telcoObject = telcoConverter.getTelcoStatement();
@@ -107,8 +106,7 @@ public class ScrapeStatementConverterTests {
 		dataPairs.add(new DataPair("022","qaz","R70"));
 		dataPairs.add(new DataPair("023","qaz","R0"));
 		
-		scrapedStatement = new ScrapeResult();
-		scrapedStatement.setDataPairList(dataPairs);
+		scrapedStatement = new ScrapedResult("","","",dataPairs);
 		
 		municipalConverter = new MunicipalStatementConverter(scrapedStatement);
 		municipalObject = municipalConverter.getMunicipalStatement();
@@ -150,8 +148,7 @@ public class ScrapeStatementConverterTests {
 		dataPairs.add(new DataPair("018","qaz","R4500"));
 		dataPairs.add(new DataPair("019","qaz","R90"));
 		
-		scrapedStatement = new ScrapeResult();
-		scrapedStatement.setDataPairList(dataPairs);
+		scrapedStatement = new ScrapedResult("","","",dataPairs);
 		
 		creditConverter = new CreditCardStatementConverter(scrapedStatement);
 		creditCardObject = creditConverter.getCreditCardStatement();
