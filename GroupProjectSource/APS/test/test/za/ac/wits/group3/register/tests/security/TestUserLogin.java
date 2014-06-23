@@ -1,6 +1,3 @@
-/**
- * 
- */
 package test.za.ac.wits.group3.register.tests.security;
 
 import static org.junit.Assert.*;
@@ -13,44 +10,27 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
-import za.ac.wits.elen7045.group3.aps.domain.vo.ContactDetailsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
-import za.ac.wits.elen7045.group3.aps.services.notification.ConfirmationNotification;
-import za.ac.wits.elen7045.group3.aps.services.notification.FileNotification;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.AuthenticationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.CapturedCredentialsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.EncryptedCredentialsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.notification.ConfirmSendNotification;
-import za.ac.wits.elen7045.group3.aps.services.specification.user.EncryptedUserInformationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.user.UserSpecificationByID;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
-import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 
 /**
  * @author SilasMahlangu
  *
  */
-public class TestLogonUser {
+public class TestUserLogin {
     private CustomerDTO customer;
 	private CapturedCredentialsDTO      capturedCredentialsDTO;
 	private PaymentDetailsDTO           paymentDetailsDTO;
@@ -74,7 +54,7 @@ public class TestLogonUser {
 		userCredenials         = new CredentialsDTO(); 
 		userDataRepository     = context.getBean(UserDataAccess.class);
 		encryptionModule       = context.getBean(EncryptionModule.class);
-		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
+		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);		
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
@@ -85,6 +65,7 @@ public class TestLogonUser {
 		    
 	}
 	
+		
     @Test
     public void testCustomerAuthentication() throws DatabaseException {
     	userCredenials.setUserName("username1");
