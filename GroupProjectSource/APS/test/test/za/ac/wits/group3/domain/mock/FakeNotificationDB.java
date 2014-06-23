@@ -6,7 +6,10 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.notification.ConfirmationNotification;
 import za.ac.wits.elen7045.group3.aps.services.notification.DatabaseNotification;
-
+/**
+ * @author SilasMahlangu
+ r
+ */
 public class FakeNotificationDB implements ScrapeLogResultDataAccess{
 	@Override
 	public boolean updateScrapeLogResult(ScrapeLogResult notification)throws DatabaseException {
