@@ -9,15 +9,8 @@ public class ScrapeInterpreter {
 	}
 	
 	public String evaluate(){
-		// duplicate errors have to be run first
-		/*if (new HasDuplicateScrapedResultErrorSpecification().isSatisfiedBy(scrapedStatement))
-			return "BrokenScript";*/
-		
 		if (new ErrorinScrapedResultSpecification().isSatisfiedBy(scrapedStatement))
 			return scrapedStatement.getDataPairList().get(0).getValue();
-		/*if (new ScrapedResultHasVATErrorSpecification().isSatisfiedBy(scrapedStatement))
-			return "BrokenScript";*/
-		//if (spec_ALL.isSatisfiedBy(scrapedStatement))
 		return "000";
 	}
 	

@@ -1,22 +1,12 @@
-
-/**
- * @author bakwanyana
- */
-
 package test.za.ac.wits.group3.scrape.specification;
 /**
  * @author bakwanyana
  */
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;    
-
 import java.util.ArrayList;
-
-import org.junit.After;  
 import org.junit.Before;  
 import org.junit.Test;  
 import org.junit.runner.RunWith;  
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner; 
 
 import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;

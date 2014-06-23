@@ -4,10 +4,6 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 
 public class TelcoStatementConverter {
 	private ScrapedResult scrapedStatement;
-	//private NumericDataFormatter numericDataFormat;
-	//private String [] eligibleID = {"006","008","009","010","011","012","013","014","016","017"};
-	// TODO numeric formatting
-	
 	public TelcoStatementConverter(ScrapedResult scrapedStatement){
 		this.scrapedStatement = scrapedStatement;
 	}

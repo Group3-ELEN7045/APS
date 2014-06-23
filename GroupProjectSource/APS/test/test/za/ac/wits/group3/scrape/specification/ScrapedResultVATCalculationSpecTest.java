@@ -18,8 +18,6 @@ public class ScrapedResultVATCalculationSpecTest {
 	@Before
 	public void init(){
 		vatSpec = new ScrapedResultHasVATCalculationErrorSpecification();
-		
-
 	}
 	
 	@Test
