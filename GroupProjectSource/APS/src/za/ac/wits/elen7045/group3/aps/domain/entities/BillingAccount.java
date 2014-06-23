@@ -44,6 +44,7 @@ public class BillingAccount implements Serializable{
 	private String companyUrl;	
 	private CredentialsVO credentials;
 
+	@ Embedded
 	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 
 	@ManyToOne(fetch=FetchType.LAZY)
