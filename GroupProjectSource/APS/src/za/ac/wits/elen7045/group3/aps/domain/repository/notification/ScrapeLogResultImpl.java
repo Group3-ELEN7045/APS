@@ -22,10 +22,13 @@ public class ScrapeLogResultImpl implements ScrapeLogResultRepository{
 	}
 
 	@Override
-	public boolean updateScrapeLogResult(ScrapeLogResult notification)
-			throws DatabaseException {
+	public boolean insertScrapeLogResult(ScrapeLogResult notification)throws DatabaseException {
 		return notificationDataAccess.updateScrapeLogResult(notification);
+	}
 	
+	@Override
+	public ScrapeLogResult updateScrapeLogResults(ScrapeLogResult notification)	throws DatabaseException {
+		return notificationDataAccess.updateScrapeLogResults(notification);
 	}
 
 	@Override
