@@ -13,12 +13,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactDetailsVO;
@@ -78,7 +75,6 @@ public class TestLogonUser {
 		userDataRepository     = context.getBean(UserDataAccess.class);
 		encryptionModule       = context.getBean(EncryptionModule.class);
 		paymentDetailsDTO      = context.getBean(PaymentDetailsDTO.class);
-		billingAccountDTO      = context.getBean(BillingAccountDTO.class);
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
 		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
