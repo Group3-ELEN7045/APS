@@ -18,7 +18,14 @@ public class FakeNotificationDB implements ScrapeLogResultDataAccess{
 	public List<ScrapeLogResult> getScrapeLogResults(ScrapeLogResult notification)throws DatabaseException {
 		ConfirmationNotification databaseNotification = new DatabaseNotification(notification);
 		@SuppressWarnings("unchecked")
-		List<ScrapeLogResult> NotificationResults = (List<ScrapeLogResult>) databaseNotification.getNotification();
-		return NotificationResults;		
+		List<ScrapeLogResult> notificationResults = (List<ScrapeLogResult>) databaseNotification.getNotification();
+		return notificationResults;		
+	}
+
+	@Override
+	public ScrapeLogResult updateScrapeLogResults(ScrapeLogResult notification)	throws DatabaseException {
+		DatabaseNotification databaseNotification = new DatabaseNotification(notification);
+		ScrapeLogResult notificationResult = databaseNotification.updateNotification();
+	    return notificationResult;
 	}
 }
