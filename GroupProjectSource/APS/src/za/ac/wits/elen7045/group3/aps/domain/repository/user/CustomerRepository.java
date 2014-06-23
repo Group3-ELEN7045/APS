@@ -14,7 +14,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  *
  */
 public interface CustomerRepository {
-   public boolean updateUser(Customer customer) throws DatabaseException;
+   public Customer updateUser(Customer customer) throws DatabaseException;
    public Customer selectCustomer(Customer customer) throws DatabaseException;
    public Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
    

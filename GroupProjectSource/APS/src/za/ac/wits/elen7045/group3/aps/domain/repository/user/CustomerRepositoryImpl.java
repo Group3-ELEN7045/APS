@@ -22,7 +22,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 	}
 
 	@Override
-	public boolean updateUser(Customer customer) throws DatabaseException {
+	public Customer updateUser(Customer customer) throws DatabaseException {
 		return userDatabase.updateUser(customer);
 	}
 
