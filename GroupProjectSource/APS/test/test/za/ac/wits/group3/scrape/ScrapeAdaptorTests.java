@@ -14,7 +14,6 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.*;
-import za.ac.wits.elen7045.group3.aps.services.scraper.ScrapeResult;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 public class ScrapeAdaptorTests {
@@ -32,7 +31,6 @@ public class ScrapeAdaptorTests {
 	@Before
 	public void init(){
 		xstream = new XStream();
-		statementScrapedData = new ScrapedResult();	
 		telcoScrapeAdaptor = new TelcoScrapeAdaptor();
 		munipalScrapeAdaptor = new MunicipalScrapeAdaptor();
 		crediCardScrapeAdapter = new CreditCardScrapeAdaptor();
@@ -41,7 +39,7 @@ public class ScrapeAdaptorTests {
 		billingCo.setURL("http:////localhost/APS/municipal.xml");
 		billingAccount = new BillingAccount(1L,98986L,"9098777546");
 		billingAccount.setCredentials(new CredentialsVO());
-		billingAccount.setCompanyUrl("municipal.xml");
+		
 		billingCo.addBillingAccounts(billingAccount);
 		
 	}
@@ -53,7 +51,7 @@ public class ScrapeAdaptorTests {
 	
 	@Test
 	public void testReadScrapeAdaptorForTelcoAccount(){
-
+		billingAccount.setCompanyUrl("..\\..\\XML Files\\telco.xml");
 		statementScrapedData = telcoScrapeAdaptor.scrapeWebsite(billingAccount.getCompanyUrl(), billingAccount.getCredentials());
 		
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
@@ -66,6 +64,7 @@ public class ScrapeAdaptorTests {
 	@Test
 	public void testReadScrapeAdaptorForMunicipalAccount(){
 
+		billingAccount.setCompanyUrl("..\\..\\XML Files\\municipal.xml");
 		statementScrapedData = munipalScrapeAdaptor.scrapeWebsite(billingAccount.getCompanyUrl(), billingAccount.getCredentials());
 		
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
@@ -77,6 +76,7 @@ public class ScrapeAdaptorTests {
 	@Test
 	public void testReadScrapeAdaptorForCreditCardAccount(){
 
+		billingAccount.setCompanyUrl("..\\..\\XML Files\\creditcard.xml");
 		statementScrapedData = crediCardScrapeAdapter.scrapeWebsite(billingAccount.getCompanyUrl(), billingAccount.getCredentials());
 		
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
