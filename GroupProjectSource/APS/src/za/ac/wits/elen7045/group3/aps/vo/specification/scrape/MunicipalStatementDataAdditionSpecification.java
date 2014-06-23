@@ -2,14 +2,14 @@ package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 /**
  * @author bakwanyana
  */
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.DefaultNumericDataFormatStrategy;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.NumericDataFormatter;
 
 public class MunicipalStatementDataAdditionSpecification extends
-		ApplicationSpecification<AbstractBillingAccountStatement> {
+		ApplicationSpecification<ScrapedData> {
 
 	private final NumericDataFormatter numericDataFormatter;
 	
@@ -23,7 +23,7 @@ public class MunicipalStatementDataAdditionSpecification extends
 	}
 	
 	@Override
-	public boolean isSatisfiedBy(AbstractBillingAccountStatement statement) {
+	public boolean isSatisfiedBy(ScrapedData statement) {
 		return municipalSpecificAdditonSatisfied((MunicipalStatement)statement);
 	}
 	

@@ -1,6 +1,6 @@
 package test.za.ac.wits.group3.scrape;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.vo.scrape.NumericDataFormatter;
 import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.GenericStatementDataAdditionSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalStatementDataAdditionSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapeErrorInStatementSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ErrorinScrapedResultSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementDataAdditionSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
@@ -26,27 +26,27 @@ import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 public class ScrapeInterpreterTests {
 	ScrapeInterpreter interpreter;
 	ScrapedResult scrapedStatement;
-	List<DataPair> dataPairs;
+	List<DataPair> dataPairsTrue;
 	DuplicateStatementDataSpecification spec_duplicate;
 	GenericStatementDataAdditionSpecification spec_generic;
 	MunicipalStatementDataAdditionSpecification spec_municipal;
-	ScrapeErrorInStatementSpecification spec_errorInStatement;
+	ErrorinScrapedResultSpecification spec_errorInStatement;
 	StatementVATCalculationSpecification spec_vat;
 	TelcoStatementDataAdditionSpecification spec_telco;
-	Specification<AbstractBillingAccountStatement> spec_ALL;
+	Specification<ScrapedData> spec_ALL;
 	NumericDataFormatter numericDataFormatter;
 	
 	
 	@Before 
 	public void init(){
-		dataPairs = new ArrayList<DataPair>();
+		dataPairsTrue = new ArrayList<DataPair>();
 		numericDataFormatter = new NumericDataFormatter(new DefaultNumericDataFormatStrategy());
 		
 	}
 	
 	@After 
 	public void tearDown(){
-		
+		dataPairsTrue = null;
 	}
 	
 	/*@Test
@@ -56,23 +56,87 @@ public class ScrapeInterpreterTests {
 	*/
 	@Test
 	public void testCommonError(){
-		dataPairs = new ArrayList<DataPair>();
-		dataPairs.add(new DataPair("001","Scrape Error","InvalidCredentials"));
+		dataPairsTrue = new ArrayList<DataPair>();
+		dataPairsTrue.add(new DataPair("001","Scrape Error","InvalidCredentials"));
 		
-		scrapedStatement = new ScrapedResult("","","",dataPairs);
+		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
 		
 		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
 		
 		assertTrue(interpreter.evaluate().equals("InvalidCredentials"));
 	}
 	
-	/*@Test 
+	@Test 
 	public void testBrokenScript_DuplicateData(){
+		dataPairsTrue = new ArrayList<DataPair>();
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("011","New Account Charges","R111"));
+		dataPairsTrue.add(new DataPair("011","New Account Charges","R100.0"));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("014","Vat Amount","R14.0"));
+		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
 		
+		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
+		
+		assertTrue(interpreter.evaluate().equals("BrokenScript"));
 	}
 	
 	@Test 
-	public void testBrokenScript_VatCalculation(){
+	public void testBrokenScript_NoVatCalculationError(){
+		dataPairsTrue = new ArrayList<DataPair>();
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("011","New Account Charges","R100.0"));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("014","Vat Amount","R14.0"));
+		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
 		
-	}*/
+		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
+		
+		assertTrue(interpreter.evaluate().equals("000"));
+
+	}
+	
+	@Test 
+	public void testBrokenScript_HasVatCalculationError(){
+		dataPairsTrue = new ArrayList<DataPair>();
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("011","New Account Charges","R1010.0"));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("","",""));
+		dataPairsTrue.add(new DataPair("014","Vat Amount","R14.0"));
+		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
+		
+		interpreter = new ScrapeInterpreter(scrapedStatement, spec_ALL, numericDataFormatter);
+		
+		assertFalse(interpreter.evaluate().equals("BrokenScript"));
+
+	}
 }

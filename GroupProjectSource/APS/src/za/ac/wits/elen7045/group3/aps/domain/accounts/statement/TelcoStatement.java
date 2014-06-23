@@ -4,9 +4,9 @@ import javax.persistence.Embeddable;
 /**
  * @author boitumelo
  */
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 @Embeddable
-public class TelcoStatement extends AbstractBillingAccountStatement{
+public class TelcoStatement extends ScrapedData{
 
 
 	private String 	telephonenumber;

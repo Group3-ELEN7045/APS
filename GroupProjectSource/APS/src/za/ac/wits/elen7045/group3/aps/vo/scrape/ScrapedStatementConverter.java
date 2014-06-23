@@ -2,7 +2,7 @@ package za.ac.wits.elen7045.group3.aps.vo.scrape;
 /**
  * @author bakwanyana
  */
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
@@ -15,7 +15,7 @@ import za.ac.wits.elen7045.group3.aps.vo.exception.scrape.VatCalculationExceptio
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.DuplicateStatementDataSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.GenericStatementDataAdditionSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalStatementDataAdditionSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapeErrorInStatementSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ErrorinScrapedResultSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.StatementVATCalculationSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoStatementDataAdditionSpecification;
 
@@ -29,8 +29,8 @@ public class ScrapedStatementConverter {
 	private MunicipalStatementDataAdditionSpecification municipalAddSpec;
 	private TelcoStatementDataAdditionSpecification telcoAddSpec;
 	private GenericStatementDataAdditionSpecification genericAddSpec;
-	private Specification<AbstractBillingAccountStatement> stateMentAddSpec;
-	private ScrapeErrorInStatementSpecification hasScrapeErrors;
+	private Specification<ScrapedData> stateMentAddSpec;
+	private ErrorinScrapedResultSpecification hasScrapeErrors;
 	
 	public ScrapedStatementConverter(ScrapedResult scrapedAccount, CompanyStatementType companyStatementType,
 			INumericDataFormatStrategy numericConvertStrategy) 
@@ -43,7 +43,7 @@ public class ScrapedStatementConverter {
 		municipalAddSpec = new MunicipalStatementDataAdditionSpecification();
 		telcoAddSpec = new TelcoStatementDataAdditionSpecification();
 		genericAddSpec = new GenericStatementDataAdditionSpecification();
-		hasScrapeErrors = new ScrapeErrorInStatementSpecification();
+		hasScrapeErrors = new ErrorinScrapedResultSpecification();
 		
 		vatSpec = new StatementVATCalculationSpecification(14, numericDataConverter);
 		
@@ -54,7 +54,7 @@ public class ScrapedStatementConverter {
 			throw new ScrapeErrorException(scrapedAccount.getDataPairList().get(0).getValue());
 	}
 	
-	public AbstractBillingAccountStatement getStatement() 
+	public ScrapedData getStatement() 
 			throws VatCalculationException, DataIntegrityException{
 		if (companyStatementType.equals(CompanyStatementType.CREDITCARD))
 			return getCreditCardStatement();

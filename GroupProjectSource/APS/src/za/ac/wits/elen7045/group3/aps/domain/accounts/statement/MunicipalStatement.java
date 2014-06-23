@@ -6,10 +6,10 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
 
 import javax.persistence.Embeddable;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 
 @ Embeddable
-public class MunicipalStatement extends AbstractBillingAccountStatement {
+public class MunicipalStatement extends ScrapedData {
 
 	private String InstalmentNotice = "";
 	private String ElectricityUsed = "";

@@ -3,7 +3,7 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts;
 import javax.persistence.Embeddable;
 
 @ Embeddable
-public abstract class  AbstractBillingAccountStatement {
+public abstract class  ScrapedData {
 
 	private String AccountNumber="";
 	private String AccountHolderName="";

@@ -6,7 +6,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 
-public class ScrapeErrorInStatementSpecification
+public class ErrorinScrapedResultSpecification
 	extends ApplicationSpecification<ScrapedResult>{
 	
 	@Override

@@ -2,13 +2,13 @@ package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 /**
  * @author bakwanyana
  */
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.DefaultNumericDataFormatStrategy;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.NumericDataFormatter;
 
 public class StatementVATCalculationSpecification extends 
-		ApplicationSpecification<AbstractBillingAccountStatement> {
+		ApplicationSpecification<ScrapedData> {
 	
 	private final double vatPercentage;
 	private NumericDataFormatter numericDataFormatter;
@@ -23,7 +23,7 @@ public class StatementVATCalculationSpecification extends
 		this.numericDataFormatter = numericDataFormatter;
 	}
 	@Override
-	public boolean isSatisfiedBy(AbstractBillingAccountStatement statement) {
+	public boolean isSatisfiedBy(ScrapedData statement) {
 		double calc = 0.0;
 		calc = numericDataFormatter.getNumericValue(statement.getAccountNewCharges())*vatPercentage/100;	
 		double statementVATAmount = numericDataFormatter.getNumericValue(statement.getAccountVATAmount());
