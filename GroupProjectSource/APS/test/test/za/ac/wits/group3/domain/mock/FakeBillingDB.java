@@ -11,7 +11,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
-public class MockBillingDAOImpl implements BillingAccountDataAccess {
+public class FakeBillingDB implements BillingAccountDataAccess {
 	@Override
 	public boolean saveBillingAccount(BillingAccount billingAccount){
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();

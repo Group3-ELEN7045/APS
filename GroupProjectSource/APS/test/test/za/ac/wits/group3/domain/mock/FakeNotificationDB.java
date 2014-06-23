@@ -7,7 +7,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.notification.ConfirmationNotification;
 import za.ac.wits.elen7045.group3.aps.services.notification.DatabaseNotification;
 
-public class MockScrapeLogDAOImpl implements ScrapeLogResultDataAccess{
+public class FakeNotificationDB implements ScrapeLogResultDataAccess{
 	@Override
 	public boolean updateScrapeLogResult(ScrapeLogResult notification)throws DatabaseException {
 		ConfirmationNotification databaseNotification = new DatabaseNotification(notification);

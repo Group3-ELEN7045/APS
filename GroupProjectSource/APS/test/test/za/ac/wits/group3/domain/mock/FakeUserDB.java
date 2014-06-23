@@ -17,7 +17,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  * @author SilasMahlangu
  *
  */		
-public class MockUserDAOImpl implements UserDataAccess{
+public class FakeUserDB implements UserDataAccess{
     	 
 	public Customer updateUser(Customer customer) throws DatabaseException{
 	   //DI Inject This
