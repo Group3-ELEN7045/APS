@@ -28,6 +28,8 @@ import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.ContactType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
@@ -36,6 +38,8 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.CapturedCredentialsSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.EncryptedCredentialsSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.user.EncryptedUserInformationSpecification;
+import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
+import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 
 /**
  * @author SilasMahlangu
@@ -73,22 +77,28 @@ public class InsertUserTest {
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
 		
-	    writer = new StringWriter();
-		try {
-			inputStream = this.getClass().getResourceAsStream("customers.xml");
-			IOUtils.copy(inputStream, writer, "UTF-8");
-			enquiryXML = writer.toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		XStream sxt = new XStream();
-		sxt.alias("Customers", List.class);
-		//parse the data for file system users.
-		List<CustomerDTO> customers = (List<CustomerDTO>)sxt.fromXML(enquiryXML);
+		customer.setFirstName("Samuel");
+		customer.setLastname("Sam");
+		customer.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
+	   
+		//captured logon credentials
+	    logonCredentialsDTO.setUserName("username");
+	    logonCredentialsDTO.setPassword("password");
+	    logonCredentialsDTO.setConfirmPasword("P@ssword");
+	    customer.setCredentials(logonCredentialsDTO);
 	    
-	    //test with one user
-	    customer = customers.get(0);
+	    //cutomer payment details
+	    paymentDetailsDTO.setPaymentType(PaymentType.CREDIT_CARD.getPaymentType());
+	    paymentDetailsDTO.setValue("111111111111");
+	    customer.setPaymentDetails(paymentDetailsDTO);
+	    
+	    contactInforMationDTO.setContactType(ContactType.EMAIL.getContactType());
+	    contactInforMationDTO.setContactValue("bak@hotmail.com");
+	    customer.setContactDetails(contactInforMationDTO);
+	    
+	    customer.setEncryptionModule(encryptionModule);
+	    
+	    
 	    
 	    //inject encryption module
 	    customer.setEncryptionModule(encryptionModule);
@@ -126,9 +136,8 @@ public class InsertUserTest {
 	
 	@Test //test if insertion happened successfult
 	public void testRegisterUser() throws DatabaseException{
-		userManager.updateUser(customer);
-		customer.setId(Long.valueOf(26));
-	    CustomerDTO insertedUser = userManager.selectCustomer(customer);
+		CustomerDTO responseCutomer = userManager.updateUser(customer);
+		CustomerDTO insertedUser = userManager.selectCustomer(responseCutomer);
 	    assertNotNull("Failed to Insert User" , insertedUser);
 	}
 	
