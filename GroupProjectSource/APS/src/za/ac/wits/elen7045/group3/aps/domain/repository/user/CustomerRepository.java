@@ -11,7 +11,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 /**
  * @author SilasMahlangu
- *
+ * 
  */
 public interface CustomerRepository {
    public Customer updateUser(Customer customer) throws DatabaseException;
