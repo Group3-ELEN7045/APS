@@ -16,10 +16,13 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
 import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
+import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer.NotificationObserver;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.notification.CheckNotificationSpecification;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 /**
  * @author SilasMahlangu
@@ -45,23 +48,26 @@ public class CheckNotifictionTest {
 
 
 	}
-
+	
+	
 	//Check Notifiction Test
 	@Test
 	public void checkNotifictionObserverTest(){
-		NotificationCheck checkNotification = new NotificationCheck();
-		checkNotification.setAccountNumber("123456789");
-		checkNotification.setNotificationStatus(NotificationType.LOGON.getNotificationType());
-
+				
+		notification.setAccountNumber("123456789");
+		notification.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
+		notification.setNotificationType(NotificationType.LOGON.getNotificationType());
+		
 		NotificationObserver notificationObserver = new NotificationObserver();
 		ScrapeLogResult responseNotification = new ScrapeLogResult();
 
-		List<ScrapeLogResult> dbNotifications = new ArrayList<ScrapeLogResult>();
-		dbNotifications = notificationObserver.checkNotifications(checkNotification, notificationRepository);
+		List<ScrapeLogResult> dbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(notification, notificationRepository);
 
 		responseNotification = dbNotifications.get(0);
-
+		notifications = dbNotifications;
 		ApplicationSpecification<ScrapeLogResult> notificationSpecification = new CheckNotificationSpecification(notification);
 		assertTrue("Not logon Notifications", notificationSpecification.isSatisfiedBy(responseNotification));
 	}
+	
+	
 }
