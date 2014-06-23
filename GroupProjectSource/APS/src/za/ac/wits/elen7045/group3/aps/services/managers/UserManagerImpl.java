@@ -25,12 +25,13 @@ public class UserManagerImpl implements UserManager{
 	}
 	
 	@Override
-	public boolean updateUser(CustomerDTO customer) throws DatabaseException {
+	public CustomerDTO updateUser(CustomerDTO customer) throws DatabaseException {
 		
 		UserMarshallerFactory userEntity = new UserMapper();
 		customerEntity = userEntity.marshallRequest(customer);
-		customerRepository.updateUser(customerEntity);
-		return true;
+		Customer customerEntityRespone = customerRepository.updateUser(customerEntity);
+		CustomerDTO customerDTO = userEntity.marshallResponse(customerEntityRespone);
+		return customerDTO;
 	}
 
 	@Override
