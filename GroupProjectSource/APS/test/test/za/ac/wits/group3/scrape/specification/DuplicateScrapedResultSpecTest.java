@@ -54,13 +54,13 @@ public class DuplicateScrapedResultSpecTest {
 		
 		scrapedStatement = new ScrapedResult(null,null,null,dataPairsTrue);
 	
-		assertTrue(duplicateSpec.isSatisfiedBy(scrapedStatement));
+		assertFalse(duplicateSpec.isSatisfiedBy(scrapedStatement));
 	}
 	
 	@Test
 	public void negativeDuplicateCorrelationTest(){
 		scrapedStatement = new ScrapedResult(null,null,null,dataPairsFalse);
 		
-		assertFalse(duplicateSpec.isSatisfiedBy(scrapedStatement));
+		assertTrue(duplicateSpec.isSatisfiedBy(scrapedStatement));
 	}
 }

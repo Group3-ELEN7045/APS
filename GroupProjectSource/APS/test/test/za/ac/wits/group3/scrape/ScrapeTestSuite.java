@@ -5,17 +5,21 @@ package test.za.ac.wits.group3.scrape;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import test.za.ac.wits.group3.scrape.specification.DuplicateScrapedResultSpecTest;
+import test.za.ac.wits.group3.scrape.specification.GenericScrapedResultAdditionSpecTest;
+import test.za.ac.wits.group3.scrape.specification.MunicipalScrapedResultAdditionSpecTest;
+import test.za.ac.wits.group3.scrape.specification.ScrapedResultVATCalculationSpecTest;
+import test.za.ac.wits.group3.scrape.specification.TelcoScrapedResultAdditionSpecTest;
+
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-   GenericStatementDataAdditionSpecTest.class,
-   DuplicateStatementDataSpecTest.class,
-   MunicipalStatementDataAdditionSpecTest.class,
-   StatementVATCalculationSpecTest.class,
-   TelcoStatementDataAdditionSpecTest.class,
-   ScrapeStatementConverterTests.class,
+   GenericScrapedResultAdditionSpecTest.class,
+   DuplicateScrapedResultSpecTest.class,
+   MunicipalScrapedResultAdditionSpecTest.class,
+   ScrapedResultVATCalculationSpecTest.class,
+   TelcoScrapedResultAdditionSpecTest.class,
    ScrapedXMLFileReadTests.class,
-   BillingAccountSuitableForScrapeSpecTest.class,
-   DuplicateStatementDataSpecTest.class,
+   DuplicateScrapedResultSpecTest.class,
    ScrapeAdaptorTests.class,
    ScrapeInterpreterTests.class,
 })

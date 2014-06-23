@@ -2,12 +2,9 @@ package test.za.ac.wits.group3.scrape;
 /**
  * @author bakwanyana
  */
-import java.net.URI;
 
 import com.thoughtworks.xstream.XStream;
-
 import static org.junit.Assert.*;    
-
 import org.junit.After;  
 import org.junit.Before;  
 import org.junit.Test;  
