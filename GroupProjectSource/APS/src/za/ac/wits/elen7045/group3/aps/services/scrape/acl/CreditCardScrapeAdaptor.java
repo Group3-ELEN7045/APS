@@ -1,20 +1,16 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape.acl;
 /**
  * @author bakwanyana
+ * @author boitumelo(refactoring)
  */
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
+import za.ac.wits.elen7045.group3.aps.scrape.scripts.WebsiteScraper;
+import za.ac.wits.elen7045.group3.aps.vo.scrape.*;
+import za.ac.wits.elen7045.group3.aps.services.scraper.interfaces.ScrapeAdaptor;
 public class CreditCardScrapeAdaptor implements ScrapeAdaptor{
-	
 	@Override
-	public ScrapedResult scrapeWebsite(String url, CredentialsVO credentials) {
-		String filePath = "..\\..\\XML Files\\creditcard.xml";
-		/*WebsiteScraper.scrapeWebsite(
-				url, 
-				account.getAccountNumber(), 
-				account.getCredentials().getUserName(), 
-				account.getCredentials().getPassword());*/
-		return (ScrapedResult)new XMLFileMarshall().convertScrapedDataToObject(ScrapedResult.class, filePath);
+	public ScrapedResult scrapeWebsite(String url, CredentialsVO credenttials) {
+		return WebsiteScraper.scrapeWebsite(url,credenttials);
 	}
 
 }

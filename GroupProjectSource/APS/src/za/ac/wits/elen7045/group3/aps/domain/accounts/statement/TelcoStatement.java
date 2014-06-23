@@ -1,7 +1,11 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
+import javax.persistence.Embeddable;
 
+/**
+ * @author boitumelo
+ */
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-
+@Embeddable
 public class TelcoStatement extends AbstractBillingAccountStatement{
 
 

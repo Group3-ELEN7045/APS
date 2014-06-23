@@ -13,6 +13,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  *
  */
 public interface ScrapeLogResultRepository {
-    public boolean updateScrapeLogResult(ScrapeLogResult notification)throws DatabaseException;
+    public boolean insertScrapeLogResult(ScrapeLogResult notification)throws DatabaseException;
     public List<ScrapeLogResult> getScrapeLogResult(ScrapeLogResult notification) throws DatabaseException;
+    public ScrapeLogResult updateScrapeLogResults(ScrapeLogResult notification)	throws DatabaseException;
 }

@@ -5,7 +5,7 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <!-- Customer Repository Setup -->
-       <bean id="userRepository" class="test.za.ac.wits.group3.domain.mock.MockUserDAOImpl"></bean>
+       <bean id="userRepository" class="test.za.ac.wits.group3.domain.mock.FakeUserDB"></bean>
     
        <bean id="customerReposiory" class="za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl">
           <constructor-arg ref="userRepository"/>
@@ -13,33 +13,44 @@
     <!-- Customer Repository -->
     
     <!-- Notificstions Setup -->
-       <bean id="notificationRepository" class="test.za.ac.wits.group3.domain.mock.MockScrapeLogDAOImpl">
+       <bean id="notificationRepository" class="test.za.ac.wits.group3.domain.mock.FakeNotificationDB">
        
        </bean>
-   
     <!-- Notifications Rpository -->
     
+<<<<<<< HEAD
     <bean id="billingDataAccess" class="test.za.ac.wits.group3.domain.mock.MockBillingDAOImpl"/>
     <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
    	<constructor-arg ref="billingDataAccess"/>
     </bean>    
+=======
+    <!-- Billing Database Setup -->
+        <bean id="billingDataAccess" class="test.za.ac.wits.group3.domain.mock.FakeBillingDB"/>
+        
+        <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
+   	        <constructor-arg ref="billingDataAccess"/>
+        </bean>
+    <!-- Billing Database Setup -->
+    
+>>>>>>> 814c54dc3f0053c757693db16275fe8a9ffe3e61
     <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO"/>
     <bean id="capuredCredentials"   class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO">
       <property name="encryptionModule" ref="encryptionModule"></property>
     </bean>
+    
     <bean id="paymentDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO"/>   
+<<<<<<< HEAD
     <bean id="userCredenials"    class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/>
 
+=======
+    <bean id="userCredenials"    class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/> 
+>>>>>>> 814c54dc3f0053c757693db16275fe8a9ffe3e61
     <bean id="billingCompanyDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO"/> 
     <bean id="contactDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
-     
     <bean id="notification"      class="za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult"/>
-    
     <bean id="encryptionModule"  class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
     
-   <!-- XML Serialzation -->
-     
-   
+    
     
 </beans>
 

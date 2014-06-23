@@ -1,4 +1,4 @@
-package test.za.ac.wits.elen7045.group3.login.tests;
+package test.za.ac.wits.elen7045.group3.ebilling.tests;
 
 import static org.junit.Assert.*;
 

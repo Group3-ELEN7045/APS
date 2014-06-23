@@ -1,8 +1,12 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
+/**
+ * @author boitumelo
+ */
 
+import javax.persistence.Embeddable;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-
+@Embeddable
 public class CreditCardStatement extends AbstractBillingAccountStatement{
 
 	private String cardType;

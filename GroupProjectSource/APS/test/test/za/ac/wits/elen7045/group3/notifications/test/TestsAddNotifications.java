@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.za.ac.wits.group3.register.tests.notifications;
+package test.za.ac.wits.elen7045.group3.notifications.test;
  
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -59,14 +59,14 @@ public class TestsAddNotifications {
 		
 		notification.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 		notification.setMessage(ApplicationContants.NOTIFICATION_MAIL);
-		assertTrue("Unble to add Notifiction in Datbse", notificationRepository.updateScrapeLogResult(notification));  
+		assertTrue("Unble to add Notifiction in Datbse", notificationRepository.insertScrapeLogResult(notification));  
 	}
 	
 	@Test
 	public void testValidteInsert() throws DatabaseException{
 						
 		List<ScrapeLogResult> notifications = notificationRepository.getScrapeLogResult(notification);
-		assertEquals("The databse shoud have 2 entries", notifications.size() , 1);
+		assertEquals("The databse shoud have 2 entries", notifications.size() , 3);
 	}
 	
 }

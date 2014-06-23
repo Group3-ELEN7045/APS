@@ -1,5 +1,10 @@
 package test.za.ac.wits.group3.scrape;
 
+/**
+ * @author boitumelo
+ * 
+ */
+
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;

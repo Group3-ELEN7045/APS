@@ -5,8 +5,8 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStateme
 public class MunicipalStatementConverter {
 	private ScrapedResult scrapedStatement;
 	
-	public MunicipalStatementConverter(ScrapedResult scrapedStatement){
-		this.scrapedStatement = scrapedStatement;
+	public MunicipalStatementConverter(ScrapedResult scrapeResult){
+		this.scrapedStatement = scrapeResult;
 	}
 	
 	public MunicipalStatement getMunicipalStatement(){

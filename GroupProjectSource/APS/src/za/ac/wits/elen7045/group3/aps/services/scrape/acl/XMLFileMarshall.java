@@ -17,7 +17,6 @@ public class XMLFileMarshall {
 		xstream.useAttributeFor(DataPair.class, "id");
 		xstream.addImplicitCollection(objectToConvert, "dataPairs");
 		
-		return xstream.fromXML(new File(filePath));
+		return xstream.fromXML(new File(filePath).getAbsoluteFile());
 	}
-	
 }

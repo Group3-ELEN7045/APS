@@ -16,13 +16,13 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 public class NotificationObserver {
 	private  NotificationPublisher notificationPublisher = new NotificationPublisher();
 	
-	public List<ScrapeLogResult> checkNotifications(NotificationCheck checkNotification, ScrapeLogResultRepository notificationRepository){ 
+	public List<ScrapeLogResult> checkNotifications(ScrapeLogResult checkNotification, ScrapeLogResultRepository notificationRepository){ 
 	   Observer notificationListenr   = new NotificationListener(checkNotification,notificationRepository);
 	   notificationPublisher.register(notificationListenr);
 	   notificationListenr.setSubject(notificationPublisher);
 	   notificationListenr.update(checkNotification);
 	   notificationPublisher.checkNotifications(checkNotification);
-	   List gg = (List)notificationPublisher.getResponse(notificationListenr);
+	   List<ScrapeLogResult> gg = (List<ScrapeLogResult>)notificationPublisher.getResponse(notificationListenr);
 	   return gg;
 	}
 }

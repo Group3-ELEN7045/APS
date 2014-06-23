@@ -1,21 +1,24 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts;
 
+import javax.persistence.Embeddable;
+
+@ Embeddable
 public abstract class  AbstractBillingAccountStatement {
 
-	String AccountNumber="";
-	String AccountHolderName="";
-	String AccountStatementDate="";
-	String AccountStatementNumber="";
-	String AccountStatementMonth="";
-	String AccountTotalDue="";
-	String AccountDueDate="";
-	String AccountOpeningBalance="";
-	String AccountClosingBalance="";
-	String AccountPaymentReceived="";
-	String AccountNewCharges="";
-	String AccountDeductions="";
-	String AccountDiscount="";
-	String AccountVATAmount="";
+	private String AccountNumber="";
+	private String AccountHolderName="";
+	private String AccountStatementDate="";
+	private String AccountStatementNumber="";
+	private String AccountStatementMonth="";
+	private String AccountTotalDue="";
+	private String AccountDueDate="";
+	private String AccountOpeningBalance="";
+	private String AccountClosingBalance="";
+	private String AccountPaymentReceived="";
+	private String AccountNewCharges="";
+	private String AccountDeductions="";
+	private String AccountDiscount="";
+	private String AccountVATAmount="";
 	
 	public String getAccountNumber() {
 		return AccountNumber;
