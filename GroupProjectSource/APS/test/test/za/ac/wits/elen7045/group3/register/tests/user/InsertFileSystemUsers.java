@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.za.ac.wits.group3.register.tests.user;
+package test.za.ac.wits.elen7045.group3.register.tests.user;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

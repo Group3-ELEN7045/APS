@@ -1,4 +1,4 @@
-package test.za.ac.wits.group3.register.tests.security;
+package test.za.ac.wits.elen7045.group3.security.test;
 
 import static org.junit.Assert.*;
 
