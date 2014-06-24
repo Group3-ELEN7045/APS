@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<billing-companies>
+    <billing-company type="Municipalities">
+         <name>Tswane</name>
+         <url>http://localhost:8080/tswane</url>
+         <billing-cycle>
+                  <start-date>23/06/2014</start-date>
+                  <end-date>25/06/2014</end-date>
+         </billing-cycle>
+         <maintenance-window>
+                 <seconds>05</seconds>
+                 <minutes>15</minutes>
+                 <hours>17</hours>
+                 <day-of-month>26</day-of-month>
+                 <month>06</month>
+                 <day-of-week>?</day-of-week>
+                 <year>14</year>
+             
+         </maintenance-window>
+         <peak-period>
+             
+                 <seconds>05</seconds>
+                 <minutes>15</minutes>
+                 <hours>17</hours>
+                 <day-of-month>26</day-of-month>
+                 <month>06</month>
+                 <day-of-week>?</day-of-week>
+                 <year>14</year>
+             
+         </peak-period>       
+    </billing-company>
+    <billing-company type="Credit-Card-Providers">
+         <name>FNB Credit</name>
+         <url>http://localhost:8080/fnbcredit</url>
+         <billing-cycle>
+                  <start-date>25/06/2014</start-date>
+                  <end-date>25/06/2014</end-date>
+         </billing-cycle>
+         <maintenance-window>
+             
+                 <seconds>05</seconds>
+                 <minutes>15</minutes>
+                 <hours>17</hours>
+                 <day-of-month>26</day-of-month>
+                 <month>06</month>
+                 <day-of-week>?</day-of-week>
+                 <year>14</year>
+             
+         </maintenance-window>        
+         <peak-period>
+             
+                 <seconds>05</seconds>
+                 <minutes>15</minutes>
+                 <hours>17</hours>
+                 <day-of-month>26</day-of-month>
+                 <month>06</month>
+                 <day-of-week>?</day-of-week>
+                 <year>14</year>
+             
+         </peak-period>
+    </billing-company>
+    <billing-company type="Telecomunications">
+         <name>http://localhost:8080/telcom</name>
+         <url>Telkom</url>
+         <billing-cycle>
+                  <start-date>25/06/2014</start-date>
+                  <end-date>25/06/2014</end-date>
+         </billing-cycle>
+         <maintenance-window>
+             
+                 <seconds>05</seconds>
+                 <minutes>15</minutes>
+                 <hours>17</hours>
+                 <day-of-month>26</day-of-month>
+                 <month>06</month>
+                 <day-of-week>?</day-of-week>
+                 <year>14</year>
+             
+         </maintenance-window>        
+         <peak-period>
+             
+                 <seconds>05</seconds>
+                 <minutes>15</minutes>
+                 <hours>17</hours>
+                 <day-of-month>26</day-of-month>
+                 <month>06</month>
+                 <day-of-week>?</day-of-week>
+                 <year>14</year>
+             
+         </peak-period>
+    </billing-company>  
+</billing-companies>

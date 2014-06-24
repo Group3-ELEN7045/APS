@@ -1,15 +1,16 @@
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
+
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import za.ac.wits.elen7045.group3.aps.domain.scheduler.*;
+import za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCycle;
+import za.ac.wits.elen7045.group3.aps.domain.scheduler.CronExpressionWrapper;
 
-//import za.ac.wits.elen7045.group3.aps.services.enumtypes.ComanyStatementType;
 
 /**
  * @author Livious Ndebele
@@ -17,39 +18,23 @@ import za.ac.wits.elen7045.group3.aps.domain.scheduler.*;
  * @author Ronald Menya
  *
  */
-
 public class BillingCompany implements Serializable{
 	
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String companyName;
 	private String url;
-	private List<BillingAccount> billingAccounts = new ArrayList<BillingAccount>();
 	private BillingCycle billingcylce;
-	private MaintenanceWindow maintenancewindow;
-	private PeakPeriod peakperiod;
-	
+	private List<CronExpressionWrapper> maintenanceWindows;
+	private List<CronExpressionWrapper> peakPeriods;
 	
 	public BillingCompany(String companyName){
 		if (companyName == null || companyName.equals("")) {
 			throw new RuntimeException("Company name can not be null or empty String");
 		}
 		this.companyName = companyName;
-	}
-	
-	public List<BillingAccount> getBillingAccounts() {
-		return billingAccounts;
-	}
-	
-	public void addBillingAccounts(BillingAccount billingAccount){
-		if (billingAccount != null) {
-			if (!billingAccounts.contains(billingAccount)) {
-				billingAccounts.add(billingAccount);	
-			}	
-		}
 	}
 
 	public String getCompanyName() {
@@ -62,6 +47,7 @@ public class BillingCompany implements Serializable{
 		}
 		this.companyName = companyName;
 	}
+	
 	public String getUrl() {
 		return url;
 	}
@@ -74,20 +60,20 @@ public class BillingCompany implements Serializable{
 		this.billingcylce = billingcylce;
 	}
 
-	public MaintenanceWindow getMaintenancewindow() {
-		return maintenancewindow;
+	public List<CronExpressionWrapper> getMaintenancewindows() {
+		return Collections.unmodifiableList(maintenanceWindows);
 	}
 
-	public void setMaintenancewindow(MaintenanceWindow maintenancewindow) {
-		this.maintenancewindow = maintenancewindow;
+	public void setMaintenancewindow(CronExpressionWrapper time) {
+		this.maintenanceWindows.add(time);
 	}
 
-	public PeakPeriod getPeakperiod() {
-		return peakperiod;
+	public List<CronExpressionWrapper> getPeakperiod() {
+		return Collections.unmodifiableList(peakPeriods);
 	}
 
-	public void setPeakperiod(PeakPeriod peakperiod) {
-		this.peakperiod = peakperiod;
+	public void setPeakperiod(CronExpressionWrapper time) {
+		this.peakPeriods.add(time);
 	}
 
 	public void setURL(String url) {
@@ -134,7 +120,11 @@ public class BillingCompany implements Serializable{
 		} else if (!url.equals(other.url))
 			return false;
 		return true;
-	} 	 
- 
+	}
 
+	@Override
+	public String toString() {
+		return "BillingCompany [companyName=" + companyName + ", url=" + url
+				+ "]";
+	} 	 
 }
