@@ -21,7 +21,8 @@ public class ScrapeManagerTest {
 	BillingAccount billingAccount;
 	@Before
 	public void setUp() throws Exception {
-		sm = mock(ScrapeManagerImpl.class);		
+		//sm = mock(ScrapeManagerImpl.class)
+		sm = new ScrapeManagerImpl();
 	}
 
 	@Test
