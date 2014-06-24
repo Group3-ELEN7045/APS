@@ -26,7 +26,7 @@ public class FakeUserDB implements UserDataAccess{
 	   entityManager.merge(customer);	   
 	   entityManager.getTransaction().commit();
 	   entityManager.close();
-       return cist;
+       return customer;
 	}
 	
 	public Customer selectCustomer(Customer customer) throws DatabaseException{

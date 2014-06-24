@@ -34,31 +34,31 @@ public class ScraperStrategyTest {
 
 	@Before
 	public void initilize(){
-		
 		context = new ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-		
-		//billingAccountDataAccess = context.getBean(BillingAccountDataAccess.class);		
+			
 		scrapeLogDataAccess = context.getBean(ScrapeLogResultDataAccess.class);
 		billingAccountRepositoryImpl = context.getBean(BillingAccountRepositoryImpl.class);
-		scrapeLogRepository = new ScrapeLogResultImpl(scrapeLogDataAccess);		
-		//billingAccountRepositoryImpl = new BillingAccountRepositoryImpl(billingAccountDataAccess);
-
+		scrapeLogRepository = new ScrapeLogResultImpl(scrapeLogDataAccess);
 	}		
 	
 	
 	@Test
 	public void testMunicipalStrategy() throws DatabaseException {
+		
 		billingAccount = new BillingAccount(2L,98654L,"9098666546");
 		billingAccount.setCredentials(new CredentialsVO());
 		billingAccount.setCompanyUrl("municipal.xml");
+		
+		billingAccountRepositoryImpl.saveBillingAccount(billingAccount);
+		
 		scraper = new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepositoryImpl);
 		
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for using company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		System.out.println("Scraped account for company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
 	}
 	
 	
-	@Test
+//	@Test
 	public void testCreditStrategy() throws DatabaseException {
 		billingAccount = new BillingAccount(2L,67854L,"6678666546");
 		billingAccount.setCredentials(new CredentialsVO());
@@ -66,18 +66,19 @@ public class ScraperStrategyTest {
 		scraper = new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepositoryImpl);
 		
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for using company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		System.out.println("Scraped account for company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
 	}
 
 	
-	@Test
+//	@Test
 	public void testTelcoStrategy() throws DatabaseException {
 		billingAccount = new BillingAccount(2L,679987L,"77658666546");
 		billingAccount.setCredentials(new CredentialsVO());
 		billingAccount.setCompanyUrl("telco.xml");
+		billingAccountRepositoryImpl.saveBillingAccount(billingAccount);
 		scraper = new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepositoryImpl);
 
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for using company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		System.out.println("Scraped account for company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
 	}
 }

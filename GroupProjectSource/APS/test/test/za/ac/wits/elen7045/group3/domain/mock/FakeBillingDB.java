@@ -18,7 +18,7 @@ public class FakeBillingDB implements BillingAccountDataAccess {
 	public boolean saveBillingAccount(BillingAccount billingAccount){
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
 		 entityManager.getTransaction().begin();
-		 entityManager.persist(billingAccount);
+		 entityManager.merge(billingAccount);
 		 entityManager.getTransaction().commit();
 		 entityManager.close();
 	     return true;
