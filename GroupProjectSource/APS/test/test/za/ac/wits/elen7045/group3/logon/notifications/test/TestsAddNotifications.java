@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.za.ac.wits.elen7045.group3.notifications.test;
+package test.za.ac.wits.elen7045.group3.logon.notifications.test;
  
 import java.sql.Timestamp;
 import java.util.ArrayList;
