@@ -40,8 +40,6 @@ public class ScrapeAdaptorTests {
 		billingAccount = new BillingAccount(1L,98986L,"9098777546");
 		billingAccount.setCredentials(new CredentialsVO());
 		
-		billingCo.addBillingAccounts(billingAccount);
-		
 	}
 	@After
 	public void tearDown(){
