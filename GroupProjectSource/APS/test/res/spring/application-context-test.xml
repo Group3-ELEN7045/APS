@@ -42,5 +42,11 @@
 	    <constructor-arg ref="billingAccountRepository"/>
 	    <constructor-arg ref="scrapeLogResultImpl"/>
     </bean>
+    
+     <bean id="billingCompanyRepository"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCompanyRepository"/>
+    <bean id="schedulingSpecification"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedulingSpecification"/>
+    <bean id="timer"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer"> 
+        <constructor-arg index="0"><value>0/1 * * * * ?</value></constructor-arg>
+    </bean>
 </beans>
 
