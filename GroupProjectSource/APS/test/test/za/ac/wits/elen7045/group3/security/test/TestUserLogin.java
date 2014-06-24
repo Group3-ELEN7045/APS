@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.thoughtworks.xstream.XStream;
 
-import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
+import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
