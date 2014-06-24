@@ -6,6 +6,7 @@ package za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 
 /**
@@ -15,10 +16,10 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 public class NotificationPublisher implements Subject{
 
 	private List<Observer> observerList = new ArrayList<Observer>();
-	private NotificationCheck notifictionCheck;
+	private ScrapeLogResult notifictionCheck;
 	private boolean status;
 	private long    id;
-	private  Object responseObject = new Object();
+	private  Object responseObject;
 	private final Object blocker = new Object();
 	
 	public NotificationPublisher(){
@@ -75,7 +76,7 @@ public class NotificationPublisher implements Subject{
 	//	notifyObsrvers();
 	//}
 	
-	public void checkNotifications(NotificationCheck notifictionCheck){
+	public void checkNotifications(ScrapeLogResult notifictionCheck){
 		this.notifictionCheck = notifictionCheck;
 		this.status = true;
 		notifyObsrvers();

@@ -18,16 +18,16 @@ public class testBillingAccountCreate {
 			String accountNumber = "12345";
 			BillingAccountDTO billingAccount = new BillingAccountDTO(accountNumber);
 			CredentialsDTO credentials = new CredentialsDTO();
-//			credentials.setUserName("kaka");
-//			credentials.setPassword("12345");
+			credentials.setUserName("kaka");
+			credentials.setPassword("12345");
 			billingAccount.setCredentials(credentials);
 			assertFalse((billingAccount.getCredentials() == null));
 			
-			AbstractBillingAccountStatement statement = null;
+			TelcoStatement statement = null;
 			billingAccount.addBillingAccountStatament(statement);
 			assertTrue(billingAccount.getBillingStatement().size() == 0);
 			
-			AbstractBillingAccountStatement telStatement = new TelcoStatement("1234");
+			TelcoStatement telStatement = new TelcoStatement("1234");
 			billingAccount.addBillingAccountStatament(telStatement);
 			assertTrue(billingAccount.getBillingStatement().size() != 0);			
 		}
@@ -41,13 +41,13 @@ public class testBillingAccountCreate {
 			billingAccount.setCredentials(credentials);
 			assertFalse((billingAccount.getCredentials() == null));
 			
-			AbstractBillingAccountStatement statement = null;
+			TelcoStatement statement = null;
 			billingAccount.addBillingAccountStatament(statement);
 			assertTrue(billingAccount.getBillingStatement().size() == 0);
 			
-			AbstractBillingAccountStatement telStatement = new TelcoStatement("1234");
+			TelcoStatement telStatement = new TelcoStatement("1234");
 			billingAccount.addBillingAccountStatament(telStatement);
-			assertTrue(billingAccount.getBillingStatement().size() == 0);
+			assertTrue(billingAccount.getBillingStatement().size() != 0);
 			
 			CredentialsVO credentialNull = null;
 			

@@ -3,8 +3,12 @@ package za.ac.wits.elen7045.group3.aps.services.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
 import org.dozer.DozerBeanMapper;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
@@ -42,12 +46,10 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 			dozer.map(billingAccountdto, entityBillingAccount);
 
 			// If account already exists update method is called
-			BillingAccount existingAccount = billingRepository
-					.getBillingAccount(entityBillingAccount.getAccountNumber());
+			BillingAccount existingAccount = billingRepository.getBillingAccount(entityBillingAccount.getAccountNumber());
 			if (existingAccount != null) {
 				entityBillingAccount.setId(existingAccount.getId());
-				billingRepository
-						.updateBillingAccountStatus(entityBillingAccount);
+				billingRepository.updateBillingAccountStatus(entityBillingAccount);
 			} else {
 				billingRepository.saveBillingAccount(entityBillingAccount);
 			}
@@ -60,10 +62,17 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 			BillingAccountDTO billingAccountdto) throws DatabaseException {
 		ApplicationSpecification<BillingAccountDTO> userBillingAccountDetails = new BillingAccountDetailsSpecification(
 				billingAccountdto);
-		 //checks if all the required fields of the billing account have been set
+		 System.out.println("size of list in manager " + billingAccountdto.getBillingStatement().size());
+		// checks if all the required fields of the billing account have been set
 		if (userBillingAccountDetails.isSatisfiedBy(billingAccountdto)) {
 			DozerBeanMapper dozer = new DozerBeanMapper();
+			if(billingAccountdto.getBillingStatement() != null){
+				for(AbstractBillingAccountStatement stat : billingAccountdto.getBillingStatement()){
+					entityBillingAccount.addBillingAccountStatament(stat);
+				}
+			}
 			dozer.map(billingAccountdto, entityBillingAccount);
+			System.out.println("size of list in manager entity " + entityBillingAccount.getBillingStatement().size());
 			billingRepository.updateBillingAccountStatus(entityBillingAccount);
 		}
 		return true;
@@ -116,14 +125,19 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
 		List<BillingAccount> accoutList = billingRepository.getBillingAccountStatementByAccountNumberAndPeriod(customer.getId(), period);
-		System.out.println("What is the list size " + accoutList.size() );
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
-			//	BillingAccountDTO billingAccountdto1 = new BillingAccountDTO(entity.getAccountNumber());
-				dozer.map(entity, billingAccountdto);
-				billingAccount.add(billingAccountdto);
+				BillingAccountDTO billingAccountdto1 = new BillingAccountDTO(entity.getAccountNumber());
+				dozer.map(entity, billingAccountdto1);
+				billingAccount.add(billingAccountdto1);
 			}
 		}
 		return billingAccount;
+	}
+	
+	@Override
+	public boolean updateBillingAccountStatement(AbstractBillingAccountStatement billingAccountStatement)throws DatabaseException {
+		billingRepository.updateBillingAccountStatement(billingAccountStatement);
+	       return true;
 	}
 }

@@ -16,11 +16,11 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  *
  */
 public class NotificationListener implements Observer{
-	private NotificationCheck notificationCheck;
+	private ScrapeLogResult notificationCheck;
 	private Subject listener;
 	ScrapeLogResultRepository  scrapeResiltsRepository;
 	List<ScrapeLogResult>  notifications = new ArrayList<ScrapeLogResult>();
-	public NotificationListener(NotificationCheck notificationCheck, ScrapeLogResultRepository  scrapeResiltsRepository){
+	public NotificationListener(ScrapeLogResult notificationCheck, ScrapeLogResultRepository  scrapeResiltsRepository){
 		this.notificationCheck      = notificationCheck;
 		this.scrapeResiltsRepository = scrapeResiltsRepository;
 	}
@@ -28,12 +28,8 @@ public class NotificationListener implements Observer{
 	@Override
 	public void update(Object object) {
 		try {
-		    if(object instanceof NotificationCheck){
-		        NotificationCheck notificationCheckInternal = (NotificationCheck) object;
-		        ScrapeLogResult notification = new ScrapeLogResult();
-		        notification.setAccountNumber(notificationCheckInternal.getAccountNumber());
-		        notification.setNotificationType(notificationCheckInternal.getNotificationStatus());
-			    notifications = scrapeResiltsRepository.getScrapeLogResult(notification);
+		    if(object instanceof ScrapeLogResult){
+		        notifications = scrapeResiltsRepository.getScrapeLogResult(notificationCheck);
 			    listener.setResponse(notifications);
 			 }
 		} catch (DatabaseException e) {

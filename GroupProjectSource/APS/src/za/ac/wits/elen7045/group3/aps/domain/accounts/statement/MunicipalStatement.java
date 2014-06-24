@@ -1,6 +1,17 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
 
+/**
+ * @author boitumelo
+ */
+
+import javax.persistence.Embeddable;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+
+//@ Embeddable
+@Inheritance(strategy=InheritanceType.JOINED)
 public class MunicipalStatement extends AbstractBillingAccountStatement {
 
 	private String InstalmentNotice = "";

@@ -1,22 +1,73 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts;
 
-public abstract class  AbstractBillingAccountStatement {
+import java.io.Serializable;
 
-	String AccountNumber="";
-	String AccountHolderName="";
-	String AccountStatementDate="";
-	String AccountStatementNumber="";
-	String AccountStatementMonth="";
-	String AccountTotalDue="";
-	String AccountDueDate="";
-	String AccountOpeningBalance="";
-	String AccountClosingBalance="";
-	String AccountPaymentReceived="";
-	String AccountNewCharges="";
-	String AccountDeductions="";
-	String AccountDiscount="";
-	String AccountVATAmount="";
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
+
+//@MappedSuperclass
+@Entity
+@Table(name="Statements")
+public class  AbstractBillingAccountStatement implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID", unique = true, nullable = false)
+	private long id;
+	private Long billingAccountId;
+	private String AccountNumber="";
+	private String AccountHolderName="";
+	private String AccountStatementDate="";
+	private String AccountStatementNumber="";
+	private String AccountStatementMonth="";
+	private String AccountTotalDue="";
+	
+	private String AccountDueDate="";
+	private String AccountOpeningBalance="";
+	private String AccountClosingBalance="";
+	private String AccountPaymentReceived="";
+	private String AccountNewCharges="";
+	private String AccountDeductions="";
+	private String AccountDiscount="";
+	private String AccountVATAmount="";
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
+	private BillingAccount billingAccount;	 
+	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}	
+	
+	public BillingAccount getBillingAccount() {
+		return billingAccount;
+	}
+	public void setBillingAccount(BillingAccount billingAccount) {
+		this.billingAccount = billingAccount;
+	}
+	public Long getBillingAccountId() {
+		return billingAccountId;
+	}
+	public void setBillingAccountId(Long billingAccountId) {
+		this.billingAccountId = billingAccountId;
+	}
 	public String getAccountNumber() {
 		return AccountNumber;
 	}

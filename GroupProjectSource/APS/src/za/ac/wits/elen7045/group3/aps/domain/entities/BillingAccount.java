@@ -21,6 +21,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
@@ -44,6 +45,7 @@ public class BillingAccount implements Serializable{
 	private String companyUrl;	
 	private CredentialsVO credentials;
 
+	@ Embedded
 	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
 
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -92,7 +94,6 @@ public class BillingAccount implements Serializable{
 
 		
 	@LazyCollection(LazyCollectionOption.FALSE)
-//	@OneToMany(cascade=CascadeType.ALL)
 	public List<AbstractBillingAccountStatement> getBillingStatement() {
 		return billingStatement;
 	}
@@ -112,7 +113,10 @@ public class BillingAccount implements Serializable{
 		this.accountStatus = accountStatus;
 	}
 	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(!(statement ==null)){
+		if(!(statement == null)){
+			if(billingStatement == null){
+				billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+			}
 			if(!billingStatement.contains(statement)){
 				billingStatement.add(statement);	
 			}		

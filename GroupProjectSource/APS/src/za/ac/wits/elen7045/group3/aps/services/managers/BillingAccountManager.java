@@ -2,6 +2,7 @@ package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import java.util.List;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
@@ -17,5 +18,7 @@ public interface BillingAccountManager{
 	public List<BillingAccountDTO> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException;
 	List<BillingAccountDTO> getBillingAccountStatementByAccountNumberAndPeriod(
 			CustomerDTO customer, String period) throws DatabaseException;
+	boolean updateBillingAccountStatement(AbstractBillingAccountStatement billingAccountStatement)
+			throws DatabaseException;
 	
 }

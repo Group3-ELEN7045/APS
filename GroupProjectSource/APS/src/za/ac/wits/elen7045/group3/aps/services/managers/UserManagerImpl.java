@@ -8,8 +8,13 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.pattern.user.builder.UserEntityBuilder;
+import za.ac.wits.elen7045.group3.aps.services.pattern.user.factory.UserMapper;
+import za.ac.wits.elen7045.group3.aps.services.pattern.user.factory.UserMarshallerFactory;
 
+/**
+ * @author SilasMahlangu
+ *
+ */
 public class UserManagerImpl implements UserManager{
 	
 	public CustomerRepository customerRepository;
@@ -20,29 +25,21 @@ public class UserManagerImpl implements UserManager{
 	}
 	
 	@Override
-	public boolean updateUser(CustomerDTO customer) throws DatabaseException {
+	public CustomerDTO updateUser(CustomerDTO customer) throws DatabaseException {
 		
-		UserEntityBuilder builder = UserEntityBuilder.newInstance();
-		customerEntity = builder.withId(customer.getId())
-				                .witFirstName(customer.getFirstName())
-				                .withLastName(customer.getLastname())
-				                .withCredentials(customer.getCredentials())
-				                .withDateOfBirth(customer.getDateOfBirth())
-				                .withEncryptedDateOfBirth(customer.getStringDateOfBirth())
-				                .withBillingAccounts(customer.getBillingAccounts())
-				                .buildCustomerEntity();
-		customerRepository.updateUser(customerEntity);
-		return true;
+		UserMarshallerFactory userEntity = new UserMapper();
+		customerEntity = userEntity.marshallRequest(customer);
+		Customer customerEntityRespone = customerRepository.updateUser(customerEntity);
+		CustomerDTO customerDTO = userEntity.marshallResponse(customerEntityRespone);
+		return customerDTO;
 	}
 
 	@Override
 	public CustomerDTO selectCustomer(CustomerDTO customer)	throws DatabaseException {
-		DozerBeanMapper dozer = new DozerBeanMapper();
-		customer.encryptUserInformation();
-		dozer.map(customer, customerEntity);
+		UserMarshallerFactory userEntity = new UserMapper();
+		customerEntity = userEntity.marshallRequest(customer);
 		Customer customerEntityRespone = customerRepository.selectCustomer(customerEntity);
-		CustomerDTO customerDTO = new CustomerDTO();
-		dozer.map(customerEntityRespone, customerDTO);
+		CustomerDTO customerDTO = userEntity.marshallResponse(customerEntityRespone);
 		return customerDTO;
 	}
 
@@ -52,8 +49,8 @@ public class UserManagerImpl implements UserManager{
 		DozerBeanMapper dozer = new DozerBeanMapper();
 		dozer.map(credentials, credentialsVO);
 		Customer authenticationResponse = customerRepository.getCustomer(credentialsVO);
-		CustomerDTO customerDTO = new CustomerDTO();
-		dozer.map(authenticationResponse, customerDTO);
+		UserMarshallerFactory userEntity = new UserMapper();
+		CustomerDTO customerDTO = userEntity.marshallResponse(authenticationResponse);
 		return customerDTO;
 	}
  

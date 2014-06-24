@@ -8,12 +8,13 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
-public class MockBillingDAOImpl implements BillingAccountDataAccess {
+public class FakeBillingDB implements BillingAccountDataAccess {
 	@Override
 	public boolean saveBillingAccount(BillingAccount billingAccount){
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
@@ -27,13 +28,24 @@ public class MockBillingDAOImpl implements BillingAccountDataAccess {
 	@Override
 	public boolean updateBillingAccountStatus(BillingAccount billingAccount)throws DatabaseException {
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		 BillingAccount billingAccountUpdate = entityManager.find(BillingAccount.class, billingAccount.getId());
+	//	 BillingAccount billingAccountUpdate = entityManager.find(BillingAccount.class, billingAccount.getId());
 		 entityManager.getTransaction().begin();
-		 billingAccountUpdate = billingAccount;
+		 System.out.println("size of list in DB2 " + billingAccount.getBillingStatement().size());
 		 entityManager.merge(billingAccount);
 		 entityManager.getTransaction().commit();
 		 entityManager.close();
 		 return true;
+	}
+	
+	@Override
+	public boolean updateBillingAccountStatement(AbstractBillingAccountStatement billingAccountStatement)throws DatabaseException {
+		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+	//	 BillingAccount billingAccountUpdate = entityManager.find(BillingAccount.class, billingAccount.getId());
+		   entityManager.getTransaction().begin();
+		   entityManager.merge(billingAccountStatement);	   
+		   entityManager.getTransaction().commit();
+		   entityManager.close();
+	       return true;
 	}
 
 	@Override

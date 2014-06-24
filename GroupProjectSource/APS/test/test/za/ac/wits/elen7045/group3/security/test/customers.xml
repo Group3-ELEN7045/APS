@@ -1,0 +1,58 @@
+<Customers>
+  <za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+    <firstName>Bak</firstName>
+    <lastname>Thobela</lastname>
+    <dateOfBirth>1979-01-11 22:12:00.0 UTC</dateOfBirth>
+    <credentials class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO">
+      <userName>username6</userName>
+      <password>password</password>
+      <encryptionModule class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
+      <confirmPasword>password</confirmPasword>
+    </credentials>
+    <encryptionModule class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl" reference="../credentials/encryptionModule"/>
+    <contactDetails>
+      <contactType>E</contactType>
+      <contactValue>silas@hotmail.com</contactValue>
+    </contactDetails>
+    <paymentDetails> 
+      <paymentType>CR</paymentType>
+      <value>666666666666</value>
+    </paymentDetails>
+  </za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+  <za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+    <firstName>Ronald</firstName>
+    <lastname>Menya</lastname>
+    <dateOfBirth>1979-01-13 22:12:00.0 UTC</dateOfBirth>
+    <credentials class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials"/>
+    <encryptionModule class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials/encryptionModule"/>
+    <contactDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/contactDetails"/>
+    <paymentDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/paymentDetails"/>
+  </za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+  <za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+    <firstName>Luvious</firstName>
+    <lastname>Ndebele</lastname>
+    <dateOfBirth>1979-01-14 22:12:00.0 UTC</dateOfBirth>
+    <credentials class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials"/>
+    <encryptionModule class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials/encryptionModule"/>
+    <contactDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/contactDetails"/>
+    <paymentDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/paymentDetails"/>
+  </za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+  <za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+    <firstName>Sibusiso</firstName>
+    <lastname>Shezi</lastname>
+    <dateOfBirth>1979-01-15 22:12:00.0 UTC</dateOfBirth>
+    <credentials class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials"/>
+    <encryptionModule class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials/encryptionModule"/>
+    <contactDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/contactDetails"/>
+    <paymentDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/paymentDetails"/>
+  </za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+  <za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+    <firstName>Silas</firstName>
+    <lastname>Mahlangu</lastname>
+    <dateOfBirth>1979-01-16 22:12:00.0 UTC</dateOfBirth>
+    <credentials class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials"/>
+    <encryptionModule class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl" reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/credentials/encryptionModule"/>
+    <contactDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/contactDetails"/>
+    <paymentDetails reference="../../za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO/paymentDetails"/>
+  </za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO>
+</Customers>

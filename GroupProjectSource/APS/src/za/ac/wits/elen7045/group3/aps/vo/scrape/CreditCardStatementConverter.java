@@ -1,12 +1,13 @@
 package za.ac.wits.elen7045.group3.aps.vo.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
+import za.ac.wits.elen7045.group3.aps.services.scraper.ScrapeResult;
 
 public class CreditCardStatementConverter {
-	private ScrapedResult scrapedStatement;
+	private ScrapeResult scrapedStatement;
 	
-	public CreditCardStatementConverter(ScrapedResult scrapedStatement){
-		this.scrapedStatement = scrapedStatement;
+	public CreditCardStatementConverter(ScrapeResult scrapedStatement2){
+		this.scrapedStatement = scrapedStatement2;
 	}
 
 	public CreditCardStatement getCreditCardStatement(){

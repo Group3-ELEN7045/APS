@@ -9,7 +9,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  *
  */
 public interface UserManager {
-	public boolean updateUser(CustomerDTO customer) throws DatabaseException;
+	public CustomerDTO updateUser(CustomerDTO customer) throws DatabaseException;
 	public CustomerDTO selectCustomer(CustomerDTO customer) throws DatabaseException;
 	public CustomerDTO getCustomer(CredentialsDTO credentials) throws DatabaseException; 
 }

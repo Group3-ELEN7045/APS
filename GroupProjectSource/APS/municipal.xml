@@ -1,0 +1,97 @@
+<scrape-session>
+  <baseURL>www.elen7045.co.za</baseURL>
+  <date>12/12/2014</date>
+  <time>13:50:00</time>
+  <datapair id="001">
+    <text>Account Number</text>
+    <value>123456789</value>
+  </datapair>
+  <datapair id="002">
+    <text>Account holder name</text>
+    <value>Jack Parcell</value>
+  </datapair>
+  <datapair id="003">
+    <text>Statement date</text>
+    <value>12/12/2014</value>
+  </datapair>
+  <datapair id="004">
+    <text>Statement number</text>
+    <value>1122</value>
+  </datapair>
+  <datapair id="005">
+    <text>Statement month</text>
+    <value>2</value>
+  </datapair>
+  <datapair id="006">
+    <text>Total due</text>
+    <value>R340</value>
+  </datapair>
+  <datapair id="007">
+    <text>Due date</text>
+    <value>01/01/2015</value>
+  </datapair>
+  <datapair id="008">
+    <text>Opening balance</text>
+    <value>R120</value>
+  </datapair>
+  <datapair id="009">
+    <text>Closing balance</text>
+    <value>R123</value>
+  </datapair>
+  <datapair id="010">
+    <text>Payment received</text>
+    <value>R40</value>
+  </datapair>
+  <datapair id="011">
+    <text>New charges</text>
+    <value>R45</value>
+  </datapair>
+  <datapair id="012">
+    <text>Deductions</text>
+    <value>R123</value>
+  </datapair>
+  <datapair id="013">
+    <text>Discount</text>
+    <value>R456</value>
+  </datapair>
+  <datapair id="014">
+    <text>VAT Amount</text>
+    <value>R123</value>
+  </datapair>
+  <datapair id="015">
+    <text>Instalment notice</text>
+    <value>10</value>
+  </datapair>
+  <datapair id="016">
+    <text>Electricity used</text>
+    <value>200kW</value>
+  </datapair>
+  <datapair id="017">
+    <text>Electricity charges</text>
+    <value>R100</value>
+  </datapair>
+  <datapair id="018">
+    <text>Gas used</text>
+    <value>400Btu</value>
+  </datapair>
+  <datapair id="019">
+    <text>Gas Charges</text>
+    <value>R100</value>
+  </datapair>
+  <datapair id="020">
+    <text>Water used</text>
+    <value>300Kl</value>
+  </datapair>
+  <datapair id="021">
+    <text>Water charges</text>
+    <value>R456</value>
+  </datapair>
+  <datapair id="022">
+    <text>Sewerage charges</text>
+    <value>R345</value>
+  </datapair>
+  <datapair id="023">
+    <text>Refuse charges</text>
+    <value>R123</value>
+  </datapair>
+</scrape-session>

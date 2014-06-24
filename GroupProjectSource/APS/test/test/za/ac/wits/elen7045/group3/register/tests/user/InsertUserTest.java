@@ -1,18 +1,23 @@
 /**
  * 
  */
-package test.za.ac.wits.group3.register.tests.user;
+package test.za.ac.wits.elen7045.group3.register.tests.user;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.thoughtworks.xstream.XStream;
 
 import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
@@ -23,8 +28,6 @@ import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.ContactType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
@@ -43,11 +46,9 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
  *
  */
 public class InsertUserTest {
-    private CustomerDTO customer;
-	private CapturedCredentialsDTO      logonCredentialsDTO;
+    private CapturedCredentialsDTO      logonCredentialsDTO;
 	private PaymentDetailsDTO           paymentDetailsDTO;
 	private ContactInformationDTO       contactInforMationDTO;
-	private BillingAccountDTO           billingAccountDTO;
 	private List<BillingAccountDTO>     billingAccountDTOs;
 	private CredentialsDTO              credentialDTO;
 	private ApplicationContext          context;
@@ -57,10 +58,16 @@ public class InsertUserTest {
 	private EncryptionModule            encryptionModule; 
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
+	private String enquiryXML           = null;
+	private StringWriter writer         = null;
+	private InputStream inputStream     = null;
+	private CustomerDTO customer        = null;
 	
 	//Scenario Registration Customer 
 	@Before
 	public void init(){
+		
+		//initializeSpring
 		context                = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
 		customer               = context.getBean(CustomerDTO.class); 
 		logonCredentialsDTO    = context.getBean(CapturedCredentialsDTO.class);
@@ -70,53 +77,48 @@ public class InsertUserTest {
 		contactInforMationDTO  = context.getBean(ContactInformationDTO.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
 		
-		billingAccountDTO      = new BillingAccountDTO("123456");
-		billingAccountDTOs     = new ArrayList<BillingAccountDTO>();
-	
-		// Customer Basic information;
-		customer.setFirstName("Silas");
-		customer.setLastname("Mahlangu");
+		customer.setFirstName("Samuel");
+		customer.setLastname("Sam");
 		customer.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
 	   
 		//captured logon credentials
-	    logonCredentialsDTO.setUserName("username1");
+	    logonCredentialsDTO.setUserName("username");
 	    logonCredentialsDTO.setPassword("password");
 	    logonCredentialsDTO.setConfirmPasword("P@ssword");
 	    customer.setCredentials(logonCredentialsDTO);
 	    
 	    //cutomer payment details
 	    paymentDetailsDTO.setPaymentType(PaymentType.CREDIT_CARD.getPaymentType());
-	    paymentDetailsDTO.setValue("1234 1234 5678 5678");
+	    paymentDetailsDTO.setValue("111111111111");
 	    customer.setPaymentDetails(paymentDetailsDTO);
 	    
-	    //Customer Ebilling Account 
-	    billingAccountDTO.setAccountNumber("123456789");
-	    billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-	    billingAccountDTO.setCompanyUrl("MTN");
-	   // billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
-	    billingAccountDTOs.add(billingAccountDTO);
-	    customer.setBillingAccounts(billingAccountDTOs);
-	    
-	    
-	    
-	    
-	    
-	    //E-billing Credentials
-	    CredentialsDTO ebillingLogon = new CredentialsDTO();
-	    ebillingLogon.setUserName("username");
-	    ebillingLogon.setPassword("password");
-	    ebillingLogon.setEncryptionModule(encryptionModule);
-	    ebillingLogon.encryptCredentials();
-	    billingAccountDTO.setCredentials(ebillingLogon);
-	    billingAccountDTOs.add(billingAccountDTO);
-	    
-	    //Customer Contact Information
+
+//	    //Customer Ebilling Account 
+//	    billingAccountDTO.setAccountNumber("123456789");
+//	    billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
+//	    billingAccountDTO.setCompanyUrl("MTN");
+//	   // billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
+//	    billingAccountDTOs.add(billingAccountDTO);
+//	    customer.setBillingAccounts(billingAccountDTOs);
+//	    
+
 	    contactInforMationDTO.setContactType(ContactType.EMAIL.getContactType());
-	    contactInforMationDTO.setContactValue("ssmahlangu@hotmail.com");
-	     customer.setContactDetails(contactInforMationDTO);
-	    
+	    contactInforMationDTO.setContactValue("bak@hotmail.com");
+	    customer.setContactDetails(contactInforMationDTO);
+
 	    customer.setEncryptionModule(encryptionModule);
-	    	    
+	    
+	    
+	    
+	    //inject encryption module
+	    customer.setEncryptionModule(encryptionModule);
+	    
+	    //Captured Credentials to validate Password and Captured Password;
+	    logonCredentialsDTO.setUserName("userName");
+	    logonCredentialsDTO.setPassword("password");
+	    logonCredentialsDTO.setConfirmPasword("P@ssw0rd");
+	    
+	    //Use a dynamic proxy to lookup for inter face
 	    userManagerImpl  = new UserManagerImpl(customerRepository);
 	    userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
     }
@@ -129,7 +131,6 @@ public class InsertUserTest {
 	
 	@Test //if parts user Details are Encrypted 
 	public void testValidatedUserEncryption(){
-		customer.setEncryptionModule(encryptionModule);
 		customer.encryptUserInformation();
 		ApplicationSpecification<CustomerDTO> userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
 		assertTrue("User details not encrypted properly", userDetailsSpecification.isSatisfiedBy(customer));
@@ -145,10 +146,10 @@ public class InsertUserTest {
 	
 	@Test //test if insertion happened successfult
 	public void testRegisterUser() throws DatabaseException{
-		userManager.updateUser(customer);
-		customer.setId(Long.valueOf(1));
-	    CustomerDTO insertedUser = userManager.selectCustomer(customer);
-	    assertNotNull("Failed to Insert User" , insertedUser);
+		CustomerDTO responseCutomer = userManager.updateUser(customer);
+		responseCutomer.setId(Long.valueOf(1));
+		CustomerDTO insertedUser = userManager.selectCustomer(responseCutomer);
+		assertNotNull("Failed to Insert User" , insertedUser);
 	}
 	
 	//@Test

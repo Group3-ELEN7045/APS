@@ -3,12 +3,16 @@ package test.za.ac.wits.group3.scrape;
  * @author bakwanyana
  */
 import static org.junit.Assert.*;    
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.After;  
 import org.junit.Before;  
 import org.junit.Test;  
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.*;
+import za.ac.wits.elen7045.group3.aps.services.scraper.ScrapeResult;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedStatementConverter;
 import za.ac.wits.elen7045.group3.aps.vo.scrape.MunicipalStatementConverter;
@@ -24,7 +28,7 @@ public class ScrapeStatementConverterTests {
 	CreditCardStatementConverter creditConverter;
 	MunicipalStatementConverter municipalConverter;
 	MunicipalStatement municipalObject;
-	ScrapedResult scrapedStatement;
+	ScrapeResult scrapedStatement;
 	List<DataPair> dataPairs;
 
 	@Before
@@ -63,7 +67,8 @@ public class ScrapeStatementConverterTests {
 		dataPairs.add(new DataPair("018","qaz","23"));
 		dataPairs.add(new DataPair("019","qaz","120mins"));
 		
-		scrapedStatement = new ScrapedResult("","","",dataPairs);
+		scrapedStatement = new ScrapeResult();
+		scrapedStatement.setDataPairList(dataPairs);
 		
 		telcoConverter = new TelcoStatementConverter(scrapedStatement);
 		telcoObject = telcoConverter.getTelcoStatement();
@@ -103,7 +108,8 @@ public class ScrapeStatementConverterTests {
 		dataPairs.add(new DataPair("022","qaz","R70"));
 		dataPairs.add(new DataPair("023","qaz","R0"));
 		
-		scrapedStatement = new ScrapedResult("","","",dataPairs);
+		scrapedStatement = new ScrapeResult();
+		scrapedStatement.setDataPairList(dataPairs);
 		
 		municipalConverter = new MunicipalStatementConverter(scrapedStatement);
 		municipalObject = municipalConverter.getMunicipalStatement();
@@ -145,7 +151,8 @@ public class ScrapeStatementConverterTests {
 		dataPairs.add(new DataPair("018","qaz","R4500"));
 		dataPairs.add(new DataPair("019","qaz","R90"));
 		
-		scrapedStatement = new ScrapedResult("","","",dataPairs);
+		scrapedStatement = new ScrapeResult();
+		scrapedStatement.setDataPairList(dataPairs);
 		
 		creditConverter = new CreditCardStatementConverter(scrapedStatement);
 		creditCardObject = creditConverter.getCreditCardStatement();

@@ -1,6 +1,6 @@
 
 /**
- * 
+ *  
  */
 package test.za.ac.wits.group3.domain.mock;
 
@@ -17,32 +17,33 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  * @author SilasMahlangu
  *
  */		
-public class MockUserDAOImpl implements UserDataAccess{
+public class FakeUserDB implements UserDataAccess{
     	 
-	public boolean updateUser(Customer customer) throws DatabaseException{
+	public Customer updateUser(Customer customer) throws DatabaseException{
 	   //DI Inject This
 	   EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
 	   entityManager.getTransaction().begin();
 	   entityManager.merge(customer);	   
 	   entityManager.getTransaction().commit();
 	   entityManager.close();
-       return true;
+       return customer;
 	}
 	
 	public Customer selectCustomer(Customer customer) throws DatabaseException{
-		//DI Inject This
+		//DI Inject This		 
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		
 		 Customer customerResponse = entityManager.find(Customer.class,customer.getId());
-		 entityManager.close();
+		 entityManager.close();		 
 		 return customerResponse;
 	}
 	
 	public Customer getCustomer(CredentialsVO credentilas) throws DatabaseException{
-		//DI Inject This
+		//DI Inject This		
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		 Query query = entityManager.createQuery ("SELECT customer FROM Customer customer WHERE customer.credentials.userName = ?1");
+		 Query query = entityManager.createQuery ("SELECT distinct customer FROM Customer customer WHERE customer.credentials.userName = ?1");
 		 query.setParameter (1, credentilas.getUserName());
-		 Customer custResult =(Customer) query.getSingleResult();
+		 Customer custResult =(Customer) query.getSingleResult();		
 		 entityManager.close();
 		 return custResult;
 	}

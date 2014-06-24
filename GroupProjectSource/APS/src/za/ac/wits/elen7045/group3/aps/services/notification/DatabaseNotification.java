@@ -34,15 +34,27 @@ public class DatabaseNotification extends ConfirmationNotification{
 	       
 		return true;
 	}
-
+    
+	//1. get Logon Notifications and the ones in a waiting state	
 	@Override
 	public Object getNotification() {
 		//DI Inject This
 	    EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		Query query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.accountNumber = ?1 and notify.notificationType=?2");
-		query.setParameter (1, notification.getAccountNumber()).setParameter(2, notification.getNotificationType());
-		List<ScrapeLogResult>  scrapeResults =(List<ScrapeLogResult>) query.getResultList();
+		Query query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.accountNumber = ?1 and notify.notificationType=?2 and notify.statsus=?3");
+		query.setParameter (1, notification.getAccountNumber()).setParameter(2, notification.getNotificationType()).setParameter(3, notification.getStatsus());
+		List  scrapeResults =(List) query.getResultList();
         return scrapeResults;
+	}
+	
+	public ScrapeLogResult updateNotification(){
+	    //DI Inject This
+		EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		ScrapeLogResult upDateResults = entityManager.find(ScrapeLogResult.class, notification.getId());
+		entityManager.getTransaction().begin();
+		upDateResults.setStatsus(notification.getStatsus());
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return upDateResults;
 	}
 
 }
