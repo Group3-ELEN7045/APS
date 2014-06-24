@@ -20,7 +20,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
@@ -45,7 +45,7 @@ public class BillingAccount implements Serializable{
 	private CredentialsVO credentials;
 
 	@ Embedded
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+	private List<ScrapedData> billingStatement = new ArrayList<ScrapedData>();
 
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
@@ -94,7 +94,7 @@ public class BillingAccount implements Serializable{
 		
 	@LazyCollection(LazyCollectionOption.FALSE)
 //	@OneToMany(cascade=CascadeType.ALL)
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
+	public List<ScrapedData> getBillingStatement() {
 		return billingStatement;
 	}
 
@@ -114,7 +114,7 @@ public class BillingAccount implements Serializable{
 	}
 	
 
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+	public void addBillingAccountStatament(ScrapedData statement){
 		if(!(statement ==null)){
 			if(!billingStatement.contains(statement)){
 				billingStatement.add(statement);	

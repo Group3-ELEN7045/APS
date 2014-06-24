@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
+import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;

@@ -5,9 +5,9 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
 
 import javax.persistence.Embeddable;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 @Embeddable
-public class CreditCardStatement extends AbstractBillingAccountStatement{
+public class CreditCardStatement extends ScrapedData{
 
 	private String cardType;
 	private String interestRate;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
 /**
