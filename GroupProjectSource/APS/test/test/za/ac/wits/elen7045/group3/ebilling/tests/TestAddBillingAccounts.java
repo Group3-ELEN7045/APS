@@ -15,39 +15,22 @@ import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
-import za.ac.wits.elen7045.group3.aps.domain.entities.User;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
-import za.ac.wits.elen7045.group3.aps.domain.vo.ContactDetailsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountStatementManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountStatementManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
-import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.AuthenticationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.CapturedCredentialsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.user.EncryptedUserInformationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
-import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
-import za.ac.wits.elen7045.group3.aps.services.validation.LogonService;
 
 public class TestAddBillingAccounts {
 	private CustomerDTO customer;
@@ -85,17 +68,20 @@ public class TestAddBillingAccounts {
 	
 	@Test
 	 public void tetBillingAccountFields() {
-	 try {	 
+	 try {	
+		 //Tests for the specification which verifues the nbilling account details
 		 billingAccountDTO = new BillingAccountDTO("12345");
 		 ApplicationSpecification<BillingAccountDTO> billingAccountDetails = new BillingAccountDetailsSpecification(
 				 billingAccountDTO);
 		 assertFalse(billingAccountDetails.isSatisfiedBy(billingAccountDTO));
 		 
-		 userCredenials.setUserName("username1");
+		 //Tests for a valid user
+		 userCredenials.setUserName("userName");
 	     userCredenials.setPassword("password");
 	     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
 		assertTrue(authenticationCustomer != null);
 		
+		//Tests if all the required fields for billing account are set
 		billingAccountDTO.setCustomerId(authenticationCustomer.getId());
 		billingAccountDTO.setCredentials(authenticationCustomer.getCredentials());
 		billingAccountDTO.setCompanyUrl("www.telco.co.za");
@@ -111,9 +97,10 @@ public class TestAddBillingAccounts {
 	
 	 @Test
 	 public void testSaveBillingAccount() {
-	 try {	 	 
+	 try {	
+		 //Tests for the saving of the billing accounts
 		 billingAccountDTO = new BillingAccountDTO("12345");		 	 
-		 userCredenials.setUserName("username1");
+		 userCredenials.setUserName("userName");
 	     userCredenials.setPassword("password");
 	     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);		 
 		 billingAccountDTO.setCustomerId(authenticationCustomer.getId());
@@ -126,11 +113,13 @@ public class TestAddBillingAccounts {
 		 assertNotNull("Failed to Insert Billing Account" , insertedBillingAccount);
 		 assertEquals("www.telco.co.za", insertedBillingAccount.getCompanyUrl() );
 		 
+		 //Tests for the updating of the billing accounts
 		 insertedBillingAccount.setCompanyUrl("www.credit.co.za");
 		 billingAccountManager.updateBillingAccountStatus(insertedBillingAccount);
 		 BillingAccountDTO updateBillingAccount = billingAccountManager.getBillingAccount("12345");
-		 assertEquals("www.credit.co.za", updateBillingAccount.getCompanyUrl() );
-		 
+		 System.out.println("Updated 1 = " + updateBillingAccount.getCompanyUrl());
+		 assertEquals("www.credit.co.za", updateBillingAccount.getCompanyUrl() );		 
+				 
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block
 	 e.printStackTrace();
@@ -139,9 +128,12 @@ public class TestAddBillingAccounts {
 	 
 	 @Test
 	 public void testgetBillingAccountsByCompanyName() {
-	 try {		 
+	 try {
+		 
+		 //Tests for billing account search
 		 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount("12345");
 		 assertEquals("www.credit.co.za", insertedBillingAccount.getCompanyUrl() );
+		 
 		 String url = "www.credit.co.za";
 		 List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountsByCompanyName(url);
 		 assertEquals(1, updateBillingAccount.size() );		 
@@ -149,24 +141,5 @@ public class TestAddBillingAccounts {
 	 // TODO Auto-generated catch block
 	 e.printStackTrace();
 	 }
-	}
-	 
-	 @Test
-	 public void testgetBillingAccountsStatements() {
-	 try {
-
-		 userCredenials.setUserName("username1");
-	     userCredenials.setPassword("password");
-	     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
-		assertTrue(authenticationCustomer != null);
-		
-		String period = "june";
-		List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountStatementByAccountNumberAndPeriod(authenticationCustomer, period);
-		 assertEquals(1, updateBillingAccount.size() );		 
-	 } catch (Exception e) {
-	 // TODO Auto-generated catch block
-	 e.printStackTrace();
-	 }
-	}
-	 
+	}	 
 }

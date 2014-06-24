@@ -5,6 +5,7 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <!-- Customer Repository Setup -->
+
 	<bean id="userRepository" 			class="test.za.ac.wits.elen7045.group3.domain.mock.FakeUserDB"/>
 	<bean id="customerReposiory" 		class="za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl">
 	   <constructor-arg ref="userRepository"/>
@@ -23,6 +24,7 @@
    <bean id="billingAccountRepository" 	class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
        <constructor-arg ref="billingDataAccess"/>
    </bean>
+
     <!-- Billing Database Setup -->
     
     <bean id="applicationUser"   		class="za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO"/>
@@ -30,8 +32,12 @@
       <property name="encryptionModule" ref="encryptionModule"></property>
     </bean>
     
-    <bean id="paymentDetails"    		class="za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO"/>   
-    <bean id="userCredenials"    		class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/> 
+
+    <bean id="paymentDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO"/>   
+	   
+    <bean id="userCredenials"    class="za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO"/>
+
+
     <bean id="billingCompanyDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO"/> 
     <bean id="contactDetails"    		class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
     <bean id="notification"      		class="za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult"/>

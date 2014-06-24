@@ -79,14 +79,28 @@ public class TestUserLogin {
 		
     @Test
     public void testCustomerAuthentication() throws DatabaseException {
-    	for(CustomerDTO customerDTO : customers){
-    	  userCredenials.setUserName(customerDTO.getCredentials().getUserName());
-    	  userCredenials.setPassword(customerDTO.getCredentials().getPassword());
-    	  CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
-    	  authenticationCustomer.getCredentials().setEncryptionModule(encryptionModule);
-	      ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
-	      CredentialsDTO dbCredentials = authenticationCustomer.getCredentials();
-	       assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(dbCredentials));
-    	}
+    	
+	    
+    	userCredenials.setUserName("userName");
+    	userCredenials.setPassword("password");
+    	CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
+    	authenticationCustomer.getCredentials().setEncryptionModule(encryptionModule);
+	    
+    	ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
+	    CredentialsDTO dbCredentials = authenticationCustomer.getCredentials();
+	    assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(dbCredentials));
+    	
+//    	for(CustomerDTO customerDTO : customers){
+//    	  userCredenials.setUserName(customerDTO.getCredentials().getUserName());
+//    	  userCredenials.setPassword(customerDTO.getCredentials().getPassword());
+//    	  userCredenials.setEncryptionModule(encryptionModule);
+//    	  userCredenials.encryptCredentials();
+//    	  
+//    	  CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
+//    	  authenticationCustomer.getCredentials().setEncryptionModule(encryptionModule);
+//	      ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
+//	      CredentialsDTO dbCredentials = authenticationCustomer.getCredentials();
+//	       assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(dbCredentials));
+//    	}
     }
 }

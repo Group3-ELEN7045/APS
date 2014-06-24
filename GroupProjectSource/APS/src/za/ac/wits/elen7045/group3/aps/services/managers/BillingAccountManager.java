@@ -16,6 +16,5 @@ public interface BillingAccountManager{
 	public BillingAccountDTO getBillingAccount(String accountNumber) throws DatabaseException;
 	public List<BillingAccountDTO> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException;
 	List<BillingAccountDTO> getBillingAccountStatementByAccountNumberAndPeriod(
-			CustomerDTO customer, String period) throws DatabaseException;
-	
+			CustomerDTO customer, String period) throws DatabaseException;	
 }

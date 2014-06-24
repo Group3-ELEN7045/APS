@@ -92,10 +92,27 @@ public class InsertUserTest {
 	    paymentDetailsDTO.setValue("111111111111");
 	    customer.setPaymentDetails(paymentDetailsDTO);
 	    
+
+
+//	    //Customer Ebilling Account 
+//	    billingAccountDTO.setAccountNumber("123456789");
+//	    billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
+//	    billingAccountDTO.setCompanyUrl("MTN");
+//	   // billingAccountDTO.setBillingCompanyType(CompanyStatementType.TELCO.getAccountType());
+//	    billingAccountDTOs.add(billingAccountDTO);
+//	    customer.setBillingAccounts(billingAccountDTOs);
+//	    
+
+//	    contactInforMationDTO.setContactType(ContactType.EMAIL.getContactType());
+//	    contactInforMationDTO.setContactValue("bak@hotmail.com");
+//	    customer.setContactDetails(contactInforMationDTO);
+
+
 	    contactInforMationDTO.setContactType(ContactType.EMAIL.getContactType());
 	    contactInforMationDTO.setContactValue("bak@hotmail.com");
 	    customer.setContactDetails(contactInforMationDTO);
 	    
+
 	    customer.setEncryptionModule(encryptionModule);
 	    
 	    
@@ -137,8 +154,9 @@ public class InsertUserTest {
 	@Test //test if insertion happened successfult
 	public void testRegisterUser() throws DatabaseException{
 		CustomerDTO responseCutomer = userManager.updateUser(customer);
+		responseCutomer.setId(Long.valueOf(1));
 		CustomerDTO insertedUser = userManager.selectCustomer(responseCutomer);
-	    assertNotNull("Failed to Insert User" , insertedUser);
+		assertNotNull("Failed to Insert User" , insertedUser);
 	}
 	
 	//@Test

@@ -3,18 +3,31 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
  * @author boitumelo
  */
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
-@Embeddable
-public class CreditCardStatement extends ScrapedData{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+
+@Entity
+@Table(name="CREDIT_CARD_STATEMENT")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class CreditCardStatement extends BillingAccountStatement implements Serializable{
+			
 	private String cardType;
 	private String interestRate;
 	private String creditLimit;
 	private String creditAvailable;
 	private String minimumAmountDue;
-
+	
 	public CreditCardStatement(String accountNumber) {
 		setAccountNumber(accountNumber);
 	}
@@ -48,9 +61,5 @@ public class CreditCardStatement extends ScrapedData{
 	}
 	public void setMinimumAmountDue(String minimumAmountDue) {
 		this.minimumAmountDue = minimumAmountDue;
-	}
-	
-	
-	
-	
+	}	
 }

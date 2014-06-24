@@ -30,19 +30,20 @@ public class FakeUserDB implements UserDataAccess{
 	}
 	
 	public Customer selectCustomer(Customer customer) throws DatabaseException{
-		//DI Inject This
+		//DI Inject This		 
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		
 		 Customer customerResponse = entityManager.find(Customer.class,customer.getId());
-		 entityManager.close();
+		 entityManager.close();		 
 		 return customerResponse;
 	}
 	
 	public Customer getCustomer(CredentialsVO credentilas) throws DatabaseException{
-		//DI Inject This
+		//DI Inject This		
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
 		 Query query = entityManager.createQuery ("SELECT distinct customer FROM Customer customer WHERE customer.credentials.userName = ?1");
 		 query.setParameter (1, credentilas.getUserName());
-		 Customer custResult =(Customer) query.getSingleResult();
+		 Customer custResult =(Customer) query.getSingleResult();		
 		 entityManager.close();
 		 return custResult;
 	}
