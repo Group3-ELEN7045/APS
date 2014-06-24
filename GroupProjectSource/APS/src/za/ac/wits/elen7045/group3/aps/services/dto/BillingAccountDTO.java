@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
+
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
 
@@ -16,7 +16,7 @@ public class BillingAccountDTO implements Serializable{
 	private String accountNumber;
 	private String companyUrl;	
 	private CredentialsDTO credentials;
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+	private List<BillingAccountStatement> billingStatement = new ArrayList<BillingAccountStatement>();
 	private String accountStatus;
 	
 	public BillingAccountDTO(String accountNumber){
@@ -64,7 +64,7 @@ public String getCompanyUrl() {
 		this.companyUrl = companyUrl;
 	}
 
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
+	public List<BillingAccountStatement> getBillingStatement() {
 		return billingStatement;
 	}	
 	public Long getCustomerId() {
@@ -81,7 +81,7 @@ public String getCompanyUrl() {
 		this.accountStatus = accountStatus;
 	}
 	
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
+	public void addBillingAccountStatament(BillingAccountStatement statement){
 		if(!(statement == null)){
 			if(!billingStatement.contains(statement)){
 				billingStatement.add(statement);

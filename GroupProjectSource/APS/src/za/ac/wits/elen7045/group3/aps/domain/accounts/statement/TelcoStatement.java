@@ -1,35 +1,43 @@
 package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-
-
 /**
  * @author boitumelo
+ * @author Livious
  */
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 
 @Entity
-@Table(name="Telco")
-@Inheritance(strategy=InheritanceType.JOINED)
-public class TelcoStatement extends AbstractBillingAccountStatement implements Serializable {
+@Table(name="TELCO")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class TelcoStatement extends BillingAccountStatement implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String 	telephonenumber;
 	private String 	serviceCharges;
 	private String 	callCharges;
 	private String 	totalCustomerCalls;
 	private String	totalCallDuration;
-	
+		
 	public TelcoStatement() {		
 	}
-	public TelcoStatement(String accountNumber) {
-		setAccountNumber(accountNumber);
-	}
+//	public TelcoStatement(String accountNumber) {
+//		setAccountNumber(accountNumber);
+//	}
+	
+	
 	public String getTelephonenumber() {
 		return telephonenumber;
 	}

@@ -82,7 +82,6 @@ public class UserEntityBuilder {
 
 			    billingAccount.setCompanyUrl(accountDTO.getCompanyUrl());
 
-			
 			    CredentialsDTO credentialsDTO = accountDTO.getCredentials();
 			    CredentialsVO credentialsVO = new CredentialsVO();
 			    credentialsVO.setPassword(credentialsDTO.getPassword());

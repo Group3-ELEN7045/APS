@@ -13,15 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
@@ -43,14 +36,12 @@ public class BillingAccount implements Serializable{
 	private Long customerId;
 	private String accountNumber;
 	private String companyUrl;	
-	private CredentialsVO credentials;
-
-	@ Embedded
-	private List<AbstractBillingAccountStatement> billingStatement = new ArrayList<AbstractBillingAccountStatement>();
+	private CredentialsVO credentials;	
 
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
 	private Customer customer;	 
+	
 	private String accountStatus=AccountStatusType.TRYING.getStatusType();
 	
 	public BillingAccount() {
@@ -90,12 +81,6 @@ public class BillingAccount implements Serializable{
 	}
 	public void setCredentials(CredentialsVO credentials) {
 		this.credentials = credentials;
-	}	
-
-		
-	@LazyCollection(LazyCollectionOption.FALSE)
-	public List<AbstractBillingAccountStatement> getBillingStatement() {
-		return billingStatement;
 	}
 
 	public Long getCustomerId() {
@@ -112,17 +97,7 @@ public class BillingAccount implements Serializable{
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-	public void addBillingAccountStatament(AbstractBillingAccountStatement statement){
-		if(!(statement == null)){
-			if(billingStatement == null){
-				billingStatement = new ArrayList<AbstractBillingAccountStatement>();
-			}
-			if(!billingStatement.contains(statement)){
-				billingStatement.add(statement);	
-			}		
-		}
-	}
-	
+		
 	public String getCompanyUrl() {
 		return companyUrl;
 	}

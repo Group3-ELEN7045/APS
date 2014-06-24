@@ -19,8 +19,9 @@ public class ApplicationContants {
    
    public static final String FILE_NAME_NOTIFICATION = "notifications.txt";
    public static final String USER_MESSAGES_XML_PATH = "user/notifications/messages/";
+   public static final String USER_STATEMENT_PATH ="notifications/statement/muninicipality";
    public static final String ACCOUNT_STATUS = "status";
-   
+      
    
    //Notifications Constants
    public static final String XML_PROLOG = "<?xml version='1.0'?>";

@@ -3,8 +3,8 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.repository;
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
@@ -50,9 +50,10 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	}
 
 	@Override
-	public boolean updateBillingAccountStatement(AbstractBillingAccountStatement billingAccountStatement)
+	public boolean updateBillingAccountStatement(
+			BillingAccountStatement billingAccountStatement)
 			throws DatabaseException {
-		dataAccess.updateBillingAccountStatement(billingAccountStatement);
+		// TODO Auto-generated method stub
 		return false;
-	}
+	}	
 }

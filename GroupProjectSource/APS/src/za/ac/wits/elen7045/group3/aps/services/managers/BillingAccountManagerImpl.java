@@ -8,9 +8,9 @@ import javax.persistence.Persistence;
 
 import org.dozer.DozerBeanMapper;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
@@ -62,17 +62,15 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 			BillingAccountDTO billingAccountdto) throws DatabaseException {
 		ApplicationSpecification<BillingAccountDTO> userBillingAccountDetails = new BillingAccountDetailsSpecification(
 				billingAccountdto);
-		 System.out.println("size of list in manager " + billingAccountdto.getBillingStatement().size());
 		// checks if all the required fields of the billing account have been set
 		if (userBillingAccountDetails.isSatisfiedBy(billingAccountdto)) {
 			DozerBeanMapper dozer = new DozerBeanMapper();
 			if(billingAccountdto.getBillingStatement() != null){
-				for(AbstractBillingAccountStatement stat : billingAccountdto.getBillingStatement()){
-					entityBillingAccount.addBillingAccountStatament(stat);
+				for(BillingAccountStatement stat : billingAccountdto.getBillingStatement()){
+				//	entityBillingAccount.addBillingAccountStatament(stat);
 				}
 			}
-			dozer.map(billingAccountdto, entityBillingAccount);
-			System.out.println("size of list in manager entity " + entityBillingAccount.getBillingStatement().size());
+			dozer.map(billingAccountdto, entityBillingAccount);			
 			billingRepository.updateBillingAccountStatus(entityBillingAccount);
 		}
 		return true;
@@ -135,9 +133,4 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		return billingAccount;
 	}
 	
-	@Override
-	public boolean updateBillingAccountStatement(AbstractBillingAccountStatement billingAccountStatement)throws DatabaseException {
-		billingRepository.updateBillingAccountStatement(billingAccountStatement);
-	       return true;
-	}
 }

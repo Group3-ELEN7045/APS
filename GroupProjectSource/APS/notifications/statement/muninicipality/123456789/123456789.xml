@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="municipality.xsl" ?>
+<MunicipalStatement>
+  <AccountNumber>123456789</AccountNumber>
+  <AccountHolderName>Silas Mahlangu</AccountHolderName>
+  <AccountStatementDate>01/01/2000</AccountStatementDate>
+  <AccountStatementNumber>332</AccountStatementNumber>
+  <AccountStatementMonth>01/2000</AccountStatementMonth>
+  <AccountTotalDue>will Calculte</AccountTotalDue>
+  <AccountDueDate>05/01/2000</AccountDueDate>
+  <AccountOpeningBalance></AccountOpeningBalance>
+  <AccountClosingBalance></AccountClosingBalance>
+  <AccountPaymentReceived>1000</AccountPaymentReceived>
+  <AccountNewCharges>Will calculate</AccountNewCharges>
+  <AccountDeductions></AccountDeductions>
+  <AccountDiscount></AccountDiscount>
+  <AccountVATAmount></AccountVATAmount>
+  <InstalmentNotice>01002003004</InstalmentNotice>
+  <ElectricityUsed>0 Megawatts</ElectricityUsed>
+  <ElectricityCharges>3000.00</ElectricityCharges>
+  <GasUsed>2lt</GasUsed>
+  <GasCharges>R5000</GasCharges>
+  <WaterUsed>One drop</WaterUsed>
+  <WaterCharges>3000.00</WaterCharges>
+  <SewerageCharges>2300.00</SewerageCharges>
+  <RefuseCharges>300.00</RefuseCharges>
+</MunicipalStatement>

@@ -19,7 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.thoughtworks.xstream.XStream;
 
-import test.za.ac.wits.group3.mock.proxy.APSMockObjectGenerator;
+import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
@@ -93,6 +93,7 @@ public class InsertUserTest {
 	    customer.setPaymentDetails(paymentDetailsDTO);
 	    
 
+
 //	    //Customer Ebilling Account 
 //	    billingAccountDTO.setAccountNumber("123456789");
 //	    billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
@@ -102,9 +103,15 @@ public class InsertUserTest {
 //	    customer.setBillingAccounts(billingAccountDTOs);
 //	    
 
+//	    contactInforMationDTO.setContactType(ContactType.EMAIL.getContactType());
+//	    contactInforMationDTO.setContactValue("bak@hotmail.com");
+//	    customer.setContactDetails(contactInforMationDTO);
+
+
 	    contactInforMationDTO.setContactType(ContactType.EMAIL.getContactType());
 	    contactInforMationDTO.setContactValue("bak@hotmail.com");
 	    customer.setContactDetails(contactInforMationDTO);
+	    
 
 	    customer.setEncryptionModule(encryptionModule);
 	    
