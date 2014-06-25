@@ -48,6 +48,14 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 		return dataAccess.getBillingAccountStatementByAccountNumberAndPeriod(customerId, period);
 		
 	}
+	
+	
+
+	@Override
+	public List<BillingAccount> getBillingAccountsByUserId(Long id)	throws DatabaseException {
+		List<BillingAccount> bilingAccs = dataAccess.getBillingAccountsByUserId(id);
+		return bilingAccs;
+	}
 
 	@Override
 	public boolean updateBillingAccountStatement(
