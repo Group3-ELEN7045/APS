@@ -8,21 +8,15 @@ import javax.persistence.Persistence;
 
 import org.dozer.DozerBeanMapper;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class BillingAccountManagerImpl implements BillingAccountManager {
 	private BillingAccountRepository billingRepository;

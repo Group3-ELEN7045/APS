@@ -1,12 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import java.util.List;
-
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
