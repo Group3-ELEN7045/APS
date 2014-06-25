@@ -4,13 +4,28 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.statement;
  * @author boitumelo
  */
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 
-@ Embeddable
-public class MunicipalStatement extends ScrapedData {
-
+@Entity
+@Table(name="MUNICIPAL_STATEMENT")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class MunicipalStatement extends BillingAccountStatement implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String InstalmentNotice = "";
 	private String ElectricityUsed = "";
 	private String ElectricityCharges = "";
@@ -21,9 +36,9 @@ public class MunicipalStatement extends ScrapedData {
 	private String SewerageCharges = "";
 	private String RefuseCharges = "";
 	
-	public MunicipalStatement(String accountNumber) {
-		setAccountNumber(accountNumber);
-	}
+//	public MunicipalStatement(String accountNumber) {
+//		setAccountNumber(accountNumber);
+//	}
 	public String getInstalmentNotice() {
 		return InstalmentNotice;
 	}

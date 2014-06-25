@@ -15,5 +15,5 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 public interface UserDataAccess {
 	public Customer updateUser(Customer customer) throws DatabaseException;
 	public Customer selectCustomer(Customer customer) throws DatabaseException;
-	public Customer getCustomer(CredentialsVO credentials) throws DatabaseException;
+	public Customer getCustomerForLogin(CredentialsVO credentials) throws DatabaseException;
 }

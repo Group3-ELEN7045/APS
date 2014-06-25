@@ -4,7 +4,6 @@ package test.za.ac.wits.elen7045.group3.scrape;
  * @author boitumelo
  * 
  */
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -17,40 +16,33 @@ import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.ScrapeRetryExce
 
 public class ScrapeManagerTest {
 	
-	ScrapeManagerImpl sm;
+	ScrapeManagerImpl scrapeManagerImpl;
 	BillingAccount billingAccount;
 	@Before
 	public void setUp() throws Exception {
-		sm = mock(ScrapeManagerImpl.class);		
+		scrapeManagerImpl = new ScrapeManagerImpl();
 	}
 
 	@Test
 	public void test() {
 		billingAccount = new BillingAccount(2L,98654L,"9098666546");
 		billingAccount.setCredentials(new CredentialsVO());
-		billingAccount.setCompanyUrl("creditcard.xml");
-		//configure 	
-//		when(sm.scrapeAccount(billingAccount)).thenReturn(true);
-		
+//		billingAccount.setCompanyUrl("creditcard.xml");
+		billingAccount.setCompanyUrl("municipal.xml");
+
 		//exercise
 		try {
-			sm.scrapeAccount(billingAccount);
+			scrapeManagerImpl.scrapeAccount(billingAccount);
 		} catch (ScrapeRetryException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			verify(sm).scrapeAccount(billingAccount);
+			verify(scrapeManagerImpl).scrapeAccount(billingAccount);
 		} catch (ScrapeRetryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	private Object when(Object scrapeAccount) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

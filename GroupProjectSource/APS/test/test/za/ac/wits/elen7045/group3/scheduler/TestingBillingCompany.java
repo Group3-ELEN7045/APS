@@ -34,12 +34,6 @@ public class TestingBillingCompany extends TestCase {
 		BillingCompany billingCompany = new BillingCompany(companyName);
 		billingCompany.setCompanyName("COJ");
 		assertTrue(companyName.equals(billingCompany.getCompanyName()));
-		BillingAccount account = new BillingAccount();
-		account.setId(new Long(56));
-		billingCompany.addBillingAccounts(account);
-		billingCompany.addBillingAccounts(account);
-		List<BillingAccount> accounts = billingCompany.getBillingAccounts();
-		assertTrue(accounts.size() == 1);
 		String url = "http://www";
 		billingCompany.setURL(url);
 		assertTrue(url.equals(billingCompany.getUrl()));

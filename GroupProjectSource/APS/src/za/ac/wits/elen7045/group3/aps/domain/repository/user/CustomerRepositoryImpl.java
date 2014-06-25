@@ -31,9 +31,8 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 		return userDatabase.selectCustomer(customer);
 	}
 	@Override
-	public Customer getCustomer(CredentialsVO credentials)
-			throws DatabaseException {
-		return userDatabase.getCustomer(credentials);
+	public Customer getCustomerForLogin(CredentialsVO credentials)throws DatabaseException {
+		return userDatabase.getCustomerForLogin(credentials);
 	}
 	
 	

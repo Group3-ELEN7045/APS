@@ -8,7 +8,7 @@ package za.ac.wits.elen7045.group3.aps.services.enumtypes;
  *
  */
 public enum NotificationType {
-	SMS("SMS"), EMAIL("E"), DATABASE("DB"), LOGON("L");
+	SMS("SMS"), EMAIL("E"), DATABASE("DB"), LOGON("L"), APS("APS");
 	 
 	private String notificationType;
  

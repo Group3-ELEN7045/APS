@@ -4,6 +4,7 @@ import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
@@ -47,4 +48,12 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 		return dataAccess.getBillingAccountStatementByAccountNumberAndPeriod(customerId, period);
 		
 	}
+
+	@Override
+	public boolean updateBillingAccountStatement(
+			BillingAccountStatement billingAccountStatement)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		return false;
+	}	
 }

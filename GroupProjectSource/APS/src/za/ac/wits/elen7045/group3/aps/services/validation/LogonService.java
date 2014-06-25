@@ -19,7 +19,7 @@ public class LogonService {
 	
 	public Boolean validation(CredentialsVO credentials) throws Exception{
 					
-		user = customerRepository.getCustomer(credentials);
+		user = customerRepository.getCustomerForLogin(credentials);
 		
 		if(user == null){			
 			throw new LogonException(ApplicationContants.USER_NOT_FOUND);

@@ -1,8 +1,11 @@
 package za.ac.wits.elen7045.group3.aps.domain;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.ScrapedData;
+import java.util.List;
 
-public interface BillingAccountStatementDataAccess {
-	ScrapedData getCustemerStatement(long billingAccountId, String biilingPeriod);
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+
+public interface BillingAccountStatementDataAccess <T>{
+	public boolean saveBillingAccountStatement(T t);
+	public List<BillingAccountStatement> getBillingAccountStatements(String accountNumber, String biilingPeriod);
 }
 

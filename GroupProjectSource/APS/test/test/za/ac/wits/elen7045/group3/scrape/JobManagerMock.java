@@ -24,12 +24,12 @@ public class JobManagerMock {
 		billingAccount = new BillingAccount(1L,98986L,"9098777546");
 		billingAccount.setCredentials(new CredentialsVO());
 		billingAccount.setCompanyUrl("municipal.xml");
-		billingCo.addBillingAccounts(billingAccount);
+		//billingCo.addBillingAccounts(billingAccount);
 		
 		billingAccount = new BillingAccount(2L,98654L,"9098666546");
 		billingAccount.setCredentials(new CredentialsVO());
 		billingAccount.setCompanyUrl("creditcard.xml");
-		billingCo.addBillingAccounts(billingAccount);
+		//billingCo.addBillingAccounts(billingAccount);
 		
 		//ScraperStrategy scraper = new MunicipalScrapeStrategy(billingAccount);	
 		//sm = new ScrapeManager(scraper);
