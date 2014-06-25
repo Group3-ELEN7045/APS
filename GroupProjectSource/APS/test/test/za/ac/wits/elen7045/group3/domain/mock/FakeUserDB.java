@@ -26,8 +26,20 @@ public class FakeUserDB implements UserDataAccess{
 	   EntityManager entityManager =null;
 	   try{
 		   entityManager= Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-	       entityManager.getTransaction().begin();
-	       responseCustomer = entityManager.merge(customer);	   
+		   entityManager.getTransaction().begin();
+		   if(customer.getId() != null){
+			   responseCustomer = entityManager.find(Customer.class, customer.getId());
+			   responseCustomer.setBillingAccounts(customer.getBillingAccounts());
+			   responseCustomer.setContactDetails(customer.getContactDetails());
+			   responseCustomer.setCredentials(customer.getCredentials());
+			   responseCustomer.setDateOfBirth(customer.getDateOfBirth());
+			   responseCustomer.setFirstName(customer.getFirstName());
+			   responseCustomer.setLastname(customer.getLastname());
+			   responseCustomer.setPaymentDetails(customer.getPaymentDetails());
+			   responseCustomer.setStringDateOfBirth(customer.getStringDateOfBirth());
+		   }else{   
+		       responseCustomer = entityManager.merge(customer);
+		   }
 	       entityManager.getTransaction().commit();
 	   }catch(Exception e){
 		   throw new DatabaseException(e.getMessage());
@@ -67,7 +79,7 @@ public class FakeUserDB implements UserDataAccess{
 		    //entityManager.getTransaction().begin();
 		    //query = entityManager.createQuery ("DELETE FROM Customer customer where id >= 0");
 		    //query.executeUpdate();
-		    entityManager.getTransaction().commit();
+		    //entityManager.getTransaction().commit();
 		}catch(NonUniqueResultException nure){
 			nure.printStackTrace();
 			throw new DatabaseException(ApplicationContants.DATABASE_DUPLICATE_ENTRY);

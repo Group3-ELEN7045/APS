@@ -80,4 +80,16 @@ public class FakeBillingDB implements BillingAccountDataAccess {
 		 List<BillingAccount> accountList = (List<BillingAccount>) query.getResultList();
 		 return accountList;
 	}
+
+	@Override
+	public List<BillingAccount> getBillingAccountsByUserId(Long id)throws DatabaseException {
+		EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.customerId =?1");
+		 query.setParameter (1, id);
+		 
+		 List<BillingAccount> accountList = (List<BillingAccount>) query.getResultList();
+		 return accountList;
+	}
+	
+	
 }
