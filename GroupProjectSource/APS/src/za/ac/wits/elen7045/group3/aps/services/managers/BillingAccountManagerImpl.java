@@ -25,7 +25,7 @@ import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class BillingAccountManagerImpl implements BillingAccountManager {
 	private BillingAccountRepository billingRepository;
-	private BillingAccount entityBillingAccount = new BillingAccount();
+	private BillingAccount entityBillingAccount; // = new BillingAccount();
 	private BillingAccountDTO billingAccountdto;
 
 	public BillingAccountManagerImpl(BillingAccountRepository billingRepository) {
@@ -96,13 +96,13 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 	}
 
 	@Override
-	public List<BillingAccountDTO> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException {
+	public List<BillingAccountDTO> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException {
 		if (billingCompanyUrl == null) {
 			throw new RuntimeException("Billing Company url cannot be null");
 		}		
 		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		List<BillingAccount> accoutList = billingRepository.getBillingAccountsByCompanyName(billingCompanyUrl);
+		List<BillingAccount> accoutList = billingRepository.getBillingAccountsByCompanyUrl(billingCompanyUrl);
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
 				dozer.map(entity, billingAccountdto);
@@ -111,26 +111,25 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		}
 		return billingAccount;
 	}
-	
+
 	@Override
-	public List<BillingAccountDTO> getBillingAccountStatementByAccountNumberAndPeriod(CustomerDTO customer, String period) throws DatabaseException {
-		if (customer == null) {
-			throw new RuntimeException("Billing Company url cannot be null");
+	public List<BillingAccountDTO> getBillingAcountsForCustomer(Long customerId) throws DatabaseException {
+		if (customerId == null) {
+			throw new RuntimeException("Billing Account Id cannot be null");
 		}
-		if (period == null) {
-			throw new RuntimeException("Billing period cannot be null");
-		}
-		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
+		List<BillingAccountDTO> billingAccountList = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		List<BillingAccount> accoutList = billingRepository.getBillingAccountStatementByAccountNumberAndPeriod(customer.getId(), period);
+		List<BillingAccount> accoutList = billingRepository.getBillingAcountsForCustomer(customerId);
+		System.out.println("Size of the list true " + accoutList.size());
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
-				BillingAccountDTO billingAccountdto1 = new BillingAccountDTO(entity.getAccountNumber());
-				dozer.map(entity, billingAccountdto1);
-				billingAccount.add(billingAccountdto1);
+				if (!(entity == null)) {
+					billingAccountdto = new BillingAccountDTO(entity.getAccountNumber());									
+					dozer.map(entity, billingAccountdto);
+					billingAccountList.add(billingAccountdto);
+				}
 			}
 		}
-		return billingAccount;
-	}
-	
+		return billingAccountList;		
+	}	
 }

@@ -52,6 +52,7 @@ public class TestAddBillingAccounts {
 		userCredenials         = new CredentialsDTO();
 		encryptionModule       = context.getBean(EncryptionModule.class);
 		billingAccountRepository     = context.getBean(BillingAccountRepository.class);		    
+		
 		billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
 		billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 		customerRepository     = context.getBean(CustomerRepository.class);
@@ -60,9 +61,7 @@ public class TestAddBillingAccounts {
 		
 		userManagerImpl  = new UserManagerImpl(customerRepository);
 	    userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
-	    
-	    billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
-	    billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	
     }
 	
 	
@@ -135,7 +134,7 @@ public class TestAddBillingAccounts {
 		 assertEquals("www.credit.co.za", insertedBillingAccount.getCompanyUrl() );
 		 
 		 String url = "www.credit.co.za";
-		 List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountsByCompanyName(url);
+		 List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountsByCompanyUrl(url);
 		 assertEquals(1, updateBillingAccount.size() );		 
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block

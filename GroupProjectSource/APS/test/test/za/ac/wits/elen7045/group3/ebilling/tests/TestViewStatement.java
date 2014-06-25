@@ -39,6 +39,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.credentials.Billing
 
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
+import za.ac.wits.elen7045.aps.domain.statement.repository.BillingAccountStatementRepository;
 import za.ac.wits.elen7045.aps.domain.statement.repository.BillingAccountStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
@@ -67,164 +68,113 @@ import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 
 public class TestViewStatement {
 
-		private CustomerDTO customer;
-		private BillingAccountDTO           billingAccountDTO;
-		private ApplicationContext          context;	
+		
+		private ApplicationContext          	 context;	
+		private BillingAccountStatementManager	 billingAccountStatementManager;
+		private BillingAccountStatementManagerImpl   billingAccountStatementManagerImpl;
+		private BillingAccountStatementRepository statementRepository;
+		private UserManager	                	userManager;
+		private UserManagerImpl             	userManagerImpl;
+		private CustomerRepository          customerRepository;
+		private CustomerDTO 				customer;
+		private EncryptionModule            encryptionModule;	
+		private CredentialsDTO              userCredenials;
 		private BillingAccountRepository    billingAccountRepository;
 		private BillingAccountManager	    billingAccountManager;
 		private BillingAccountManagerImpl   billingAccountManagerImpl;
-		private UserManager	                userManager;
-		private UserManagerImpl             userManagerImpl;
-		private EncryptionModule            encryptionModule;
-		private CustomerRepository          customerRepository;
-		private CredentialsDTO              userCredenials;
-
+		
 		@Before
 		public void init(){
-		    context                = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-			customer               = context.getBean(CustomerDTO.class);
-			userCredenials         = new CredentialsDTO();
-			encryptionModule       = context.getBean(EncryptionModule.class);
-			billingAccountRepository     = context.getBean(BillingAccountRepository.class);		    
-			billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
-			billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
-			customerRepository     = context.getBean(CustomerRepository.class);
+		    context               		 = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
+			statementRepository    		 = context.getBean(BillingAccountStatementRepositoryImpl.class);		    
+			customerRepository     		 = context.getBean(CustomerRepository.class);
+			customer               		 = context.getBean(CustomerDTO.class);
+			userCredenials         		 = new CredentialsDTO();			
+			encryptionModule       		 = context.getBean(EncryptionModule.class);
 			
 			customer.setEncryptionModule(encryptionModule);
-			
 			userManagerImpl  = new UserManagerImpl(customerRepository);
 		    userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 		    
-		    billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
-		    billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
-	    }	
+		    billingAccountRepository     = context.getBean(BillingAccountRepository.class);		    
+			
+			billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
+			billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+			
+		    billingAccountStatementManagerImpl  	= new BillingAccountStatementManagerImpl(statementRepository);
+			billingAccountStatementManager     	 	= new APSMockObjectGenerator<BillingAccountStatementManagerImpl>().mock(billingAccountStatementManagerImpl);
+		}
 	
 		 @Test
 		 public void testSaveBillingAccountStatement() {
-		 try {	
-				 
-			 BillingAccountStatementManager statManager = new BillingAccountStatementManagerImpl();
+		 try {				 
+			 
 			 BillingAccountStatement statement = new TelcoStatement();
 			 statement.setAccountNumber("34566");
+			 statement.setAccountStatementNumber("1234");
 			 statement.setAccountClosingBalance("R5000");
 			 statement.setAccountStatementMonth("June");
 			 statement.setAccountDiscount("R23");
 			 statement.setAccountNumber("1234");
-			 statManager.saveBillingAccountStatement(statement);
+			 billingAccountStatementManagerImpl.saveBillingAccountStatement(statement);
 			 
-			 BillingAccountStatementManager statManager2 = new BillingAccountStatementManagerImpl();
 			 BillingAccountStatement statement2 = new MunicipalStatement();
 			 statement.setAccountNumber("34566");
+			 statement.setAccountStatementNumber("12345");
 			 statement.setAccountClosingBalance("R5000");
 			 statement.setAccountStatementMonth("June");
 			 statement.setAccountDiscount("R23");
 			 
-			 statManager2.saveBillingAccountStatement(statement2);
+			 billingAccountStatementManagerImpl.saveBillingAccountStatement(statement2);
 			 
-			 BillingAccountStatementManager statManager3 = new BillingAccountStatementManagerImpl();
 			 BillingAccountStatement statement3 = new MunicipalStatement();
 			 statement.setAccountNumber("34566");
+			 statement.setAccountStatementNumber("123456");
 			 statement.setAccountClosingBalance("R5000");
 			 statement.setAccountStatementMonth("June");
 			 statement.setAccountDiscount("R23");
-			
-			 statManager3.saveBillingAccountStatement(statement3);
+			 
+			 billingAccountStatementManagerImpl.saveBillingAccountStatement(statement3);
 			 		
-			 List<BillingAccountStatement> statement1 = statManager.getBillingAccountStatements("1234", "June");
-			 assertEquals(1, statement1.size());
+			 BillingAccountStatement statement1 = (BillingAccountStatement) billingAccountStatementManagerImpl.getBillingAccountStatements("1234", "June");
+			 assertNotNull("Billing Account not null" , statement1);
 					 
 		 } catch (Exception e) {
 		 // TODO Auto-generated catch block
 		 e.printStackTrace();
 		 }
 		}
-		 
-//		 @Test
-//		 public void testgetBillingAccountsByCompanyName() {
-//		 try {
-//			 
-//			 //Tests for billing account search
-//			 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount("12345");
-////			 assertEquals("www.credit.co.za", insertedBillingAccount.getCompanyUrl() );
-//			 String url = "www.credit.co.za";
-//			 List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountsByCompanyName(url);
-//			 assertEquals(1, updateBillingAccount.size() );		 
-//		 } catch (Exception e) {
-//		 // TODO Auto-generated catch block
-//		 e.printStackTrace();
-//		 }
-//		}
-		 
-//		 @Test
-//		 public void testgetBillingAccountsStatements() {
-//		 try {
-	//
-//			 userCredenials.setUserName("userName");
-//		     userCredenials.setPassword("password");
-//		     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
-//			assertTrue(authenticationCustomer != null);
-//			
-//			String period = "june";
-//			List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountStatementByAccountNumberAndPeriod(authenticationCustomer, period);
-//			assertEquals(1, updateBillingAccount.size() );	
-//			 for(BillingAccountDTO billingAcc : updateBillingAccount){
-//				 
-//			 }
-//		 } catch (Exception e) {
-//		 // TODO Auto-generated catch block
-//		 e.printStackTrace();
-//		 }
-//		}
-		 
-	}
 
-//	 @Test
-//	 public void testViewBillingAccountStatement() {
-//	 try {	 	 
-//	 BillingAccountManager billingManager = new BillingAccountManagerImpl(billingAccountRepository);	 
-//	 billingManager.addCustomerBillingAccounts(billingAccount);
-//	 BillingAccount billAccount = billingManager.getBillingStatement("12345", "June");
-//	 //AbstractBillingAccountStatement = statement = billAccount.getBillingStatement();
-//	 for(AbstractBillingAccountStatement statement : billAccount.getBillingStatement()){
-//		 System.out.println("Account Number : " + billAccount.getAccountNumber());
-//		 System.out.println("Account Type : " + billAccount.getBillingCompanyName());
-//		 System.out.println("Statement Number : " + statement.getAccountNumber());
-//		 System.out.println("Closing Balance : " + statement.getAccountClosingBalance());
-//		 System.out.println("Amount Deducted : " + statement.getAccountDeductions());
-//		 System.out.println("Account Holder : " + statement.getAccountHolderName());
-//		 System.out.println("Statement Period: " + statement.getAccountStatementMonth());
-//	 }
-//	 assertEquals(1,  billAccount.getBillingStatement().size()); 
-//	
-//	 } catch (Exception e) {
-//	 // TODO Auto-generated catch block
-//	 e.printStackTrace();
-//	 }
-//	 }
-//	 
-//	 @Test
-//	 public void testUserAddBillingAccountStatement() {
-//	 try {	 	 
-//	 BillingAccountManager billingManager = new BillingAccountManagerImpl(billingAccountRepository);	 
-//	 billingManager.addCustomerBillingAccounts(billingAccount2);
-//	 BillingAccount billAccount = billingManager.getBillingStatement("45454", "August");
-//	 //AbstractBillingAccountStatement = statement = billAccount.getBillingStatement();
-//	 for(AbstractBillingAccountStatement statement : billAccount.getBillingStatement()){
-//		 System.out.println("Account Number : " + billAccount.getAccountNumber());
-//		 System.out.println("Account Type : " + billAccount.getBillingCompanyName());
-//		 System.out.println("Statement Number : " + statement.getAccountNumber());
-//		 System.out.println("Closing Balance : " + statement.getAccountClosingBalance());
-//		 System.out.println("Amount Deducted : " + statement.getAccountDeductions());
-//		 System.out.println("Account Holder : " + statement.getAccountHolderName());
-//		 System.out.println("Statement Period: " + statement.getAccountStatementMonth());
-//	 }
-//	 assertEquals(1,  billAccount.getBillingStatement().size()); 
-//	
-//	 } catch (Exception e) {
-//	 // TODO Auto-generated catch block
-//	 e.printStackTrace();
-//	 }
-//	 }
-//	 
-//*/}
+	 @Test
+	 public void testViewBillingAccountStatement() {
+	 try {		 
+		 customer.setFirstName("Samuel");		
+		 userCredenials.setUserName("userName");
+	     userCredenials.setPassword("password");
+	     customer.setCredentials(userCredenials);
+		 customer.setId(Long.valueOf(1));
+		 CustomerDTO logedUser = userManager.selectCustomer(customer);
+		 assertNotNull("Failed to Insert User" , logedUser);
+		 
+		 List<BillingAccountDTO> customereBillingAccounts = billingAccountManager.getBillingAcountsForCustomer(customer.getId());
+		 assertEquals(1, customereBillingAccounts.size() );		 
+		 
+		 for(BillingAccountDTO billingAccounts : customereBillingAccounts){
+			 String period = "June";
+			 System.out.println("Account number " + billingAccounts.getAccountNumber());
+			 BillingAccountStatement statement =(BillingAccountStatement) billingAccountStatementManagerImpl.getBillingAccountStatements(billingAccounts.getAccountNumber(), period);
+				 System.out.println("Billing Account Number = " + statement.getAccountNumber());
+				 System.out.println("Statement ID = " + statement.getId());
+				 System.out.println("Statement Date = " + statement.getAccountStatementDate());
+				 System.out.println("Statement Closing Balance = " + statement.getAccountClosingBalance());
+				 System.out.println("Statement Discount = " + statement.getAccountDiscount());
+				 System.out.println("Statement Period = " + statement.getAccountStatementMonth());
+			 }
+		
+		 } catch (Exception e) {
+		 // TODO Auto-generated catch block
+		 e.printStackTrace();
+	 }	 
+	}	 
+}
 

@@ -23,13 +23,15 @@ import za.ac.wits.elen7045.group3.aps.services.specification.credentials.Billing
  *
  */
 
-public class BillingAccountStatementManagerImpl implements BillingAccountStatementManager {
-	private BillingAccountStatementRepository statementRepository =
-		new BillingAccountStatementRepositoryImpl(new FakeBillingStatementDB());
+public class BillingAccountStatementManagerImpl<T> implements BillingAccountStatementManager {
+	private BillingAccountStatementRepository statementRepository; 
 
-//	public BillingAccountStatementManagerImpl(BillingAccountStatementRepository dataStatementAccess){
-//		this.statementRepository = dataStatementAccess;
-//	}	
+	public BillingAccountStatementManagerImpl(BillingAccountStatementRepository dataStatementAccess){
+		this.statementRepository = dataStatementAccess;
+	}	
+	
+	
+	//Method to save billing Account statement 
 	@Override
 	public void saveBillingAccountStatement(BillingAccountStatement statement) {
 		if (statement == null) {
@@ -38,12 +40,12 @@ public class BillingAccountStatementManagerImpl implements BillingAccountStateme
 		statementRepository.saveBillingAccountStatement(statement);
 		}	
 
+	//Method to retrieve a list of billing statement for a billing account
 	@Override
-	public List<BillingAccountStatement> getBillingAccountStatements(
-			String accountNumber, String billingPeriod) {	 
+	public T getBillingAccountStatements(String accountNumber, String billingPeriod) {	 
 		if(accountNumber == null || billingPeriod ==null){
 			throw new RuntimeException("Account number and period must be provided");
 		}
-		return statementRepository.getBillingAccountStatements(accountNumber, billingPeriod);
+		return (T) statementRepository.getBillingAccountStatements(accountNumber, billingPeriod);
 	}	
 }

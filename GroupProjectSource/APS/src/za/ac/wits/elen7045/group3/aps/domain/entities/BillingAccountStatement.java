@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SelectBeforeUpdate;
+
 @MappedSuperclass
 public class  BillingAccountStatement implements Serializable {
 		
@@ -69,7 +71,7 @@ public class  BillingAccountStatement implements Serializable {
 	public void setAccountStatementDate(String accountStatementDate) {
 		AccountStatementDate = accountStatementDate;
 	}
-	@Column(name = "STATEMENT_NUMBER",nullable = true)
+	@Column(name = "STATEMENT_NUMBER",unique= true, nullable = true)
 	public String getAccountStatementNumber() {
 		return AccountStatementNumber;
 	}
@@ -77,7 +79,7 @@ public class  BillingAccountStatement implements Serializable {
 	public void setAccountStatementNumber(String accountStatementNumber) {
 		AccountStatementNumber = accountStatementNumber;
 	}
-	@Column(name = "PERIOD",nullable = true)
+	@Column(name = "PERIOD",unique = true,nullable = true)
 	public String getAccountStatementMonth() {
 		return AccountStatementMonth;
 	}

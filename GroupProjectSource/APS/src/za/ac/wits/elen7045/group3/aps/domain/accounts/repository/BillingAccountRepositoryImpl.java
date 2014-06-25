@@ -38,22 +38,14 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	}
 
 	@Override
-	public List<BillingAccount> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException {
-		return dataAccess.getBillingAccountsByCompanyName(billingCompanyUrl);
+	public List<BillingAccount> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException {
+		return dataAccess.getBillingAccountsByCompanyUrl(billingCompanyUrl);
 	}
 
+	
 	@Override
-	public List<BillingAccount> getBillingAccountStatementByAccountNumberAndPeriod(
-			Long customerId, String period) throws DatabaseException {
-		return dataAccess.getBillingAccountStatementByAccountNumberAndPeriod(customerId, period);
-		
-	}
-
-	@Override
-	public boolean updateBillingAccountStatement(
-			BillingAccountStatement billingAccountStatement)
+	public List<BillingAccount> getBillingAcountsForCustomer(Long customerId)
 			throws DatabaseException {
-		// TODO Auto-generated method stub
-		return false;
+		return dataAccess.getBillingAcountsForCustomer(customerId);
 	}	
 }

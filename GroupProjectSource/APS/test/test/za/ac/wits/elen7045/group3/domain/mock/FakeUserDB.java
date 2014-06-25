@@ -32,7 +32,6 @@ public class FakeUserDB implements UserDataAccess{
 	public Customer selectCustomer(Customer customer) throws DatabaseException{
 		//DI Inject This		 
 		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		
 		 Customer customerResponse = entityManager.find(Customer.class,customer.getId());
 		 entityManager.close();		 
 		 return customerResponse;
