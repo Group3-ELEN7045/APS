@@ -28,34 +28,39 @@ public class CreditCardStatement extends BillingAccountStatement implements Seri
 	private String creditAvailable;
 	private String minimumAmountDue;
 	
-	public CreditCardStatement(String accountNumber) {
-		setAccountNumber(accountNumber);
-	}
-	
+	@Column(name = "CARD_TYPE",nullable = true)	
 	public String getCardType() {
 		return cardType;
 	}
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
+	
+	@Column(name = "INTEREST_RATE",nullable = true)
 	public String getInterestRate() {
 		return interestRate;
 	}
 	public void setInterestRate(String interestRate) {
 		this.interestRate = interestRate;
 	}
+	
+	@Column(name = "CREDIT_LIMIT",nullable = true)
 	public String getCreditLimit() {
 		return creditLimit;
 	}
 	public void setCreditLimit(String creditLimit) {
 		this.creditLimit = creditLimit;
 	}
+	
+	@Column(name = "CREDIT_AVAILABLE",nullable = true)
 	public String getCreditAvailable() {
 		return creditAvailable;
 	}
 	public void setCreditAvailable(String creditAvailable) {
 		this.creditAvailable = creditAvailable;
 	}
+	
+	@Column(name = "MINIMUM_AMOUNT_DUE",nullable = true)
 	public String getMinimumAmountDue() {
 		return minimumAmountDue;
 	}
