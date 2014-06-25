@@ -1,8 +1,8 @@
 package za.ac.wits.elen7045.group3.aps.scrape.scripts;
 
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLFileMarshall;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 /**
  * @author bakwanyana
