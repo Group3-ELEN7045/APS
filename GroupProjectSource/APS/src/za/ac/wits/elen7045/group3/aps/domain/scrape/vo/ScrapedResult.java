@@ -1,3 +1,4 @@
+
 package za.ac.wits.elen7045.group3.aps.domain.scrape.vo;
 /**
  * @author bakwanyana
@@ -33,5 +34,16 @@ public class ScrapedResult {
 	
 	public List<DataPair> getDataPairList() {
 		return dataPairs;
+	}
+	
+	@Override
+	public String toString() {
+		String scrapeData = "";
+		if(dataPairs!=null){
+			for(DataPair data:dataPairs){
+				scrapeData = scrapeData.concat(data.getText().concat(":".concat(data.getValue())).concat("\n"));
+			}
+		}
+		return scrapeData.toString();// baseURL.concat(date).concat(time).concat(scrapeData);
 	}
 }
