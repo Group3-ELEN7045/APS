@@ -21,10 +21,20 @@
     <!-- Billing Database Setup -->
         <bean id="billingDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
         
-        <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
+        <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl">
    	        <constructor-arg ref="billingDataAccess"/>
         </bean>
     <!-- Billing Database Setup -->
+    
+    <!--    statement Setup -->
+     <bean id="statementDataAcces" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingStatementDB">
+       
+      </bean>
+      
+      <bean id="statementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl">
+         <constructor-arg ref="statementDataAcces"/>
+      </bean>
+    <!--  statement Setup    -->
     
     <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO"/>
     <bean id="capuredCredentials"   class="za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO">
