@@ -6,16 +6,16 @@ package za.ac.wits.elen7045.group3.aps.services.scrape;
  */
 
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.TelcoStatementConverter;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.MunicipalScrapeAdaptor;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.TelcoStatementConverter;
 
 public class TelcoScrapeStrategy implements ScraperStrategy {
 	

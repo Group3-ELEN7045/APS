@@ -35,6 +35,10 @@ public class MunicipalStatement extends BillingAccountStatement implements Seria
 	private String WaterCharges = "";
 	private String SewerageCharges = "";
 	private String RefuseCharges = "";
+	
+	public MunicipalStatement(String accountNumber){
+		this.setAccountNumber(accountNumber);
+	}
 
 	@Column(name = "INSTALMENT_NOTICE",nullable = true)
 	public String getInstalmentNotice() {
