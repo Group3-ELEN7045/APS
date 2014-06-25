@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 package test.za.ac.wits.elen7045.group3.ebilling.tests;
 
@@ -144,4 +145,5 @@ public class TestViewStatement {
 	 }	 
 	}	 
 }
+
 
