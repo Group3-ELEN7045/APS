@@ -1,7 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.vo.specification.scrape;
 
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 // this specification is case sensitive
 public class ScrapedResultAccountNumberMatchesSpecification
