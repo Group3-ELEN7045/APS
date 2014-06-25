@@ -29,7 +29,6 @@ public class ScrapeLogResult implements Serializable{
 	private String statsus;
 	private String response;
 	private String message;
-	
 	private Timestamp notificationDate;
 	
 	public Long getId() {

@@ -38,8 +38,8 @@ public class BillingAccount implements Serializable{
 	private String companyUrl;	
 	private CredentialsVO credentials;	
 
-	@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
+	@ManyToOne(fetch=FetchType.EAGER)
+   // @JoinColumn(name="CUSTOMER_ID",referencedColumnName="ID")
 	private Customer customer;	 
 	
 	private String accountStatus=AccountStatusType.TRYING.getStatusType();
@@ -60,6 +60,7 @@ public class BillingAccount implements Serializable{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+		
 	public long getId() {
 		return id;
 	}
