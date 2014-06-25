@@ -14,6 +14,7 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
@@ -132,5 +133,37 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		}
 		return billingAccount;
 	}
+
+	@Override
+	public List<BillingAccountDTO> getBillingAccountsByUserId(Long id)throws DatabaseException {
+	    System.out.println();  
+		List<BillingAccount> billingAccountResponse = null;
+		List<BillingAccountDTO> billingAccountDTOResponse = null;
+		billingAccountResponse = billingRepository.getBillingAccountsByUserId(id);
+		
+		if(billingAccountResponse != null){
+			BillingAccountDTO billingAccountDTO = null;
+			billingAccountDTOResponse = new ArrayList<BillingAccountDTO>();
+			for(BillingAccount bAccount : billingAccountResponse){
+				billingAccountDTO = new BillingAccountDTO(bAccount.getAccountNumber());
+				billingAccountDTO.setAccountNumber(bAccount.getAccountNumber());
+				billingAccountDTO.setAccountStatus(bAccount.getAccountStatus());
+				billingAccountDTO.setCompanyUrl(bAccount.getCompanyUrl());
+				CredentialsDTO credentialsDTO = new CredentialsDTO();
+				credentialsDTO.setUserName(credentialsDTO.getUserName());
+				credentialsDTO.setPassword(credentialsDTO.getPassword());
+				billingAccountDTO.setCredentials(credentialsDTO);
+				billingAccountDTO.setCustomerId(bAccount.getCustomerId());
+				billingAccountDTO.setId(bAccount.getCustomerId());
+				billingAccountDTOResponse.add(billingAccountDTO);
+			}
+			
+			
+		}	
+		
+		return billingAccountDTOResponse;
+	}
+	
+	
 	
 }
