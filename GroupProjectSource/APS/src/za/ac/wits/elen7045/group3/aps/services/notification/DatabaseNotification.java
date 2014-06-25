@@ -40,8 +40,30 @@ public class DatabaseNotification extends ConfirmationNotification{
 	public Object getNotification() {
 		//DI Inject This
 	    EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		Query query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.accountNumber = ?1 and notify.notificationType=?2 and notify.statsus=?3");
-		query.setParameter (1, notification.getAccountNumber()).setParameter(2, notification.getNotificationType()).setParameter(3, notification.getStatsus());
+	    //--
+		Query query;
+	    if(!notification.getAccountNumber().isEmpty() && !notification.getNotificationType().isEmpty() && !notification.getStatsus().isEmpty()){
+	    	query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.accountNumber = ?1 and notify.notificationType=?2 and notify.statsus=?3");
+			query.setParameter (1, notification.getAccountNumber()).setParameter(2, notification.getNotificationType()).setParameter(3, notification.getStatsus());	    	
+	    }else if(!notification.getAccountNumber().isEmpty() && !notification.getNotificationType().isEmpty()){
+	    	query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.accountNumber = ?1 and notify.notificationType=?2");
+			query.setParameter (1, notification.getAccountNumber()).setParameter(2, notification.getNotificationType());
+	    }else if(!notification.getAccountNumber().isEmpty()){
+	    	query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.accountNumber = ?1");
+			query.setParameter (1, notification.getAccountNumber());	    	
+	    }else if(notification.getNotificationType().isEmpty() && notification.getStatsus().isEmpty()){
+			query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.notificationType=?1 and notify.statsus=?2");
+			query.setParameter (1, notification.getNotificationType()).setParameter(2, notification.getStatsus());
+	    }else if(notification.getNotificationType().isEmpty()){
+			query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.notificationType=?1");
+			query.setParameter (1, notification.getNotificationType());
+	    }else if( notification.getStatsus().isEmpty()){
+			query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify WHERE notify.statsus=?1");
+			query.setParameter (1, notification.getStatsus());
+	    }else{
+	    	query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify limit 50");
+	    }
+		//--
 		List  scrapeResults =(List) query.getResultList();
         return scrapeResults;
 	}

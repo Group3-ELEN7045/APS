@@ -6,11 +6,19 @@ package za.ac.wits.elen7045.group3.aps.services.scrape;
  */
 
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
+import java.sql.Timestamp;
+
+import org.apache.derby.iapi.util.StringUtil;
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.MunicipalStatementConverter;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapeInterpreter;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
@@ -19,9 +27,6 @@ import za.ac.wits.elen7045.group3.aps.services.scrape.acl.MunicipalScrapeAdaptor
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.MunicipalStatementConverter;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapeInterpreter;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasDuplicateScrapedResultErrorSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasGenericErrorInScrapedResultSpecification;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalScrapedResultAdditionSpecification;
@@ -29,15 +34,18 @@ import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapedResultAccou
 
 public class MunicipalScrapeStrategy implements ScraperStrategy {
 	
+	private static final String SUCCESS = "000";
 	private ScrapeLogResultRepository scrapeLogRepository;
-	private BillingAccountRepository billingRepository;
+	private BillingAccountRepository accountRepository;
+	private StatementRepository statementRepository;
 	private BillingAccount account;
 	
-	public MunicipalScrapeStrategy(BillingAccount acc, ScrapeLogResultRepository slr, BillingAccountRepository bar) {
+	public MunicipalScrapeStrategy(BillingAccount acc, ScrapeLogResultRepository slr, BillingAccountRepository bar, StatementRepository sr) {
 		super();
 		this.account = acc;
-		scrapeLogRepository = slr;
-		billingRepository = bar;
+		this.scrapeLogRepository = slr;
+		this.accountRepository = bar;
+		this.statementRepository = sr;
 	}
 	
 	@Override
@@ -48,14 +56,20 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 
 		ScrapeLogResult scrapeLog = new ScrapeLogResult();
 		scrapeLog.setAccountNumber(account.getAccountNumber());
-		scrapeLog.setResponse(scrapeResult.toString());
-			
+		
+		scrapeLog.setResponse(StringUtil.truncate(scrapeResult.toString(), 255));
+		scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
+		
 		//was the scrape successful
 		ScrapeInterpreter scrapeResultCheck = new ScrapeInterpreter(scrapeResult);
 		String returnCode = scrapeResultCheck.evaluate();
-		if("000".equalsIgnoreCase(returnCode)){
+		if(SUCCESS.equalsIgnoreCase(returnCode)){
 			try {
 				isIntegrityCheckPassed(scrapeResult);
+				
+				statementRepository.addStatement(getMunicipalStatement(scrapeResult));
+				scrapeLog.setNotificationType(NotificationType.SCRAPESUCCESS.getNotificationType());
+				scrapeLog.setStatsus(NotificationStatus.SUCCESS.getNotificationStatus());
 				
 			} catch (AccountNumberIncorrectException e) {
 				e.printStackTrace();
@@ -73,37 +87,50 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 				
 				account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-			}
-			
-			account.addBillingAccountStatament(getMunicipalStatement(scrapeResult));
-			try {
-				billingRepository.updateBillingAccountStatus(account);
-			} catch (DatabaseException e) {
+			} catch (Exception e){
 				e.printStackTrace();
+				
+				scrapeLog.setMessage(e.getMessage());
+				scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
+				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
+				
+				account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
 			}
 		}
 		
+		try {
+			accountRepository.updateBillingAccountStatus(account);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			
+			scrapeLog.setMessage(e.getMessage());
+			scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
+			scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());			
+		}
 		//log the scrape call with its result
 		logScrapeResult(scrapeLog);
 	}
 
 	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws AccountNumberIncorrectException, DataIntegrityCheckException {
 		boolean integrityPassed = true;
-		
+
 		//check account number integrity
 		ScrapedResultAccountNumberMatchesSpecification accNoSpec = new ScrapedResultAccountNumberMatchesSpecification(account.getAccountNumber());
 		if(!account.getAccountStatus().equalsIgnoreCase(AccountStatusType.ACTIVE.getStatusType())  
-			&& accNoSpec.isSatisfiedBy(scrapeResult)){
+			&& !accNoSpec.isSatisfiedBy(scrapeResult)){
 			integrityPassed = false;
 			throw new AccountNumberIncorrectException("Account number " +account.getAccountNumber()+ " incorrect");
 		}
 		
-		//check municipal statement data integrity
-		HasGenericErrorInScrapedResultSpecification hasGenError = new HasGenericErrorInScrapedResultSpecification();
-		HasDuplicateScrapedResultErrorSpecification hasDupError = new HasDuplicateScrapedResultErrorSpecification();
-		MunicipalScrapedResultAdditionSpecification municipalStatementSpec = new MunicipalScrapedResultAdditionSpecification();
-		if(!hasDupError.or(hasGenError).or(municipalStatementSpec).isSatisfiedBy(scrapeResult)){
-			integrityPassed = false;
+		try{
+			//check municipal statement data integrity
+			HasGenericErrorInScrapedResultSpecification hasGenError = new HasGenericErrorInScrapedResultSpecification();
+			HasDuplicateScrapedResultErrorSpecification hasDupError = new HasDuplicateScrapedResultErrorSpecification();
+			MunicipalScrapedResultAdditionSpecification municipalStatementSpec = new MunicipalScrapedResultAdditionSpecification();
+			
+			hasDupError.or(hasGenError).or(municipalStatementSpec).isSatisfiedBy(scrapeResult);
+
+		}catch (Exception e){
 			throw new DataIntegrityCheckException("Invalid data scraped for account("+account.getAccountNumber()+")");
 		}
 				

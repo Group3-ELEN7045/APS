@@ -10,7 +10,8 @@ public class MunicipalStatementConverter {
 	}
 	
 	public MunicipalStatement getMunicipalStatement(){
-		MunicipalStatement municipalAcc = new MunicipalStatement(getIndexDataPair("001"));
+		MunicipalStatement municipalAcc = new MunicipalStatement();
+		municipalAcc.setAccountNumber(getIndexDataPair("001"));
 		municipalAcc.setAccountHolderName(getIndexDataPair("002"));
 		municipalAcc.setAccountStatementDate(getIndexDataPair("003"));
 		municipalAcc.setAccountStatementNumber(getIndexDataPair("004"));

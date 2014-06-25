@@ -8,7 +8,7 @@ package za.ac.wits.elen7045.group3.aps.services.enumtypes;
  *
  */
 public enum NotificationStatus {
-	WAITING("w"), COMPLETE("C");
+	WAITING("w"), COMPLETE("C"), SUCCESS("S");
 	 
 	private String notificationStatus;
  

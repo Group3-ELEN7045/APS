@@ -78,128 +78,19 @@ public class TestViewStatement {
 		 try {	
 				 
 			
-			 BillingAccountStatement statement = new TelcoStatement();
+			 BillingAccountStatement statement = new TelcoStatement("1");
 			 statement.setAccountNumber("1");
 			 statement.setAccountClosingBalance("R5000");
 			 statement.setAccountStatementMonth("June");
 			 statement.setAccountDiscount("R23");
 			 statement.setAccountNumber("1234");
-			 billingAccountstatementManager.addStatement(statement);
-			/* statManager.saveBillingAccountStatement(statement);
-			 
-			 BillingAccountStatementManager statManager2 = new BillingAccountStatementManagerImpl();
-			 BillingAccountStatement statement2 = new MunicipalStatement();
-			 statement.setAccountNumber("34566");
-			 statement.setAccountClosingBalance("R5000");
-			 statement.setAccountStatementMonth("June");
-			 statement.setAccountDiscount("R23");
-			 
-			 statManager2.saveBillingAccountStatement(statement2);
-			 
-			 BillingAccountStatementManager statManager3 = new BillingAccountStatementManagerImpl();
-			 BillingAccountStatement statement3 = new MunicipalStatement();
-			 statement.setAccountNumber("34566");
-			 statement.setAccountClosingBalance("R5000");
-			 statement.setAccountStatementMonth("June");
-			 statement.setAccountDiscount("R23");
-			
-			 statManager3.saveBillingAccountStatement(statement3);*/
-			 		
+			 billingAccountstatementManager.addStatement(statement); 		
 			 List<BillingAccountStatement> statement1 =billingAccountstatementManager.getAccountStatement("1"); //statManager.getBillingAccountStatements("1234", "June");
 			 assertEquals(1, statement1.size());
 					 
 		 } catch (Exception e) {
-		 // TODO Auto-generated catch block
-		 e.printStackTrace();
-		 }
-		}
-		 
-//		 @Test
-//		 public void testgetBillingAccountsByCompanyName() {
-//		 try {
-//			 
-//			 //Tests for billing account search
-//			 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount("12345");
-////			 assertEquals("www.credit.co.za", insertedBillingAccount.getCompanyUrl() );
-//			 String url = "www.credit.co.za";
-//			 List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountsByCompanyName(url);
-//			 assertEquals(1, updateBillingAccount.size() );		 
-//		 } catch (Exception e) {
-//		 // TODO Auto-generated catch block
-//		 e.printStackTrace();
-//		 }
-//		}
-		 
-//		 @Test
-//		 public void testgetBillingAccountsStatements() {
-//		 try {
-	//
-//			 userCredenials.setUserName("userName");
-//		     userCredenials.setPassword("password");
-//		     CustomerDTO authenticationCustomer = userManager.getCustomer(userCredenials);
-//			assertTrue(authenticationCustomer != null);
-//			
-//			String period = "june";
-//			List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountStatementByAccountNumberAndPeriod(authenticationCustomer, period);
-//			assertEquals(1, updateBillingAccount.size() );	
-//			 for(BillingAccountDTO billingAcc : updateBillingAccount){
-//				 
-//			 }
-//		 } catch (Exception e) {
-//		 // TODO Auto-generated catch block
-//		 e.printStackTrace();
-//		 }
-//		}
-		 
-	}
-
-//	 @Test
-//	 public void testViewBillingAccountStatement() {
-//	 try {	 	 
-//	 BillingAccountManager billingManager = new BillingAccountManagerImpl(billingAccountRepository);	 
-//	 billingManager.addCustomerBillingAccounts(billingAccount);
-//	 BillingAccount billAccount = billingManager.getBillingStatement("12345", "June");
-//	 //AbstractBillingAccountStatement = statement = billAccount.getBillingStatement();
-//	 for(AbstractBillingAccountStatement statement : billAccount.getBillingStatement()){
-//		 System.out.println("Account Number : " + billAccount.getAccountNumber());
-//		 System.out.println("Account Type : " + billAccount.getBillingCompanyName());
-//		 System.out.println("Statement Number : " + statement.getAccountNumber());
-//		 System.out.println("Closing Balance : " + statement.getAccountClosingBalance());
-//		 System.out.println("Amount Deducted : " + statement.getAccountDeductions());
-//		 System.out.println("Account Holder : " + statement.getAccountHolderName());
-//		 System.out.println("Statement Period: " + statement.getAccountStatementMonth());
-//	 }
-//	 assertEquals(1,  billAccount.getBillingStatement().size()); 
-//	
-//	 } catch (Exception e) {
-//	 // TODO Auto-generated catch block
-//	 e.printStackTrace();
-//	 }
-//	 }
-//	 
-//	 @Test
-//	 public void testUserAddBillingAccountStatement() {
-//	 try {	 	 
-//	 BillingAccountManager billingManager = new BillingAccountManagerImpl(billingAccountRepository);	 
-//	 billingManager.addCustomerBillingAccounts(billingAccount2);
-//	 BillingAccount billAccount = billingManager.getBillingStatement("45454", "August");
-//	 //AbstractBillingAccountStatement = statement = billAccount.getBillingStatement();
-//	 for(AbstractBillingAccountStatement statement : billAccount.getBillingStatement()){
-//		 System.out.println("Account Number : " + billAccount.getAccountNumber());
-//		 System.out.println("Account Type : " + billAccount.getBillingCompanyName());
-//		 System.out.println("Statement Number : " + statement.getAccountNumber());
-//		 System.out.println("Closing Balance : " + statement.getAccountClosingBalance());
-//		 System.out.println("Amount Deducted : " + statement.getAccountDeductions());
-//		 System.out.println("Account Holder : " + statement.getAccountHolderName());
-//		 System.out.println("Statement Period: " + statement.getAccountStatementMonth());
-//	 }
-//	 assertEquals(1,  billAccount.getBillingStatement().size()); 
-//	
-//	 } catch (Exception e) {
-//	 // TODO Auto-generated catch block
-//	 e.printStackTrace();
-//	 }
-//	 }
-//	 
-//*/}
+		 	 e.printStackTrace();
+	     }
+     }	
+}
 
