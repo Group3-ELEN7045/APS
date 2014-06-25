@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.junit.Before;
@@ -15,13 +15,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
@@ -33,68 +31,44 @@ import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountStatementM
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
-import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-
-
-
-import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.aps.domain.statement.repository.BillingAccountStatementRepositoryImpl;
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountStatementDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
-import za.ac.wits.elen7045.group3.aps.domain.entities.User;
-import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl;
-import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
-import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
-import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
-import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
-import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
+
 
 public class TestViewStatement {
 
 		private CustomerDTO customer;
-		private BillingAccountDTO           billingAccountDTO;
-		private ApplicationContext          context;	
-		private BillingAccountRepository    billingAccountRepository;
-		private BillingAccountManager	    billingAccountManager;
-		private BillingAccountManagerImpl   billingAccountManagerImpl;
-		private UserManager	                userManager;
-		private UserManagerImpl             userManagerImpl;
-		private EncryptionModule            encryptionModule;
-		private CustomerRepository          customerRepository;
-		private CredentialsDTO              userCredenials;
+		private BillingAccountDTO                  billingAccountDTO;
+		private ApplicationContext                 context;	
+		private StatementRepository                statementRepository;
+		private BillingAccountStatementManager     billingAccountstatementManager;
+		private BillingAccountStatementManagerImpl billingAccountStatementManagerImpl;
+		private UserManager	                       userManager;
+		private UserManagerImpl                    userManagerImpl;
+		private EncryptionModule                   encryptionModule;
+		private CustomerRepository                 customerRepository;
+		private CredentialsDTO                     userCredenials;
+		
+		private BillingAccountRepository           billingAccountRepository;
+		private BillingAccountManagerImpl          billingAccountManagerImpl;
+		private BillingAccountManager              billingAccountManager; 
 
 		@Before
 		public void init(){
-		    context                = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-			customer               = context.getBean(CustomerDTO.class);
-			userCredenials         = new CredentialsDTO();
-			encryptionModule       = context.getBean(EncryptionModule.class);
-			billingAccountRepository     = context.getBean(BillingAccountRepository.class);		    
-			billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
-			billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
-			customerRepository     = context.getBean(CustomerRepository.class);
+		    context                            = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
+			customer                           = context.getBean(CustomerDTO.class);
+			userCredenials                     = new CredentialsDTO();
+			encryptionModule                   = context.getBean(EncryptionModule.class);
+			statementRepository                = context.getBean(StatementRepository.class);		    
+			billingAccountStatementManagerImpl = new BillingAccountStatementManagerImpl(statementRepository);
+			billingAccountstatementManager     = new APSMockObjectGenerator<BillingAccountStatementManagerImpl>().mock(billingAccountStatementManagerImpl);
+			customerRepository                 = context.getBean(CustomerRepository.class);
 			
 			customer.setEncryptionModule(encryptionModule);
 			
 			userManagerImpl  = new UserManagerImpl(customerRepository);
 		    userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 		    
+		    billingAccountRepository   = context.getBean(BillingAccountRepository.class);
 		    billingAccountManagerImpl  = new BillingAccountManagerImpl(billingAccountRepository);
 		    billingAccountManager      = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 	    }	
@@ -103,14 +77,15 @@ public class TestViewStatement {
 		 public void testSaveBillingAccountStatement() {
 		 try {	
 				 
-			 BillingAccountStatementManager statManager = new BillingAccountStatementManagerImpl();
+			
 			 BillingAccountStatement statement = new TelcoStatement();
-			 statement.setAccountNumber("34566");
+			 statement.setAccountNumber("1");
 			 statement.setAccountClosingBalance("R5000");
 			 statement.setAccountStatementMonth("June");
 			 statement.setAccountDiscount("R23");
 			 statement.setAccountNumber("1234");
-			 statManager.saveBillingAccountStatement(statement);
+			 billingAccountstatementManager.addStatement(statement);
+			/* statManager.saveBillingAccountStatement(statement);
 			 
 			 BillingAccountStatementManager statManager2 = new BillingAccountStatementManagerImpl();
 			 BillingAccountStatement statement2 = new MunicipalStatement();
@@ -128,9 +103,9 @@ public class TestViewStatement {
 			 statement.setAccountStatementMonth("June");
 			 statement.setAccountDiscount("R23");
 			
-			 statManager3.saveBillingAccountStatement(statement3);
+			 statManager3.saveBillingAccountStatement(statement3);*/
 			 		
-			 List<BillingAccountStatement> statement1 = statManager.getBillingAccountStatements("1234", "June");
+			 List<BillingAccountStatement> statement1 =billingAccountstatementManager.getAccountStatement("1"); //statManager.getBillingAccountStatements("1234", "June");
 			 assertEquals(1, statement1.size());
 					 
 		 } catch (Exception e) {
