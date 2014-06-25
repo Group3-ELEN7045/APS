@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
  * @author SilasMahlangu
  *
  */
-
+@Embeddable
 public class PaymentDetailsVO implements Serializable{
 	/**
 	 * 

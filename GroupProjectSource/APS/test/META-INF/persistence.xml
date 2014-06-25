@@ -6,13 +6,20 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
          
         <properties>
+<<<<<<< HEAD
       <!-- <property name="hibernate.hbm2ddl.auto" value="create" />  -->
       <property name="hibernate.hbm2ddl.auto" value="update" /> 
          	<property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver" />			
 			<property name="hibernate.connection.url" value="jdbc:derby:C:\Users\livious\MyDBC"/>
+=======
+           <property name="hibernate.hbm2ddl.auto" value="drop"/>
+            <!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
+			<property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>			
+			<property name="hibernate.connection.url" value="jdbc:derby:C:\Users\SilasMahlangu\MyAPSDB"/>
+>>>>>>> 9282d895db7e514c4c2c8c60f297a9a73436e8a4
 			<property name="hibernate.connection.username" value="aps"/>
 			<property name="hibernate.connection.password" value="aps"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
 			<property name="hibernate.show_sql" value="true" />
         </properties>
     </persistence-unit>

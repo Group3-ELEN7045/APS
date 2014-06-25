@@ -33,6 +33,7 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.ContactType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
+import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
@@ -93,7 +94,7 @@ public class InsertFileSystemUsers {
     }
 	
 	@Test //test if insertion happened successfult
-	public void testRegisterUser() throws DatabaseException{
+	public void testRegisterUser() throws DatabaseException, ApplicationException{
 		int numberOfUsersToInsert = customers.size();
 		int insertedUsers = 0;
 		for(CustomerDTO custDTO : customers){

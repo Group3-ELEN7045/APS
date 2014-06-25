@@ -1,3 +1,4 @@
+
 package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import java.util.ArrayList;
@@ -7,11 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import org.dozer.DozerBeanMapper;
-
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
@@ -119,7 +119,7 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		}
 		List<BillingAccountDTO> billingAccountList = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		List<BillingAccount> accoutList = billingRepository.getBillingAcountsForCustomer(customerId);
+		List<BillingAccount> accoutList = (List<BillingAccount>) billingRepository.getBillingAcountsForCustomer(customerId);
 		System.out.println("Size of the list true " + accoutList.size());
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
@@ -133,3 +133,4 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		return billingAccountList;		
 	}	
 }
+

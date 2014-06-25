@@ -7,8 +7,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;

@@ -4,13 +4,15 @@ package test.za.ac.wits.elen7045.group3.scrape;
  */
 
 import com.thoughtworks.xstream.XStream;
+
 import static org.junit.Assert.*;    
+
 import org.junit.After;  
 import org.junit.Before;  
 import org.junit.Test;  
 
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLFileMarshall;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 public class ScrapedXMLFileReadTests {
 	

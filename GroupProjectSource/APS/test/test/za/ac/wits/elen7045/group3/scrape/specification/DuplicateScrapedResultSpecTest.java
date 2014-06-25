@@ -4,12 +4,15 @@ package test.za.ac.wits.elen7045.group3.scrape.specification;
  */
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.Assert.*; 
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.DataPair;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
+
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasDuplicateScrapedResultErrorSpecification;
 
 public class DuplicateScrapedResultSpecTest {

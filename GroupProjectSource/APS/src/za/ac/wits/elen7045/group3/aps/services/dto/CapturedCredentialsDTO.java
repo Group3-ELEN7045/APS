@@ -23,4 +23,5 @@ public class CapturedCredentialsDTO extends CredentialsDTO{
 		ApplicationSpecification<CapturedCredentialsDTO> capturedCredentials = new CapturedCredentialsSpecification(this);
 		return capturedCredentials.isSatisfiedBy(this);
 	}
+	
 }

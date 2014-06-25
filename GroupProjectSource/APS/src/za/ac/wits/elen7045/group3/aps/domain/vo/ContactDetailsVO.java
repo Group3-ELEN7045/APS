@@ -5,11 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 @Embeddable
+/**
+ * @author SilasMahlangu
+ *
+ */
 public class ContactDetailsVO implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String contactType;
 	private String contactValue;

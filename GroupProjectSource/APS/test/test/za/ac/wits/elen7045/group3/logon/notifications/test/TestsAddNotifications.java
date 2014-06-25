@@ -17,11 +17,24 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
+import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.SrapingResponseTypes;
+import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
+import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 /**
@@ -31,28 +44,52 @@ import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class TestsAddNotifications {
     
-	private ScrapeLogResult               notification;
-	private List<ScrapeLogResult>         notifications;
-	private ScrapeLogResultDataAccess     notificationDataAccess;
-	private ScrapeLogResultRepository     notificationRepository;
-	private ScrapeLogResultImpl notificationRepositoryImpl;
-	private ApplicationContext         context;
+	private ScrapeLogResult           notification;
+	private List<ScrapeLogResult>     notifications;
+	private ScrapeLogResultDataAccess notificationDataAccess;
+	private ScrapeLogResultRepository notificationRepository;
+	private ScrapeLogResultImpl       notificationRepositoryImpl;
+	private ApplicationContext        context;
+	private CredentialsDTO            userCredentials;
+	private EncryptionModule          encryptionModule;
+	private UserManager	              userManager;
+	private UserManagerImpl           userManagerImpl;
+	private CustomerRepository        customerRepository;
+	private CustomerDTO               customer;
+	private BillingAccountManager	  billingAccountManager;
+	private BillingAccountManagerImpl billingAccountManagerImpl;
+	private BillingAccountRepository    billingAccountRepository;
 	
 	@Before
 	public void initilize(){
 		context                     = new  ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
 		notification                = (ScrapeLogResult)context.getBean("notification");
+  		encryptionModule            = context.getBean(EncryptionModule.class);
+		notifications               = new ArrayList<ScrapeLogResult>();	
+
 		notificationDataAccess      = context.getBean(ScrapeLogResultDataAccess.class);
-		notifications               = new ArrayList<ScrapeLogResult>();  
 		notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
 		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
+		
+		billingAccountRepository  = context.getBean(BillingAccountRepository.class);
+		billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
+	    billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+		
+		customer                  = context.getBean(CustomerDTO.class);
+        customerRepository        = context.getBean(CustomerRepository.class);
+		  
+        userManagerImpl           = new UserManagerImpl(customerRepository);
+	    userManager               = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
+		
+	    
+		userCredentials             = new CredentialsDTO();
 		
 		notification.setAccountNumber("123456789");
 		notification.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 		notification.setNotificationType(NotificationType.LOGON.getNotificationType());
 	}
 	
-	@Test
+	@Test //Test for logon notification from ebilling (update information and accept new terms and condition)
 	public void testInsertNotifiction() throws DatabaseException{
 		
 		notification.setNotificationDate(new Timestamp(System.currentTimeMillis()));
@@ -66,7 +103,33 @@ public class TestsAddNotifications {
 	public void testValidteInsert() throws DatabaseException{
 						
 		List<ScrapeLogResult> notifications = notificationRepository.getScrapeLogResult(notification);
-		assertEquals("The databse shoud have 2 entries", notifications.size() , 3);
+		assertNotNull("The databse should have 2 entries", notifications);
 	}
 	
+	@Test //Tests for account status if Inactive notifyuser
+	public void sendInactiveAccountNotifications() throws ApplicationException, DatabaseException{
+		 userCredentials.setUserName("userName");
+	     userCredentials.setPassword("password");
+	     userCredentials.setEncryptionModule(encryptionModule);
+	     userCredentials.encryptCredentials();
+	     
+	     CustomerDTO authenticationCustomer = userManager.getCustomerForLogin(userCredentials);		 
+		 List<BillingAccountDTO> accountsDTOs = billingAccountManager.getBillingAccountsByUserId(authenticationCustomer.getId());
+		 
+		 assertNotNull("No Accounts created for this user" , accountsDTOs);
+		 
+		 if(accountsDTOs != null){
+			 ScrapeLogResult accountInactive = null;
+			 for(BillingAccountDTO accountInactiveDTO : accountsDTOs){
+				 accountInactive  = new ScrapeLogResult();
+			     accountInactive.setAccountNumber(accountInactiveDTO.getAccountNumber());
+			     accountInactive.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
+			     accountInactive.setResponse(AccountStatusType.INACTIVE.getStatusType());
+			     accountInactive.setNotificationType(NotificationType.LOGON.getNotificationType());
+			     accountInactive.setMessage(SrapingResponseTypes.ACCOUNT_INACTIVE.getScrapingResponse());
+			     notificationRepository.insertScrapeLogResult(notification);
+			 }
+		 }
+		
+	}
 }

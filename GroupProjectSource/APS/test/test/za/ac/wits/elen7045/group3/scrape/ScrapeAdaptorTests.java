@@ -12,9 +12,9 @@ import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.*;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 public class ScrapeAdaptorTests {
 	

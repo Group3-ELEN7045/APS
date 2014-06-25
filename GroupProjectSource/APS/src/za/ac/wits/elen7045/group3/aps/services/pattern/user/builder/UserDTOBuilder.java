@@ -20,8 +20,6 @@ import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
 
 public class UserDTOBuilder {
   
-	private CustomerDTO customerDTO = new CustomerDTO();
-	
 	/** The id. */
 	private Long                 id;
 	private String               firstName;
@@ -104,6 +102,7 @@ public class UserDTOBuilder {
 	}
 	
 	public CustomerDTO buildCustomerDTO(){
+		CustomerDTO customerDTO = new CustomerDTO();
 		customerDTO.setId(id);
 		customerDTO.setFirstName(firstName);
 		customerDTO.setDateOfBirth(dateOfBirth);

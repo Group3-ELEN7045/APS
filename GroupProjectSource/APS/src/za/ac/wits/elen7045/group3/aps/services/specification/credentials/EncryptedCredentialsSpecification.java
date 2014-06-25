@@ -3,8 +3,6 @@
  */
 package za.ac.wits.elen7045.group3.aps.services.specification.credentials;
 
-import org.apache.commons.codec.binary.Base64;
-
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 
@@ -19,12 +17,10 @@ public class EncryptedCredentialsSpecification extends ApplicationSpecification<
 		this.credentialsDTO = credentialsDTO;	
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean isSatisfiedBy(CredentialsDTO capturedlogonCredentials) {
-		
-		return ((Base64.isArrayByteBase64(capturedlogonCredentials.getPassword().getBytes()))
+	  	return ((credentialsDTO.getPassword().equals(capturedlogonCredentials.getPassword()))
 				 &&
-				(Base64.isArrayByteBase64(capturedlogonCredentials.getUserName().getBytes()))
+				(credentialsDTO.getUserName().equals(capturedlogonCredentials.getUserName()))
 			   );
 	}
 }

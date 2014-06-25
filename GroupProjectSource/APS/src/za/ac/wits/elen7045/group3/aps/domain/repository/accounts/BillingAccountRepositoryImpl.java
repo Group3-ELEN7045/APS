@@ -1,4 +1,5 @@
-package za.ac.wits.elen7045.group3.aps.domain.accounts.repository;
+
+
 
 import java.util.List;
 
@@ -44,8 +45,8 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 
 	
 	@Override
-	public List<BillingAccount> getBillingAcountsForCustomer(Long customerId)
-			throws DatabaseException {
+	public BillingAccount getBillingAcountsForCustomer(Long customerId)
+			throws DatabaseException { 
 		return dataAccess.getBillingAcountsForCustomer(customerId);
 	}	
 }

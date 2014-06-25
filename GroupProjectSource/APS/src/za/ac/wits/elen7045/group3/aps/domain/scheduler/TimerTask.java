@@ -4,11 +4,13 @@ package za.ac.wits.elen7045.group3.aps.domain.scheduler;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepository;
+
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 

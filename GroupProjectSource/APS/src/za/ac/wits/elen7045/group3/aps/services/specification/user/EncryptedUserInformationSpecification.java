@@ -3,8 +3,6 @@
  */
 package za.ac.wits.elen7045.group3.aps.services.specification.user;
 
-import org.apache.commons.codec.binary.Base64;
-
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 
@@ -19,11 +17,10 @@ private CustomerDTO customer;
 		this.customer = customer;	
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean isSatisfiedBy(CustomerDTO customerParams) {
-		return ((Base64.isArrayByteBase64(customerParams.getStringDateOfBirth().getBytes())
+		return ((customer.getStringDateOfBirth().equals(customerParams.getStringDateOfBirth()))
 				 &&
-				(Base64.isArrayByteBase64(customerParams.getPaymentDetails().getValue().getBytes()))
-			   ));
+				(customer.getPaymentDetails().getValue().equals(customerParams.getPaymentDetails().getValue()))
+			   );
 	}
 }

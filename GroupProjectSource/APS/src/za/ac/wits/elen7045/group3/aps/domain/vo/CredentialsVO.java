@@ -14,7 +14,7 @@ public class CredentialsVO{
 	private String userName;
 	private String password;
 	
-	@Column(name = "USER_NAME", nullable = false) 
+	@Column(name = "USER_NAME", nullable = false,unique = true) 
 	public String getUserName() {
 		return userName;
 	}

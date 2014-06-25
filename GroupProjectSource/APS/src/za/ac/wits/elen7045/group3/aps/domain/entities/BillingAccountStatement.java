@@ -1,3 +1,4 @@
+
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
@@ -12,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.SelectBeforeUpdate;
 
 @MappedSuperclass
 public class  BillingAccountStatement implements Serializable {
@@ -71,7 +70,7 @@ public class  BillingAccountStatement implements Serializable {
 	public void setAccountStatementDate(String accountStatementDate) {
 		AccountStatementDate = accountStatementDate;
 	}
-	@Column(name = "STATEMENT_NUMBER",unique= true, nullable = true)
+	@Column(name = "STATEMENT_NUMBER",nullable = true)
 	public String getAccountStatementNumber() {
 		return AccountStatementNumber;
 	}
@@ -79,7 +78,7 @@ public class  BillingAccountStatement implements Serializable {
 	public void setAccountStatementNumber(String accountStatementNumber) {
 		AccountStatementNumber = accountStatementNumber;
 	}
-	@Column(name = "PERIOD",unique = true,nullable = true)
+	@Column(name = "PERIOD",nullable = true)
 	public String getAccountStatementMonth() {
 		return AccountStatementMonth;
 	}
@@ -91,51 +90,69 @@ public class  BillingAccountStatement implements Serializable {
 	public String getAccountTotalDue() {
 		return AccountTotalDue;
 	}
+	
+	
 	public void setAccountTotalDue(String accountTotalDue) {
 		AccountTotalDue = accountTotalDue;
 	}
+	
+	@Column(name = "ACCOUNT_TOTAL_DUE",nullable = true)
 	public String getAccountDueDate() {
 		return AccountDueDate;
 	}
 	public void setAccountDueDate(String accountDueDate) {
 		AccountDueDate = accountDueDate;
 	}
+	
+	@Column(name = "ACCOUNT_OPENING_BALANCE",nullable = true)
 	public String getAccountOpeningBalance() {
 		return AccountOpeningBalance;
 	}
 	public void setAccountOpeningBalance(String accountOpeningBalance) {
 		AccountOpeningBalance = accountOpeningBalance;
 	}
+	
+	@Column(name = "ACCOUNT_CLOSING_BALANCE",nullable = true)
 	public String getAccountClosingBalance() {
 		return AccountClosingBalance;
 	}
 	public void setAccountClosingBalance(String accountClosingBalance) {
 		AccountClosingBalance = accountClosingBalance;
 	}
+	
+	@Column(name = "ACCOUNT_ACCOUNT_PAYMENT_RECEIVED",nullable = true)
 	public String getAccountPaymentReceived() {
 		return AccountPaymentReceived;
 	}
 	public void setAccountPaymentReceived(String accountPaymentReceived) {
 		AccountPaymentReceived = accountPaymentReceived;
 	}
+	
+	@Column(name = "ACCOUNT_NEW_CHARGES",nullable = true)
 	public String getAccountNewCharges() {
 		return AccountNewCharges;
 	}
 	public void setAccountNewCharges(String accountNewCharges) {
 		AccountNewCharges = accountNewCharges;
 	}
+	
+	@Column(name = "ACCOUNT_DEDUCTIONS",nullable = true)
 	public String getAccountDeductions() {
 		return AccountDeductions;
 	}
 	public void setAccountDeductions(String accountDeductions) {
 		AccountDeductions = accountDeductions;
 	}
+	
+	@Column(name = "ACCOUNT_DISCOUNT",nullable = true)
 	public String getAccountDiscount() {
 		return AccountDiscount;
 	}
 	public void setAccountDiscount(String accountDiscount) {
 		AccountDiscount = accountDiscount;
 	}
+	
+	@Column(name = "ACCOUNT_VAT_AMOUNT",nullable = true)
 	public String getAccountVATAmount() {
 		return AccountVATAmount;
 	}
@@ -143,3 +160,4 @@ public class  BillingAccountStatement implements Serializable {
 		AccountVATAmount = accountVATAmount;
 	}
 }
+

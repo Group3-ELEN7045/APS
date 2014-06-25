@@ -15,6 +15,7 @@ import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
@@ -22,7 +23,6 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer.NotificationObserver;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.notification.CheckNotificationSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.scrape.ScrapedResult;
 
 /**
  * @author SilasMahlangu
@@ -45,8 +45,6 @@ public class CheckNotifictionTest {
 		notifications = new ArrayList<ScrapeLogResult>();
 		notificationRepositoryImpl = new ScrapeLogResultImpl(notificationDataAccess);
 		notificationRepository = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
-
-
 	}
 	
 	
