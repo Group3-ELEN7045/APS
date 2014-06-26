@@ -52,63 +52,85 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	public void scrapeAccount() {
 		//scrape account
 		MunicipalScrapeAdaptor msa = new MunicipalScrapeAdaptor();
-		ScrapedResult scrapeResult = msa.scrapeWebsite(account.getCompanyUrl(), account.getCredentials());
-
-		ScrapeLogResult scrapeLog = new ScrapeLogResult();
-		scrapeLog.setAccountNumber(account.getAccountNumber());
+		ScrapedResult scrapeResult;
+		ScrapeLogResult scrapeLog;
+		try{
+			scrapeResult = msa.scrapeWebsite(account.getCompanyUrl(), account.getCredentials());
 		
-		scrapeLog.setResponse(StringUtil.truncate(scrapeResult.toString(), 255));
-		scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
-		
-		//was the scrape successful
-		ScrapeInterpreter scrapeResultCheck = new ScrapeInterpreter(scrapeResult);
-		String returnCode = scrapeResultCheck.evaluate();
-		if(SUCCESS.equalsIgnoreCase(returnCode)){
-			try {
-				isIntegrityCheckPassed(scrapeResult);
-				
-				statementRepository.addStatement(getMunicipalStatement(scrapeResult));
-				scrapeLog.setNotificationType(NotificationType.SCRAPESUCCESS.getNotificationType());
-				scrapeLog.setStatsus(NotificationStatus.SUCCESS.getNotificationStatus());
-				
-			} catch (AccountNumberIncorrectException e) {
-				e.printStackTrace();
-				
-				scrapeLog.setMessage(e.getMessage());
-				scrapeLog.setNotificationType(NotificationType.EMAIL.getNotificationType());
-				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
-				
-				account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-			} catch (DataIntegrityCheckException e) {
-				e.printStackTrace();
-				
-				scrapeLog.setMessage(e.getMessage());
-				scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
-				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
-				
-				account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-			} catch (Exception e){
-				e.printStackTrace();
-				
-				scrapeLog.setMessage(e.getMessage());
-				scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
-				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
-				
-				account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-			}
-		}
-		
-		try {
-			accountRepository.updateBillingAccountStatus(account);
-		} catch (DatabaseException e) {
-			e.printStackTrace();
+			scrapeLog = new ScrapeLogResult();
+			scrapeLog.setAccountNumber(account.getAccountNumber());
 			
-			scrapeLog.setMessage(e.getMessage());
-			scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
-			scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());			
+			scrapeLog.setResponse(StringUtil.truncate(scrapeResult.toString(), 255));
+			scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
+			
+			//was the scrape successful
+			ScrapeInterpreter scrapeResultCheck = new ScrapeInterpreter(scrapeResult);
+			String returnCode = scrapeResultCheck.evaluate();
+			if(SUCCESS.equalsIgnoreCase(returnCode)){
+				try {
+					isIntegrityCheckPassed(scrapeResult);
+					
+					statementRepository.addStatement(getMunicipalStatement(scrapeResult));
+					scrapeLog.setNotificationType(NotificationType.SCRAPESUCCESS.getNotificationType());
+					scrapeLog.setStatsus(NotificationStatus.SUCCESS.getNotificationStatus());
+					
+				} catch (AccountNumberIncorrectException e) {
+					e.printStackTrace();
+					
+					scrapeLog.setMessage(e.getMessage());
+					scrapeLog.setNotificationType(NotificationType.EMAIL.getNotificationType());
+					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
+					
+					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
+				} catch (DataIntegrityCheckException e) {
+					e.printStackTrace();
+					
+					scrapeLog.setMessage(e.getMessage());
+					scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
+					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
+					
+					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
+				} catch (Exception e){
+					e.printStackTrace();
+					
+					scrapeLog.setMessage(e.getMessage());
+					scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
+					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
+					
+					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
+				}
+			}
+			
+			try {
+				accountRepository.updateBillingAccountStatus(account);
+			} catch (DatabaseException e) {
+				e.printStackTrace();
+				
+				scrapeLog.setMessage(e.getMessage());
+				scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
+				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());			
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	
+			scrapeLog = new ScrapeLogResult();
+			scrapeLog.setAccountNumber(account.getAccountNumber());
+			scrapeLog.setResponse(e.getMessage());
+			scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
 		}
 		//log the scrape call with its result
-		logScrapeResult(scrapeLog);
+		logScrapeResult(scrapeLog);		
+	}catch(Exception e){
+		e.printStackTrace();
+
+		scrapeLog = new ScrapeLogResult();
+		scrapeLog.setAccountNumber(account.getAccountNumber());
+		scrapeLog.setResponse(e.getMessage());
+		scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
+	}
+	//log the scrape call with its result
+	logScrapeResult(scrapeLog);		
+		
 	}
 
 	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws AccountNumberIncorrectException, DataIntegrityCheckException {

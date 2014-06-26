@@ -1,4 +1,3 @@
-
 package test.za.ac.wits.elen7045.group3.scrape;
 /**
  * @author boitumelo
@@ -22,7 +21,9 @@ import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepos
 import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.MunicipalScrapeStrategy;
+import za.ac.wits.elen7045.group3.aps.services.scrape.TelcoScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -56,7 +57,6 @@ public class ScraperStrategyTest {
 		scrapeLog.setAccountNumber(billingAccount.getAccountNumber());
 		scrapeLog.setNotificationType("");
 		scrapeLog.setStatsus("");
-		
 	}		
 	
 	
@@ -64,36 +64,40 @@ public class ScraperStrategyTest {
 	public void testMunicipalStrategy() throws DatabaseException {
 		System.out.println("\n ScrapedAccountTest:START");
 
-		billingAccount.setCompanyUrl("municipal.xml");		
-		billingAccountRepository.saveBillingAccount(billingAccount);
+		billingAccount.setAccountNumber("123456789");
+		billingAccount.setCompanyUrl("municipal.xml");
 		
 		scraper = new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
 		scraper.scrapeAccount();
-		System.out.println("\n ScrapedAccountTest:END");//+billingAccountRepository.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		
+		System.out.println("\n ScrapedAccountTest:END");
 	}
 
-//	@Test
+	@Test
 	public void testCreditStrategy() throws DatabaseException {
-		billingAccount = new BillingAccount(2L,67854L,"6678666546");
-		billingAccount.setCredentials(new CredentialsVO());
-		billingAccount.setCompanyUrl("creditcard.xml");
-//		scraper = new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository);
+		System.out.println("\n ScrapedAccountTest:START");
 		
+		billingAccount.setAccountNumber("6678666546");
+		billingAccount.setCompanyUrl("creditcard.xml");
+		
+		scraper = new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);		
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for company : ");//+billingAccountRepository.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		
+		System.out.println("\n ScrapedAccountTest:END");
 	}
 
 	
-//	@Test
+	@Test
 	public void testTelcoStrategy() throws DatabaseException {
-		billingAccount = new BillingAccount(2L,679987L,"77658666546");
-		billingAccount.setCredentials(new CredentialsVO());
+		System.out.println("\n ScrapedAccountTest:START");
+		
+		billingAccount.setAccountNumber("77658666546");
 		billingAccount.setCompanyUrl("telco.xml");
-		billingAccountRepository.saveBillingAccount(billingAccount);
-//		scraper = new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository);
-
+		
+		scraper = new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for company : ");//+billingAccountRepository.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+
+		System.out.println("\n ScrapedAccountTest:END");
 	}
 	
 	@Test
