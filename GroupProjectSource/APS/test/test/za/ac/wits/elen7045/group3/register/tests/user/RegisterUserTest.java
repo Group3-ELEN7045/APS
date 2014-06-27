@@ -100,6 +100,8 @@ public class RegisterUserTest {
 	
 	@Test //if parts user Details are Encrypted 
 	public void testValidatedUserDetailsEncryption(){
+		
+		
 		CustomerDTO validatingUser = new CustomerDTO();
 		validatingUser.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
 		PaymentDetailsDTO validatingPaymentsDTO = new PaymentDetailsDTO();
@@ -166,10 +168,16 @@ public class RegisterUserTest {
 		validationCredentials.setPassword("password");
 		validationCredentials.setConfirmPasword("password");
 		
-System.out.println("*****************************  User Registration Process *****************************");			
+		try {
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+System.out.println("***************************** 1. User Registration Process *****************************");			
 System.out.println("   ");
 System.out.println("1. Validating Password and Confirm Password   ");
-System.out.println("");
 System.out.println("");
 System.out.println("Password         = " + logonCredentialsDTO.getPassword());
 System.out.println("Confirm Password = " + logonCredentialsDTO.getConfirmPasword());
@@ -197,49 +205,148 @@ System.out.println("");
 		//1.  Validate captured Password and CapturedPassword. 
 		if(capturedCredentials.isSatisfiedBy(logonCredentialsDTO)){
 			System.out.println("Captured Password and Confirm Password are valid");
-			
+
+System.out.println("");
+System.out.println("*********************************************************************************");
+System.out.println("");			
+System.out.println("**************** 2. User Information Encryption Process **************************");
+System.out.println("");
+System.out.println("Unencrypted data ");
+System.out.println("");
+
 			CustomerDTO validatingUser = new CustomerDTO();
 			validatingUser.setDateOfBirth(DateUtil.formatDate(ApplicationContants.DATE_OF_BIRTH_FORMAT, "12/12/1979"));
+			
+System.out.println("Dateof Birth    = " + validatingUser.getStringDateOfBirth());
+System.out.println("CreditCard Info = " + validatingUser.getPaymentDetails().getValue());
+System.out.println(" ");			
+		    
+try {
+	Thread.currentThread().sleep(2000);
+} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+
 			PaymentDetailsDTO validatingPaymentsDTO = new PaymentDetailsDTO();
 	      	validatingPaymentsDTO.setPaymentType(PaymentType.CREDIT_CARD.getPaymentType());
 	        validatingPaymentsDTO.setValue("111111111111");
 	        validatingUser.setPaymentDetails(validatingPaymentsDTO);
-	        
 	        validatingUser.setEncryptionModule(encryptionModule);
-			
 			customer.encryptUserInformation();
+
+System.out.println("Encrypting user sensetiveinformation");			
+System.out.println(" ");
+			
 			validatingUser.encryptUserInformation();
-			ApplicationSpecification<CustomerDTO> userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
-						
+			
+System.out.println(" ");
+System.out.println(" Done ");
+System.out.println(" ");
+System.out.println(" Displaying encrypted Information ");
+System.out.println(" ");
+System.out.println("Dateof Birth    = " + validatingUser.getStringDateOfBirth());
+System.out.println("CreditCard Info = " + validatingUser.getPaymentDetails().getValue());
+System.out.println(" ");
+System.out.println(" Applying encryption Specification ");			
+System.out.println(" ");
+
+             ApplicationSpecification<CustomerDTO> userDetailsSpecification = new EncryptedUserInformationSpecification(customer);
+
+System.out.println(" ");             
+System.out.println(" Is usert data encrypted = " + userDetailsSpecification.isSatisfiedBy(validatingUser));
+System.out.println(" ");
+
+try {
+	Thread.currentThread().sleep(2000);
+} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+
 			//For Presentation
 			//2.  Validate captured Date of Birth and and Payment details are encrypted.
 			if(userDetailsSpecification.isSatisfiedBy(validatingUser)){
 				System.out.println("User details have been encrypted properly");	
 				
+System.out.println(" ");				
+System.out.println("********************************************************************************************** ");				
+System.out.println(" ");
+System.out.println("*********************** 2. User Credentials Encryption Process *******************************");
+System.out.println(" ");
+
+
 				credentialDTO = new CredentialsDTO();
 				credentialDTO.setUserName(logonCredentialsDTO.getUserName());
 				credentialDTO.setPassword(logonCredentialsDTO.getPassword());
 				customer.setCredentials(credentialDTO);
 				customer.getCredentials().setEncryptionModule(encryptionModule);
 				
+System.out.println("Displaying username and pasword in clear text");
+System.out.println(" ");
+				
 				CredentialsDTO credentialDTOEncrypt = new CredentialsDTO();
 				credentialDTOEncrypt.setUserName("userName");
 				credentialDTOEncrypt.setPassword("password");
 				credentialDTOEncrypt.setEncryptionModule(encryptionModule);
 				
+System.out.println("Username = " + credentialDTOEncrypt.getUserName());
+System.out.println("Password = " + credentialDTOEncrypt.getPassword());
+System.out.println(" ");
+System.out.println(" Encrypting the credentials");
+System.out.println(" ");
+
 				credentialDTO = customer.getCredentials().encryptCredentials();
 				credentialDTOEncrypt.encryptCredentials();
-				
-				ApplicationSpecification<CredentialsDTO> encryptSpecification = new EncryptedCredentialsSpecification(credentialDTO);
+System.out.println(" ");
+System.out.println("Done ...");
+System.out.println(" ");
+System.out.println(" Encrypted the credentials");
+System.out.println(" ");
+System.out.println("Username = " + credentialDTOEncrypt.getUserName());
+System.out.println("Password = " + credentialDTOEncrypt.getPassword());
+System.out.println(" ");
+System.out.println("Applying encrption check specification");
+System.out.println(" ");
+
+                 ApplicationSpecification<CredentialsDTO> encryptSpecification = new EncryptedCredentialsSpecification(credentialDTO); 
+
+System.out.println("Are credentials encrypted = " + encryptSpecification.isSatisfiedBy(credentialDTOEncrypt));
+System.out.println(" ");
 								
+try {
+	Thread.currentThread().sleep(2000);
+} catch (InterruptedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+
 				//For Presentation
 				//3.  Validate userEntry.
 				if(encryptSpecification.isSatisfiedBy(credentialDTOEncrypt)){
 					System.out.println("UserName and password are  Encrypted");
-					
+
+System.out.println(" ");
+System.out.println(" *************************************************************************************");
+System.out.println(" ");
+System.out.println(" ******************* Registering user in the Database ********************************");
+System.out.println(" ");
+
 					CustomerDTO responseCutomer = userManager.updateUser(customer);
 					CustomerDTO insertedUser = userManager.selectCustomer(responseCutomer);
+					
+System.out.println("User successfully registered new id = " +insertedUser.getId());
+
 				    assertNotNull("Failed to Insert User" , insertedUser);
+	try {
+		Thread.currentThread().sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}			    
+System.out.println(" ******************* Registeration process is complete  ********************************");
+System.out.println(" ");
+				    
 				}
 			}
 		}

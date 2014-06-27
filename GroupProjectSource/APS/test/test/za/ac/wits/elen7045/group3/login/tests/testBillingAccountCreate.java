@@ -27,7 +27,7 @@ public class testBillingAccountCreate {
 			billingAccount.addBillingAccountStatament(statement);
 			assertTrue(billingAccount.getBillingStatement().size() == 0);
 			
-			TelcoStatement telStatement = new TelcoStatement();
+			TelcoStatement telStatement = new TelcoStatement("3");
 			billingAccount.addBillingAccountStatament(telStatement);
 			assertTrue(billingAccount.getBillingStatement().size() != 0);			
 		}

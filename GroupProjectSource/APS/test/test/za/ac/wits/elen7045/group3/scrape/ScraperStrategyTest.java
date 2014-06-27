@@ -1,15 +1,24 @@
 package test.za.ac.wits.elen7045.group3.scrape;
+/**
+ * @author boitumelo
+ * 
+ */
+import java.util.List;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
@@ -17,68 +26,101 @@ import za.ac.wits.elen7045.group3.aps.services.scrape.MunicipalScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.TelcoScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ScraperStrategyTest {
 	
-	
 	private ApplicationContext context;
-	
 	private BillingAccount billingAccount;
 	private ScraperStrategy scraper;
-
-	private ScrapeLogResultDataAccess scrapeLogDataAccess;
-	private ScrapeLogResultImpl scrapeLogRepository;
+	private ScrapeLogResult scrapeLog;
 	
-	private BillingAccountDataAccess billingAccountDataAccess;
-	private BillingAccountRepositoryImpl billingAccountRepositoryImpl;
+//	private ScrapeLogResultDataAccess scrapeLogDataAccess;
+	private ScrapeLogResultImpl scrapeLogRepository;
+	private BillingAccountRepositoryImpl billingAccountRepository;	
+	private StatementRepository statementRepository;
 	
 
 	@Before
 	public void initilize(){
 		context = new ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
-			
-		scrapeLogDataAccess = context.getBean(ScrapeLogResultDataAccess.class);
-		billingAccountRepositoryImpl = context.getBean(BillingAccountRepositoryImpl.class);
-		scrapeLogRepository = new ScrapeLogResultImpl(scrapeLogDataAccess);
+		
+		billingAccountRepository 		= context.getBean(BillingAccountRepositoryImpl.class);
+		statementRepository				= context.getBean(StatementRepositoryImpl.class);
+		scrapeLogRepository				= context.getBean(ScrapeLogResultImpl.class);
+
+		//account
+		billingAccount = new BillingAccount(2L,98654L,"123456789");
+		billingAccount.setCredentials(new CredentialsVO());
+		
+		//scrapelog
+		scrapeLog = new ScrapeLogResult();
+		scrapeLog.setAccountNumber(billingAccount.getAccountNumber());
+		scrapeLog.setNotificationType("");
+		scrapeLog.setStatsus("");
 	}		
 	
 	
 	@Test
 	public void testMunicipalStrategy() throws DatabaseException {
-		
-		billingAccount = new BillingAccount(2L,98654L,"9098666546");
-		billingAccount.setCredentials(new CredentialsVO());
+		System.out.println("\n ScrapedAccountTest:START");
+
+		billingAccount.setAccountNumber("123456789");
 		billingAccount.setCompanyUrl("municipal.xml");
 		
-		billingAccountRepositoryImpl.saveBillingAccount(billingAccount);
-		
-		scraper = new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepositoryImpl);
-		
+		scraper = new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		
+		System.out.println("\n ScrapedAccountTest:END");
 	}
-	
-	
-//	@Test
+
+	@Test
 	public void testCreditStrategy() throws DatabaseException {
-		billingAccount = new BillingAccount(2L,67854L,"6678666546");
-		billingAccount.setCredentials(new CredentialsVO());
-		billingAccount.setCompanyUrl("creditcard.xml");
-		scraper = new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepositoryImpl);
+		System.out.println("\n ScrapedAccountTest:START");
 		
+		billingAccount.setAccountNumber("6678666546");
+		billingAccount.setCompanyUrl("creditcard.xml");
+		
+		scraper = new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);		
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+		
+		System.out.println("\n ScrapedAccountTest:END");
 	}
 
 	
-//	@Test
+	@Test
 	public void testTelcoStrategy() throws DatabaseException {
-		billingAccount = new BillingAccount(2L,679987L,"77658666546");
-		billingAccount.setCredentials(new CredentialsVO());
+		System.out.println("\n ScrapedAccountTest:START");
+		
+		billingAccount.setAccountNumber("77658666546");
 		billingAccount.setCompanyUrl("telco.xml");
-		billingAccountRepositoryImpl.saveBillingAccount(billingAccount);
-		scraper = new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepositoryImpl);
-
+		
+		scraper = new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
 		scraper.scrapeAccount();
-		System.out.println("Scraped account for company : "+billingAccountRepositoryImpl.getBillingAccount(billingAccount.getAccountNumber()).getCompanyUrl());
+
+		System.out.println("\n ScrapedAccountTest:END");
+	}
+	
+	@Test
+	public void testScrapeLog(){
+		System.out.println("\n ScrapeLogTest:START");
+		try {
+			List<ScrapeLogResult> logs = scrapeLogRepository.getScrapeLogResult(scrapeLog);
+			for(ScrapeLogResult scrapeLog : logs){
+				System.out.println("\n ------- scrape log ------ \n ".concat(scrapeLog.toString()));
+			}			
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("\n ScrapeLogTest:END");
+	}
+	
+	@Test
+	public void testStatementRepository(){
+		System.out.println("\n StatementRepository:START");
+		List<BillingAccountStatement> stmatements = statementRepository.getAccountStatement(billingAccount.getAccountNumber());
+		for(BillingAccountStatement statement : stmatements){
+			System.out.println("\n ------- statement ------ \n ".concat(statement.toString()));
+		}
+		System.out.println("\n StatementRepository:END");
 	}
 }

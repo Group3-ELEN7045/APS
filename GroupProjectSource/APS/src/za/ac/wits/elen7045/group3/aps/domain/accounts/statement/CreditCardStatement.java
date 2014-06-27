@@ -28,6 +28,14 @@ public class CreditCardStatement extends BillingAccountStatement implements Seri
 	private String creditAvailable;
 	private String minimumAmountDue;
 	
+	public CreditCardStatement(){
+		
+	}
+	
+	public CreditCardStatement(String accountNumber){
+		this.setAccountNumber(accountNumber);
+	}
+	
 	@Column(name = "CARD_TYPE",nullable = true)	
 	public String getCardType() {
 		return cardType;

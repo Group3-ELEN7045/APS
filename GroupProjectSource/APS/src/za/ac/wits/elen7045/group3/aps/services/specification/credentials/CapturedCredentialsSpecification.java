@@ -18,8 +18,8 @@ public class CapturedCredentialsSpecification extends ApplicationSpecification<C
 		this.logonCredentials = logonCredentials;	
 	}
 
-	public boolean isSatisfiedBy(CapturedCredentialsDTO capturedlogonCredentials) {
-		return capturedlogonCredentials.getConfirmPasword().equals(capturedlogonCredentials.getPassword());
+	public boolean isSatisfiedBy(CapturedCredentialsDTO validationCredentials) {
+		return logonCredentials.getConfirmPasword().equals(validationCredentials.getPassword());
 	}
 
 }

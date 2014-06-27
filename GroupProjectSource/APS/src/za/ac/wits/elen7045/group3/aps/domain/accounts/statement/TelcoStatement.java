@@ -25,6 +25,9 @@ public class TelcoStatement extends BillingAccountStatement implements Serializa
 	
 	private static final long serialVersionUID = 1L;
 	
+	public TelcoStatement(String accountNumber){
+		this.setAccountNumber(accountNumber);
+	}
 	private String 	telephonenumber;
 	private String 	serviceCharges;
 	private String 	callCharges;

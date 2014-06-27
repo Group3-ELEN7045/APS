@@ -7,7 +7,7 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAc
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
-import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.generator.StatementRenderer;
+import za.ac.wits.elen7045.group3.aps.services.accounts.statement.generator.StatementRenderer;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class StatementGenerationTest {

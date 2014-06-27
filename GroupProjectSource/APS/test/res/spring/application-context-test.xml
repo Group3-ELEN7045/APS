@@ -5,20 +5,22 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <!-- Customer Repository Setup -->
-       <bean id="userRepository" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeUserDB"></bean>
-    
-       <bean id="customerReposiory" class="za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl">
-          <constructor-arg ref="userRepository"/>
-       </bean>
+    <bean id="userRepository" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeUserDB"></bean>    
+    <bean id="customerReposiory" class="za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl">
+       <constructor-arg ref="userRepository"/>
+    </bean>
     <!-- Customer Repository -->
     
     <!-- Notificstions Setup -->
-       <bean id="notificationRepository" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeNotificationDB">
-       
-       </bean>
+    
+    <bean id="notificationDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeNotificationDB"/>
+    <bean id="scrapeLogResultRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl">
+        <constructor-arg ref="notificationDataAccess"/>
+    </bean>
     <!-- Notifications Rpository -->
     
     <!-- Billing Database Setup -->
+<<<<<<< HEAD
 
    <bean id="billingDataAccess" 		class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
    <bean id="billingAccountRepository" 	class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
@@ -31,16 +33,19 @@
        <constructor-arg ref="billingStatementDataAccess"/>
    </bean>
 
+=======
+    <bean id="billingDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
+    <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl">
+        <constructor-arg ref="billingDataAccess"/>
+    </bean> 
+>>>>>>> 0c5781abf9ee40a1df181b254c85fb4d8679c880
     <!-- Billing Database Setup -->
     
     <!--    statement Setup -->
-     <bean id="statementDataAcces" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingStatementDB">
-       
-      </bean>
-      
-      <bean id="statementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl">
-         <constructor-arg ref="statementDataAcces"/>
-      </bean>
+    <bean id="statementDataAcces" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingStatementDB"/>
+    <bean id="statementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl">
+       <constructor-arg ref="statementDataAcces"/>
+    </bean>
     <!--  statement Setup    -->
     
     <bean id="applicationUser"   class="za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO"/>
@@ -54,6 +59,7 @@
     <bean id="contactDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
     <bean id="notification"      class="za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult"/>
     <bean id="encryptionModule"  class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
+<<<<<<< HEAD
     
     
     
@@ -63,5 +69,7 @@
      <bean id="timer"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer"> 
         <constructor-arg index="0"><value>0/1 * * * * ?</value></constructor-arg>	
      </bean>
+=======
+>>>>>>> 0c5781abf9ee40a1df181b254c85fb4d8679c880
 </beans>
 

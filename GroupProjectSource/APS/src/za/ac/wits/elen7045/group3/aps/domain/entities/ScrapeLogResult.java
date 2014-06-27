@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -38,7 +40,7 @@ public class ScrapeLogResult implements Serializable{
 		this.id = id;
 	}
 	
-	@Column(name = "NOTIFICATION_TYPE") 
+	
 	public String getNotificationType() {
 		return notificationType;
 	}
@@ -53,8 +55,8 @@ public class ScrapeLogResult implements Serializable{
 	public void setStatsus(String statsus) {
 		this.statsus = statsus;
 	}
-	
-	@Column(name = "NOTIFICATION_RESPONSE")
+
+	@Column(name = "NOTIFICATION_RESPONSE", columnDefinition="varchar(1000)")
 	public String getResponse() {
 		return response;
 	}
@@ -84,5 +86,12 @@ public class ScrapeLogResult implements Serializable{
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	
+	@Override
+	public String toString() {
+		return "\n Account Number : ".concat(this.accountNumber.concat("\n scraped on: ".concat(null!=notificationDate?notificationDate.toString():"")
+				.concat("\n status: ".concat(null!=statsus?statsus:""))
+				.concat("\n ------ \n ".concat(null!=response?response:""))));
 	}
 }
