@@ -15,6 +15,4 @@ public enum CompanyStatementType {
 	public String getAccountType() {
 		return accountType;
 	}
- 
-
 }

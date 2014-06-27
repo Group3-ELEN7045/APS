@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 package test.za.ac.wits.elen7045.group3.ebilling.tests;
 
@@ -8,12 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import java.util.ArrayList;
 import java.util.List;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
-import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 
@@ -77,35 +75,77 @@ public class TestViewStatement {
 		 public void testSaveBillingAccountStatement() {
 		 try {				 
 			 
-			 BillingAccountStatement statement = new TelcoStatement();
-			 statement.setAccountNumber("34566");
-			 statement.setAccountStatementNumber("1234");
-			 statement.setAccountClosingBalance("R5000");
-			 statement.setAccountStatementMonth("June");
-			 statement.setAccountDiscount("R23");
-			 statement.setAccountNumber("1234");
-			 billingAccountStatementManagerImpl.saveBillingAccountStatement(statement);
+			 BillingAccountStatement telcoStatement = new TelcoStatement();
+			 telcoStatement.setAccountNumber("34566");
+			 telcoStatement.setAccountDeductions("R30");
+			 telcoStatement.setAccountDueDate("2014/06/26");
+			 telcoStatement.setAccountHolderName("John");
+			 telcoStatement.setAccountNewCharges("R26");
+			 telcoStatement.setAccountOpeningBalance("R3000");
+			 telcoStatement.setAccountPaymentReceived("R200");
+			 telcoStatement.setAccountStatementDate("2014/06/20");
+			 telcoStatement.setAccountTotalDue("R233");
+			 telcoStatement.setAccountTotalDue("R230");
+			 telcoStatement.setAccountDeductions("R328");
+			 telcoStatement.setAccountVATAmount("R33");
+			 telcoStatement.setAccountStatementNumber("1234");
+			 telcoStatement.setAccountClosingBalance("R5000");
+			 telcoStatement.setAccountStatementMonth("June");
+			 telcoStatement.setAccountDiscount("R23");
 			 
-			 BillingAccountStatement statement2 = new MunicipalStatement();
-			 statement.setAccountNumber("34566");
-			 statement.setAccountStatementNumber("12345");
-			 statement.setAccountClosingBalance("R5000");
-			 statement.setAccountStatementMonth("June");
-			 statement.setAccountDiscount("R23");
+			 billingAccountStatementManagerImpl.saveBillingAccountStatement(telcoStatement);
 			 
-			 billingAccountStatementManagerImpl.saveBillingAccountStatement(statement2);
+			  BillingAccountStatement telcoStat = 
+					 (BillingAccountStatement) billingAccountStatementManagerImpl.getBillingAccountStatements(telcoStatement.getAccountNumber(), telcoStatement.getAccountStatementMonth());
+				 assertNotNull("Billing Account not null" , telcoStat);
+				 
+			 BillingAccountStatement municipalStatement = new MunicipalStatement();
+			 municipalStatement.setAccountNumber("14566");
+			 municipalStatement.setAccountDeductions("R35");
+			 municipalStatement.setAccountDueDate("2014/06/26");
+			 municipalStatement.setAccountHolderName("John");
+			 municipalStatement.setAccountNewCharges("R45");
+			 municipalStatement.setAccountOpeningBalance("R3050");
+			 municipalStatement.setAccountPaymentReceived("R250");
+			 municipalStatement.setAccountStatementDate("2014/06/15");
+			 municipalStatement.setAccountTotalDue("R435");
+			 municipalStatement.setAccountTotalDue("R56");
+			 municipalStatement.setAccountDeductions("R36");
+			 municipalStatement.setAccountVATAmount("R40");
+			 municipalStatement.setAccountStatementNumber("565656");
+			 municipalStatement.setAccountClosingBalance("R670");
+			 municipalStatement.setAccountStatementMonth("June");
+			 municipalStatement.setAccountDiscount("R0");;
 			 
-			 BillingAccountStatement statement3 = new MunicipalStatement();
-			 statement.setAccountNumber("34566");
-			 statement.setAccountStatementNumber("123456");
-			 statement.setAccountClosingBalance("R5000");
-			 statement.setAccountStatementMonth("June");
-			 statement.setAccountDiscount("R23");
+			 billingAccountStatementManagerImpl.saveBillingAccountStatement(municipalStatement);
 			 
-			 billingAccountStatementManagerImpl.saveBillingAccountStatement(statement3);
+			 BillingAccountStatement municipalStat = 
+				 (BillingAccountStatement) billingAccountStatementManagerImpl.getBillingAccountStatements(municipalStatement.getAccountNumber(), municipalStatement.getAccountStatementMonth());
+			 assertNotNull("Billing Account not null" , municipalStat);
+			 
+			 BillingAccountStatement creditCardStatement = new CreditCardStatement();
+			 creditCardStatement.setAccountNumber("45549");
+			 creditCardStatement.setAccountDeductions("R23");
+			 creditCardStatement.setAccountDueDate("2014/06/26");
+			 creditCardStatement.setAccountHolderName("John");
+			 creditCardStatement.setAccountNewCharges("R56");
+			 creditCardStatement.setAccountOpeningBalance("R456");
+			 creditCardStatement.setAccountPaymentReceived("R0");
+			 creditCardStatement.setAccountStatementDate("2014/06/13");
+			 creditCardStatement.setAccountTotalDue("R879");
+			 creditCardStatement.setAccountTotalDue("R1290");
+			 creditCardStatement.setAccountDeductions("R78");
+			 creditCardStatement.setAccountVATAmount("R76");
+			 creditCardStatement.setAccountStatementNumber("98765");
+			 creditCardStatement.setAccountClosingBalance("R432");
+			 creditCardStatement.setAccountStatementMonth("June");
+			 creditCardStatement.setAccountDiscount("R0");;
+			 
+			 billingAccountStatementManagerImpl.saveBillingAccountStatement(creditCardStatement);
 			 		
-			 BillingAccountStatement statement1 = (BillingAccountStatement) billingAccountStatementManagerImpl.getBillingAccountStatements("1234", "June");
-			 assertNotNull("Billing Account not null" , statement1);
+			 BillingAccountStatement creditCardStat = 
+				 (BillingAccountStatement) billingAccountStatementManagerImpl.getBillingAccountStatements(creditCardStatement.getAccountNumber(), creditCardStatement.getAccountStatementMonth());
+			 assertNotNull("Billing Account not null" , creditCardStat);
 					 
 		 } catch (Exception e) {
 		 // TODO Auto-generated catch block
