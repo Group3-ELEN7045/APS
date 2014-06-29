@@ -20,9 +20,7 @@
     <!-- Notifications Rpository -->
     
     <!-- Billing Database Setup -->
-<<<<<<< HEAD
-
-   <bean id="billingDataAccess" 		class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
+   <bean id="billingDataAccess"	class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
    <bean id="billingAccountRepository" 	class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
        <constructor-arg ref="billingDataAccess"/>
    </bean>
@@ -33,12 +31,7 @@
        <constructor-arg ref="billingStatementDataAccess"/>
    </bean>
 
-=======
-    <bean id="billingDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
-    <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl">
-        <constructor-arg ref="billingDataAccess"/>
-    </bean> 
->>>>>>> 0c5781abf9ee40a1df181b254c85fb4d8679c880
+
     <!-- Billing Database Setup -->
     
     <!--    statement Setup -->
@@ -59,17 +52,13 @@
     <bean id="contactDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
     <bean id="notification"      class="za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult"/>
     <bean id="encryptionModule"  class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
-<<<<<<< HEAD
-    
-    
-    
+  
 
      <bean id="billingCompanyRepository"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCompanyRepository"/> 
      <bean id="schedulingSpecification"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedulingSpecification"/>	
      <bean id="timer"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer"> 
         <constructor-arg index="0"><value>0/1 * * * * ?</value></constructor-arg>	
      </bean>
-=======
->>>>>>> 0c5781abf9ee40a1df181b254c85fb4d8679c880
+
 </beans>
 
