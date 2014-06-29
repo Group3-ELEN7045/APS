@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>234</x>
+      <y>270</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;*Bounded Context*&gt;&gt;
+Scraping
+fg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>423</x>
+      <y>441</y>
+      <w>171</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>1134</x>
+      <y>108</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>This is a text 
+element to 
+place text 
+anywhere.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>441</x>
+      <y>495</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;*Bounded Context*&gt;&gt;
+3rd Party Scraper
+fg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>333</x>
+      <y>387</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>ACL
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>387</y>
+      <w>116</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;99;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>63</x>
+      <y>153</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;*Bounded Context*&gt;&gt;
+Scheduling
+fg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>513</x>
+      <y>72</y>
+      <w>162</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>513</x>
+      <y>153</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;*Bounded Context*&gt;&gt;
+User
+fg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>63</x>
+      <y>81</y>
+      <w>162</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>225</x>
+      <y>207</y>
+      <w>270</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>
+
+
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>297</x>
+      <y>126</y>
+      <w>117</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Shared Kernel&gt;&gt;
+BillingAccount
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>981</x>
+      <y>144</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>SimpleClass</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>306</x>
+      <y>315</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Customer Supplier&gt;&gt;
+ScrapedResultFieldMap
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>198</x>
+      <y>117</y>
+      <w>116</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>99;27;27;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>117</y>
+      <w>143</w>
+      <h>53</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;126;36</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>333</x>
+      <y>144</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;63</additional_attributes>
+  </element>
+</diagram>
