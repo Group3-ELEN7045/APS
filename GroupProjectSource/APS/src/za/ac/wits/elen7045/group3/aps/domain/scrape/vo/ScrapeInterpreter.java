@@ -10,6 +10,8 @@ public class ScrapeInterpreter {
 		this.scrapedStatement = scrapedStatement;
 	}
 	
+	// TODO Throw exception here for error - notifyuserexception, dataintegritycheckexception
+	
 	public String evaluate(){
 		if (new ErrorinScrapedResultSpecification().isSatisfiedBy(scrapedStatement))
 			return scrapedStatement.getDataPairList().get(0).getValue();
