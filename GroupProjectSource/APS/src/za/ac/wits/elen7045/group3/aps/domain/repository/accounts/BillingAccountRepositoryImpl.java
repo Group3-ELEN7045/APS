@@ -1,5 +1,4 @@
-
-
+package za.ac.wits.elen7045.group3.aps.domain.repository.accounts;
 
 import java.util.List;
 
@@ -39,14 +38,28 @@ public class BillingAccountRepositoryImpl implements BillingAccountRepository {
 	}
 
 	@Override
-	public List<BillingAccount> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException {
-		return dataAccess.getBillingAccountsByCompanyUrl(billingCompanyUrl);
+	public List<BillingAccount> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException {
+		return dataAccess.getBillingAccountsByCompanyName(billingCompanyUrl);
 	}
 
-	
 	@Override
-	public BillingAccount getBillingAcountsForCustomer(Long customerId)
-			throws DatabaseException { 
-		return dataAccess.getBillingAcountsForCustomer(customerId);
+	public List<BillingAccount> getBillingAccountStatementByAccountNumberAndPeriod(
+			Long customerId, String period) throws DatabaseException {
+		return dataAccess.getBillingAccountStatementByAccountNumberAndPeriod(customerId, period);
+		
+	}
+
+	@Override
+	public List<BillingAccount> getBillingAccountsByUserId(Long id)	throws DatabaseException {
+		List<BillingAccount> bilingAccs = dataAccess.getBillingAccountsByUserId(id);
+		return bilingAccs;
+	}
+
+	@Override
+	public boolean updateBillingAccountStatement(
+			BillingAccountStatement billingAccountStatement)
+			throws DatabaseException {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

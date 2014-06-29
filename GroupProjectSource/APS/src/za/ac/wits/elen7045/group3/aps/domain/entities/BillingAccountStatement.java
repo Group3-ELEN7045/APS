@@ -1,4 +1,3 @@
-
 package za.ac.wits.elen7045.group3.aps.domain.entities;
 
 import java.io.Serializable;
@@ -160,4 +159,3 @@ public class  BillingAccountStatement implements Serializable {
 		AccountVATAmount = accountVATAmount;
 	}
 }
-

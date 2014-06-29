@@ -1,37 +1,26 @@
-
 package za.ac.wits.elen7045.group3.aps.services.managers;
-import za.ac.wits.elen7045.aps.domain.statement.repository.BillingAccountStatementRepository;
+
+import java.util.List;
+
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
 
-/**
- * @author Livious
- *
- */
-
-public class BillingAccountStatementManagerImpl<T> implements BillingAccountStatementManager {
-	private BillingAccountStatementRepository statementRepository; 
-
-	public BillingAccountStatementManagerImpl(BillingAccountStatementRepository dataStatementAccess){
-		this.statementRepository = dataStatementAccess;
-	}	
+public class BillingAccountStatementManagerImpl implements BillingAccountStatementManager{
 	
+	private StatementRepository statementRepo;
 	
-	//Method to save billing Account statement 
-	@Override
-	public void saveBillingAccountStatement(BillingAccountStatement statement) {
-		if (statement == null) {
-			throw new RuntimeException("Billing Account statement cannot be null");
-		}
-		statementRepository.saveBillingAccountStatement(statement);
-		}	
+	public BillingAccountStatementManagerImpl(StatementRepository statementRepo){
+		this.statementRepo = statementRepo;
+	}
 
-	//Method to retrieve a list of billing statement for a billing account
 	@Override
-	public T getBillingAccountStatements(String accountNumber, String billingPeriod) {	 
-		if(accountNumber == null || billingPeriod ==null){
-			throw new RuntimeException("Account number and period must be provided");
-		}
-		return (T) statementRepository.getBillingAccountStatements(accountNumber, billingPeriod);
-	}	
+	public boolean addStatement(BillingAccountStatement statement) {
+	    return statementRepo.addStatement(statement);
+	}
+
+	@Override
+	public List<BillingAccountStatement> getAccountStatement(String accountNumber) {
+			return statementRepo.getAccountStatement(accountNumber);
+	}
+
 }
-

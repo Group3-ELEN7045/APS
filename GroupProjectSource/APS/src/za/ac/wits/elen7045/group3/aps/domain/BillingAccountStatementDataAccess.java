@@ -1,10 +1,11 @@
-
 package za.ac.wits.elen7045.group3.aps.domain;
 
-//statement data access 
-public interface BillingAccountStatementDataAccess <T>{
-	public boolean saveBillingAccountStatement(T t);
-	public T getBillingAccountStatements(String accountNumber, String biilingPeriod);
-}
+import java.util.List;
 
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+
+public interface BillingAccountStatementDataAccess{
+	public boolean saveBillingAccountStatement(BillingAccountStatement statement);
+	public List<BillingAccountStatement> getBillingAccountStatements(String accountNumber);
+}
 

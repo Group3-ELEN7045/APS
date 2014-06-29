@@ -23,12 +23,16 @@ public class SchedulingSpecification {
 	 * @return
 	 */
 	public boolean isCompanyInSchedule(BillingCompany billingCompany) {
+		System.out.println("JJJJJJJJJJJJJJJ " + billingCompany);
 		BillingCycle billingCycle = billingCompany.getBillingcylce();
 		Date startDate = billingCycle.getStartDate();
 		Date endDate = billingCycle.getEndDate();
 		Date now = new Date();
 		
-		if (!(now.after(endDate) && now.before(startDate))) {
+		System.out.println("XXXXXXXXXXXXXXXXXXXX: " + now + " " + startDate + " " + endDate);
+		
+		if (now.after(startDate) && now.before(endDate)) {
+			System.out.println("XXXXXXXXXXXXXXXXXXXX");
 			return false;
 		}
 		

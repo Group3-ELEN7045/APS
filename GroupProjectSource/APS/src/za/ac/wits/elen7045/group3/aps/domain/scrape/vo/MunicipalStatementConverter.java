@@ -1,7 +1,6 @@
+
 package za.ac.wits.elen7045.group3.aps.domain.scrape.vo;
-/**
- * @author bakwanyana
- */
+
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 
 public class MunicipalStatementConverter {
@@ -12,7 +11,7 @@ public class MunicipalStatementConverter {
 	}
 	
 	public MunicipalStatement getMunicipalStatement(){
-		MunicipalStatement municipalAcc = new MunicipalStatement((getIndexDataPair("001")));
+		MunicipalStatement municipalAcc = new MunicipalStatement(getIndexDataPair("001"));
 		municipalAcc.setAccountHolderName(getIndexDataPair("002"));
 		municipalAcc.setAccountStatementDate(getIndexDataPair("003"));
 		municipalAcc.setAccountStatementNumber(getIndexDataPair("004"));

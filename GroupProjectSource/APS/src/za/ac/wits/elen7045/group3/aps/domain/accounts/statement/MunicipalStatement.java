@@ -39,6 +39,8 @@ public class MunicipalStatement extends BillingAccountStatement implements Seria
 	public MunicipalStatement(String accountNumber){
 		this.setAccountNumber(accountNumber);
 	}
+	
+	public MunicipalStatement(){}
 
 	@Column(name = "INSTALMENT_NOTICE",nullable = true)
 	public String getInstalmentNotice() {

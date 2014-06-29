@@ -58,7 +58,9 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 			scrapeResult = msa.scrapeWebsite(account.getCompanyUrl(), account.getCredentials());
 		
 			scrapeLog = new ScrapeLogResult();
-			scrapeLog.setAccountNumber(account.getAccountNumber());
+			//scrapeLog.setAccountNumber(account.getAccountNumber());
+			//removeAcc
+			scrapeLog.setAccountNumber("123456789");
 			
 			scrapeLog.setResponse(StringUtil.truncate(scrapeResult.toString(), 255));
 			scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
@@ -90,7 +92,6 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 					
 					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-				} catch (Exception e){
 					e.printStackTrace();
 					
 					scrapeLog.setMessage(e.getMessage());
@@ -120,24 +121,15 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 		}
 		//log the scrape call with its result
 		logScrapeResult(scrapeLog);		
-	}catch(Exception e){
-		e.printStackTrace();
-
-		scrapeLog = new ScrapeLogResult();
-		scrapeLog.setAccountNumber(account.getAccountNumber());
-		scrapeLog.setResponse(e.getMessage());
-		scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
-	}
-	//log the scrape call with its result
-	logScrapeResult(scrapeLog);		
-		
 	}
 
 	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws AccountNumberIncorrectException, DataIntegrityCheckException {
 		boolean integrityPassed = true;
 
 		//check account number integrity
-		ScrapedResultAccountNumberMatchesSpecification accNoSpec = new ScrapedResultAccountNumberMatchesSpecification(account.getAccountNumber());
+		//removeAcc
+		//ScrapedResultAccountNumberMatchesSpecification accNoSpec = new ScrapedResultAccountNumberMatchesSpecification(account.getAccountNumber());
+		ScrapedResultAccountNumberMatchesSpecification accNoSpec = new ScrapedResultAccountNumberMatchesSpecification("123456789");
 		if(!account.getAccountStatus().equalsIgnoreCase(AccountStatusType.ACTIVE.getStatusType())  
 			&& !accNoSpec.isSatisfiedBy(scrapeResult)){
 			integrityPassed = false;

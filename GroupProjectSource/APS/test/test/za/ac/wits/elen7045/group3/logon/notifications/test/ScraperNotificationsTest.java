@@ -1,4 +1,4 @@
-package test.za.ac.wits.elen7045.group3.scraper.notifications.test;
+package test.za.ac.wits.elen7045.group3.logon.notifications.test;
 
 import org.junit.Before;
 

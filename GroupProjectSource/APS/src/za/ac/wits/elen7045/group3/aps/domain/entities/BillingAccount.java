@@ -35,8 +35,7 @@ public class BillingAccount implements Serializable{
 	private Long id;
 	private Long customerId;
 	private String accountNumber;
-	private String companyUrl;
-	private String accountType;
+	private String companyUrl;	
 	private CredentialsVO credentials;	
 
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -106,12 +105,4 @@ public class BillingAccount implements Serializable{
 	public void setCompanyUrl(String companyUrl) {
 		this.companyUrl = companyUrl;
 	}
-
-	public String getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
-	}	
 }

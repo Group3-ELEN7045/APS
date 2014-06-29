@@ -10,21 +10,21 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
  */
 public class StatementRepositoryImpl implements StatementRepository{
 
-  private BillingAccountStatementDataAccess statementResource;
+  private BillingAccountStatementDataAccess statementDataAcces;
   
   public StatementRepositoryImpl(BillingAccountStatementDataAccess statementResource){
-	 this.statementResource = statementResource;
+	 this.statementDataAcces = statementResource;
   }	
    
   @Override
   public List<BillingAccountStatement> getAccountStatement(String accountNumber) {
-    return statementResource.getBillingAccountStatements(accountNumber);
+    return statementDataAcces.getBillingAccountStatements(accountNumber);
   }
 
 @Override
 public boolean addStatement(BillingAccountStatement statement) {
-	statementResource.saveBillingAccountStatement(statement);
-	return false;
+	return statementDataAcces.saveBillingAccountStatement(statement);
+	
 }
   
   
