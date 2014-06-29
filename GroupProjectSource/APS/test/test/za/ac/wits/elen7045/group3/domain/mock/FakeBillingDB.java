@@ -1,4 +1,3 @@
-
 package test.za.ac.wits.elen7045.group3.domain.mock;
 
 import java.util.List;
@@ -35,10 +34,21 @@ public class FakeBillingDB implements BillingAccountDataAccess {
 		 entityManager.getTransaction().commit();
 		 entityManager.close();
 		 return true;
-	}	
+	}
+	
+	@Override
+	public boolean updateBillingAccountStatement(BillingAccountStatement billingAccountStatement)throws DatabaseException {
+		 EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+	//	 BillingAccount billingAccountUpdate = entityManager.find(BillingAccount.class, billingAccount.getId());
+		   entityManager.getTransaction().begin();
+		   entityManager.merge(billingAccountStatement);	   
+		   entityManager.getTransaction().commit();
+		   entityManager.close();
+	       return true;
+	}
 
 	@Override
-	public List<BillingAccount> getBillingAccountsByCompanyUrl(String billingCompanyUrl)throws DatabaseException {
+	public List<BillingAccount> getBillingAccountsByCompanyName(String billingCompanyUrl)throws DatabaseException {
 		EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
 		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.companyUrl = ?1");
 		 query.setParameter (1, billingCompanyUrl);
@@ -59,17 +69,27 @@ public class FakeBillingDB implements BillingAccountDataAccess {
 		        return null;
 		}
 		return account;
-	}	
+	}
 
 	@Override
-	public List<BillingAccount> getBillingAcountsForCustomer(Long customerId)
-			throws DatabaseException {
+	public List<BillingAccount> getBillingAccountStatementByAccountNumberAndPeriod(Long customerId, String period) throws DatabaseException {
 		EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
-		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.customerId = ?1");
+		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.customerId =?1");
 		 query.setParameter (1, customerId);
 		 
-		 List<BillingAccount> accountList = (List<BillingAccount>)query.getResultList();
+		 List<BillingAccount> accountList = (List<BillingAccount>) query.getResultList();
 		 return accountList;
 	}
-}
 
+	@Override
+	public List<BillingAccount> getBillingAccountsByUserId(Long id)throws DatabaseException {
+		EntityManager entityManager = Persistence.createEntityManagerFactory("apsBackend").createEntityManager();
+		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.customerId =?1");
+		 query.setParameter (1, id);
+		 
+		 List<BillingAccount> accountList = (List<BillingAccount>) query.getResultList();
+		 return accountList;
+	}
+	
+	
+}

@@ -1,4 +1,3 @@
-
 package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import java.util.ArrayList;
@@ -8,24 +7,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import org.dozer.DozerBeanMapper;
+
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.BillingCompanyDTO;
+import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.Specification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class BillingAccountManagerImpl implements BillingAccountManager {
 	private BillingAccountRepository billingRepository;
-	private BillingAccount entityBillingAccount; // = new BillingAccount();
+	private BillingAccount entityBillingAccount = new BillingAccount();
 	private BillingAccountDTO billingAccountdto;
 
 	public BillingAccountManagerImpl(BillingAccountRepository billingRepository) {
@@ -96,13 +91,13 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 	}
 
 	@Override
-	public List<BillingAccountDTO> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException {
+	public List<BillingAccountDTO> getBillingAccountsByCompanyName(String billingCompanyUrl) throws DatabaseException {
 		if (billingCompanyUrl == null) {
 			throw new RuntimeException("Billing Company url cannot be null");
 		}		
 		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		List<BillingAccount> accoutList = billingRepository.getBillingAccountsByCompanyUrl(billingCompanyUrl);
+		List<BillingAccount> accoutList = billingRepository.getBillingAccountsByCompanyName(billingCompanyUrl);
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
 				dozer.map(entity, billingAccountdto);
@@ -111,26 +106,58 @@ public class BillingAccountManagerImpl implements BillingAccountManager {
 		}
 		return billingAccount;
 	}
-
+	
 	@Override
-	public List<BillingAccountDTO> getBillingAcountsForCustomer(Long customerId) throws DatabaseException {
-		if (customerId == null) {
-			throw new RuntimeException("Billing Account Id cannot be null");
+	public List<BillingAccountDTO> getBillingAccountStatementByAccountNumberAndPeriod(CustomerDTO customer, String period) throws DatabaseException {
+		if (customer == null) {
+			throw new RuntimeException("Billing Company url cannot be null");
 		}
-		List<BillingAccountDTO> billingAccountList = new ArrayList<BillingAccountDTO>();
+		if (period == null) {
+			throw new RuntimeException("Billing period cannot be null");
+		}
+		List<BillingAccountDTO> billingAccount = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		List<BillingAccount> accoutList = (List<BillingAccount>) billingRepository.getBillingAcountsForCustomer(customerId);
-		System.out.println("Size of the list true " + accoutList.size());
+		List<BillingAccount> accoutList = billingRepository.getBillingAccountStatementByAccountNumberAndPeriod(customer.getId(), period);
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
-				if (!(entity == null)) {
-					billingAccountdto = new BillingAccountDTO(entity.getAccountNumber());									
-					dozer.map(entity, billingAccountdto);
-					billingAccountList.add(billingAccountdto);
-				}
+				BillingAccountDTO billingAccountdto1 = new BillingAccountDTO(entity.getAccountNumber());
+				dozer.map(entity, billingAccountdto1);
+				billingAccount.add(billingAccountdto1);
 			}
 		}
-		return billingAccountList;		
-	}	
-}
+		return billingAccount;
+	}
 
+	@Override
+	public List<BillingAccountDTO> getBillingAccountsByUserId(Long id)throws DatabaseException {
+	    System.out.println();  
+		List<BillingAccount> billingAccountResponse = null;
+		List<BillingAccountDTO> billingAccountDTOResponse = null;
+		billingAccountResponse = billingRepository.getBillingAccountsByUserId(id);
+		
+		if(billingAccountResponse != null){
+			BillingAccountDTO billingAccountDTO = null;
+			billingAccountDTOResponse = new ArrayList<BillingAccountDTO>();
+			for(BillingAccount bAccount : billingAccountResponse){
+				billingAccountDTO = new BillingAccountDTO(bAccount.getAccountNumber());
+				billingAccountDTO.setAccountNumber(bAccount.getAccountNumber());
+				billingAccountDTO.setAccountStatus(bAccount.getAccountStatus());
+				billingAccountDTO.setCompanyUrl(bAccount.getCompanyUrl());
+				CredentialsDTO credentialsDTO = new CredentialsDTO();
+				credentialsDTO.setUserName(credentialsDTO.getUserName());
+				credentialsDTO.setPassword(credentialsDTO.getPassword());
+				billingAccountDTO.setCredentials(credentialsDTO);
+				billingAccountDTO.setCustomerId(bAccount.getCustomerId());
+				billingAccountDTO.setId(bAccount.getCustomerId());
+				billingAccountDTOResponse.add(billingAccountDTO);
+			}
+			
+			
+		}	
+		
+		return billingAccountDTOResponse;
+	}
+	
+	
+	
+}

@@ -17,21 +17,13 @@
     <bean id="scrapeLogResultRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl">
         <constructor-arg ref="notificationDataAccess"/>
     </bean>
-    <!-- Notifications Rpository -->
+    <!-- Notifications Repository -->
     
     <!-- Billing Database Setup -->
-   <bean id="billingDataAccess"	class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
-   <bean id="billingAccountRepository" 	class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.BillingAccountRepositoryImpl">
-       <constructor-arg ref="billingDataAccess"/>
-   </bean>
-   
-    <!-- Billing Statements Database Setup -->
-   <bean id="billingStatementDataAccess" 		class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingStatementDB"/>
-   <bean id="statementRepository" 	class="za.ac.wits.elen7045.aps.domain.statement.repository.BillingAccountStatementRepositoryImpl">
-       <constructor-arg ref="billingStatementDataAccess"/>
-   </bean>
-
-
+    <bean id="billingDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
+    <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl">
+        <constructor-arg ref="billingDataAccess"/>
+    </bean> 
     <!-- Billing Database Setup -->
     
     <!--    statement Setup -->
@@ -52,13 +44,18 @@
     <bean id="contactDetails"    class="za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO"/> 
     <bean id="notification"      class="za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult"/>
     <bean id="encryptionModule"  class="za.ac.wits.elen7045.group3.aps.services.security.EncryptionModuleImpl"/>
-  
-
-     <bean id="billingCompanyRepository"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCompanyRepository"/> 
-     <bean id="schedulingSpecification"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedulingSpecification"/>	
-     <bean id="timer"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer"> 
-        <constructor-arg index="0"><value>0/1 * * * * ?</value></constructor-arg>	
-     </bean>
-
+    
+    <!-- Strategy Factory  -->
+    <bean id="scrapeStrategyFactory" 	class="za.ac.wits.elen7045.group3.aps.services.scrape.factory.ScraperStrategyFactoryImpl">
+	    <constructor-arg ref="billingAccountRepository"/>
+	    <constructor-arg ref="scrapeLogResultRepository"/>
+	    <constructor-arg ref="statementDataRepository"/>
+    </bean>
+    
+     <bean id="billingCompanyRepository"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCompanyRepository"/>
+    <bean id="schedulingSpecification"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedulingSpecification"/>
+    <bean id="timer"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer"> 
+        <constructor-arg index="0"><value>0/10 * * * * ?</value></constructor-arg>
+    </bean>
 </beans>
 

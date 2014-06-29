@@ -3,7 +3,6 @@ package test.za.ac.wits.elen7045.group3.statement;
 import org.junit.Before;
 import org.junit.Test;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
