@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.domain.scrape.vo;
-
+/**
+ * @author bakwanyana
+ */
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 
 public class TelcoStatementConverter {

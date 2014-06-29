@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+----------------------------------------------------------------
+2014-06-25 12:59:40.706 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.5.1.1 - (764942): instance a816c00e-0146-d31c-38b7-000002f33510
+on database directory C:\Users\livious\MyDBC  
+
+Database Class Loader started - derby.database.classpath=''
+=======
+----------------------------------------------------------------
+2014-06-24 23:35:59.100 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.5.1.1 - (764942): instance a816c00e-0146-d03c-6ab7-000000b1c9e8
+on database directory C:\Users\SilasMahlangu\MyAPSDB  
+
+Database Class Loader started - derby.database.classpath=''
+>>>>>>> 9282d895db7e514c4c2c8c60f297a9a73436e8a4
+=======
 2014-06-25 19:33:53.020 GMT Thread[main,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'C:\Users\SilasMahlangu\MyAPSDB', see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
@@ -4958,3 +4975,4 @@ ERROR XSDB6: Another instance of Derby may have already booted the database C:\U
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
 ============= end nested exception, level (3) ===========
 Cleanup action completed
+>>>>>>> 0c5781abf9ee40a1df181b254c85fb4d8679c880

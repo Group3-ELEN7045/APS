@@ -8,3 +8,4 @@ public interface BillingAccountStatementManager{
 	public boolean addStatement(BillingAccountStatement statement);
     public List<BillingAccountStatement> getAccountStatement(String accountNumber);
 }
+
