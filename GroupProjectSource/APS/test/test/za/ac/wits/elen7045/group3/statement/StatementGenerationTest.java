@@ -3,16 +3,16 @@ package test.za.ac.wits.elen7045.group3.statement;
 import org.junit.Before;
 import org.junit.Test;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.abtracts.AbstractBillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.services.accounts.statement.generator.StatementRenderer;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
 public class StatementGenerationTest {
 
-	private AbstractBillingAccountStatement billingStatement;
+	private BillingAccountStatement billingStatement;
 	private MunicipalStatement  municipalStatement;
 	private CreditCardStatement creditcardStatement;
 	private TelcoStatement telecomStateMent;

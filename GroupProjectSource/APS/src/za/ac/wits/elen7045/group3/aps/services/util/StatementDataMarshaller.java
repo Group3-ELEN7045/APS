@@ -1,5 +1,7 @@
 package za.ac.wits.elen7045.group3.aps.services.util;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
+
 import com.thoughtworks.xstream.XStream;
 
 public class StatementDataMarshaller<T> {
@@ -10,7 +12,7 @@ public class StatementDataMarshaller<T> {
 	}
 	
 	public String unMarshallToXML(String alias,Class<T> param,Object instanceObject){
-		xstream.alias(alias, param);
+		xstream.alias("MunicipalStatement", MunicipalStatement.class);
 		return xstream.toXML(instanceObject);
 	}
 	

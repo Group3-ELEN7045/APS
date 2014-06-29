@@ -16,10 +16,24 @@ public class HTMLRenderer implements Statement{
 
    @Override
    public void saveStatement(String location) {
+	   System.out.println("Saving generated statement");
+	   String statementData = statementMarshaller();
+	   sendNotification(statementData,location);
+   }
+   
+   private String statementMarshaller(){
+	   String xmlprolog = "<?xml version=\"1.0\"?>\n";
+	   String xslprolog = "<?xml-stylesheet type=\"text/xsl\" href=\"municipality.xsl\" ?>\n";
 	   StatementDataMarshaller<BillingAccountStatement> dataMarshaller = new  
-       StatementDataMarshaller<BillingAccountStatement>(new XStream()); 
-	   String parsedBillingAccountStatement = dataMarshaller.unMarshallToXML("Statement", BillingAccountStatement.class, statement);
-	   ConfirmationNotification persistNotification = new FileNotification(parsedBillingAccountStatement, location);
+	   StatementDataMarshaller<BillingAccountStatement>(new XStream()); 
+	   String parsedBillingAccountStatement = dataMarshaller.unMarshallToXML("MunicipalStatement", BillingAccountStatement.class, statement);
+	   String statementData = xmlprolog + xslprolog + parsedBillingAccountStatement;
+		
+	   return statementData;
+   }
+   
+   public void sendNotification(String statementData, String location){
+	   ConfirmationNotification persistNotification = new FileNotification(statementData, location);
 	   persistNotification.sendNotification();
    }
 }

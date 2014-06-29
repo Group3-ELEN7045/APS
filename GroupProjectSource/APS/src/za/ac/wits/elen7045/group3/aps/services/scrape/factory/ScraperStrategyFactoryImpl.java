@@ -22,26 +22,28 @@ public class ScraperStrategyFactoryImpl implements ScraperStrategyFactory {
 	
 	BillingAccountRepository 	billingAccountRepository;
 	ScrapeLogResultRepository 	scrapeLogRepository;
-	StatementRepository			statementRepository;
+	StatementRepository			statementDataRepository;
 	
 	@Autowired
 	public ScraperStrategyFactoryImpl(
-			BillingAccountRepository billingAccountRepository,
-			ScrapeLogResultRepository scrapeLogRepository) {
+			BillingAccountRepository  billingAccountRepository,
+			ScrapeLogResultRepository scrapeLogRepository,
+			StatementRepository		  statementDataRepository) {
 		super();
 		this.billingAccountRepository = billingAccountRepository;
-		this.scrapeLogRepository = scrapeLogRepository;
+		this.scrapeLogRepository      = scrapeLogRepository;
+		this.statementDataRepository      = statementDataRepository;
 	}
 
 	@Override
 	public ScraperStrategy getScraperStrategy(BillingAccount billingAccount) {
 		
 		if("municipal.xml".equalsIgnoreCase(billingAccount.getCompanyUrl())){
-			return new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
+			return new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementDataRepository);
 		}else if("creditcard.xml".equalsIgnoreCase(billingAccount.getCompanyUrl())){
-			return new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
+			return new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementDataRepository);
 		}else if("telco.xml".equalsIgnoreCase(billingAccount.getCompanyUrl())){
-			return new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
+			return new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementDataRepository);
 		}else{
 			return null;
 		}

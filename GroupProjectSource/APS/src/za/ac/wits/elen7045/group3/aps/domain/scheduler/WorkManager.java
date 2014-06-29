@@ -42,6 +42,7 @@ public final class WorkManager implements Cloneable {
                     	((ScrapeTask) runnable).decrementRetryCount();
                     	
                         if (((ScrapeTask) runnable).getRetryCount() > 0) {
+                        	System.out.println("Thread " + Thread.currentThread().getName() + " putting Task back to the Queue.");
     						scrapeCommandsQueue.offer(runnable);
     					}
                     }
@@ -63,7 +64,7 @@ public final class WorkManager implements Cloneable {
 	/**
 	 * Pool of worker threads
 	 */
-	Collection<Worker> workers = new ArrayList<Worker>();
+	private Collection<Worker> workers = new ArrayList<Worker>();
 	
 	/**
 	 * 
@@ -90,6 +91,7 @@ public final class WorkManager implements Cloneable {
 	 * @param runnable
 	 */
 	public void add(Runnable runnable) {
+		System.out.println("Adding scrape task to queue");
 		scrapeCommandsQueue.offer(runnable);
 	}
 	

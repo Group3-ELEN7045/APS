@@ -18,7 +18,7 @@ import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
  *
  */
 @MappedSuperclass
-public class User implements Serializable{
+public abstract class User implements Serializable{
 	
 	/**
 	 * 
@@ -26,21 +26,21 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1244663388016048205L;
 
 	/** The id. */
-	private Long                     id;
+	private Long              id;
 	
 	/** The first name. */
-	private String                   firstName;
+	private String           firstName;
 	
 	/** The lastname. */
-	private String                   lastname;
+	private String           lastname;
 	
 	/** The date of birth. */
-	private Date                     dateOfBirth;
+	private Date             dateOfBirth;
 	
 	/** The credentials. */
-	private CredentialsVO              credentials;
+	private CredentialsVO   credentials;
 		
-	private String                    stringDateOfBirth;
+	private String          stringDateOfBirth;
 	
 	/**
 	 * Gets the id.

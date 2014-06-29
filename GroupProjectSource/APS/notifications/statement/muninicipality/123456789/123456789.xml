@@ -1,27 +1,28 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="municipality.xsl" ?>
 <MunicipalStatement>
+  <id>11</id>
   <AccountNumber>123456789</AccountNumber>
-  <AccountHolderName>Silas Mahlangu</AccountHolderName>
-  <AccountStatementDate>01/01/2000</AccountStatementDate>
-  <AccountStatementNumber>332</AccountStatementNumber>
-  <AccountStatementMonth>01/2000</AccountStatementMonth>
-  <AccountTotalDue>will Calculte</AccountTotalDue>
-  <AccountDueDate>05/01/2000</AccountDueDate>
-  <AccountOpeningBalance></AccountOpeningBalance>
-  <AccountClosingBalance></AccountClosingBalance>
-  <AccountPaymentReceived>1000</AccountPaymentReceived>
-  <AccountNewCharges>Will calculate</AccountNewCharges>
-  <AccountDeductions></AccountDeductions>
-  <AccountDiscount></AccountDiscount>
-  <AccountVATAmount></AccountVATAmount>
-  <InstalmentNotice>01002003004</InstalmentNotice>
-  <ElectricityUsed>0 Megawatts</ElectricityUsed>
-  <ElectricityCharges>3000.00</ElectricityCharges>
-  <GasUsed>2lt</GasUsed>
-  <GasCharges>R5000</GasCharges>
-  <WaterUsed>One drop</WaterUsed>
-  <WaterCharges>3000.00</WaterCharges>
-  <SewerageCharges>2300.00</SewerageCharges>
-  <RefuseCharges>300.00</RefuseCharges>
+  <AccountHolderName>Silas Mahlangu  WAZZUP</AccountHolderName>
+  <AccountStatementDate>12/12/2014</AccountStatementDate>
+  <AccountStatementNumber>1122</AccountStatementNumber>
+  <AccountStatementMonth>2</AccountStatementMonth>
+  <AccountTotalDue>R340</AccountTotalDue>
+  <AccountDueDate>01/01/2015</AccountDueDate>
+  <AccountOpeningBalance>R120</AccountOpeningBalance>
+  <AccountClosingBalance>R123</AccountClosingBalance>
+  <AccountPaymentReceived>R40</AccountPaymentReceived>
+  <AccountNewCharges>R45</AccountNewCharges>
+  <AccountDeductions>R123</AccountDeductions>
+  <AccountDiscount>R456</AccountDiscount>
+  <AccountVATAmount>R123</AccountVATAmount>
+  <InstalmentNotice>10</InstalmentNotice>
+  <ElectricityUsed>200kW</ElectricityUsed>
+  <ElectricityCharges>R100</ElectricityCharges>
+  <GasUsed>400Btu</GasUsed>
+  <GasCharges>R100</GasCharges>
+  <WaterUsed>300Kl</WaterUsed>
+  <WaterCharges>R456</WaterCharges>
+  <SewerageCharges>R345</SewerageCharges>
+  <RefuseCharges>R123</RefuseCharges>
 </MunicipalStatement>

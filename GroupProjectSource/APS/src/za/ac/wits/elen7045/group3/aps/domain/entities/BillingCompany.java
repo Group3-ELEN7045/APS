@@ -27,8 +27,8 @@ public class BillingCompany implements Serializable{
 	private String companyName;
 	private String url;
 	private BillingCycle billingcylce;
-	private List<CronExpressionWrapper> maintenanceWindows;
-	private List<CronExpressionWrapper> peakPeriods;
+	private List<CronExpressionWrapper> maintenanceWindows = new ArrayList<CronExpressionWrapper>();
+	private List<CronExpressionWrapper> peakPeriods = new ArrayList<CronExpressionWrapper>();
 	
 	public BillingCompany(String companyName){
 		if (companyName == null || companyName.equals("")) {
@@ -81,12 +81,12 @@ public class BillingCompany implements Serializable{
 			throw new RuntimeException("URL can not be null or empty string");
 		}
 		
-		Pattern pattern = Pattern.compile("\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-		Matcher matcher = pattern.matcher(url);
+		//Pattern pattern = Pattern.compile("\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+		//Matcher matcher = pattern.matcher(url);
 		
-		if (!matcher.matches()) {
-			throw new RuntimeException("Wrong URL pattern");
-		}
+		///if (!matcher.matches()) {
+		//	throw new RuntimeException("Wrong URL pattern");
+		//}
 	    this.url = url;	
 	}
 
