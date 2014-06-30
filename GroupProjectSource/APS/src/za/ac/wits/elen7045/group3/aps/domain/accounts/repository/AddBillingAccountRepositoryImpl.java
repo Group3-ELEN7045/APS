@@ -2,10 +2,8 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.repository;
 
 import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.AddBillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 /**
@@ -15,9 +13,9 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 public class AddBillingAccountRepositoryImpl implements AddBillingAccountRepository {
 	
-	private BillingAccountDataAccess dataAccess;
+	private AddBillingAccountDataAccess dataAccess;
 
-	public AddBillingAccountRepositoryImpl(BillingAccountDataAccess dataAccess){
+		public AddBillingAccountRepositoryImpl(AddBillingAccountDataAccess dataAccess){
 		this.dataAccess = dataAccess;
 	}
 

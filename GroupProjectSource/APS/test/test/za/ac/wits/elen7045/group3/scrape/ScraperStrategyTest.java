@@ -12,10 +12,15 @@ import org.junit.runners.MethodSorters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
@@ -35,6 +40,7 @@ public class ScraperStrategyTest {
 	private ScrapeLogResultImpl scrapeLogRepository;
 	private AddBillingAccountRepositoryImpl billingAccountRepository;	
 	private SaveStatementRepository statementRepository;
+	private RetriveStatementRepository retriveStatementRepository;
 	
 
 	@Before
@@ -43,6 +49,7 @@ public class ScraperStrategyTest {
 		
 		billingAccountRepository 		= context.getBean(AddBillingAccountRepositoryImpl.class);
 		statementRepository				= context.getBean(SaveStatementRepositoryImpl.class);
+		retriveStatementRepository		= context.getBean(RetriveStatementRepositoryImpl.class);
 		scrapeLogRepository				= context.getBean(ScrapeLogResultImpl.class);
 
 		//account
@@ -114,7 +121,7 @@ public class ScraperStrategyTest {
 	@Test
 	public void testStatementRepository(){
 		System.out.println("\n StatementRepository:START");
-		List<BillingAccountStatement> stmatements = statementRepository.getAccountStatement(billingAccount.getAccountNumber());
+		List<BillingAccountStatement> stmatements = retriveStatementRepository.getAccountStatement(billingAccount.getAccountNumber());
 		for(BillingAccountStatement statement : stmatements){
 			System.out.println("\n ------- statement ------ \n ".concat(statement.toString()));
 		}

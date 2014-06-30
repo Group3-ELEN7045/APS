@@ -21,10 +21,10 @@
     
     <!-- Billing Database Setup -->
     <bean id="billingDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
-    <bean id="addBillingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepositoryImpl">
+    <bean id="addBillingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepositoryImpl">
         <constructor-arg ref="billingDataAccess"/>
     </bean> 
-    <bean id="retrivebillingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.RetriveBillingAccountRepositoryImpl">
+    <bean id="retrivebillingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepositoryImpl">
         <constructor-arg ref="billingDataAccess"/>
     </bean>
     
@@ -32,10 +32,10 @@
     
     <!--    statement Setup -->
     <bean id="statementDataAcces" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingStatementDB"/>
-    <bean id="saveStatementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepositoryImpl">
+    <bean id="saveStatementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepositoryImpl">
        <constructor-arg ref="statementDataAcces"/>
     </bean>
-     <bean id="retriveStatementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.RetriveStatementRepositoryImpl">
+     <bean id="retriveStatementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepositoryImpl">
        <constructor-arg ref="statementDataAcces"/>
     </bean>
     <!--  statement Setup    -->

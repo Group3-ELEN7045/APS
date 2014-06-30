@@ -22,14 +22,7 @@ public class testBillingAccountCreate {
 			credentials.setPassword("12345");
 			billingAccount.setCredentials(credentials);
 			assertFalse((billingAccount.getCredentials() == null));
-			
-			TelcoStatement statement = null;
-			billingAccount.addBillingAccountStatament(statement);
-			assertTrue(billingAccount.getBillingStatement().size() == 0);
-			
-			TelcoStatement telStatement = new TelcoStatement("3");
-			billingAccount.addBillingAccountStatament(telStatement);
-			assertTrue(billingAccount.getBillingStatement().size() != 0);			
+					
 		}
 	  
 	  @Test
@@ -39,17 +32,6 @@ public class testBillingAccountCreate {
 			credentials.setUserName("jojo");
 			credentials.setPassword("12345");
 			billingAccount.setCredentials(credentials);
-			assertFalse((billingAccount.getCredentials() == null));
-			
-			TelcoStatement statement = null;
-//			billingAccount.addBillingAccountStatament(statement);
-//			assertTrue(billingAccount.getBillingStatement().size() == 0);
-//			
-//			TelcoStatement telStatement = new TelcoStatement("1234");
-//			billingAccount.addBillingAccountStatament(telStatement);
-//			assertTrue(billingAccount.getBillingStatement().size() != 0);
-//			
-			CredentialsVO credentialNull = null;
-			
+			assertFalse((billingAccount.getCredentials() == null));					
 		}
 	}

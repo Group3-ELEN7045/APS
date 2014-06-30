@@ -3,8 +3,10 @@ package za.ac.wits.elen7045.group3.aps.services.scrape.factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
 import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.MunicipalScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.TelcoScrapeStrategy;

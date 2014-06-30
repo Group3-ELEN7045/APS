@@ -16,6 +16,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
@@ -31,6 +33,8 @@ import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
@@ -57,7 +61,10 @@ public class TestsAddNotifications {
 	private CustomerDTO               customer;
 	private AddBillingAccountManager	  billingAccountManager;
 	private AddBillingAccountManagerImpl billingAccountManagerImpl;
+	private RetriveBillingAccountManager	  retriveBillingAccountManager;
+	private RetriveBillingAccountManagerImpl retriveBillingAccountManagerImpl;
 	private AddBillingAccountRepository    billingAccountRepository;
+	private RetriveBillingAccountRepository    retriveBillingAccountRepository;
 	
 	@Before
 	public void initilize(){
@@ -71,8 +78,11 @@ public class TestsAddNotifications {
 		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 		
 		billingAccountRepository  = context.getBean(AddBillingAccountRepository.class);
-		billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository);
+		billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository, retriveBillingAccountRepository);
 	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	    
+	    retriveBillingAccountManagerImpl = new RetriveBillingAccountManagerImpl(retriveBillingAccountRepository);
+	    retriveBillingAccountManager     = new APSMockObjectGenerator<RetriveBillingAccountManagerImpl>().mock(retriveBillingAccountManagerImpl);
 		
 		customer                  = context.getBean(CustomerDTO.class);
         customerRepository        = context.getBean(CustomerRepository.class);
@@ -113,7 +123,7 @@ public class TestsAddNotifications {
 	     userCredentials.encryptCredentials();
 	     
 	     CustomerDTO authenticationCustomer = userManager.getCustomerForLogin(userCredentials);		 
-		 List<BillingAccountDTO> accountsDTOs = billingAccountManager.getBillingAccountsByUserId(authenticationCustomer.getId());
+		 List<BillingAccountDTO> accountsDTOs = retriveBillingAccountManager.getBillingAccountForCustomer(authenticationCustomer.getId());
 		 
 		 assertNotNull("No Accounts created for this user" , accountsDTOs);
 		 

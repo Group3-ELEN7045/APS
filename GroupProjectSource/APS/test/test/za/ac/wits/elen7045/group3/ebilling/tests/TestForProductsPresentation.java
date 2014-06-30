@@ -17,6 +17,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
@@ -27,6 +29,8 @@ import za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.TimerJob;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.TimerTask;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.WorkManager;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.services.accounts.statement.generator.StatementRenderer;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
@@ -52,6 +56,7 @@ public class TestForProductsPresentation {
 	private BillingAccountDTO           billingAccountDTO;
 	private ApplicationContext          context;	
 	private AddBillingAccountRepository    billingAccountRepository;
+	private RetriveBillingAccountRepository    retriveBillingAccountRepository;
 	private AddBillingAccountManager	    billingAccountManager;
 	private AddBillingAccountManagerImpl   billingAccountManagerImpl;
 	private UserManager	                userManager;
@@ -76,14 +81,17 @@ public class TestForProductsPresentation {
 		userCredentials           = new CredentialsDTO();
 		encryptionModule          = context.getBean(EncryptionModule.class);
 		billingAccountRepository  = context.getBean(AddBillingAccountRepository.class);		    
-		billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository);
+		billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository, retriveBillingAccountRepository);
 		billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 		customerRepository        = context.getBean(CustomerRepository.class);
 		
 		userManagerImpl           = new UserManagerImpl(customerRepository);
 	    userManager               = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 	    
-	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository);
+	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository,retriveBillingAccountRepository);
+	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	    
+	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository,retriveBillingAccountRepository);
 	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 	    
 	    customer.setEncryptionModule(encryptionModule);

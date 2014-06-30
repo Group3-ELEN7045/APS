@@ -2,14 +2,15 @@ package za.ac.wits.elen7045.group3.aps.domain.accounts.repository;
 
 import java.util.List;
 
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.AddBillingAccountDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.RetriveBillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 public class RetriveBillingAccountRepositoryImpl implements RetriveBillingAccountRepository{
-	private BillingAccountDataAccess dataAccess;
+	private RetriveBillingAccountDataAccess dataAccess;
 	
-	public RetriveBillingAccountRepositoryImpl(BillingAccountDataAccess dataAccess){
+	public RetriveBillingAccountRepositoryImpl(RetriveBillingAccountDataAccess dataAccess){
 		this.dataAccess = dataAccess;
 	}
 	

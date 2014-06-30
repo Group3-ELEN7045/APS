@@ -27,6 +27,7 @@ public class  BillingAccountStatement implements Serializable {
 	private String AccountTotalDue="";
 	
 	private String AccountDueDate="";
+	
 	private String AccountOpeningBalance="";
 	private String AccountClosingBalance="";
 	private String AccountPaymentReceived="";
@@ -94,9 +95,12 @@ public class  BillingAccountStatement implements Serializable {
 	public String getAccountDueDate() {
 		return AccountDueDate;
 	}
-	public void addStatement(String accountDueDate) {
+	public void setAccountDueDate(String accountDueDate) {
 		AccountDueDate = accountDueDate;
 	}
+//	public void addStatement(String accountDueDate) {
+//		AccountDueDate = accountDueDate;
+//	}
 	
 	@Column(name = "ACCOUNT_OPENING_BALANCE",nullable = true)
 	public String getAccountOpeningBalance() {
