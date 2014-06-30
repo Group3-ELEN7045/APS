@@ -2,10 +2,9 @@ package za.ac.wits.elen7045.group3.aps.services.managers;
 
 import org.dozer.DozerBeanMapper;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
@@ -14,7 +13,7 @@ import za.ac.wits.elen7045.group3.aps.services.specification.credentials.Billing
 public class AddBillingAccountManagerImpl implements AddBillingAccountManager {
 	private AddBillingAccountRepository addBillingRepository;
 	private RetriveBillingAccountRepository retriveBillingRepository;
-	private BillingAccount entityBillingAccount; // = new BillingAccount();
+	private BillingAccount entityBillingAccount; 
 	private BillingAccountDTO billingAccountdto;
 
 	public AddBillingAccountManagerImpl(AddBillingAccountRepository addBillingRepository, RetriveBillingAccountRepository retriveBillingRepository ) {
@@ -54,12 +53,7 @@ public class AddBillingAccountManagerImpl implements AddBillingAccountManager {
 				billingAccountdto);
 		// checks if all the required fields of the billing account have been set
 		if (userBillingAccountDetails.isSatisfiedBy(billingAccountdto)) {
-			DozerBeanMapper dozer = new DozerBeanMapper();
-			if(billingAccountdto.getBillingStatement() != null){
-				for(BillingAccountStatement stat : billingAccountdto.getBillingStatement()){
-				//	entityBillingAccount.addBillingAccountStatament(stat);
-				}
-			}
+			DozerBeanMapper dozer = new DozerBeanMapper();			
 			dozer.map(billingAccountdto, entityBillingAccount);			
 			addBillingRepository.updateBillingAccountStatus(entityBillingAccount);
 		}

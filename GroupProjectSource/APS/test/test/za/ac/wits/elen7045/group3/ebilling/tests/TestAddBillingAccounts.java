@@ -11,8 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.RetriveBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
@@ -59,7 +59,7 @@ public class TestAddBillingAccounts {
 		userManagerImpl           = new UserManagerImpl(customerRepository);
 	    userManager               = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 	    
-	    addBillingAccountManagerImpl = new AddBillingAccountManagerImpl(addBillingAccountRepository, retriveBillingAccountRepository);
+        addBillingAccountManagerImpl = new AddBillingAccountManagerImpl(addBillingAccountRepository, retriveBillingAccountRepository);
 		addBillingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(addBillingAccountManagerImpl);
 		
 		retriveBillingAccountManagerImpl = new RetriveBillingAccountManagerImpl(retriveBillingAccountRepository);

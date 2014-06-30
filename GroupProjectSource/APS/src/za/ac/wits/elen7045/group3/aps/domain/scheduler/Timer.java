@@ -2,10 +2,6 @@ package za.ac.wits.elen7045.group3.aps.domain.scheduler;
 
 
 import java.text.ParseException;
-import java.util.Map;
-import java.util.Properties;
-
-import org.quartz.CronExpression;
 import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;

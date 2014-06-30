@@ -5,12 +5,9 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 
 public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountManager {
@@ -22,10 +19,10 @@ public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountMa
 	public RetriveBillingAccountManagerImpl(RetriveBillingAccountRepository billingRepository) {
 		this.billingRepository = billingRepository;
 	}
+	
 
 	@Override
-	public BillingAccountDTO getBillingAccount(String accountNumber)
-			throws DatabaseException {
+	public BillingAccountDTO getBillingAccount(String accountNumber) throws DatabaseException {
 		if (accountNumber == null) {
 			throw new RuntimeException("Account number cannot be null");
 		}
@@ -65,7 +62,7 @@ public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountMa
 		}
 		List<BillingAccountDTO> billingAccountList = new ArrayList<BillingAccountDTO>();
 		DozerBeanMapper dozer = new DozerBeanMapper();		
-		List<BillingAccount> accoutList = (List<BillingAccount>) billingRepository.getBillingAcountsForCustomer(customerId);
+		List<BillingAccount> accoutList = billingRepository.getBillingAccountForCustomer(customerId);
 		if((accoutList.size() > 0)){
 			for (BillingAccount entity : accoutList) {
 				if (!(entity == null)) {

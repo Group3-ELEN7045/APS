@@ -42,7 +42,7 @@ public class FakeBillingDB implements BillingAccountDataAccess {
 		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.companyUrl = ?1");
 		 query.setParameter (1, billingCompanyUrl);
 		 
-		 List<BillingAccount> accountList = (List<BillingAccount>)query.getResultList();
+		 List<BillingAccount> accountList = query.getResultList();
 		 return accountList;
 	}
 
@@ -67,7 +67,7 @@ public class FakeBillingDB implements BillingAccountDataAccess {
 		 Query query = entityManager.createQuery ("SELECT account FROM BillingAccount account WHERE account.customerId =?1");
 		 query.setParameter (1, id);
 		 
-		 List<BillingAccount> accountList = (List<BillingAccount>) query.getResultList();
+		 List<BillingAccount> accountList = query.getResultList();
 		 return accountList;
 	}
 	

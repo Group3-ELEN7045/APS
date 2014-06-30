@@ -11,7 +11,6 @@ import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
@@ -54,7 +53,8 @@ public class TestUserLogon {
     	userCredenials.encryptCredentials();
     	
     	try {
-			Thread.currentThread().sleep(1000);
+			Thread.currentThread();
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +76,8 @@ public class TestUserLogon {
      System.out.println("User Authenticated successfully");
      
      try {
-			Thread.currentThread().sleep(1000);
+			Thread.currentThread();
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

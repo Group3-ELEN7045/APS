@@ -10,15 +10,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.RetriveBillingAccountRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.RetriveStatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.RetriveStatementRepositoryImpl;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
@@ -34,7 +34,7 @@ public class TestViewStatement {
 
 		
 		private ApplicationContext          	 context;		
-		private SaveStatementRepository 	saveStatementRepository;
+		private SaveStatementRepository 	saveStatementRepository;		
 		private RetriveStatementRepository 	retriveStatementRepository;
 		private UserManager	                	userManager;
 		private UserManagerImpl             	userManagerImpl;
@@ -89,7 +89,7 @@ public class TestViewStatement {
 			 saveStatementRepository.addStatement(telcoStatement);
 			 
 			  BillingAccountStatement telcoStat = 
-					 (BillingAccountStatement) retriveStatementRepository.getTelcoStatement(telcoStatement.getAccountNumber(), telcoStatement.getAccountStatementMonth());
+					 retriveStatementRepository.getTelcoStatement(telcoStatement.getAccountNumber(), telcoStatement.getAccountStatementMonth());
 				 assertNotNull("Billing Account not null" , telcoStat);
 				 
 			 BillingAccountStatement municipalStatement = new MunicipalStatement("14566");
@@ -111,7 +111,7 @@ public class TestViewStatement {
 			 saveStatementRepository.addStatement(municipalStatement);
 			 
 			 BillingAccountStatement municipalStat = 
-				 (BillingAccountStatement) retriveStatementRepository.getMunicipalStatement(municipalStatement.getAccountNumber(), municipalStatement.getAccountStatementMonth());
+				 retriveStatementRepository.getMunicipalStatement(municipalStatement.getAccountNumber(), municipalStatement.getAccountStatementMonth());
 			 assertNotNull("Billing Account not null" , municipalStat);
 			 
 			 BillingAccountStatement creditCardStatement = new CreditCardStatement("45549");
@@ -134,7 +134,7 @@ public class TestViewStatement {
 			 saveStatementRepository.addStatement(creditCardStatement);
 			 		
 			 BillingAccountStatement creditCardStat = 
-				 (BillingAccountStatement) retriveStatementRepository.getCreditCardStatement(creditCardStatement.getAccountNumber(), creditCardStatement.getAccountStatementMonth());
+				 retriveStatementRepository.getCreditCardStatement(creditCardStatement.getAccountNumber(), creditCardStatement.getAccountStatementMonth());
 			 assertNotNull("Billing Account not null" , creditCardStat);
 					 
 		 } catch (Exception e) {
@@ -161,7 +161,7 @@ public class TestViewStatement {
 			
 			 if(billingAccount.getAccountType().equalsIgnoreCase(CompanyStatementType.MUNICIPALITY.getAccountType())){
 				 String period = "June";			 
-				 BillingAccountStatement statement =(BillingAccountStatement) retriveStatementRepository.getMunicipalStatement(billingAccount.getAccountNumber(), period);
+				 BillingAccountStatement statement =retriveStatementRepository.getMunicipalStatement(billingAccount.getAccountNumber(), period);
 					 System.out.println("Billing Account Number = " + statement.getAccountNumber());
 					 System.out.println("Statement ID = " + statement.getId());
 					 System.out.println("Statement Date = " + statement.getAccountStatementDate());
@@ -171,7 +171,7 @@ public class TestViewStatement {
 			 }else if(billingAccount.getAccountType().equalsIgnoreCase(CompanyStatementType.TELCO.getAccountType())){
 				
 				 String period = "June";			 
-				 BillingAccountStatement statement =(BillingAccountStatement) retriveStatementRepository.getTelcoStatement(billingAccount.getAccountNumber(), period);
+				 BillingAccountStatement statement =retriveStatementRepository.getTelcoStatement(billingAccount.getAccountNumber(), period);
 					 System.out.println("Billing Account Number = " + statement.getAccountNumber());
 					 System.out.println("Statement ID = " + statement.getId());
 					 System.out.println("Statement Date = " + statement.getAccountStatementDate());
@@ -181,7 +181,7 @@ public class TestViewStatement {
 			 }else if(billingAccount.getAccountType().equalsIgnoreCase(CompanyStatementType.TELCO.getAccountType())){
 				
 				 String period = "June";			 
-				 BillingAccountStatement statement =(BillingAccountStatement) retriveStatementRepository.getCreditCardStatement(billingAccount.getAccountNumber(), period);
+				 BillingAccountStatement statement =retriveStatementRepository.getCreditCardStatement(billingAccount.getAccountNumber(), period);
 					 System.out.println("Billing Account Number = " + statement.getAccountNumber());
 					 System.out.println("Statement ID = " + statement.getId());
 					 System.out.println("Statement Date = " + statement.getAccountStatementDate());

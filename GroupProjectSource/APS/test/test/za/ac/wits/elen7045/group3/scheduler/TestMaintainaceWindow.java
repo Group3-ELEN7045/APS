@@ -1,14 +1,9 @@
 package test.za.ac.wits.elen7045.group3.scheduler;
 
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCycle;
 
 import junit.framework.TestCase;
 
@@ -25,6 +20,7 @@ public class TestMaintainaceWindow extends TestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -35,6 +31,7 @@ public class TestMaintainaceWindow extends TestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@After
 	protected void tearDown() throws Exception {
 		super.tearDown();

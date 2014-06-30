@@ -134,13 +134,15 @@ public class ApplicationException extends Exception{
 
    /** Prints the composite message and the embedded stack trace to the specified stream ps. */
    
-   public void printStackTrace(PrintStream ps) {
+   @Override
+public void printStackTrace(PrintStream ps) {
        super.printStackTrace(ps);
    }
 
    /** Prints the composite message and the embedded stack trace to the specified print writer pw. */
    
-   public void printStackTrace(PrintWriter pw) {
+   @Override
+public void printStackTrace(PrintWriter pw) {
        super.printStackTrace(pw);
    }
 

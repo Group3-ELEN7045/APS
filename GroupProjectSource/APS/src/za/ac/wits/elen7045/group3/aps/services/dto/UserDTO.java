@@ -2,8 +2,6 @@ package za.ac.wits.elen7045.group3.aps.services.dto;
 
 import java.util.Date;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
-
 /**
  * @author SilasMahlangu
  *

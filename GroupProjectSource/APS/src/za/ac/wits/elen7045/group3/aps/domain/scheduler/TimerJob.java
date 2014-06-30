@@ -21,7 +21,7 @@ public class TimerJob implements Job {
 		Map<String, TimerTask> dataMap = context.getJobDetail().getJobDataMap();
 		
 		for (String key : dataMap.keySet()) {
-			TimerTask task = (TimerTask) dataMap.get(key);
+			TimerTask task = dataMap.get(key);
 			task.execute();	
 		}
 	}

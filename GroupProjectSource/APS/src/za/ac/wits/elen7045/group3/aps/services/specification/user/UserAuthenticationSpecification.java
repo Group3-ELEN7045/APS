@@ -11,6 +11,7 @@ public class UserAuthenticationSpecification extends ApplicationSpecification<Cr
 		this.credentials = credentials;	
 	}
 
+	@Override
 	public boolean isSatisfiedBy(CredentialsVO credentialsParam) {
      return(credentials.getPassword().equals(credentialsParam.getPassword()) &&
           credentials.getUserName().equals(credentialsParam.getUserName()));

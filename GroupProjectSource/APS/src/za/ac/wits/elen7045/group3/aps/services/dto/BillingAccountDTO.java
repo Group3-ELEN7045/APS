@@ -1,12 +1,6 @@
 package za.ac.wits.elen7045.group3.aps.services.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
 
 public class BillingAccountDTO implements Serializable{

@@ -65,7 +65,7 @@ public class DatabaseNotification extends ConfirmationNotification{
 	    	query = entityManager.createQuery ("SELECT notify FROM ScrapeLogResult notify limit 50");
 	    }
 		//--
-		List  scrapeResults =(List) query.getResultList();
+		List  scrapeResults =query.getResultList();
         return scrapeResults;
 	}
 	

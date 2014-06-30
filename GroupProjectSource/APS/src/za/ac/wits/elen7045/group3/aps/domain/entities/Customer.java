@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import za.ac.wits.elen7045.group3.aps.domain.vo.ContactInformationVO;
 import za.ac.wits.elen7045.group3.aps.domain.vo.PaymentDetailsVO;
-import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
 
 /**
  * @author SilasMahlangu

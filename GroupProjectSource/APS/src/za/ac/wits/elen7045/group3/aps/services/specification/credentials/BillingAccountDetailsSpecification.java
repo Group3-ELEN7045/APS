@@ -11,6 +11,7 @@ public class BillingAccountDetailsSpecification extends ApplicationSpecification
 		this.billingAccount = billingAccount;	
 	}
 
+	@Override
 	public boolean isSatisfiedBy(BillingAccountDTO billingAccount) {
 		if(billingAccount.getCredentials() != null){
      return((billingAccount.getAccountNumber() != null) &&

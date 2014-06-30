@@ -19,11 +19,8 @@ import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAcce
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedularLauncher;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer;
@@ -116,7 +113,8 @@ public class TestForProductsPresentation {
 		 assertTrue(authenticationCustomer != null);
 		 
 		 try {
-				Thread.currentThread().sleep(1000);
+				Thread.currentThread();
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -175,7 +173,8 @@ public class TestForProductsPresentation {
 			     System.out.println("Checking if ccount exist");
 			     BillingAccountDTO accountDTO =  billingAccountManager.getBillingAccount(dto.getAccountNumber());
 			 	 try {
-					  Thread.currentThread().sleep(2000);
+					  Thread.currentThread();
+					Thread.sleep(2000);
 				  } catch (InterruptedException e) {
 					  e.printStackTrace();
 				  }
@@ -237,7 +236,7 @@ public class TestForProductsPresentation {
 	        NotificationObserver notificationObserver = new NotificationObserver();
 	        ScrapeLogResult responseNotification = new ScrapeLogResult();
 
-	        List<ScrapeLogResult> dbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(logonNotification, notificationRepository);
+	        List<ScrapeLogResult> dbNotifications =notificationObserver.checkNotifications(logonNotification, notificationRepository);
 	        
 	        if(dbNotifications != null ){
 	            for(ScrapeLogResult updateNotification : dbNotifications){
@@ -250,7 +249,7 @@ public class TestForProductsPresentation {
 				    try {
 				    	System.out.println("Before Notification Update " + dbNotifications.size());
 						ScrapeLogResult updatedNotification = notificationRepository.updateScrapeLogResults(updateNotification);
-						List<ScrapeLogResult> LastdbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(logonNotification, notificationRepository);
+						List<ScrapeLogResult> LastdbNotifications =notificationObserver.checkNotifications(logonNotification, notificationRepository);
 						  if(LastdbNotifications != null){
 							  dbNotifications = LastdbNotifications;
 							  System.out.println("After Notification Update " + dbNotifications.size());
@@ -274,7 +273,7 @@ public class TestForProductsPresentation {
 	        NotificationObserver notificationObserverAcc = new NotificationObserver();
 	        ScrapeLogResult responseNotificationt = new ScrapeLogResult();
 
-	        List<ScrapeLogResult> dbNotificationst =(List<ScrapeLogResult>) notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
+	        List<ScrapeLogResult> dbNotificationst =notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
 	        
 	        if(dbNotificationst != null ){
 	            for(ScrapeLogResult updateNotification : dbNotificationst){
@@ -287,7 +286,7 @@ public class TestForProductsPresentation {
 				    try {
 				    	System.out.println("Before Notification Update " + dbNotificationst.size());
 						ScrapeLogResult updatedNotification = notificationRepository.updateScrapeLogResults(updateNotification);
-						List<ScrapeLogResult> LastdbNotifications =(List<ScrapeLogResult>) notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
+						List<ScrapeLogResult> LastdbNotifications =notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
 						  if(LastdbNotifications != null){
 							  dbNotificationst = LastdbNotifications;
 							  System.out.println("After Notification Update " + dbNotificationst.size());
@@ -312,7 +311,7 @@ public class TestForProductsPresentation {
 		        NotificationObserver notificationObserverAcc = new NotificationObserver();
 		        ScrapeLogResult responseNotificationt = new ScrapeLogResult();
 
-		        List<ScrapeLogResult> dbNotificationst =(List<ScrapeLogResult>) notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
+		        List<ScrapeLogResult> dbNotificationst =notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
 		        
 		        if(dbNotificationst != null ){
 		            for(ScrapeLogResult updateNotification : dbNotificationst){
@@ -331,21 +330,24 @@ public class TestForProductsPresentation {
 		addNotifications();
 		CustomerDTO customer = 	customerStuff();
 		try {
-			Thread.currentThread().sleep(2000);
+			Thread.currentThread();
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<BillingAccountDTO> accountsDTO = checkForActiveAccounts(customer);
         try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 checkUserNotifications(); 
 		   try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -354,7 +356,8 @@ public class TestForProductsPresentation {
 		   checkActiveInactiveNotifications();       
 		   
 		   try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -363,7 +366,8 @@ public class TestForProductsPresentation {
 		   checkActiveNotifications();
 		   
 		   try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -372,7 +376,8 @@ public class TestForProductsPresentation {
 		 new SchedularLauncher().launch(); 
 		 
 		 try {
-				Thread.currentThread().sleep(10000);
+				Thread.currentThread();
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

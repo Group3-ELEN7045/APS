@@ -1,11 +1,9 @@
 package test.za.ac.wits.elen7045.group3.scheduler;
  
 
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
 import junit.framework.TestCase;
 
@@ -18,11 +16,13 @@ import junit.framework.TestCase;
  */
 public class TestingBillingCompany extends TestCase {
 
+	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
 
+	@Override
 	@After
 	protected void tearDown() throws Exception {
 		super.tearDown();
