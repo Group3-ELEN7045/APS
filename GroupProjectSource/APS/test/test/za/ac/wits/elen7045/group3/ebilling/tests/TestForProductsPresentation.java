@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
+import za.ac.wits.elen7045.group3.aps.domain.RetriveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
@@ -29,6 +30,8 @@ import za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.TimerJob;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.TimerTask;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.WorkManager;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
 import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.services.accounts.statement.generator.StatementRenderer;
@@ -43,6 +46,8 @@ import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer.NotificationObserver;
@@ -59,6 +64,8 @@ public class TestForProductsPresentation {
 	private RetriveBillingAccountRepository    retriveBillingAccountRepository;
 	private AddBillingAccountManager	    billingAccountManager;
 	private AddBillingAccountManagerImpl   billingAccountManagerImpl;
+	private RetriveBillingAccountManager	    retriveBillingAccountManager;
+	private RetriveBillingAccountManagerImpl   retriveBillingAccountManagerImpl;
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
 	private EncryptionModule            encryptionModule;
@@ -69,9 +76,9 @@ public class TestForProductsPresentation {
 	private ScrapeLogResultRepository notificationRepository;
 	private ScrapeLogResultImpl       notificationRepositoryImpl;
 	
-	private SaveBillingAccountStatementDataAccess statementDataAcces;
-	private SaveStatementRepository      statementDataRepository;
-	private SaveStatementRepositoryImpl  statementRepositoryImpl;
+	private RetriveBillingAccountStatementDataAccess statementDataAcces;
+	private RetriveStatementRepository      statementDataRepository;
+	private RetriveStatementRepositoryImpl  statementRepositoryImpl;
 	              
 	
 	@Before
@@ -91,8 +98,8 @@ public class TestForProductsPresentation {
 	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository,retriveBillingAccountRepository);
 	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 	    
-	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository,retriveBillingAccountRepository);
-	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	    retriveBillingAccountManagerImpl = new RetriveBillingAccountManagerImpl(retriveBillingAccountRepository);
+	    retriveBillingAccountManager     = new APSMockObjectGenerator<RetriveBillingAccountManagerImpl>().mock(retriveBillingAccountManagerImpl);
 	    
 	    customer.setEncryptionModule(encryptionModule);
 	    
@@ -100,11 +107,11 @@ public class TestForProductsPresentation {
 		notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
 		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 		
-		statementDataAcces          = context.getBean(SaveBillingAccountStatementDataAccess.class);
+		statementDataAcces          = context.getBean(RetriveBillingAccountStatementDataAccess.class);
 		
-		statementDataRepository     = context.getBean(SaveStatementRepository.class) ;
-		statementRepositoryImpl     = new SaveStatementRepositoryImpl(statementDataAcces);          
-		statementDataRepository     = new APSMockObjectGenerator<SaveStatementRepositoryImpl>().mock(statementRepositoryImpl);
+		statementDataRepository     = context.getBean(RetriveStatementRepository.class) ;
+		statementRepositoryImpl     = new RetriveStatementRepositoryImpl(statementDataAcces);          
+		statementDataRepository     = new APSMockObjectGenerator<RetriveStatementRepositoryImpl>().mock(statementRepositoryImpl);
 		
 		  
 	}
@@ -134,7 +141,7 @@ public class TestForProductsPresentation {
 	}
 	
 	private List<BillingAccountDTO>  checkForActiveAccounts(CustomerDTO customer) throws DatabaseException{
-		List<BillingAccountDTO> accountsDTO = billingAccountManager.getBillingAccountsByUserId(customer.getId()); 
+		List<BillingAccountDTO> accountsDTO = retriveBillingAccountManager.getBillingAccountForCustomer(customer.getId()); 
 		 
 		 if(accountsDTO == null || accountsDTO.size() == 0){
 			 
@@ -179,7 +186,7 @@ public class TestForProductsPresentation {
 			     billingAccountManager.saveBillingAccount(dto);
 			     System.out.println(" ");
 			     System.out.println("Checking if ccount exist");
-			     BillingAccountDTO accountDTO =  billingAccountManager.getBillingAccount(dto.getAccountNumber());
+			     BillingAccountDTO accountDTO =  retriveBillingAccountManager.getBillingAccount(dto.getAccountNumber());
 			 	 try {
 					  Thread.currentThread();
 					Thread.sleep(2000);
@@ -188,7 +195,7 @@ public class TestForProductsPresentation {
 				  }
 			 
 			      if(accountDTO != null){
-				      List<BillingAccountDTO> accountsDTOs = billingAccountManager.getBillingAccountsByUserId(customer.getId());
+				      List<BillingAccountDTO> accountsDTOs = retriveBillingAccountManager.getBillingAccountForCustomer(customer.getId());
 				 
 				      System.out.println(" ");
 				      System.out.println("User has account(s)");
@@ -396,12 +403,12 @@ public class TestForProductsPresentation {
 		 System.out.println("Check Accounts");
 		 System.out.println("  ");
 		    
-		List<BillingAccountStatement> statements =  statementDataRepository.getAccountStatement("123456789");  
+		BillingAccountStatement statements =  statementDataRepository.getTelcoStatement("123456789", "June");  
 		StatementRenderer statement = StatementRenderer.newInstnce();
-		for(BillingAccountStatement accountStatement : statements){
-			statement.createHTHMLStateMent(accountStatement, 
-                    ApplicationContants.USER_STATEMENT_PATH+"\\"+accountStatement.getAccountNumber()+"\\"+accountStatement.getAccountNumber()+".xml");	
-		}
+		
+		statement.createHTHMLStateMent(statements, 
+                    ApplicationContants.USER_STATEMENT_PATH+"\\"+statements.getAccountNumber()+"\\"+statements.getAccountNumber()+".xml");	
+		
 		
 		
 		
