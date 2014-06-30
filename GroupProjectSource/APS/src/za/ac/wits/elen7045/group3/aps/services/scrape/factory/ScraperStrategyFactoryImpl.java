@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepository;
 import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.MunicipalScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.TelcoScrapeStrategy;
@@ -20,15 +20,15 @@ import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy
 @Service
 public class ScraperStrategyFactoryImpl implements ScraperStrategyFactory {
 	
-	BillingAccountRepository 	billingAccountRepository;
+	AddBillingAccountRepository 	billingAccountRepository;
 	ScrapeLogResultRepository 	scrapeLogRepository;
-	StatementRepository			statementDataRepository;
+	SaveStatementRepository			statementDataRepository;
 	
 	@Autowired
 	public ScraperStrategyFactoryImpl(
-			BillingAccountRepository  billingAccountRepository,
+			AddBillingAccountRepository  billingAccountRepository,
 			ScrapeLogResultRepository scrapeLogRepository,
-			StatementRepository		  statementDataRepository) {
+			SaveStatementRepository		  statementDataRepository) {
 		super();
 		this.billingAccountRepository = billingAccountRepository;
 		this.scrapeLogRepository      = scrapeLogRepository;

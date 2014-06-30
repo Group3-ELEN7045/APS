@@ -21,14 +21,21 @@
     
     <!-- Billing Database Setup -->
     <bean id="billingDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingDB"/>
-    <bean id="billingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl">
+    <bean id="addBillingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepositoryImpl">
         <constructor-arg ref="billingDataAccess"/>
     </bean> 
+    <bean id="retrivebillingAccountRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.accounts.RetriveBillingAccountRepositoryImpl">
+        <constructor-arg ref="billingDataAccess"/>
+    </bean>
+    
     <!-- Billing Database Setup -->
     
     <!--    statement Setup -->
     <bean id="statementDataAcces" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeBillingStatementDB"/>
-    <bean id="statementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl">
+    <bean id="saveStatementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepositoryImpl">
+       <constructor-arg ref="statementDataAcces"/>
+    </bean>
+     <bean id="retriveStatementDataRepository" class="za.ac.wits.elen7045.group3.aps.domain.repository.statement.RetriveStatementRepositoryImpl">
        <constructor-arg ref="statementDataAcces"/>
     </bean>
     <!--  statement Setup    -->
@@ -47,9 +54,9 @@
     
     <!-- Strategy Factory  -->
     <bean id="scrapeStrategyFactory" 	class="za.ac.wits.elen7045.group3.aps.services.scrape.factory.ScraperStrategyFactoryImpl">
-	    <constructor-arg ref="billingAccountRepository"/>
+	    <constructor-arg ref="addBillingAccountRepository"/>
 	    <constructor-arg ref="scrapeLogResultRepository"/>
-	    <constructor-arg ref="statementDataRepository"/>
+	    <constructor-arg ref="saveStatementDataRepository"/>
     </bean>
     
      <bean id="billingCompanyRepository"  class="za.ac.wits.elen7045.group3.aps.domain.scheduler.BillingCompanyRepository"/>

@@ -13,9 +13,9 @@ import org.apache.derby.iapi.util.StringUtil;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepository;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.MunicipalStatementConverter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapeInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
@@ -36,11 +36,11 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	
 	private static final String SUCCESS = "000";
 	private ScrapeLogResultRepository scrapeLogRepository;
-	private BillingAccountRepository accountRepository;
-	private StatementRepository statementRepository;
+	private AddBillingAccountRepository accountRepository;
+	private SaveStatementRepository statementRepository;
 	private BillingAccount account;
 	
-	public MunicipalScrapeStrategy(BillingAccount acc, ScrapeLogResultRepository slr, BillingAccountRepository bar, StatementRepository sr) {
+	public MunicipalScrapeStrategy(BillingAccount acc, ScrapeLogResultRepository slr, AddBillingAccountRepository bar, SaveStatementRepository sr) {
 		super();
 		this.account = acc;
 		this.scrapeLogRepository = slr;

@@ -15,15 +15,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountStatementDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedularLauncher;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer;
@@ -40,8 +40,8 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.SrapingResponseTypes;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer.NotificationObserver;
@@ -54,9 +54,9 @@ public class TestForProductsPresentation {
 	private CustomerDTO customer;
 	private BillingAccountDTO           billingAccountDTO;
 	private ApplicationContext          context;	
-	private BillingAccountRepository    billingAccountRepository;
-	private BillingAccountManager	    billingAccountManager;
-	private BillingAccountManagerImpl   billingAccountManagerImpl;
+	private AddBillingAccountRepository    billingAccountRepository;
+	private AddBillingAccountManager	    billingAccountManager;
+	private AddBillingAccountManagerImpl   billingAccountManagerImpl;
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
 	private EncryptionModule            encryptionModule;
@@ -67,9 +67,9 @@ public class TestForProductsPresentation {
 	private ScrapeLogResultRepository notificationRepository;
 	private ScrapeLogResultImpl       notificationRepositoryImpl;
 	
-	private BillingAccountStatementDataAccess statementDataAcces;
-	private StatementRepository      statementDataRepository;
-	private StatementRepositoryImpl  statementRepositoryImpl;
+	private SaveBillingAccountStatementDataAccess statementDataAcces;
+	private SaveStatementRepository      statementDataRepository;
+	private SaveStatementRepositoryImpl  statementRepositoryImpl;
 	              
 	
 	@Before
@@ -78,16 +78,16 @@ public class TestForProductsPresentation {
 		customer                  = context.getBean(CustomerDTO.class);
 		userCredentials           = new CredentialsDTO();
 		encryptionModule          = context.getBean(EncryptionModule.class);
-		billingAccountRepository  = context.getBean(BillingAccountRepository.class);		    
-		billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
-		billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+		billingAccountRepository  = context.getBean(AddBillingAccountRepository.class);		    
+		billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository);
+		billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 		customerRepository        = context.getBean(CustomerRepository.class);
 		
 		userManagerImpl           = new UserManagerImpl(customerRepository);
 	    userManager               = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 	    
-	    billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
-	    billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository);
+	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 	    
 	    customer.setEncryptionModule(encryptionModule);
 	    
@@ -95,11 +95,11 @@ public class TestForProductsPresentation {
 		notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
 		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 		
-		statementDataAcces          = context.getBean(BillingAccountStatementDataAccess.class);
+		statementDataAcces          = context.getBean(SaveBillingAccountStatementDataAccess.class);
 		
-		statementDataRepository     = context.getBean(StatementRepository.class) ;
-		statementRepositoryImpl     = new StatementRepositoryImpl(statementDataAcces);          
-		statementDataRepository     = new APSMockObjectGenerator<StatementRepositoryImpl>().mock(statementRepositoryImpl);
+		statementDataRepository     = context.getBean(SaveStatementRepository.class) ;
+		statementRepositoryImpl     = new SaveStatementRepositoryImpl(statementDataAcces);          
+		statementDataRepository     = new APSMockObjectGenerator<SaveStatementRepositoryImpl>().mock(statementRepositoryImpl);
 		
 		  
 	}

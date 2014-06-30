@@ -99,7 +99,7 @@ public class  BillingAccountStatement implements Serializable {
 	public String getAccountDueDate() {
 		return AccountDueDate;
 	}
-	public void setAccountDueDate(String accountDueDate) {
+	public void addStatement(String accountDueDate) {
 		AccountDueDate = accountDueDate;
 	}
 	

@@ -15,10 +15,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.AddBillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.repository.statement.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
@@ -36,16 +36,16 @@ public class ScraperStrategyTest {
 	
 //	private ScrapeLogResultDataAccess scrapeLogDataAccess;
 	private ScrapeLogResultImpl scrapeLogRepository;
-	private BillingAccountRepositoryImpl billingAccountRepository;	
-	private StatementRepository statementRepository;
+	private AddBillingAccountRepositoryImpl billingAccountRepository;	
+	private SaveStatementRepository statementRepository;
 	
 
 	@Before
 	public void initilize(){
 		context = new ClassPathXmlApplicationContext("res/spring/application-context-test.xml");
 		
-		billingAccountRepository 		= context.getBean(BillingAccountRepositoryImpl.class);
-		statementRepository				= context.getBean(StatementRepositoryImpl.class);
+		billingAccountRepository 		= context.getBean(AddBillingAccountRepositoryImpl.class);
+		statementRepository				= context.getBean(SaveStatementRepositoryImpl.class);
 		scrapeLogRepository				= context.getBean(ScrapeLogResultImpl.class);
 
 		//account
