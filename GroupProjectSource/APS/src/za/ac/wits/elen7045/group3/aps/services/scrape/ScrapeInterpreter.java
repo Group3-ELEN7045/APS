@@ -1,8 +1,9 @@
-package za.ac.wits.elen7045.group3.aps.domain.scrape.vo;
+package za.ac.wits.elen7045.group3.aps.services.scrape;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 /**
  * @author bakwanyana
  */
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ErrorinScrapedResultSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.ErrorinScrapedResultSpecification;
 public class ScrapeInterpreter {
 	private ScrapedResult scrapedStatement;
 	

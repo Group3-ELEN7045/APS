@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasDuplicateScrapedResultErrorSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasDuplicateScrapedResultErrorSpecification;
 
 public class DuplicateScrapedResultSpecTest {
 	

@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapeInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalScrapedResultAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.MunicipalScrapedResultAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapeInterpreter;
 
 public class ScrapeInterpreterTests {
 	ScrapeInterpreter interpreter;

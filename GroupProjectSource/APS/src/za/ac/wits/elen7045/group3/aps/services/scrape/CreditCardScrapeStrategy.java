@@ -16,9 +16,10 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.CreditCardStatementConverter;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapeInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasDuplicateScrapedResultErrorSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasGenericErrorInScrapedResultSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.ScrapedResultAccountNumberMatchesSpecification;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
@@ -27,9 +28,6 @@ import za.ac.wits.elen7045.group3.aps.services.scrape.acl.CreditCardScrapeAdapto
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasDuplicateScrapedResultErrorSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasGenericErrorInScrapedResultSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapedResultAccountNumberMatchesSpecification;
 
 public class CreditCardScrapeStrategy implements ScraperStrategy {
 	

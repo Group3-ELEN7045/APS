@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.*;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MunicipalScrapedResultAdditionSpecTest {

@@ -1,4 +1,6 @@
-package za.ac.wits.elen7045.group3.aps.domain.scrape.vo;
+package za.ac.wits.elen7045.group3.aps.services.scrape;
+
+
 /**
  * @author bakwanyana
  */

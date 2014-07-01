@@ -1,7 +1,8 @@
 
-package za.ac.wits.elen7045.group3.aps.domain.scrape.vo;
+package za.ac.wits.elen7045.group3.aps.services.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
 public class MunicipalStatementConverter {
 	private ScrapedResult scrapedStatement;
