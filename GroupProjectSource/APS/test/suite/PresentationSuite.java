@@ -3,9 +3,9 @@ package suite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import test.za.ac.wits.elen7045.group3.billingAccount.test.TestUserLogon;
 import test.za.ac.wits.elen7045.group3.ebilling.tests.TestForProductsPresentation;
 import test.za.ac.wits.elen7045.group3.register.tests.user.RegisterUserTest;
-import test.za.ac.wits.elen7045.group3.security.test.TestUserLogon;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
    TestUserLogon.class,

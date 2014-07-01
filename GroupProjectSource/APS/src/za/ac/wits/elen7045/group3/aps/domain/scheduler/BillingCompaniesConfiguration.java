@@ -119,6 +119,7 @@ public final class BillingCompaniesConfiguration implements Cloneable {
 		return this.billingCompanies;
 	}
 	
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}

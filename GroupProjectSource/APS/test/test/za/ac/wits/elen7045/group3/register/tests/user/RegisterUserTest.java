@@ -6,7 +6,6 @@ package test.za.ac.wits.elen7045.group3.register.tests.user;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -169,7 +168,8 @@ public class RegisterUserTest {
 		validationCredentials.setConfirmPasword("password");
 		
 		try {
-			Thread.currentThread().sleep(1000);
+			Thread.currentThread();
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -222,7 +222,8 @@ System.out.println("CreditCard Info = " + validatingUser.getPaymentDetails().get
 System.out.println(" ");			
 		    
 try {
-	Thread.currentThread().sleep(2000);
+	Thread.currentThread();
+	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -258,7 +259,8 @@ System.out.println(" Is usert data encrypted = " + userDetailsSpecification.isSa
 System.out.println(" ");
 
 try {
-	Thread.currentThread().sleep(2000);
+	Thread.currentThread();
+	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -315,7 +317,8 @@ System.out.println("Are credentials encrypted = " + encryptSpecification.isSatis
 System.out.println(" ");
 								
 try {
-	Thread.currentThread().sleep(2000);
+	Thread.currentThread();
+	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -339,7 +342,8 @@ System.out.println("User successfully registered new id = " +insertedUser.getId(
 
 				    assertNotNull("Failed to Insert User" , insertedUser);
 	try {
-		Thread.currentThread().sleep(2000);
+		Thread.currentThread();
+		Thread.sleep(2000);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

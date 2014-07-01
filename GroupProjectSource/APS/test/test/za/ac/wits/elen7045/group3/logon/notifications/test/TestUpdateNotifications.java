@@ -51,14 +51,14 @@ public class TestUpdateNotifications {
         NotificationObserver notificationObserver = new NotificationObserver();
         ScrapeLogResult responseNotification = new ScrapeLogResult();
 
-        List<ScrapeLogResult> dbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(notification, notificationRepository);
+        List<ScrapeLogResult> dbNotifications =notificationObserver.checkNotifications(notification, notificationRepository);
         if(dbNotifications != null ){
             for(ScrapeLogResult updateNotification : dbNotifications){
 			    updateNotification.setStatsus(NotificationStatus.COMPLETE.getNotificationStatus());
 			    try {
 			    	System.out.println("Before Notification Update " + dbNotifications.size());
 					ScrapeLogResult updatedNotification = notificationRepository.updateScrapeLogResults(updateNotification);
-					List<ScrapeLogResult> LastdbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(notification, notificationRepository);
+					List<ScrapeLogResult> LastdbNotifications =notificationObserver.checkNotifications(notification, notificationRepository);
 					  if(LastdbNotifications != null){
 						  dbNotifications = LastdbNotifications;
 						  System.out.println("After Notification Update " + dbNotifications.size());

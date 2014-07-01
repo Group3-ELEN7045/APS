@@ -1,10 +1,6 @@
 package test.za.ac.wits.elen7045.group3.scheduler;
 
 
-import static org.junit.Assert.*;
-
-import java.util.Calendar;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

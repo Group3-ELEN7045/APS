@@ -15,21 +15,25 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.BillingAccountStatementDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.RetriveBillingAccountStatementDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepository;
-import za.ac.wits.elen7045.group3.aps.domain.repository.statement.StatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.SchedularLauncher;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.Timer;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.TimerJob;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.TimerTask;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.WorkManager;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepositoryImpl;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
+import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.services.accounts.statement.generator.StatementRenderer;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
@@ -40,8 +44,10 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.SrapingResponseTypes;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer.NotificationObserver;
@@ -54,9 +60,12 @@ public class TestForProductsPresentation {
 	private CustomerDTO customer;
 	private BillingAccountDTO           billingAccountDTO;
 	private ApplicationContext          context;	
-	private BillingAccountRepository    billingAccountRepository;
-	private BillingAccountManager	    billingAccountManager;
-	private BillingAccountManagerImpl   billingAccountManagerImpl;
+	private AddBillingAccountRepository    billingAccountRepository;
+	private RetriveBillingAccountRepository    retriveBillingAccountRepository;
+	private AddBillingAccountManager	    billingAccountManager;
+	private AddBillingAccountManagerImpl   billingAccountManagerImpl;
+	private RetriveBillingAccountManager	    retriveBillingAccountManager;
+	private RetriveBillingAccountManagerImpl   retriveBillingAccountManagerImpl;
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
 	private EncryptionModule            encryptionModule;
@@ -67,9 +76,9 @@ public class TestForProductsPresentation {
 	private ScrapeLogResultRepository notificationRepository;
 	private ScrapeLogResultImpl       notificationRepositoryImpl;
 	
-	private BillingAccountStatementDataAccess statementDataAcces;
-	private StatementRepository      statementDataRepository;
-	private StatementRepositoryImpl  statementRepositoryImpl;
+	private RetriveBillingAccountStatementDataAccess statementDataAcces;
+	private RetriveStatementRepository      statementDataRepository;
+	private RetriveStatementRepositoryImpl  statementRepositoryImpl;
 	              
 	
 	@Before
@@ -78,16 +87,19 @@ public class TestForProductsPresentation {
 		customer                  = context.getBean(CustomerDTO.class);
 		userCredentials           = new CredentialsDTO();
 		encryptionModule          = context.getBean(EncryptionModule.class);
-		billingAccountRepository  = context.getBean(BillingAccountRepository.class);		    
-		billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
-		billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+		billingAccountRepository  = context.getBean(AddBillingAccountRepository.class);		    
+		billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository, retriveBillingAccountRepository);
+		billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
 		customerRepository        = context.getBean(CustomerRepository.class);
 		
 		userManagerImpl           = new UserManagerImpl(customerRepository);
 	    userManager               = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 	    
-	    billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
-	    billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	    billingAccountManagerImpl = new AddBillingAccountManagerImpl(billingAccountRepository,retriveBillingAccountRepository);
+	    billingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+	    
+	    retriveBillingAccountManagerImpl = new RetriveBillingAccountManagerImpl(retriveBillingAccountRepository);
+	    retriveBillingAccountManager     = new APSMockObjectGenerator<RetriveBillingAccountManagerImpl>().mock(retriveBillingAccountManagerImpl);
 	    
 	    customer.setEncryptionModule(encryptionModule);
 	    
@@ -95,11 +107,11 @@ public class TestForProductsPresentation {
 		notificationRepositoryImpl  = new ScrapeLogResultImpl(notificationDataAccess);
 		notificationRepository      = new APSMockObjectGenerator<ScrapeLogResultImpl>().mock(notificationRepositoryImpl);
 		
-		statementDataAcces          = context.getBean(BillingAccountStatementDataAccess.class);
+		statementDataAcces          = context.getBean(RetriveBillingAccountStatementDataAccess.class);
 		
-		statementDataRepository     = context.getBean(StatementRepository.class) ;
-		statementRepositoryImpl     = new StatementRepositoryImpl(statementDataAcces);          
-		statementDataRepository     = new APSMockObjectGenerator<StatementRepositoryImpl>().mock(statementRepositoryImpl);
+		statementDataRepository     = context.getBean(RetriveStatementRepository.class) ;
+		statementRepositoryImpl     = new RetriveStatementRepositoryImpl(statementDataAcces);          
+		statementDataRepository     = new APSMockObjectGenerator<RetriveStatementRepositoryImpl>().mock(statementRepositoryImpl);
 		
 		  
 	}
@@ -116,7 +128,8 @@ public class TestForProductsPresentation {
 		 assertTrue(authenticationCustomer != null);
 		 
 		 try {
-				Thread.currentThread().sleep(1000);
+				Thread.currentThread();
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -128,7 +141,7 @@ public class TestForProductsPresentation {
 	}
 	
 	private List<BillingAccountDTO>  checkForActiveAccounts(CustomerDTO customer) throws DatabaseException{
-		List<BillingAccountDTO> accountsDTO = billingAccountManager.getBillingAccountsByUserId(customer.getId()); 
+		List<BillingAccountDTO> accountsDTO = retriveBillingAccountManager.getBillingAccountForCustomer(customer.getId()); 
 		 
 		 if(accountsDTO == null || accountsDTO.size() == 0){
 			 
@@ -173,15 +186,16 @@ public class TestForProductsPresentation {
 			     billingAccountManager.saveBillingAccount(dto);
 			     System.out.println(" ");
 			     System.out.println("Checking if ccount exist");
-			     BillingAccountDTO accountDTO =  billingAccountManager.getBillingAccount(dto.getAccountNumber());
+			     BillingAccountDTO accountDTO =  retriveBillingAccountManager.getBillingAccount(dto.getAccountNumber());
 			 	 try {
-					  Thread.currentThread().sleep(2000);
+					  Thread.currentThread();
+					Thread.sleep(2000);
 				  } catch (InterruptedException e) {
 					  e.printStackTrace();
 				  }
 			 
 			      if(accountDTO != null){
-				      List<BillingAccountDTO> accountsDTOs = billingAccountManager.getBillingAccountsByUserId(customer.getId());
+				      List<BillingAccountDTO> accountsDTOs = retriveBillingAccountManager.getBillingAccountForCustomer(customer.getId());
 				 
 				      System.out.println(" ");
 				      System.out.println("User has account(s)");
@@ -237,7 +251,7 @@ public class TestForProductsPresentation {
 	        NotificationObserver notificationObserver = new NotificationObserver();
 	        ScrapeLogResult responseNotification = new ScrapeLogResult();
 
-	        List<ScrapeLogResult> dbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(logonNotification, notificationRepository);
+	        List<ScrapeLogResult> dbNotifications =notificationObserver.checkNotifications(logonNotification, notificationRepository);
 	        
 	        if(dbNotifications != null ){
 	            for(ScrapeLogResult updateNotification : dbNotifications){
@@ -250,7 +264,7 @@ public class TestForProductsPresentation {
 				    try {
 				    	System.out.println("Before Notification Update " + dbNotifications.size());
 						ScrapeLogResult updatedNotification = notificationRepository.updateScrapeLogResults(updateNotification);
-						List<ScrapeLogResult> LastdbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(logonNotification, notificationRepository);
+						List<ScrapeLogResult> LastdbNotifications =notificationObserver.checkNotifications(logonNotification, notificationRepository);
 						  if(LastdbNotifications != null){
 							  dbNotifications = LastdbNotifications;
 							  System.out.println("After Notification Update " + dbNotifications.size());
@@ -274,7 +288,7 @@ public class TestForProductsPresentation {
 	        NotificationObserver notificationObserverAcc = new NotificationObserver();
 	        ScrapeLogResult responseNotificationt = new ScrapeLogResult();
 
-	        List<ScrapeLogResult> dbNotificationst =(List<ScrapeLogResult>) notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
+	        List<ScrapeLogResult> dbNotificationst =notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
 	        
 	        if(dbNotificationst != null ){
 	            for(ScrapeLogResult updateNotification : dbNotificationst){
@@ -287,7 +301,7 @@ public class TestForProductsPresentation {
 				    try {
 				    	System.out.println("Before Notification Update " + dbNotificationst.size());
 						ScrapeLogResult updatedNotification = notificationRepository.updateScrapeLogResults(updateNotification);
-						List<ScrapeLogResult> LastdbNotifications =(List<ScrapeLogResult>) notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
+						List<ScrapeLogResult> LastdbNotifications =notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
 						  if(LastdbNotifications != null){
 							  dbNotificationst = LastdbNotifications;
 							  System.out.println("After Notification Update " + dbNotificationst.size());
@@ -312,7 +326,7 @@ public class TestForProductsPresentation {
 		        NotificationObserver notificationObserverAcc = new NotificationObserver();
 		        ScrapeLogResult responseNotificationt = new ScrapeLogResult();
 
-		        List<ScrapeLogResult> dbNotificationst =(List<ScrapeLogResult>) notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
+		        List<ScrapeLogResult> dbNotificationst =notificationObserverAcc.checkNotifications(accountNotification, notificationRepository);
 		        
 		        if(dbNotificationst != null ){
 		            for(ScrapeLogResult updateNotification : dbNotificationst){
@@ -331,21 +345,24 @@ public class TestForProductsPresentation {
 		addNotifications();
 		CustomerDTO customer = 	customerStuff();
 		try {
-			Thread.currentThread().sleep(2000);
+			Thread.currentThread();
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<BillingAccountDTO> accountsDTO = checkForActiveAccounts(customer);
         try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 checkUserNotifications(); 
 		   try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -354,7 +371,8 @@ public class TestForProductsPresentation {
 		   checkActiveInactiveNotifications();       
 		   
 		   try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -363,7 +381,8 @@ public class TestForProductsPresentation {
 		   checkActiveNotifications();
 		   
 		   try {
-				Thread.currentThread().sleep(2000);
+				Thread.currentThread();
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -372,7 +391,8 @@ public class TestForProductsPresentation {
 		 new SchedularLauncher().launch(); 
 		 
 		 try {
-				Thread.currentThread().sleep(10000);
+				Thread.currentThread();
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -383,12 +403,12 @@ public class TestForProductsPresentation {
 		 System.out.println("Check Accounts");
 		 System.out.println("  ");
 		    
-		List<BillingAccountStatement> statements =  statementDataRepository.getAccountStatement("123456789");  
+		BillingAccountStatement statements =  statementDataRepository.getTelcoStatement("123456789", "June");  
 		StatementRenderer statement = StatementRenderer.newInstnce();
-		for(BillingAccountStatement accountStatement : statements){
-			statement.createHTHMLStateMent(accountStatement, 
-                    ApplicationContants.USER_STATEMENT_PATH+"\\"+accountStatement.getAccountNumber()+"\\"+accountStatement.getAccountNumber()+".xml");	
-		}
+		
+		statement.createHTHMLStateMent(statements, 
+                    ApplicationContants.USER_STATEMENT_PATH+"\\"+statements.getAccountNumber()+"\\"+statements.getAccountNumber()+".xml");	
+		
 		
 		
 		

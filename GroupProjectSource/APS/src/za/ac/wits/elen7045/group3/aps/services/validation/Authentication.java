@@ -7,9 +7,9 @@ import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecific
 import za.ac.wits.elen7045.group3.aps.services.specification.user.UserAuthenticationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 
- class Authentication  {
+ public class Authentication  {
 
-protected Boolean authenticate(User user, CredentialsVO credentials) throws LogonException, Exception {
+	 protected Boolean authenticate(User user, CredentialsVO credentials) throws LogonException, Exception {
 		
 		CredentialsVO encryptedCredentials = user.getCredentials();	
 		

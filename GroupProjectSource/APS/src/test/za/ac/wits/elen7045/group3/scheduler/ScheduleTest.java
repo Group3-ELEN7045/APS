@@ -18,10 +18,6 @@ import junit.framework.TestCase;
 import za.ac.wits.elen7045.group3.aps.domain.entities.*;
 import za.ac.wits.elen7045.group3.aps.domain.scheduler.*;
 
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.junit.Test;
-
 /**
  * @author Sibusiso
  *
@@ -30,11 +26,13 @@ import org.junit.Test;
 
 public class ScheduleTest extends TestCase {
 
+	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
 
+	@Override
 	@After
 	protected void tearDown() throws Exception {
 		super.tearDown();

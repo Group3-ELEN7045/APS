@@ -21,6 +21,7 @@ public final class WorkManager implements Cloneable {
 	 *
 	 */
 	private class Worker extends Thread {
+		@Override
 		public void run() {
 			Runnable runnable = null;
 			
@@ -95,6 +96,7 @@ public final class WorkManager implements Cloneable {
 		scrapeCommandsQueue.offer(runnable);
 	}
 	
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}

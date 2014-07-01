@@ -17,6 +17,7 @@ private CustomerDTO customer;
 		this.customer = customer;	
 	}
 
+	@Override
 	public boolean isSatisfiedBy(CustomerDTO customerParams) {
 		return ((customer.getStringDateOfBirth().equals(customerParams.getStringDateOfBirth()))
 				 &&

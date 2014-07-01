@@ -17,6 +17,7 @@ public class EncryptedCredentialsSpecification extends ApplicationSpecification<
 		this.credentialsDTO = credentialsDTO;	
 	}
 
+	@Override
 	public boolean isSatisfiedBy(CredentialsDTO capturedlogonCredentials) {
 	  	return ((credentialsDTO.getPassword().equals(capturedlogonCredentials.getPassword()))
 				 &&

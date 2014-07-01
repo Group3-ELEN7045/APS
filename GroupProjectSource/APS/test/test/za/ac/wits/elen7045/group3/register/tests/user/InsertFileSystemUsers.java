@@ -3,13 +3,11 @@
  */
 package test.za.ac.wits.elen7045.group3.register.tests.user;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -23,27 +21,12 @@ import com.thoughtworks.xstream.XStream;
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
 import za.ac.wits.elen7045.group3.aps.domain.UserDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
-import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CapturedCredentialsDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.ContactInformationDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
-import za.ac.wits.elen7045.group3.aps.services.dto.PaymentDetailsDTO;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.CompanyStatementType;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.ContactType;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.PaymentType;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
-import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.CapturedCredentialsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.credentials.EncryptedCredentialsSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.user.EncryptedUserInformationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
-import za.ac.wits.elen7045.group3.aps.services.util.DateUtil;
 
 /**
  * @author SilasMahlangu

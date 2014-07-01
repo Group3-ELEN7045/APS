@@ -11,7 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import test.za.ac.wits.elen7045.group3.mock.proxy.APSMockObjectGenerator;
-import za.ac.wits.elen7045.group3.aps.domain.repository.accounts.BillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepository;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
@@ -19,8 +20,10 @@ import za.ac.wits.elen7045.group3.aps.services.dto.CustomerDTO;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManager;
-import za.ac.wits.elen7045.group3.aps.services.managers.BillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.AddBillingAccountManagerImpl;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManager;
+import za.ac.wits.elen7045.group3.aps.services.managers.RetriveBillingAccountManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
@@ -31,9 +34,12 @@ public class TestAddBillingAccounts {
 	private CustomerDTO customer;
 	private BillingAccountDTO           billingAccountDTO;
 	private ApplicationContext          context;	
-	private BillingAccountRepository    billingAccountRepository;
-	private BillingAccountManager	    billingAccountManager;
-	private BillingAccountManagerImpl   billingAccountManagerImpl;
+	private AddBillingAccountRepository    addBillingAccountRepository;
+	private RetriveBillingAccountRepository    retriveBillingAccountRepository;
+	private AddBillingAccountManager	    addBillingAccountManager;
+	private AddBillingAccountManagerImpl   addBillingAccountManagerImpl;
+	private RetriveBillingAccountManager	    retriveBillingAccountManager;
+	private RetriveBillingAccountManagerImpl   retriveBillingAccountManagerImpl;
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
 	private EncryptionModule            encryptionModule;
@@ -46,17 +52,18 @@ public class TestAddBillingAccounts {
 		customer                  = context.getBean(CustomerDTO.class);
 		userCredentials           = new CredentialsDTO();
 		encryptionModule          = context.getBean(EncryptionModule.class);
-		billingAccountRepository  = context.getBean(BillingAccountRepository.class);		    
-		billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
-		billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
+		addBillingAccountRepository  = context.getBean(AddBillingAccountRepository.class);		    
+		retriveBillingAccountRepository  = context.getBean(RetriveBillingAccountRepository.class);		
 		customerRepository        = context.getBean(CustomerRepository.class);
 		
 		userManagerImpl           = new UserManagerImpl(customerRepository);
 	    userManager               = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 	    
-	    billingAccountManagerImpl = new BillingAccountManagerImpl(billingAccountRepository);
-	    billingAccountManager     = new APSMockObjectGenerator<BillingAccountManagerImpl>().mock(billingAccountManagerImpl);
-	    
+        addBillingAccountManagerImpl = new AddBillingAccountManagerImpl(addBillingAccountRepository, retriveBillingAccountRepository);
+		addBillingAccountManager     = new APSMockObjectGenerator<AddBillingAccountManagerImpl>().mock(addBillingAccountManagerImpl);
+		
+		retriveBillingAccountManagerImpl = new RetriveBillingAccountManagerImpl(retriveBillingAccountRepository);
+		retriveBillingAccountManager     = new APSMockObjectGenerator<RetriveBillingAccountManagerImpl>().mock(retriveBillingAccountManagerImpl);
 	    customer.setEncryptionModule(encryptionModule);
     }
 	
@@ -102,7 +109,7 @@ public class TestAddBillingAccounts {
 	     userCredentials.encryptCredentials();
 	     
 	     CustomerDTO authenticationCustomer = userManager.getCustomerForLogin(userCredentials);		 
-		 List<BillingAccountDTO> accountsDTO = billingAccountManager.getBillingAccountsByUserId(authenticationCustomer.getId());
+		 List<BillingAccountDTO> accountsDTO = retriveBillingAccountManager.getBillingAccountForCustomer(authenticationCustomer.getId());
 		 
 		 assertNotNull("No Accounts created for this user" , accountsDTO);
 		
@@ -114,7 +121,7 @@ public class TestAddBillingAccounts {
 	 try {	
 		 //Tests for the saving of the billing accounts
 		 billingAccountDTO = new BillingAccountDTO("3");
-		 Assert.assertNull(billingAccountManager.getBillingAccount(billingAccountDTO.getAccountNumber()));
+		 Assert.assertNull(retriveBillingAccountManager.getBillingAccount(billingAccountDTO.getAccountNumber()));
 		 
 		 userCredentials.setUserName("userName");
 	     userCredentials.setPassword("password");
@@ -126,9 +133,9 @@ public class TestAddBillingAccounts {
 		 billingAccountDTO.setCredentials(authenticationCustomer.getCredentials());
 		 billingAccountDTO.setCompanyUrl("www.telco.co.za");
 		 billingAccountDTO.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-		 billingAccountManager.saveBillingAccount(billingAccountDTO);
+		 addBillingAccountManager.saveBillingAccount(billingAccountDTO);
 		 
-		 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount(billingAccountDTO.getAccountNumber());
+		 BillingAccountDTO insertedBillingAccount = retriveBillingAccountManager.getBillingAccount(billingAccountDTO.getAccountNumber());
 		 assertNotNull("Failed to Insert Billing Account" , insertedBillingAccount);
 		 assertEquals("www.telco.co.za", insertedBillingAccount.getCompanyUrl() );
 		 
@@ -149,14 +156,14 @@ public class TestAddBillingAccounts {
 	     
 	     CustomerDTO authenticationCustomer = userManager.getCustomerForLogin(userCredentials);		 
 		 
-		 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount(billingAccountDTO.getAccountNumber());
+		 BillingAccountDTO insertedBillingAccount = retriveBillingAccountManager.getBillingAccount(billingAccountDTO.getAccountNumber());
 		 assertNotNull("Failed to Insert Billing Account" , insertedBillingAccount);
 		 assertEquals("www.telco.co.za", insertedBillingAccount.getCompanyUrl() );
 				
 		 //Tests for the updating of the billing accounts
 		 insertedBillingAccount.setCompanyUrl("www.credit.co.za");
-		 billingAccountManager.updateBillingAccountStatus(insertedBillingAccount);
-		 BillingAccountDTO updateBillingAccount = billingAccountManager.getBillingAccount("1");
+		 addBillingAccountManager.updateBillingAccountStatus(insertedBillingAccount);
+		 BillingAccountDTO updateBillingAccount = retriveBillingAccountManager.getBillingAccount("1");
 		 System.out.println("Updated 1 = " + updateBillingAccount.getCompanyUrl());
 		 assertEquals("www.credit.co.za", updateBillingAccount.getCompanyUrl() );		 
 		
@@ -167,11 +174,11 @@ public class TestAddBillingAccounts {
 	 try {
 		 
 		 //Tests for billing account search
-		 BillingAccountDTO insertedBillingAccount = billingAccountManager.getBillingAccount("1");
+		 BillingAccountDTO insertedBillingAccount = retriveBillingAccountManager.getBillingAccount("1");
 		 assertEquals("www.credit.co.za", insertedBillingAccount.getCompanyUrl() );
 		 
 		 String url = "www.credit.co.za";
-		 List<BillingAccountDTO> updateBillingAccount = billingAccountManager.getBillingAccountsByCompanyName(url);
+		 List<BillingAccountDTO> updateBillingAccount = retriveBillingAccountManager.getBillingAccountsByCompanyUrl(url);
 		 assertEquals(1, updateBillingAccount.size() );		 
 	 } catch (Exception e) {
 	 // TODO Auto-generated catch block

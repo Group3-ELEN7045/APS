@@ -2,7 +2,6 @@ package za.ac.wits.elen7045.group3.aps.services.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;

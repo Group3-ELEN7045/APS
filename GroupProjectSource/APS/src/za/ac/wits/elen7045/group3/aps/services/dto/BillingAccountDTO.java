@@ -1,12 +1,6 @@
 package za.ac.wits.elen7045.group3.aps.services.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
-import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 
 
 public class BillingAccountDTO implements Serializable{
@@ -15,9 +9,9 @@ public class BillingAccountDTO implements Serializable{
 	private Long customerId;
 	private String accountNumber;
 	private String companyUrl;	
-	private CredentialsDTO credentials;
-	private List<BillingAccountStatement> billingStatement = new ArrayList<BillingAccountStatement>();
+	private CredentialsDTO credentials;	
 	private String accountStatus;
+	private String accountType;
 	
 	public BillingAccountDTO(String accountNumber){
 		if(accountNumber == null || accountNumber == ""){
@@ -63,10 +57,7 @@ public String getCompanyUrl() {
 	public void setCompanyUrl(String companyUrl) {
 		this.companyUrl = companyUrl;
 	}
-
-	public List<BillingAccountStatement> getBillingStatement() {
-		return billingStatement;
-	}	
+		
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -80,12 +71,12 @@ public String getCompanyUrl() {
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-	
-	public void addBillingAccountStatament(BillingAccountStatement statement){
-		if(!(statement == null)){
-			if(!billingStatement.contains(statement)){
-				billingStatement.add(statement);
-			}					
-		}		
+
+	public String getAccountType() {
+		return accountType;
 	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}	
 }

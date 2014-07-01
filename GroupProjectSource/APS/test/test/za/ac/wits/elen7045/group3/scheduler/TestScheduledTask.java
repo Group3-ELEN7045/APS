@@ -1,7 +1,6 @@
 package test.za.ac.wits.elen7045.group3.scheduler;
 
 
-import static org.junit.Assert.*;
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -20,6 +19,7 @@ public class TestScheduledTask extends TestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -28,6 +28,7 @@ public class TestScheduledTask extends TestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

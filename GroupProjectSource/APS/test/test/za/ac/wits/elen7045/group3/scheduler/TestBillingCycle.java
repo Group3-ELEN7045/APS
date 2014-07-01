@@ -32,6 +32,7 @@ public class TestBillingCycle extends TestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -43,6 +44,7 @@ public class TestBillingCycle extends TestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@After
 	protected void tearDown() throws Exception {
 		super.tearDown();

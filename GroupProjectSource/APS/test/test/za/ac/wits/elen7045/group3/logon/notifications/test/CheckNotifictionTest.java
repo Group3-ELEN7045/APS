@@ -15,11 +15,8 @@ import za.ac.wits.elen7045.group3.aps.domain.ScrapeLogResultDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.domain.vo.NotificationCheck;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.pattern.notification.observer.NotificationObserver;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.notification.CheckNotificationSpecification;
@@ -59,7 +56,7 @@ public class CheckNotifictionTest {
 		NotificationObserver notificationObserver = new NotificationObserver();
 		ScrapeLogResult responseNotification = new ScrapeLogResult();
 
-		List<ScrapeLogResult> dbNotifications =(List<ScrapeLogResult>) notificationObserver.checkNotifications(notification, notificationRepository);
+		List<ScrapeLogResult> dbNotifications =notificationObserver.checkNotifications(notification, notificationRepository);
 
 		responseNotification = dbNotifications.get(0);
 		notifications = dbNotifications;
