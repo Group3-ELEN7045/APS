@@ -118,7 +118,7 @@ public class ScraperStrategyTest {
 		System.out.println("\n ScrapeLogTest:END");
 	}
 	
-	@Test
+	/*@Test
 	public void testStatementRepository(){
 		System.out.println("\n StatementRepository:START");
 		List<BillingAccountStatement> stmatements = retriveStatementRepository.getAccountStatement(billingAccount.getAccountNumber());
@@ -126,5 +126,5 @@ public class ScraperStrategyTest {
 			System.out.println("\n ------- statement ------ \n ".concat(statement.toString()));
 		}
 		System.out.println("\n StatementRepository:END");
-	}
+	}*/
 }

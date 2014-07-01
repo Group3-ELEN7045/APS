@@ -8,9 +8,7 @@ import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 
 import com.thoughtworks.xstream.XStream;
 
-// TODO Make interface for all types of marshallers
-
-public class XMLFileMarshall {
+public class XMLFileMarshall{
 	
 	public Object convertScrapedDataToObject(Class objectToConvert, String filePath){
 		XStream xstream = new XStream();

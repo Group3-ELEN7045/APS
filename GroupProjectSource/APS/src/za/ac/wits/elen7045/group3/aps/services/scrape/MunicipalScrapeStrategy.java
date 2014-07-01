@@ -27,7 +27,7 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.scrape.acl.MunicipalScrapeAdaptor;
+import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLAdaptor;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
@@ -51,7 +51,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	@Override
 	public void scrapeAccount() {
 		//scrape account
-		MunicipalScrapeAdaptor msa = new MunicipalScrapeAdaptor();
+		XMLAdaptor msa = new XMLAdaptor();
 		ScrapedResult scrapeResult;
 		ScrapeLogResult scrapeLog;
 		try{
@@ -162,6 +162,6 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	
 	private MunicipalStatement getMunicipalStatement(ScrapedResult scrapeResult) {
 		MunicipalStatementConverter msc = new MunicipalStatementConverter(scrapeResult);
-		return msc.getMunicipalStatement();
+		return (MunicipalStatement) msc.getStatement();
 	}
 }

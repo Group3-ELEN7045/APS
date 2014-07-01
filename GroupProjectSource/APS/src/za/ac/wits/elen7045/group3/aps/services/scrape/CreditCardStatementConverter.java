@@ -1,46 +1,38 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatement;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
-public class CreditCardStatementConverter {
-	private ScrapedResult scrapedStatement;
+public class CreditCardStatementConverter extends StatementConverter{
 	
-	public CreditCardStatementConverter(ScrapedResult scrapedStatement){
-		this.scrapedStatement = scrapedStatement;
+	public CreditCardStatementConverter(ScrapedResult scrapedStatement) {
+		super(scrapedStatement);
 	}
-
-	public CreditCardStatement getCreditCardStatement(){
-		CreditCardStatement creditAcc = new CreditCardStatement(getIndexDataPair("001").getValue());
-		creditAcc.setAccountHolderName(getIndexDataPair("002").getValue());
-		creditAcc.setAccountStatementDate(getIndexDataPair("003").getValue());
-		creditAcc.setAccountStatementNumber(getIndexDataPair("004").getValue());
-		creditAcc.setAccountStatementMonth(getIndexDataPair("005").getValue());
-		creditAcc.setAccountTotalDue(getIndexDataPair("006").getValue());
-		creditAcc.setAccountDueDate(getIndexDataPair("007").getValue());
-		creditAcc.setAccountOpeningBalance(getIndexDataPair("008").getValue());
-		creditAcc.setAccountClosingBalance(getIndexDataPair("009").getValue());
-		creditAcc.setAccountPaymentReceived(getIndexDataPair("010").getValue());
-		creditAcc.setAccountNewCharges(getIndexDataPair("011").getValue());
-		creditAcc.setAccountDeductions(getIndexDataPair("012").getValue());
-		creditAcc.setAccountDiscount(getIndexDataPair("013").getValue());
-		creditAcc.setAccountVATAmount(getIndexDataPair("014").getValue());
-		creditAcc.setCardType(getIndexDataPair("015").getValue());
-		creditAcc.setInterestRate(getIndexDataPair("016").getValue());
-		creditAcc.setCreditLimit(getIndexDataPair("017").getValue());
-		creditAcc.setCreditAvailable(getIndexDataPair("018").getValue());
-		creditAcc.setMinimumAmountDue(getIndexDataPair("019").getValue());
+	
+	@Override
+	public BillingAccountStatement getStatement() {
+		
+		CreditCardStatement creditAcc = new CreditCardStatement(getIndexDataPairValue("001"));
+		creditAcc.setAccountHolderName(getIndexDataPairValue("002"));
+		creditAcc.setAccountStatementDate(getIndexDataPairValue("003"));
+		creditAcc.setAccountStatementNumber(getIndexDataPairValue("004"));
+		creditAcc.setAccountStatementMonth(getIndexDataPairValue("005"));
+		creditAcc.setAccountTotalDue(getIndexDataPairValue("006"));
+		creditAcc.setAccountDueDate(getIndexDataPairValue("007"));
+		creditAcc.setAccountOpeningBalance(getIndexDataPairValue("008"));
+		creditAcc.setAccountClosingBalance(getIndexDataPairValue("009"));
+		creditAcc.setAccountPaymentReceived(getIndexDataPairValue("010"));
+		creditAcc.setAccountNewCharges(getIndexDataPairValue("011"));
+		creditAcc.setAccountDeductions(getIndexDataPairValue("012"));
+		creditAcc.setAccountDiscount(getIndexDataPairValue("013"));
+		creditAcc.setAccountVATAmount(getIndexDataPairValue("014"));
+		creditAcc.setCardType(getIndexDataPairValue("015"));
+		creditAcc.setInterestRate(getIndexDataPairValue("016"));
+		creditAcc.setCreditLimit(getIndexDataPairValue("017"));
+		creditAcc.setCreditAvailable(getIndexDataPairValue("018"));
+		creditAcc.setMinimumAmountDue(getIndexDataPairValue("019"));
 		
 		return creditAcc;
-	}
-
-
-	private DataPair getIndexDataPair(String id){
-		for (int i = 0; i < scrapedStatement.getDataPairList().size(); i++){
-			if(scrapedStatement.getDataPairList().get(i).getId().equals(id))
-				return scrapedStatement.getDataPairList().get(i);
-		}
-		return null;
 	}
 }

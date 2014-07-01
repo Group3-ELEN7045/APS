@@ -24,10 +24,6 @@ public class DataPair implements Serializable{
 	public String getId() {
 		return id;
 	}
-	@Override
-	public String toString() {
-		return "DataPair [text=" + text + ", value=" + value + "]";
-	}
 
 	public DataPair(DataPair copy)
 	{
