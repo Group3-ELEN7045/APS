@@ -16,6 +16,8 @@ import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.AuthenticationSpecification;
+import za.ac.wits.elen7045.group3.aps.services.validation.APSLogonManager;
+import za.ac.wits.elen7045.group3.aps.services.validation.APSLogonManagerImpl;
 
 /**
  * @author SilasMahlangu
@@ -29,6 +31,9 @@ public class TestUserLogon {
 	private EncryptionModule            encryptionModule; 
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
+	
+	private APSLogonManager	                logonManager;
+	private APSLogonManagerImpl             logonManagerImpl;
 		
 	//User APS Authentication
 	@Before
@@ -37,6 +42,7 @@ public class TestUserLogon {
 		userCredenials         = new CredentialsDTO(); 
 		encryptionModule       = context.getBean(EncryptionModule.class);
 		customerRepository     = context.getBean(CustomerRepository.class);
+		logonManager		   = context.getBean(APSLogonManagerImpl.class);
 		userManagerImpl  = new UserManagerImpl(customerRepository);
 		userManager      = new APSMockObjectGenerator<UserManagerImpl>().mock(userManagerImpl);
 	}
@@ -83,7 +89,7 @@ public class TestUserLogon {
 			e.printStackTrace();
 		}
      
-     assertTrue("Invalid Usernme or Password", autentication.isSatisfiedBy(dbCredentials));
+     assertTrue("Invalid Usernme or Password", logonManager.validation(dbCredentials));
         
      System.out.println(" ");
      System.out.println("Going to check ebilling notification ");	

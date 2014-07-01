@@ -4,6 +4,7 @@ import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
+import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 /**
  * @author Livious
  *
@@ -19,8 +20,10 @@ public class SaveStatementRepositoryImpl implements SaveStatementRepository{
 
 @Override
 public boolean addStatement(BillingAccountStatement statement) {
-	return statementDataAcces.saveBillingAccountStatement(statement);
-	
-}  
-  
+	try {
+		return statementDataAcces.saveBillingAccountStatement(statement);
+	} catch (DatabaseException e) {
+		throw new RuntimeException("Problem saving statement statement");
+	}	
+  }  
 }

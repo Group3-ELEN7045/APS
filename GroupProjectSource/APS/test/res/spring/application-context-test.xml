@@ -9,8 +9,11 @@
     <bean id="customerReposiory" class="za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepositoryImpl">
        <constructor-arg ref="userRepository"/>
     </bean>
-    <!-- Customer Repository -->
-    
+    <!-- APS logon  -->
+    <bean id="logon"    class="za.ac.wits.elen7045.group3.aps.services.validation.APSLogonManagerImpl">
+     <constructor-arg ref="customerReposiory"/>
+     </bean> 
+     
     <!-- Notificstions Setup -->
     
     <bean id="notificationDataAccess" class="test.za.ac.wits.elen7045.group3.domain.mock.FakeNotificationDB"/>

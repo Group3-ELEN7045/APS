@@ -15,19 +15,31 @@ public class RetriveBillingAccountRepositoryImpl implements RetriveBillingAccoun
 	}
 	
 	@Override
-	public BillingAccount getBillingAccount(String accountNumberSearch)	throws DatabaseException {
-		return dataAccess.getBillingAccount(accountNumberSearch);
+	public BillingAccount getBillingAccount(String accountNumberSearch) {
+		try {
+			return dataAccess.getBillingAccount(accountNumberSearch);
+		} catch (DatabaseException e) {
+			throw new RuntimeException("Problem getting the billing account");
+		}
 	}
 
 	@Override
-	public List<BillingAccount> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException {
-		return dataAccess.getBillingAccountsByCompanyUrl(billingCompanyUrl);
+	public List<BillingAccount> getBillingAccountsByCompanyUrl(String billingCompanyUrl) {
+		try {
+			return dataAccess.getBillingAccountsByCompanyUrl(billingCompanyUrl);
+		} catch (DatabaseException e) {
+			throw new RuntimeException("Problem getting the billing account for url");
+		}
 	}
 
 	
 	@Override
-	public List<BillingAccount> getBillingAccountForCustomer(Long customerId)
-			throws DatabaseException { 
-		return dataAccess.getBillingAccountForCustomer(customerId);
+	public List<BillingAccount> getBillingAccountForCustomer(Long customerId){ 
+		try {
+			return dataAccess.getBillingAccountForCustomer(customerId);
+		} catch (DatabaseException e) {
+			throw new RuntimeException("Problem getting the billing account for customer");
+			
+		}
 	}	
 }
