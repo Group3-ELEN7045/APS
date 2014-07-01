@@ -20,15 +20,24 @@ public class AddBillingAccountRepositoryImpl implements AddBillingAccountReposit
 	}
 
 	@Override
-	public boolean saveBillingAccount(BillingAccount billingAccount)throws DatabaseException {
+	public boolean saveBillingAccount(BillingAccount billingAccount) {
 
-		return dataAccess.saveBillingAccount(billingAccount);
+		try {
+			return dataAccess.saveBillingAccount(billingAccount);
+		} catch (DatabaseException e) {
+				throw new RuntimeException("Problem Saving the billing account");
+			
+		}
 	}
 
 	@Override
-	public boolean updateBillingAccountStatus(BillingAccount billingAccount)throws DatabaseException {
+	public boolean updateBillingAccountStatus(BillingAccount billingAccount){
 
-		return dataAccess.updateBillingAccountStatus(billingAccount);
+		try {
+			return dataAccess.updateBillingAccountStatus(billingAccount);
+		} catch (DatabaseException e) {
+			throw new RuntimeException("Problem Updating the billing account");
+		}
 	}
 	
 }

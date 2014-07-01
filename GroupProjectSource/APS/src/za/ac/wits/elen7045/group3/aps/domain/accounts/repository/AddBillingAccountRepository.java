@@ -7,6 +7,6 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
  *
  */
 public interface AddBillingAccountRepository {	
-	public boolean saveBillingAccount(BillingAccount billingAccount) throws DatabaseException;
-	public boolean updateBillingAccountStatus(BillingAccount billingAccount) throws DatabaseException;
+	public boolean saveBillingAccount(BillingAccount billingAccount);
+	public boolean updateBillingAccountStatus(BillingAccount billingAccount);
 }
