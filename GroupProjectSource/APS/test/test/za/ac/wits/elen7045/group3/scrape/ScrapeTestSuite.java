@@ -4,7 +4,6 @@ package test.za.ac.wits.elen7045.group3.scrape;
  */
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-
 import test.za.ac.wits.elen7045.group3.scrape.specification.AccountNumberNotEqualSpecTest;
 import test.za.ac.wits.elen7045.group3.scrape.specification.DuplicateScrapedResultSpecTest;
 import test.za.ac.wits.elen7045.group3.scrape.specification.GenericScrapedResultAdditionSpecTest;

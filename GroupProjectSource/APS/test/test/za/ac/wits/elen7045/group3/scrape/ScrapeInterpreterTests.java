@@ -1,5 +1,7 @@
 package test.za.ac.wits.elen7045.group3.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
