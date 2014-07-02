@@ -21,9 +21,9 @@ public class ScrapeAdaptorTests {
 	String filePath;
 	XStream xstream;	
 	ScrapedResult statementScrapedData;
-	TelcoScrapeAdaptor telcoScrapeAdaptor;
-	MunicipalScrapeAdaptor munipalScrapeAdaptor;
-	CreditCardScrapeAdaptor crediCardScrapeAdapter;
+	XMLToScrapedResultAdaptor telcoScrapeAdaptor;
+	XMLToScrapedResultAdaptor munipalScrapeAdaptor;
+	XMLToScrapedResultAdaptor crediCardScrapeAdapter;
 	
 	BillingAccount billingAccount;
 	BillingCompany billingCo;
@@ -31,9 +31,9 @@ public class ScrapeAdaptorTests {
 	@Before
 	public void init(){
 		xstream = new XStream();
-		telcoScrapeAdaptor = new TelcoScrapeAdaptor();
-		munipalScrapeAdaptor = new MunicipalScrapeAdaptor();
-		crediCardScrapeAdapter = new CreditCardScrapeAdaptor();
+		telcoScrapeAdaptor = new XMLToScrapedResultAdaptor();
+		munipalScrapeAdaptor = new XMLToScrapedResultAdaptor();
+		crediCardScrapeAdapter = new XMLToScrapedResultAdaptor();
 		
 		billingCo = new BillingCompany("JoburgMunicipality");
 		billingCo.setURL("http:////localhost/APS/municipal.xml");

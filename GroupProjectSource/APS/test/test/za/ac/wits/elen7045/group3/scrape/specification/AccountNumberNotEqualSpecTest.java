@@ -1,8 +1,10 @@
 package test.za.ac.wits.elen7045.group3.scrape.specification;
-
+/**
+ * @author bakwanyana
+ */
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapedResultAccountNumberMatchesSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.ScrapedResultAccountNumberMatchesSpecification;
 
 import java.util.ArrayList;
 

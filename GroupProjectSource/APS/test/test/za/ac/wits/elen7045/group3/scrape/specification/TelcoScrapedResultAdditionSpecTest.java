@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.TelcoScrapedResultAdditionSpecification;;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.TelcoScrapedResultAdditionSpecification;
 
 public class TelcoScrapedResultAdditionSpecTest {
 	ArrayList<DataPair> dataPairsTrue;

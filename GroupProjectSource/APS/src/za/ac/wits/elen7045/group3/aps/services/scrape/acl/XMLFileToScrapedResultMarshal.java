@@ -5,20 +5,19 @@ package za.ac.wits.elen7045.group3.aps.services.scrape.acl;
 import java.io.File;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
 import com.thoughtworks.xstream.XStream;
 
-// TODO Make interface for all types of marshallers
-
-public class XMLFileMarshall {
+public class XMLFileToScrapedResultMarshal{
 	
-	public Object convertScrapedDataToObject(Class objectToConvert, String filePath){
+	public ScrapedResult convertScrapedDataToObject(Class objectToConvert, String filePath){
 		XStream xstream = new XStream();
 		xstream.alias("scrape-session",objectToConvert);
 		xstream.alias("datapair",DataPair.class);
 		xstream.useAttributeFor(DataPair.class, "id");
 		xstream.addImplicitCollection(objectToConvert, "dataPairs");
 		
-		return xstream.fromXML(new File(filePath).getAbsoluteFile());
+		return (ScrapedResult)xstream.fromXML(new File(filePath).getAbsoluteFile());
 	}
 }

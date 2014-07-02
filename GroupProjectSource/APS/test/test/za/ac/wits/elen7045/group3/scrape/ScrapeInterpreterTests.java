@@ -1,5 +1,7 @@
 package test.za.ac.wits.elen7045.group3.scrape;
-
+/**
+ * @author bakwanyana
+ */
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -9,12 +11,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapeInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalScrapedResultAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.MunicipalScrapedResultAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultInterpreter;
 
 public class ScrapeInterpreterTests {
-	ScrapeInterpreter interpreter;
+	ScrapedResultInterpreter interpreter;
 	ScrapedResult scrapedStatement;
 	List<DataPair> dataPairsTrue;
 	MunicipalScrapedResultAdditionSpecification spec_municipal;
@@ -31,7 +33,7 @@ public class ScrapeInterpreterTests {
 		
 		scrapedStatement = new ScrapedResult("","","",dataPairsTrue);
 		
-		interpreter = new ScrapeInterpreter(scrapedStatement);
+		interpreter = new ScrapedResultInterpreter(scrapedStatement);
 		
 		assertTrue(interpreter.evaluate().equals("InvalidCredentials"));
 	}

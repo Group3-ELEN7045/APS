@@ -15,22 +15,22 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStateme
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.MunicipalStatementConverter;
-import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapeInterpreter;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultToMunicipalStatementConverter;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasDuplicateScrapedResultErrorSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasGenericErrorInScrapedResultSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.MunicipalScrapedResultAdditionSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.ScrapedResultAccountNumberMatchesSpecification;
 import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementRepository;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.scrape.acl.MunicipalScrapeAdaptor;
+import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLToScrapedResultAdaptor;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasDuplicateScrapedResultErrorSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.HasGenericErrorInScrapedResultSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.MunicipalScrapedResultAdditionSpecification;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapedResultAccountNumberMatchesSpecification;
 
 public class MunicipalScrapeStrategy implements ScraperStrategy {
 	
@@ -51,7 +51,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	@Override
 	public void scrapeAccount() {
 		//scrape account
-		MunicipalScrapeAdaptor msa = new MunicipalScrapeAdaptor();
+		XMLToScrapedResultAdaptor msa = new XMLToScrapedResultAdaptor();
 		ScrapedResult scrapeResult;
 		ScrapeLogResult scrapeLog;
 		try{
@@ -66,7 +66,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 			scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
 			
 			//was the scrape successful
-			ScrapeInterpreter scrapeResultCheck = new ScrapeInterpreter(scrapeResult);
+			ScrapedResultInterpreter scrapeResultCheck = new ScrapedResultInterpreter(scrapeResult);
 			String returnCode = scrapeResultCheck.evaluate();
 			if(SUCCESS.equalsIgnoreCase(returnCode)){
 				try {
@@ -161,7 +161,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	
 	
 	private MunicipalStatement getMunicipalStatement(ScrapedResult scrapeResult) {
-		MunicipalStatementConverter msc = new MunicipalStatementConverter(scrapeResult);
-		return msc.getMunicipalStatement();
+		ScrapedResultToMunicipalStatementConverter msc = new ScrapedResultToMunicipalStatementConverter(scrapeResult);
+		return (MunicipalStatement) msc.getStatement();
 	}
 }

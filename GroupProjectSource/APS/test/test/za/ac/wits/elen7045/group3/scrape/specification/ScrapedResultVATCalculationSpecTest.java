@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.vo.specification.scrape.ScrapedResultHasVATCalculationErrorSpecification;
+import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.ScrapedResultHasVATCalculationErrorSpecification;
 
 public class ScrapedResultVATCalculationSpecTest {
 	ArrayList<DataPair> dataPairsTrue;
