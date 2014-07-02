@@ -7,7 +7,7 @@ import za.ac.wits.elen7045.group3.aps.services.scrape.scripts.WebsiteScraper;
 /**
  * @author bakwanyana
  */
-public class XMLAdaptor implements ScrapeAdaptor{
+public class XMLToScrapedResultAdaptor implements ScrapedResultAdaptor{
 
 	@Override
 	public ScrapedResult scrapeWebsite(String url, CredentialsVO credentialsVO) {

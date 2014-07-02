@@ -3,9 +3,9 @@ package za.ac.wits.elen7045.group3.aps.services.scrape;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
-public abstract class StatementConverter {
+public abstract class ScrapedResultToStatementConverter {
 	private ScrapedResult scrapedStatement;
-	public StatementConverter(ScrapedResult scrapedStatement){
+	public ScrapedResultToStatementConverter(ScrapedResult scrapedStatement){
 		this.scrapedStatement = scrapedStatement;
 	}
 	

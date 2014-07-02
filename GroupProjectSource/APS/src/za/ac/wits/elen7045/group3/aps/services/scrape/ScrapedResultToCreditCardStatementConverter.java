@@ -4,9 +4,9 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatem
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
-public class CreditCardStatementConverter extends StatementConverter{
+public class ScrapedResultToCreditCardStatementConverter extends ScrapedResultToStatementConverter{
 	
-	public CreditCardStatementConverter(ScrapedResult scrapedStatement) {
+	public ScrapedResultToCreditCardStatementConverter(ScrapedResult scrapedStatement) {
 		super(scrapedStatement);
 	}
 	

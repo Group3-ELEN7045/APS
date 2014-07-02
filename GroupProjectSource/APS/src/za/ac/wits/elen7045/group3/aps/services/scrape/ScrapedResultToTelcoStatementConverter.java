@@ -6,9 +6,9 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.TelcoStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
-public class TelcoStatementConverter extends StatementConverter{
+public class ScrapedResultToTelcoStatementConverter extends ScrapedResultToStatementConverter{
 	
-	public TelcoStatementConverter(ScrapedResult scrapedStatement) {
+	public ScrapedResultToTelcoStatementConverter(ScrapedResult scrapedStatement) {
 		super(scrapedStatement);
 	}
 

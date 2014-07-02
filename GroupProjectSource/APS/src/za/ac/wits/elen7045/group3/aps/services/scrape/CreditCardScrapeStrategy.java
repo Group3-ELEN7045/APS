@@ -15,8 +15,8 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatem
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardStatementConverter;
-import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapeInterpreter;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultToCreditCardStatementConverter;
+import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasDuplicateScrapedResultErrorSpecification;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasGenericErrorInScrapedResultSpecification;
@@ -26,7 +26,7 @@ import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLAdaptor;
+import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLToScrapedResultAdaptor;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
@@ -51,7 +51,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 	@Override
 	public void scrapeAccount() {
 		//scrape account
-		XMLAdaptor msa = new XMLAdaptor();
+		XMLToScrapedResultAdaptor msa = new XMLToScrapedResultAdaptor();
 		ScrapedResult scrapeResult;
 		ScrapeLogResult scrapeLog;
 		try{
@@ -64,7 +64,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 			scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
 			
 			//was the scrape successful
-			ScrapeInterpreter scrapeResultCheck = new ScrapeInterpreter(scrapeResult);
+			ScrapedResultInterpreter scrapeResultCheck = new ScrapedResultInterpreter(scrapeResult);
 			String returnCode = scrapeResultCheck.evaluate();
 			if(SUCCESS.equalsIgnoreCase(returnCode)){
 				try {
@@ -156,7 +156,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 	}
 
 	private CreditCardStatement getCreditCardStatement(ScrapedResult scrapeResult) {
-		CreditCardStatementConverter csc = new CreditCardStatementConverter(scrapeResult);
+		ScrapedResultToCreditCardStatementConverter csc = new ScrapedResultToCreditCardStatementConverter(scrapeResult);
 		return (CreditCardStatement) csc.getStatement();
 	}
 }

@@ -5,10 +5,10 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStateme
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
-public class MunicipalStatementConverter extends StatementConverter{
+public class ScrapedResultToMunicipalStatementConverter extends ScrapedResultToStatementConverter{
 	
 	
-	public MunicipalStatementConverter(ScrapedResult scrapedStatement) {
+	public ScrapedResultToMunicipalStatementConverter(ScrapedResult scrapedStatement) {
 		super(scrapedStatement);
 	}
 
