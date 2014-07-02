@@ -29,7 +29,10 @@ import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-
+/**
+ * @author Livious
+ *
+ */
 public class TestAddBillingAccounts {
 	private CustomerDTO customer;
 	private BillingAccountDTO           billingAccountDTO;
@@ -89,7 +92,7 @@ public class TestAddBillingAccounts {
 		billingAccountDTO.setCustomerId(authenticationCustomer.getId());
 		billingAccountDTO.setCredentials(authenticationCustomer.getCredentials());
 		billingAccountDTO.setCompanyUrl("www.telco.co.za");
-		
+		billingAccountDTO.setAccountStatus(AccountStatusType.ACTIVE.getStatusType());
 		ApplicationSpecification<BillingAccountDTO> billingAccountDetail = new BillingAccountDetailsSpecification(
 				 billingAccountDTO);
 		 assertTrue(billingAccountDetails.isSatisfiedBy(billingAccountDTO));
@@ -101,16 +104,15 @@ public class TestAddBillingAccounts {
 	} 
 	
 	@Test
-	public void testAccountUserRelationShip() throws ApplicationException, DatabaseException{
+	public void testAccountUserRelationShip() throws ApplicationException{
 		 
 		 userCredentials.setUserName("userName");
 	     userCredentials.setPassword("password");
 	     userCredentials.setEncryptionModule(encryptionModule);
 	     userCredentials.encryptCredentials();
-	     
+	     //Tests if the billing account are linked to the user
 	     CustomerDTO authenticationCustomer = userManager.getCustomerForLogin(userCredentials);		 
 		 List<BillingAccountDTO> accountsDTO = retriveBillingAccountManager.getBillingAccountForCustomer(authenticationCustomer.getId());
-		 
 		 assertNotNull("No Accounts created for this user" , accountsDTO);
 		
 		 
@@ -147,7 +149,7 @@ public class TestAddBillingAccounts {
 	}
 	 
 	@Test
-	public void testupdateAccount() throws ApplicationException, DatabaseException{
+	public void testupdateAccount() throws ApplicationException{
 		 billingAccountDTO = new BillingAccountDTO("2");		 	 
 		 userCredentials.setUserName("userName");
 	     userCredentials.setPassword("password");
@@ -164,13 +166,12 @@ public class TestAddBillingAccounts {
 		 insertedBillingAccount.setCompanyUrl("www.credit.co.za");
 		 addBillingAccountManager.updateBillingAccountStatus(insertedBillingAccount);
 		 BillingAccountDTO updateBillingAccount = retriveBillingAccountManager.getBillingAccount("1");
-		 System.out.println("Updated 1 = " + updateBillingAccount.getCompanyUrl());
 		 assertEquals("www.credit.co.za", updateBillingAccount.getCompanyUrl() );		 
 		
 	}
 	 
 	 @Test
-	 public void testgetBillingAccountsByCompanyName() {
+	 public void testgetBillingAccountsByCompanyUrl() {
 	 try {
 		 
 		 //Tests for billing account search

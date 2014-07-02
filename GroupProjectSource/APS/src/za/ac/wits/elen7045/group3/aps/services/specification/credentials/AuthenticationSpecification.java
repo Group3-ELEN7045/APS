@@ -7,7 +7,7 @@ import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 
 /**
- * @author SilasMahlangu
+ * @author Livious
  *
  */
 public class AuthenticationSpecification extends ApplicationSpecification<CredentialsDTO>{

@@ -9,7 +9,10 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingA
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-
+/**
+ * @author Livious
+ *
+ */
 public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountManager {
 	private RetriveBillingAccountRepository billingRepository;
 	private BillingAccount entityBillingAccount; // = new BillingAccount();
@@ -22,7 +25,7 @@ public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountMa
 	
 
 	@Override
-	public BillingAccountDTO getBillingAccount(String accountNumber) throws DatabaseException {
+	public BillingAccountDTO getBillingAccount(String accountNumber){
 		if (accountNumber == null) {
 			throw new RuntimeException("Account number cannot be null");
 		}
@@ -39,7 +42,7 @@ public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountMa
 	}
 
 	@Override
-	public List<BillingAccountDTO> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException {
+	public List<BillingAccountDTO> getBillingAccountsByCompanyUrl(String billingCompanyUrl){
 		if (billingCompanyUrl == null) {
 			throw new RuntimeException("Billing Company url cannot be null");
 		}		
@@ -56,7 +59,7 @@ public class RetriveBillingAccountManagerImpl implements RetriveBillingAccountMa
 	}
 
 	@Override
-	public List<BillingAccountDTO> getBillingAccountForCustomer(Long customerId) throws DatabaseException {
+	public List<BillingAccountDTO> getBillingAccountForCustomer(Long customerId){
 		if (customerId == null) {
 			throw new RuntimeException("Billing Account Id cannot be null");
 		}

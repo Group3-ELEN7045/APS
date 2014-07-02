@@ -3,7 +3,10 @@ package za.ac.wits.elen7045.group3.aps.domain.statement.repository;
 import za.ac.wits.elen7045.group3.aps.domain.RetriveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-
+/**
+ * @author Livious
+ *
+ */
 public class RetriveStatementRepositoryImpl implements RetriveStatementRepository{
 	 
 	private RetriveBillingAccountStatementDataAccess statementDataAcces;

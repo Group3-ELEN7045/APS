@@ -6,7 +6,10 @@ import za.ac.wits.elen7045.group3.aps.domain.AddBillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.RetriveBillingAccountDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-
+/**
+ * @author Livious
+ *
+ */
 public class RetriveBillingAccountRepositoryImpl implements RetriveBillingAccountRepository{
 	private RetriveBillingAccountDataAccess dataAccess;
 	

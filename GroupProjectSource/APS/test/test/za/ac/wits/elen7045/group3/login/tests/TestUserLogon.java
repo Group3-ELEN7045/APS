@@ -20,7 +20,7 @@ import za.ac.wits.elen7045.group3.aps.services.validation.APSLogonManager;
 import za.ac.wits.elen7045.group3.aps.services.validation.APSLogonManagerImpl;
 
 /**
- * @author SilasMahlangu
+ * @author Livious
  *
  */
 public class TestUserLogon {
@@ -32,8 +32,8 @@ public class TestUserLogon {
 	private UserManager	                userManager;
 	private UserManagerImpl             userManagerImpl;
 	
-	private APSLogonManager	                logonManager;
-	private APSLogonManagerImpl             logonManagerImpl;
+	private APSLogonManager	            logonManager;
+	private APSLogonManagerImpl         logonManagerImpl;
 		
 	//User APS Authentication
 	@Before
@@ -66,20 +66,19 @@ public class TestUserLogon {
 			e.printStackTrace();
 		}
     
-     System.out.println(" Finding user with ecrypted username = " + userCredenials.getUserName());
+    	System.out.println(" Finding user with ecrypted username = " + userCredenials.getUserName());
         	
     	CustomerDTO authenticationCustomer = userManager.getCustomerForLogin(userCredenials);
     	assertNotNull("Customer Empty Please Regiser", authenticationCustomer);
     
-    System.out.println(" ");
-    System.out.println(" Found user with Id " + authenticationCustomer.getId());
-    System.out.println("Applyting Authentication specification " );	
-    System.out.println(" ");	
-    ApplicationSpecification<CredentialsDTO> autentication = new AuthenticationSpecification(userCredenials);
-    CredentialsDTO dbCredentials = authenticationCustomer.getCredentials();
-    
-     System.out.println("Results = " + autentication.isSatisfiedBy(dbCredentials));
-     System.out.println("User Authenticated successfully");
+	    System.out.println(" ");
+	    System.out.println(" Found user with Id " + authenticationCustomer.getId());
+	    System.out.println("Applyting Authentication specification " );	
+	    System.out.println(" ");	
+	    
+	    assertTrue("Invalid Usernme or Password", logonManager.validation(userCredenials));
+	     
+	     System.out.println("User Authenticated successfully");
      
      try {
 			Thread.currentThread();
@@ -87,11 +86,7 @@ public class TestUserLogon {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-     
-     assertTrue("Invalid Usernme or Password", logonManager.validation(dbCredentials));
-        
-     System.out.println(" ");
-     System.out.println("Going to check ebilling notification ");	
+		}   
+    	
     }
 }

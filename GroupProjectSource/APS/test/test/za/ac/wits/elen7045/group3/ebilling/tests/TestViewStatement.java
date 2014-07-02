@@ -29,7 +29,10 @@ import za.ac.wits.elen7045.group3.aps.services.managers.UserManager;
 import za.ac.wits.elen7045.group3.aps.services.managers.UserManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.security.EncryptionModule;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
-
+/**
+ * @author Livious
+ *
+ */
 public class TestViewStatement {
 
 		
@@ -67,7 +70,7 @@ public class TestViewStatement {
 			
 		}
 	
-		 @Test
+		 @Test //Tesing the saving of the billing accounts
 		 public void testSaveBillingAccountStatement() {
 		 try {				 
 			 
@@ -154,9 +157,11 @@ public class TestViewStatement {
 		 CustomerDTO logedUser = userManager.selectCustomer(customer);
 		 assertNotNull("Failed to Insert User" , logedUser);
 		 
+		 //get all billing accounts belong to the customer
 		 List<BillingAccountDTO> customereBillingAccounts = retiveBillingAccountManager.getBillingAccountForCustomer(customer.getId());
 		 assertEquals(1, customereBillingAccounts.size() );		 
 		 
+		 //get statement for each billing account
 		 for(BillingAccountDTO billingAccount : customereBillingAccounts){
 			
 			 if(billingAccount.getAccountType().equalsIgnoreCase(CompanyStatementType.MUNICIPALITY.getAccountType())){

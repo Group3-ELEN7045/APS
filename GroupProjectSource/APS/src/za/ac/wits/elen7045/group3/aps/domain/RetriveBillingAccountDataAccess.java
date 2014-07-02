@@ -4,7 +4,10 @@ import java.util.List;
 
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
-
+/**
+ * @author Livious
+ *
+ */
 public interface RetriveBillingAccountDataAccess {
 	public BillingAccount getBillingAccount(String accountNumber) throws DatabaseException;
 	public List<BillingAccount> getBillingAccountsByCompanyUrl(String billingCompanyUrl) throws DatabaseException;

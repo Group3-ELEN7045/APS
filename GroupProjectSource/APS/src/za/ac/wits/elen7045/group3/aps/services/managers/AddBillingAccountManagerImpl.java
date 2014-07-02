@@ -9,7 +9,10 @@ import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
-
+/**
+ * @author Livious
+ *
+ */
 public class AddBillingAccountManagerImpl implements AddBillingAccountManager {
 	private AddBillingAccountRepository addBillingRepository;
 	private RetriveBillingAccountRepository retriveBillingRepository;
@@ -22,8 +25,8 @@ public class AddBillingAccountManagerImpl implements AddBillingAccountManager {
 	}
 
 	@Override
-	public boolean saveBillingAccount(BillingAccountDTO billingAccountdto)
-			throws DatabaseException {
+	public boolean saveBillingAccount(BillingAccountDTO billingAccountdto){
+			
 		if (billingAccountdto == null) {
 			throw new RuntimeException("Billing Account cannot be null");
 		}
@@ -47,8 +50,7 @@ public class AddBillingAccountManagerImpl implements AddBillingAccountManager {
 	}
 
 	@Override
-	public boolean updateBillingAccountStatus(
-			BillingAccountDTO billingAccountdto) throws DatabaseException {
+	public boolean updateBillingAccountStatus(BillingAccountDTO billingAccountdto) {
 		ApplicationSpecification<BillingAccountDTO> userBillingAccountDetails = new BillingAccountDetailsSpecification(
 				billingAccountdto);
 		// checks if all the required fields of the billing account have been set

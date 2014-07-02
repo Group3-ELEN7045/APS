@@ -75,14 +75,9 @@ public class UserManagerImpl implements UserManager{
 		CustomerDTO customerDTO = null;
 		
 		DozerBeanMapper dozer = new DozerBeanMapper();
-		dozer.map(credentials, credentialsVO);
+		dozer.map(credentials, credentialsVO);				
+		customerEntityRespone = customerRepository.getCustomerForLogin(credentialsVO);
 				
-		try {
-			customerEntityRespone = customerRepository.getCustomerForLogin(credentialsVO);
-		} catch (DatabaseException e) {
-			throw new ApplicationException(e.getMessage());
-		}
-		
 		if(customerEntityRespone != null){		
 		   UserMarshallerFactory userEntity = new UserMapper();
 		   customerDTO = userEntity.marshallResponse(customerEntityRespone);
