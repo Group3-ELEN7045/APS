@@ -32,6 +32,9 @@ public class BillingCompany implements Serializable{
 			throw new RuntimeException("Company name can not be null or empty String");
 		}
 		this.companyName = companyName;
+		
+	  maintenanceWindows= new ArrayList<CronExpressionWrapper>();
+	  peakPeriods= new ArrayList<CronExpressionWrapper>();
 	}
 
 	public String getCompanyName() {

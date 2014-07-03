@@ -2,21 +2,21 @@ package za.ac.wits.elen7045.group3.aps.domain.scheduler;
 
 import java.util.Date;
 
-public class CompareDates  implements itimes
+public class CompareDates  implements IDuration
 	{    
 		
 	
 	private long scheduletime;  
 	private Date starttime , endtime;
 
-	CompareDates(long scheduletime, Date starttime, Date endtime)
+	public CompareDates(long scheduletime, Date starttime, Date endtime)
 	{ 
 	  this.scheduletime=scheduletime;
 	  this.starttime=starttime;
 	  this.endtime=endtime;  
 	}
 
-	public int comparetimes()
+	public int compareduration()
 	 {  
 		 if (scheduletime <= 0  ||  starttime == null ||   endtime == null) 
 		     { 

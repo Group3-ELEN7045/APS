@@ -47,4 +47,36 @@ public class TestingBillingCompany extends TestCase {
 		BillingCompany billingCompany2 = new BillingCompany(companyName2);
 		assertTrue(billingCompany1.equals(billingCompany2));
 	}
+
+	@Test
+	public void testBillingCompanyCronExpressionWrapperLists() {
+		String companyName = "COJ";
+		BillingCompany billingCompany = new BillingCompany(companyName);
+		billingCompany.setCompanyName("COJ");  
+		String url = "http://www";
+		billingCompany.setURL(url);
+ 
+	  
+		CronExpressionWrapper mw1=new CronExpressionWrapper(); 
+		mw1.setSeconds("05");  
+		mw1.setMinutes("15-30");  
+		mw1.setHours("17-18"); 
+		mw1.setDayOfMonth("26");
+		mw1.setDayOfWeek("?");  
+		mw1.setMonth("06"); 
+		mw1.setYear("14");  
+	     billingCompany.setMaintenancewindow(mw1);
+	    Iterator<CronExpressionWrapper> myiterator;
+	    myiterator=billingCompany.getMaintenancewindows().iterator();
+	    
+		assertTrue(mw1.equals(myiterator.next()));
+		
+		billingCompany.setPeakperiod(mw1);
+	    myiterator=billingCompany.getPeakperiod().iterator();
+	    
+		assertTrue(mw1.equals(myiterator.next()));
+		
+		
+	}
+
 }
