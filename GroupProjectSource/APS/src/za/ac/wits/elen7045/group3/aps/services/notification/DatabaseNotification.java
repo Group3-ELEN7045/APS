@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import za.ac.wits.elen7045.group3.aps.domain.entities.Customer;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 
 /**

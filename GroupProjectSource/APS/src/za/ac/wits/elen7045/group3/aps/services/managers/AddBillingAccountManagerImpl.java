@@ -6,7 +6,6 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccou
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 import za.ac.wits.elen7045.group3.aps.services.specification.credentials.BillingAccountDetailsSpecification;
 /**
@@ -17,8 +16,6 @@ public class AddBillingAccountManagerImpl implements AddBillingAccountManager {
 	private AddBillingAccountRepository addBillingRepository;
 	private RetriveBillingAccountRepository retriveBillingRepository;
 	private BillingAccount entityBillingAccount; 
-	private BillingAccountDTO billingAccountdto;
-
 	public AddBillingAccountManagerImpl(AddBillingAccountRepository addBillingRepository, RetriveBillingAccountRepository retriveBillingRepository ) {
 		this.addBillingRepository = addBillingRepository;
 		this.retriveBillingRepository = retriveBillingRepository;

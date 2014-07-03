@@ -8,7 +8,6 @@ import org.dozer.DozerBeanMapper;
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.RetriveBillingAccountRepository;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.dto.BillingAccountDTO;
-import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 /**
  * @author Livious
  *

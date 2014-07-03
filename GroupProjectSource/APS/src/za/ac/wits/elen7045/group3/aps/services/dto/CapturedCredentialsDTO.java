@@ -9,7 +9,8 @@ import za.ac.wits.elen7045.group3.aps.services.specification.credentials.Capture
  *
  */
 public class CapturedCredentialsDTO extends CredentialsDTO{
-    private String confirmPasword;
+	private static final long serialVersionUID = 1L;
+	private String confirmPasword;
 
 	public String getConfirmPasword() {
 		return confirmPasword;
