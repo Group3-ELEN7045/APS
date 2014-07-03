@@ -1,6 +1,5 @@
 package test.za.ac.wits.elen7045.group3.scheduler;
  
-
 import static org.junit.Assert.*;
 
 import java.security.Timestamp;
