@@ -160,6 +160,6 @@ public class TelcoScrapeStrategy implements ScraperStrategy {
 		
 	private TelcoStatement getMunicipalStatement(ScrapedResult scrapeResult) {
 		ScrapedResultToTelcoStatementConverter tsc = new ScrapedResultToTelcoStatementConverter(scrapeResult);
-		return (TelcoStatement) tsc.getStatement();
+		return (TelcoStatement) tsc.getBillingStatement();
 	}
 }

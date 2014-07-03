@@ -162,6 +162,6 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	
 	private MunicipalStatement getMunicipalStatement(ScrapedResult scrapeResult) {
 		ScrapedResultToMunicipalStatementConverter msc = new ScrapedResultToMunicipalStatementConverter(scrapeResult);
-		return (MunicipalStatement) msc.getStatement();
+		return (MunicipalStatement) msc.getBillingStatement();
 	}
 }

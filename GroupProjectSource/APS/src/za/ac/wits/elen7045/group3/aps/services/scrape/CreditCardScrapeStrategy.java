@@ -157,6 +157,6 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 
 	private CreditCardStatement getCreditCardStatement(ScrapedResult scrapeResult) {
 		ScrapedResultToCreditCardStatementConverter csc = new ScrapedResultToCreditCardStatementConverter(scrapeResult);
-		return (CreditCardStatement) csc.getStatement();
+		return (CreditCardStatement) csc.getBillingStatement();
 	}
 }
