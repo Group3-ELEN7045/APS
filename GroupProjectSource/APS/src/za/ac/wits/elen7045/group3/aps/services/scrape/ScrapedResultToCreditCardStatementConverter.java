@@ -11,7 +11,7 @@ public class ScrapedResultToCreditCardStatementConverter extends ScrapedResultTo
 	}
 	
 	@Override
-	public BillingAccountStatement getStatement() {
+	public BillingAccountStatement getBillingStatement() {
 		
 		CreditCardStatement creditAcc = new CreditCardStatement(getIndexDataPairValue("001"));
 		creditAcc.setAccountHolderName(getIndexDataPairValue("002"));

@@ -1,6 +1,5 @@
 package za.ac.wits.elen7045.group3.aps.services.specification.user;
 
-import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
 import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
 

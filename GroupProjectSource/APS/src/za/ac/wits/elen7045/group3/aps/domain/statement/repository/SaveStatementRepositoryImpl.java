@@ -1,7 +1,5 @@
 package za.ac.wits.elen7045.group3.aps.domain.statement.repository;
 
-import java.util.List;
-
 import za.ac.wits.elen7045.group3.aps.domain.SaveBillingAccountStatementDataAccess;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;

@@ -18,6 +18,10 @@ import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class CreditCardStatement extends BillingAccountStatement implements Serializable{
 			
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String cardType;
 	private String interestRate;
 	private String creditLimit;

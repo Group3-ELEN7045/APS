@@ -14,7 +14,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import za.ac.wits.elen7045.group3.aps.domain.accounts.repository.AddBillingAccountRepositoryImpl;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultImpl;
 import za.ac.wits.elen7045.group3.aps.domain.statement.repository.RetriveStatementRepository;
@@ -26,6 +25,7 @@ import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.CreditCardScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.MunicipalScrapeStrategy;
 import za.ac.wits.elen7045.group3.aps.services.scrape.TelcoScrapeStrategy;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.ScrapeRetryException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -72,12 +72,34 @@ public class ScraperStrategyTest {
 		billingAccount.setCompanyUrl("municipal.xml");
 		
 		scraper = new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
-		scraper.scrapeAccount();
+		try {
+			scraper.scrapeAccount();
+		} catch (ScrapeRetryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("\n ScrapedAccountTest:END");
 	}
 
 	@Test
+	public void testInvalidAccountMunicipalStrategy() throws DatabaseException {
+		System.out.println("\n ScrapedAccountTest:START");
+
+		billingAccount.setAccountNumber("123456789");
+		billingAccount.setCompanyUrl("invalid_accoung_municipal.xml");
+		
+		scraper = new MunicipalScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
+		try {
+			scraper.scrapeAccount();
+		} catch (ScrapeRetryException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("\n ScrapedAccountTest:END");
+	}	
+	
+	/*@Test
 	public void testCreditStrategy() throws DatabaseException {
 		System.out.println("\n ScrapedAccountTest:START");
 		
@@ -85,7 +107,12 @@ public class ScraperStrategyTest {
 		billingAccount.setCompanyUrl("creditcard.xml");
 		
 		scraper = new CreditCardScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);		
-		scraper.scrapeAccount();
+		try {
+			scraper.scrapeAccount();
+		} catch (ScrapeRetryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("\n ScrapedAccountTest:END");
 	}
@@ -99,7 +126,12 @@ public class ScraperStrategyTest {
 		billingAccount.setCompanyUrl("telco.xml");
 		
 		scraper = new TelcoScrapeStrategy(billingAccount, scrapeLogRepository, billingAccountRepository, statementRepository);
-		scraper.scrapeAccount();
+		try {
+			scraper.scrapeAccount();
+		} catch (ScrapeRetryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.println("\n ScrapedAccountTest:END");
 	}
@@ -117,7 +149,7 @@ public class ScraperStrategyTest {
 		}
 		System.out.println("\n ScrapeLogTest:END");
 	}
-	
+*/	
 	/*@Test
 	public void testStatementRepository(){
 		System.out.println("\n StatementRepository:START");

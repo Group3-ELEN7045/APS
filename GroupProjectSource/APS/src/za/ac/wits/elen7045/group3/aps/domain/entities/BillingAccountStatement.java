@@ -11,9 +11,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class  BillingAccountStatement implements Serializable {
 		
-	/**
-	 * 
-	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

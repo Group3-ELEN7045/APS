@@ -15,8 +15,6 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStateme
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultToMunicipalStatementConverter;
-import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasDuplicateScrapedResultErrorSpecification;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasGenericErrorInScrapedResultSpecification;
@@ -26,10 +24,13 @@ import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementR
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.ScrapeServiceError;
+import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLToScrapedResultAdaptor;
-import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
-import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.NotifyAPSException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.NotifyUserException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.ScrapeRetryException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
 
 public class MunicipalScrapeStrategy implements ScraperStrategy {
@@ -49,11 +50,12 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 	}
 	
 	@Override
-	public void scrapeAccount() {
+	public void scrapeAccount() throws ScrapeRetryException {
 		//scrape account
 		XMLToScrapedResultAdaptor msa = new XMLToScrapedResultAdaptor();
 		ScrapedResult scrapeResult;
 		ScrapeLogResult scrapeLog;
+		String exceptionMessage = "";
 		try{
 			scrapeResult = msa.scrapeWebsite(account.getCompanyUrl(), account.getCredentials());
 		
@@ -76,7 +78,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 					scrapeLog.setNotificationType(NotificationType.SCRAPESUCCESS.getNotificationType());
 					scrapeLog.setStatsus(NotificationStatus.SUCCESS.getNotificationStatus());
 					
-				} catch (AccountNumberIncorrectException e) {
+				} catch (NotifyUserException e) {
 					e.printStackTrace();
 					
 					scrapeLog.setMessage(e.getMessage());
@@ -84,14 +86,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 					
 					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-				} catch (DataIntegrityCheckException e) {
-					e.printStackTrace();
-					
-					scrapeLog.setMessage(e.getMessage());
-					scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
-					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
-					
-					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
+				} catch (NotifyAPSException e) {
 					e.printStackTrace();
 					
 					scrapeLog.setMessage(e.getMessage());
@@ -100,30 +95,52 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 					
 					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
 				}
+			}else{
+				handleScrapeFailure(returnCode);
 			}
 			
-			try {
-				accountRepository.updateBillingAccountStatus(account);
-			} catch (DatabaseException e) {
-				e.printStackTrace();
-				
-				scrapeLog.setMessage(e.getMessage());
-				scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
-				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());			
-			}
-		}catch(Exception e){
+			accountRepository.updateBillingAccountStatus(account);
+
+			//log the scrape call with its result
+			logScrapeResult(scrapeLog);
+		}catch(ApplicationException e){
 			e.printStackTrace();
-	
+			exceptionMessage = e.getMessage();
+		}finally{
+			
 			scrapeLog = new ScrapeLogResult();
 			scrapeLog.setAccountNumber(account.getAccountNumber());
-			scrapeLog.setResponse(e.getMessage());
+			scrapeLog.setResponse(exceptionMessage);
 			scrapeLog.setNotificationDate(new Timestamp(System.currentTimeMillis()));
+			
+			//log the scrape call with its result
+			logScrapeResult(scrapeLog);		
 		}
-		//log the scrape call with its result
-		logScrapeResult(scrapeLog);		
 	}
 
-	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws AccountNumberIncorrectException, DataIntegrityCheckException {
+	private void handleScrapeFailure(String returnCode) throws NotifyUserException, NotifyAPSException, ScrapeRetryException {
+		int errorCode = Integer.parseInt(returnCode);
+		
+		if(errorCode == ScrapeServiceError.INVALIDACCOUNT.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.INVALIDACCOUNT.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.INVALIDUSERCREDENTIAL.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.INVALIDUSERCREDENTIAL.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.NOTSIGNEFOREBILLING.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.NOTSIGNEFOREBILLING.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.ACTIONREQUIRED.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.ACTIONREQUIRED.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.BROKENSCRIPT.getScrapeServiceError()){
+			throw new NotifyAPSException(ScrapeServiceError.BROKENSCRIPT.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.DATAINTEGRITYFAILURE.getScrapeServiceError()){
+			throw new NotifyAPSException(ScrapeServiceError.DATAINTEGRITYFAILURE.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.BILLINGSITEDOWN.getScrapeServiceError()){
+			throw new ScrapeRetryException(ScrapeServiceError.BILLINGSITEDOWN.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.ERRORPAGEENCOUNTERED.getScrapeServiceError()){
+			throw new ScrapeRetryException(ScrapeServiceError.ERRORPAGEENCOUNTERED.getScrapeServiceErrorDesc());
+		}
+	}
+
+	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws NotifyUserException, NotifyAPSException {
 		boolean integrityPassed = true;
 
 		//check account number integrity
@@ -133,7 +150,7 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 		if(!account.getAccountStatus().equalsIgnoreCase(AccountStatusType.ACTIVE.getStatusType())  
 			&& !accNoSpec.isSatisfiedBy(scrapeResult)){
 			integrityPassed = false;
-			throw new AccountNumberIncorrectException("Account number " +account.getAccountNumber()+ " incorrect");
+			throw new NotifyUserException("Account number " +account.getAccountNumber()+ " incorrect");
 		}
 		
 		try{
@@ -141,13 +158,16 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 			HasGenericErrorInScrapedResultSpecification hasGenError = new HasGenericErrorInScrapedResultSpecification();
 			HasDuplicateScrapedResultErrorSpecification hasDupError = new HasDuplicateScrapedResultErrorSpecification();
 			MunicipalScrapedResultAdditionSpecification municipalStatementSpec = new MunicipalScrapedResultAdditionSpecification();
+			integrityPassed = hasDupError.or(hasGenError).or(municipalStatementSpec).isSatisfiedBy(scrapeResult);
 			
-			hasDupError.or(hasGenError).or(municipalStatementSpec).isSatisfiedBy(scrapeResult);
+			if(!integrityPassed){
+				throw new NotifyAPSException("Invalid data scraped for account("+account.getAccountNumber()+")");
+			}
 
 		}catch (Exception e){
-			throw new DataIntegrityCheckException("Invalid data scraped for account("+account.getAccountNumber()+")");
+			throw new NotifyAPSException("Invalid data scraped for account("+account.getAccountNumber()+")");
 		}
-				
+	
 		return integrityPassed;
 	}
 
@@ -159,9 +179,8 @@ public class MunicipalScrapeStrategy implements ScraperStrategy {
 		}
 	}
 	
-	
 	private MunicipalStatement getMunicipalStatement(ScrapedResult scrapeResult) {
 		ScrapedResultToMunicipalStatementConverter msc = new ScrapedResultToMunicipalStatementConverter(scrapeResult);
-		return (MunicipalStatement) msc.getStatement();
+		return (MunicipalStatement) msc.getBillingStatement();
 	}
 }

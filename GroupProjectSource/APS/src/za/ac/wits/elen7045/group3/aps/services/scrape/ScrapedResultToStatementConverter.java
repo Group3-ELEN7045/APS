@@ -9,7 +9,7 @@ public abstract class ScrapedResultToStatementConverter {
 		this.scrapedStatement = scrapedStatement;
 	}
 	
-	public abstract BillingAccountStatement getStatement();
+	public abstract BillingAccountStatement getBillingStatement();
 	
 	protected String getIndexDataPairValue(String id){
 		for (int i = 0; i < scrapedStatement.getDataPairList().size(); i++){

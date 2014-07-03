@@ -13,7 +13,7 @@ public class ScrapedResultToTelcoStatementConverter extends ScrapedResultToState
 	}
 
 	@Override
-	public BillingAccountStatement getStatement() {
+	public BillingAccountStatement getBillingStatement() {
 		TelcoStatement telcoAcc = new TelcoStatement(getIndexDataPairValue("001"));
 		telcoAcc.setAccountHolderName(getIndexDataPairValue("002"));
 		telcoAcc.setAccountStatementDate(getIndexDataPairValue("003"));

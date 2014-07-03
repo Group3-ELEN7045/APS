@@ -1,10 +1,6 @@
 package za.ac.wits.elen7045.group3.aps.services.dto;
 
 public class ContactInformationDTO {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String contactType;
 	private String contactValue;
     

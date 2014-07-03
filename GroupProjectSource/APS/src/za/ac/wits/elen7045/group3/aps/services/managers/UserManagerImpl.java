@@ -11,8 +11,6 @@ import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.pattern.user.factory.UserMapper;
 import za.ac.wits.elen7045.group3.aps.services.pattern.user.factory.UserMarshallerFactory;
-import za.ac.wits.elen7045.group3.aps.services.specification.ApplicationSpecification;
-import za.ac.wits.elen7045.group3.aps.services.specification.user.UserSpecificationByID;
 
 
 /**

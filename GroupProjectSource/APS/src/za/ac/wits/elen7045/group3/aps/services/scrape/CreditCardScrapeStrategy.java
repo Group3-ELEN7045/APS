@@ -15,8 +15,6 @@ import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.CreditCardStatem
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.ScrapeLogResult;
 import za.ac.wits.elen7045.group3.aps.domain.repository.notification.ScrapeLogResultRepository;
-import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultToCreditCardStatementConverter;
-import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapedResultInterpreter;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasDuplicateScrapedResultErrorSpecification;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.specification.HasGenericErrorInScrapedResultSpecification;
@@ -25,10 +23,12 @@ import za.ac.wits.elen7045.group3.aps.domain.statement.repository.SaveStatementR
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.AccountStatusType;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationStatus;
 import za.ac.wits.elen7045.group3.aps.services.enumtypes.NotificationType;
+import za.ac.wits.elen7045.group3.aps.services.enumtypes.ScrapeServiceError;
 import za.ac.wits.elen7045.group3.aps.services.exception.DatabaseException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLToScrapedResultAdaptor;
-import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.AccountNumberIncorrectException;
-import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.DataIntegrityCheckException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.NotifyAPSException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.NotifyUserException;
+import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.ScrapeRetryException;
 import za.ac.wits.elen7045.group3.aps.services.scrape.interfaces.ScraperStrategy;
 
 public class CreditCardScrapeStrategy implements ScraperStrategy {
@@ -74,7 +74,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 					scrapeLog.setNotificationType(NotificationType.SCRAPESUCCESS.getNotificationType());
 					scrapeLog.setStatsus(NotificationStatus.SUCCESS.getNotificationStatus());
 					
-				} catch (AccountNumberIncorrectException e) {
+				} catch (NotifyUserException e) {
 					e.printStackTrace();
 					
 					scrapeLog.setMessage(e.getMessage());
@@ -82,7 +82,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 					scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());
 					
 					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
-				} catch (DataIntegrityCheckException e) {
+				} catch (NotifyAPSException e) {
 					e.printStackTrace();
 					
 					scrapeLog.setMessage(e.getMessage());
@@ -99,17 +99,12 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 					
 					account.setAccountStatus(AccountStatusType.INACTIVE.getStatusType());
 				}
+			}else{
+				handleScrapeFailure(returnCode);
 			}
 			
-			try {
-				billingRepository.updateBillingAccountStatus(account);
-			} catch (DatabaseException e) {
-				e.printStackTrace();
-				
-				scrapeLog.setMessage(e.getMessage());
-				scrapeLog.setNotificationType(NotificationType.APS.getNotificationType());
-				scrapeLog.setStatsus(NotificationStatus.WAITING.getNotificationStatus());			
-			}
+
+			billingRepository.updateBillingAccountStatus(account);
 		}catch(Exception e){
 			e.printStackTrace();
 
@@ -122,7 +117,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 		logScrapeResult(scrapeLog);
 	}
 
-	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws AccountNumberIncorrectException, DataIntegrityCheckException {
+	private boolean isIntegrityCheckPassed(ScrapedResult scrapeResult) throws NotifyUserException, NotifyAPSException {
 		boolean integrityPassed = true;
 
 		//check account number integrity
@@ -130,7 +125,7 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 		if(!account.getAccountStatus().equalsIgnoreCase(AccountStatusType.ACTIVE.getStatusType())  
 			&& !accNoSpec.isSatisfiedBy(scrapeResult)){
 			integrityPassed = false;
-			throw new AccountNumberIncorrectException("Account number " +account.getAccountNumber()+ " incorrect");
+			throw new NotifyUserException("Account number " +account.getAccountNumber()+ " incorrect");
 		}
 		
 		try{
@@ -141,12 +136,34 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 			hasDupError.or(hasGenError).isSatisfiedBy(scrapeResult);
 
 		}catch (Exception e){
-			throw new DataIntegrityCheckException("Invalid data scraped for account("+account.getAccountNumber()+")");
+			throw new NotifyAPSException("Invalid data scraped for account("+account.getAccountNumber()+")");
 		}
 				
 		return integrityPassed;
 	}
 
+	private void handleScrapeFailure(String returnCode) throws NotifyUserException, NotifyAPSException, ScrapeRetryException {
+		int errorCode = Integer.parseInt(returnCode);
+		
+		if(errorCode == ScrapeServiceError.INVALIDACCOUNT.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.INVALIDACCOUNT.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.INVALIDUSERCREDENTIAL.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.INVALIDUSERCREDENTIAL.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.NOTSIGNEFOREBILLING.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.NOTSIGNEFOREBILLING.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.ACTIONREQUIRED.getScrapeServiceError()){
+			throw new NotifyUserException(ScrapeServiceError.ACTIONREQUIRED.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.BROKENSCRIPT.getScrapeServiceError()){
+			throw new NotifyAPSException(ScrapeServiceError.BROKENSCRIPT.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.DATAINTEGRITYFAILURE.getScrapeServiceError()){
+			throw new NotifyAPSException(ScrapeServiceError.DATAINTEGRITYFAILURE.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.BILLINGSITEDOWN.getScrapeServiceError()){
+			throw new ScrapeRetryException(ScrapeServiceError.BILLINGSITEDOWN.getScrapeServiceErrorDesc());
+		}if(errorCode == ScrapeServiceError.ERRORPAGEENCOUNTERED.getScrapeServiceError()){
+			throw new ScrapeRetryException(ScrapeServiceError.ERRORPAGEENCOUNTERED.getScrapeServiceErrorDesc());
+		}
+	}
+	
 	private void logScrapeResult(ScrapeLogResult scrapeLog) {
 		try {
 			scrapeLogRepository.insertScrapeLogResult(scrapeLog);
@@ -157,6 +174,6 @@ public class CreditCardScrapeStrategy implements ScraperStrategy {
 
 	private CreditCardStatement getCreditCardStatement(ScrapedResult scrapeResult) {
 		ScrapedResultToCreditCardStatementConverter csc = new ScrapedResultToCreditCardStatementConverter(scrapeResult);
-		return (CreditCardStatement) csc.getStatement();
+		return (CreditCardStatement) csc.getBillingStatement();
 	}
 }
