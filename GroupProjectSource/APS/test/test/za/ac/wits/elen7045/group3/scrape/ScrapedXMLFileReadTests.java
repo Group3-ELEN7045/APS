@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;  
 
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
-import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLFileToScrapedResultMarshal;
+import za.ac.wits.elen7045.group3.aps.services.scrape.acl.XMLFileToScrapedResultTranslator;
 
 public class ScrapedXMLFileReadTests {
 	
@@ -33,7 +33,7 @@ public class ScrapedXMLFileReadTests {
 	@Test
 	public void testReadScrapeXMLForTelcoAccount(){
 		filePath = "..\\..\\XML Files\\telco.xml";
-		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultMarshal().convertScrapedDataToObject(ScrapedResult.class, filePath);
+		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultTranslator().convertScrapedDataToObject(ScrapedResult.class, filePath);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));
@@ -44,7 +44,7 @@ public class ScrapedXMLFileReadTests {
 	public void testReadScrapeXMLForMunicipalAccount(){
 		
 		filePath = "..\\..\\XML Files\\municipal.xml";
-		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultMarshal().convertScrapedDataToObject(ScrapedResult.class, filePath);
+		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultTranslator().convertScrapedDataToObject(ScrapedResult.class, filePath);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));	
@@ -55,7 +55,7 @@ public class ScrapedXMLFileReadTests {
 	public void testReadScrapeXMLForCreditCardAccount(){
 		
 		filePath = "..\\..\\XML Files\\creditcard.xml";
-		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultMarshal().convertScrapedDataToObject(ScrapedResult.class, filePath);
+		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultTranslator().convertScrapedDataToObject(ScrapedResult.class, filePath);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));
@@ -66,7 +66,7 @@ public class ScrapedXMLFileReadTests {
 	public void testReadScrapeXMLForError(){
 		
 		filePath = "..\\..\\XML Files\\errors.xml";
-		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultMarshal().convertScrapedDataToObject(ScrapedResult.class, filePath);
+		statementScrapedData = (ScrapedResult)new XMLFileToScrapedResultTranslator().convertScrapedDataToObject(ScrapedResult.class, filePath);
 		assertTrue(statementScrapedData.getBaseURL().equals("www.elen7045.co.za"));
 		assertTrue(statementScrapedData.getDate().equals("12/12/2014"));
 		assertTrue(statementScrapedData.getTime().equals("13:50:00"));

@@ -8,7 +8,7 @@ import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.DataPair;
 
 import com.thoughtworks.xstream.XStream;
 
-public class XMLFileToScrapedResultMarshal{
+public class XMLFileToScrapedResultTranslator{
 	
 	public Object convertScrapedDataToObject(Class objectToConvert, String filePath){
 		XStream xstream = new XStream();
