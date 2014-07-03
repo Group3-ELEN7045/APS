@@ -1,16 +1,19 @@
 package za.ac.wits.elen7045.group3.aps.services.scrape.exceptions;
+
+import za.ac.wits.elen7045.group3.aps.services.exception.ApplicationException;
+
 /**
  * 
  * @author boitumelo
  *
  */
-public class AccountNumberIncorrectException extends Exception {
+public class NotifyUserException extends ApplicationException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public AccountNumberIncorrectException(String message) {
+	public NotifyUserException(String message) {
 		super(message);
 	}
 }
