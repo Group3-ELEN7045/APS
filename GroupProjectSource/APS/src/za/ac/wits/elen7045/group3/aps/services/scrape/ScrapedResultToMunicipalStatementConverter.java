@@ -1,8 +1,7 @@
 
 package za.ac.wits.elen7045.group3.aps.services.scrape;
 
-import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.
-;
+import za.ac.wits.elen7045.group3.aps.domain.accounts.statement.MunicipalStatement;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccountStatement;
 import za.ac.wits.elen7045.group3.aps.domain.scrape.vo.ScrapedResult;
 
@@ -14,7 +13,7 @@ public class ScrapedResultToMunicipalStatementConverter extends ScrapedResultToS
 	}
 
 	@Override
-	public BillingAccountStatement getStatement() {
+	public BillingAccountStatement getBillingStatement() {
 		MunicipalStatement municipalAcc = new MunicipalStatement(getIndexDataPairValue("001"));
 		municipalAcc.setAccountHolderName(getIndexDataPairValue("002"));
 		municipalAcc.setAccountStatementDate(getIndexDataPairValue("003"));
