@@ -3,13 +3,10 @@ package za.ac.wits.elen7045.group3.aps.services.validation;
 
 import org.dozer.DozerBeanMapper;
 
-import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.domain.entities.User;
 import za.ac.wits.elen7045.group3.aps.domain.repository.user.CustomerRepository;
 import za.ac.wits.elen7045.group3.aps.domain.vo.CredentialsVO;
 import za.ac.wits.elen7045.group3.aps.services.dto.CredentialsDTO;
-import za.ac.wits.elen7045.group3.aps.services.exception.LogonException;
-import za.ac.wits.elen7045.group3.aps.services.util.ApplicationContants;
 /**
  * @author Livious
  *

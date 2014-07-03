@@ -1,8 +1,4 @@
 package za.ac.wits.elen7045.group3.aps.domain.scheduler;
-import java.util.Map;
-
-import org.quartz.JobDetail;
-
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingAccount;
 import za.ac.wits.elen7045.group3.aps.services.scrape.ScrapeManagerImpl;
 import za.ac.wits.elen7045.group3.aps.services.scrape.exceptions.ScrapeRetryException;
