@@ -12,7 +12,7 @@ public class HasErrorInScrapedResultSpecification
 	@Override
 	public boolean isSatisfiedBy(ScrapedResult scrapedData) {
 		
-		return scrapedData.getDataPairList().size() == 1;
+		return scrapedData.getDataPairSize() == 1;
 		
 	}
 }

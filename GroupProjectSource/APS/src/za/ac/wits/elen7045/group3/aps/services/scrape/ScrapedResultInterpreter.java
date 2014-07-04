@@ -15,7 +15,7 @@ public class ScrapedResultInterpreter {
 	
 	public String evaluate(){
 		if (new HasErrorInScrapedResultSpecification().isSatisfiedBy(scrapedStatement))
-			return scrapedStatement.getDataPairList().get(0).getValue();
+			return scrapedStatement.getDataPairListItemValue(0);
 		return "000";
 	}
 	

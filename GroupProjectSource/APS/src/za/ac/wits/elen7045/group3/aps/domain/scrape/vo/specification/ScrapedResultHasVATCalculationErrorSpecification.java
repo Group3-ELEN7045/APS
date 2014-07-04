@@ -25,8 +25,8 @@ public class ScrapedResultHasVATCalculationErrorSpecification extends
 	@Override
 	public boolean isSatisfiedBy(ScrapedResult statement) {
 		double calc = 0.0;
-		calc = numericDataFormatter.getNumericValue(statement.getDataPairList().get(10).getValue())*vatPercentage/100;	
-		double statementVATAmount = numericDataFormatter.getNumericValue(statement.getDataPairList().get(13).getValue());
+		calc = numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(10))*vatPercentage/100;	
+		double statementVATAmount = numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(13));
 		return calc != statementVATAmount;
 		
 	}

@@ -28,13 +28,13 @@ public class MunicipalScrapedResultAdditionSpecification
 	private boolean municipalSpecificAdditonSatisfied(ScrapedResult statement){
 		
 		double calc = 0.0;
-		calc = numericDataFormatter.getNumericValue(statement.getDataPairList().get(16).getValue())
-				+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(18).getValue())
-				+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(20).getValue())
-				+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(21).getValue())
-				+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(22).getValue());
+		calc = numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(16))
+				+ numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(18))
+				+ numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(20))
+				+ numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(21))
+				+ numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(22));
 		
-		double newAccCharge = numericDataFormatter.getNumericValue(statement.getDataPairList().get(10).getValue());
+		double newAccCharge = numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(10));
 		return calc == newAccCharge;
 	}
 

@@ -12,9 +12,9 @@ public abstract class ScrapedResultToStatementConverter {
 	public abstract BillingAccountStatement getBillingStatement();
 	
 	protected String getIndexDataPairValue(String id){
-		for (int i = 0; i < scrapedStatement.getDataPairList().size(); i++){
-			if(scrapedStatement.getDataPairList().get(i).getId().equals(id))
-				return scrapedStatement.getDataPairList().get(i).getValue();
+		for (int i = 0; i < scrapedStatement.getDataPairSize(); i++){
+			if(scrapedStatement.getDataPairListItemId(i).equals(id))
+				return scrapedStatement.getDataPairListItemValue(i);
 		}
 		return null;
 	}

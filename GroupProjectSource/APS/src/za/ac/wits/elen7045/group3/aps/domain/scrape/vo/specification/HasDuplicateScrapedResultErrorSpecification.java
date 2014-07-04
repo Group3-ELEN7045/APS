@@ -18,10 +18,10 @@ public class HasDuplicateScrapedResultErrorSpecification
 	// method locates data pairs with identical ID, correlates only their value
 	private boolean correlationErrorsExist(ScrapedResult scrapedData){
 		boolean flag = false;
-		for (int i = 0; i < scrapedData.getDataPairList().size(); i++){
-			for (int j = 0; j < scrapedData.getDataPairList().size(); j++){
-				if(scrapedData.getDataPairList().get(i).getId().equals(scrapedData.getDataPairList().get(j).getId())){
-					if (!scrapedData.getDataPairList().get(i).getValue().equalsIgnoreCase(scrapedData.getDataPairList().get(j).getValue())){
+		for (int i = 0; i < scrapedData.getDataPairSize(); i++){
+			for (int j = 0; j < scrapedData.getDataPairSize(); j++){
+				if(scrapedData.getDataPairListItemId(i).equals(scrapedData.getDataPairListItemId(j))){
+					if (!scrapedData.getDataPairListItemValue(i).equalsIgnoreCase(scrapedData.getDataPairListItemValue(j))){
 						flag = true;
 					}
 				}
