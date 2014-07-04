@@ -33,7 +33,8 @@ import org.quartz.impl.triggers.CronTriggerImpl;
 //import org.junit.Test;
 
 /**
- * @author Sibusiso
+ * 
+ * @author S. Zwane
  *
  */
 

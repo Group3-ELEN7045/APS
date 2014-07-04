@@ -14,7 +14,7 @@ public class ScrapedResultAccountNumberMatchesSpecification
 
 	@Override
 	public boolean isSatisfiedBy(ScrapedResult scrapedData) {
-		return scrapedData.getDataPairList().get(0).getValue().equals(accountNumber);
+		return scrapedData.getDataPairListItemValue(0).equals(accountNumber);
 	}
 	
 	

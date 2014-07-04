@@ -28,9 +28,9 @@ public class TelcoScrapedResultAdditionSpecification extends
 	
 	private boolean telcoSpecificAdditonSatisfied(ScrapedResult statement){
 		double calc = 0.0;
-		calc = numericDataFormatter.getNumericValue(statement.getDataPairList().get(15).getValue())
-						+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(16).getValue());
-		double newAccCharge =numericDataFormatter.getNumericValue(statement.getDataPairList().get(10).getValue());
+		calc = numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(15))
+						+ numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(16));
+		double newAccCharge =numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(10));
 		return calc == newAccCharge;
 
 	}

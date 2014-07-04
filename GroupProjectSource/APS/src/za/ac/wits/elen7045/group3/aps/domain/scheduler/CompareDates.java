@@ -1,7 +1,11 @@
 package za.ac.wits.elen7045.group3.aps.domain.scheduler; 
 
 import java.util.Date;
-
+/**
+ * 
+ * @author S. Zwane
+ *
+ */
 public class CompareDates  implements IDuration
 	{    
 		

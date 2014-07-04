@@ -3,6 +3,12 @@ package za.ac.wits.elen7045.group3.aps.domain.scheduler;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+/**
+ * 
+ * @author S. Zwane
+ *
+ */
  
 public class CompareExpressionWrapper implements IDuration
 	{    

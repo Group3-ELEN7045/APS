@@ -32,7 +32,20 @@ public class ScrapedResult {
 		return time;
 	}
 	
-	public List<DataPair> getDataPairList() {
-		return dataPairs;
+	public int getDataPairSize(){
+		return dataPairs.size();
 	}
+	
+	public String getDataPairListItemId(int index){
+		return dataPairs.get(index).getId();
+	}
+	
+	public String getDataPairListItemText(int index){
+		return dataPairs.get(index).getText();
+	}
+	
+	public String getDataPairListItemValue(int index){
+		return dataPairs.get(index).getValue();
+	}
+	
 }

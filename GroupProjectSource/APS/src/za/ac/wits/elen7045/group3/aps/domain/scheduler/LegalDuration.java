@@ -11,7 +11,11 @@ import java.util.List;
 
 //import za.ac.wits.elen7045.group3.aps.domain.scheduler.*;
 import za.ac.wits.elen7045.group3.aps.domain.entities.BillingCompany;
-
+/**
+ * 
+ * @author S. Zwane
+ *
+ */
 public class LegalDuration {
 
 	//private boolean isLegal; 

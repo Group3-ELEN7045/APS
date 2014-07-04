@@ -20,13 +20,13 @@ public class HasGenericErrorInScrapedResultSpecification
 	@Override
 	public boolean isSatisfiedBy(ScrapedResult statement) {
 		double calc = 0.0;
-		calc = numericDataFormatter.getNumericValue(statement.getDataPairList().get(7).getValue())
-						- numericDataFormatter.getNumericValue(statement.getDataPairList().get(9).getValue())
-						+ numericDataFormatter.getNumericValue(statement.getDataPairList().get(10).getValue())
-						- numericDataFormatter.getNumericValue(statement.getDataPairList().get(12).getValue())
-						- numericDataFormatter.getNumericValue(statement.getDataPairList().get(11).getValue());
+		calc = numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(7))
+						- numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(9))
+						+ numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(10))
+						- numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(12))
+						- numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(11));
 		
-		return !(numericDataFormatter.getNumericValue(statement.getDataPairList().get(5).getValue()) == calc);
+		return !(numericDataFormatter.getNumericValue(statement.getDataPairListItemValue(5)) == calc);
 	}
 
 }
